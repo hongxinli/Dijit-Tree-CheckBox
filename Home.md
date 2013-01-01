@@ -4,6 +4,7 @@ Welcome to the CheckBox Tree wiki.
 * [Tree](wiki/Tree)
 * [Models](wiki/Model)
 * [Stores](wiki/Store)
+* [Extensions](wiki/Extensions)
 
 ## Demos
 The cbtree packages comes with a set of demos and unit tests each demonstrating
