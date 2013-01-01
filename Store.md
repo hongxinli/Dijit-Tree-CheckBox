@@ -1,0 +1,1 @@
+The Checkbox Tree package currently includes three types of memory stores.
