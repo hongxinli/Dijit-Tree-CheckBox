@@ -9,7 +9,7 @@ Welcome to the CheckBox Tree wiki.
 To get the latest stable version please visit the [download](https://github.com/pjekel/cbtree/downloads)
 section:
 
-<table style="width:100%">
+<table>
   <tbody>
 	<thead>
 	  <tr>
