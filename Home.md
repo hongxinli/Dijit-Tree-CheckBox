@@ -5,6 +5,13 @@ Welcome to the CheckBox Tree wiki.
 * [Models](wiki/Model)
 * [Stores](wiki/Store)
 
+## Demos
+The cbtree packages comes with a set of demos and unit tests each demonstrating
+the CheckBox Tree features and capabilities. A comprehensive [live demo](http://thejekels.com/cbtree/demos)
+is also available at:
+
+* [http://thejekels.com/cbtree/demos](http://thejekels.com/cbtree/demos)
+
 ## Downloads
 To get the latest stable version please visit the [download](https://github.com/pjekel/cbtree/downloads)
 section:
