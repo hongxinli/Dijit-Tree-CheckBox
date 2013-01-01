@@ -3,5 +3,5 @@ Welcome to the cbtree wiki!
 ## CheckBox Tree Components
 * [Tree](Tree)
 * [Models](Model)
-* [Stores](Store)
+* [Stores](wiki/Store)
 * [Tree Styling](Styling)
