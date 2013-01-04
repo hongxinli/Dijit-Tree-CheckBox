@@ -182,6 +182,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 <h2 id="store-functions">Store Functions</h2>
 
+--------
 #### add( object, options )
 > Add a new object to the store, throws an exception if an object with the same identifier already exists.
 
@@ -191,8 +192,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 > **returns:**: id
 
-
-
+<h2 id="addParent"></h2>
 #### addParent( child, parents )
 > Add parent or parents to the list of parents of child.
 
@@ -204,15 +204,18 @@ represent properties in the keyword object passed to the store constructor. For 
 
 
 
+******************************************
 #### destroy()
 > Release all memory and mark store as destroyed.
 
 
+******************************************
 #### get( id )
 > Retrieves an object by its identity
 
 **_id:_** String | Number
 
+******************************************
 #### getChildren( parent, options )
 
 **_parent:_** Object
@@ -221,6 +224,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 
 
+******************************************
 #### getIdentity( object )
 > Returns an object's identity
 
@@ -229,28 +233,33 @@ represent properties in the keyword object passed to the store constructor. For 
 
 
 
+******************************************
 #### getParents( child )
 
 **_child:_** Object
 
 
+******************************************
 #### hasChildren( parent )
 
 > Returns boolean true if a parent object has known children otherwise false.
 
 **_parent:_** Object
 
+******************************************
 #### isItem( object )
 
 **_object:_** Object
 
 
+******************************************
 #### load( options )
 
 **_options:_** LoadDirectives
 
 
 
+******************************************
 #### put( object, options )
 
 **_object:_** Object
@@ -258,6 +267,7 @@ represent properties in the keyword object passed to the store constructor. For 
 **_options:_** PutDirectives
 
 
+******************************************
 #### query( query, options )
 
 **_query:_** Object
@@ -266,6 +276,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 
 
+******************************************
 #### ready( callback, errback )
 
 **_callback:_** Function
@@ -273,12 +284,14 @@ represent properties in the keyword object passed to the store constructor. For 
 **_errback:_** Function
 
 
+******************************************
 #### remove( id )
 
 **_id:_** String | Number
 
 
 
+******************************************
 #### removeParent( child, parents )
 
 **_child:_** Object
