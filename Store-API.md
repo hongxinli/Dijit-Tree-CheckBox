@@ -185,11 +185,11 @@ represent properties in the keyword object passed to the store constructor. For 
 #### add( object, options )
 > Add a new object to the store, throws an exception if an object with the same identifier already exists.
 
-**_object:_** Object
+> **_object:_** Object
 
-**_options:_** PutDirectives
+> **_options:_** PutDirectives
 
-{**returns:**: id}
+> **returns:**: id
 
 
 
