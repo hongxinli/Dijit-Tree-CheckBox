@@ -10,7 +10,7 @@ The API documentation is devided into three section, the [store properties](#sto
 This API defines function signatures **ONLY** without providing implementation details.
 All store functions and properties defined in this API are optional and require implemention
 **ONLY** if the store is to offer the functionality. Therefore, your store of choice may
-only support a subset of this API.  
+only support a subset of this API.
 
 Except for hasChildren() and isItem(), every function, whose return value isn't already
 a promise or void, **MUST** return a promise as its return value if the execution of the
@@ -145,7 +145,7 @@ represent properties in the keyword object passed to the store constructor. For 
 > determine if it has to set the parent property of an object or if the
 > store will handle it.
 > If true, the store MUST implement all logic required to support the
-> [PutDirective](#PutDirectives) "parent" and the store's "parentProperty" property.  
+> [PutDirective](#PutDirectives) "parent" and the store's "parentProperty" property.
 
 > **_DEFAULT_**: false
 
@@ -158,7 +158,7 @@ represent properties in the keyword object passed to the store constructor. For 
 > **_DEFAULT_**: undefined
 
 #### multiParented:
-> **_TYPE_**: Boolean
+> **_TYPE_**: Boolean | String
 
 > Indicates if the store is to support multi-parented objects. Multi Parented
 > objects are objects that can have more than one parent.
@@ -214,7 +214,7 @@ with the synchronous result of the store function.
 <h2 id="add"></h2>
 #### add( object, options? )
 >	Add a new object to the store, throws an exception if an object with the same identifier already exists.
- 
+
 **_object:_** Object
 
 > The object to be added to the store.
@@ -431,7 +431,8 @@ operations. In general, directive objects are passed to store functions as an op
 
 <h4 id="PutDirectives">PutDirectives</h4>
 > Directives passed to put() and add() functions for guiding the update and creation
-> of store objects.
+> of store objects. PutDirectives is a JavaScript object with the following optional
+> properties:
 
 **_id:_** (String | Number)?
 > Indicates the identity of the object if a new object is created.
@@ -457,12 +458,19 @@ operations. In general, directive objects are passed to store functions as an op
 > as an add() operation). When this property is not provided, either an
 > update or creation is acceptable.
 
+**Example:**
+
+	{ parent:"Homer", before:"Bart", overwrite:true }
 
 
 
 <h4 id="QueryDirectives">QueryDirectives</h4>
 > Optional object with additional parameters for query results.
-**_sort:_** [SortInformation](#SortInformation)[]?
+
+**_sort:_** [SortDirective](#SortDirective)[]?
+> An array of one or more sort directives. If more than one sort directive
+> is provided the sort directives are processed in the order in which they
+> appear in the sort array.
 
 **_start:_** Number?
 > The first result to begin iteration on.
@@ -481,7 +489,7 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h4 id="SortInformation">SortInformation</h4>
+<h4 id="SortDirective">SortDirective</h4>
 > An object describing what attribute/property to sort on, and the direction of the sort.
 
 **_attribue:_** String
