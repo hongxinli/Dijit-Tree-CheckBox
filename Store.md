@@ -57,12 +57,12 @@ API methods:
 * ready()
 * remove()
 
-See the [cbtree/store/api/Store](wiki/Store-API.md) API for a detailed description.
+See the [cbtree/store/api/Store](wiki/Store-API) API for a detailed description.
 
 <h3 id="the-natural-store">The Natural Store</h3>
 
 The <strong>cbtree/store/Natural</strong> store extends the Memory store by adding
-support for the cbtree/store [PutDirectives](wiki/Store-API.md#PutDirectives) property "before" allowing for store
+support for the cbtree/store [PutDirectives](wiki/Store-API#PutDirectives) property "before" allowing for store
 objects to be arranged in a natural order. The before property value is either an
 object or object identifier.
 
@@ -79,7 +79,7 @@ The <strong>cbtree/store/Natural</strong> serves as the base class for the Hiera
 <h3 id="the-hierarchy-store">The Hierarchy Store</h3>
 
 The <strong>cbtree/store/Hierarchy</strong> store extends the Natural store by adding
-support for the cbtree/store [PutDirectives](wiki/Store-API.md#PutDirectives) "parent" property.
+support for the cbtree/store [PutDirectives](wiki/Store-API#PutDirectives) "parent" property.
 Objects loaded into the store will automatically get a "parent" property if they don't already have one.
 The object's parent property value is the identifier, or an array of identifiers, of the
 object's parent(s). The store maintains the hierarchy and natural order amongst the store
@@ -118,7 +118,7 @@ API methods:
 * getParents()
 * removeParent()
 
-For more detailed information on the Hierarchy Store click [here](wiki/Hierarchy-Store.md)
+For more detailed information on the Hierarchy Store click [here](wiki/Hierarchy-Store)
 
 <h3 id="the-object-store">The Object Store</h3>
 
@@ -150,12 +150,12 @@ API methods:
 * ready()
 * remove()
 
-For more detailed information on the FileStore click [here](wiki/File-Store.md)
+For more detailed information on the FileStore click [here](wiki/File-Store)
 
 <h2 id="query-engine">Query Engine</h2>
 
 Each store that inherits from the Memory Store will, by default, use the cbtree
-[Query Engine](wiki/QueryEngine.md) to search and query store objects. A separate
+[Query Engine](wiki/QueryEngine) to search and query store objects. A separate
 wiki page is available describing the API, functionality and capabilities of the
 _/cbtree/store/util/QueryEngine_. You can however, provide your own query engine
 using the store **_queryEngine_** property as long as the query engine complies
