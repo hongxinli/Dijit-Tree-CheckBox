@@ -15,7 +15,7 @@ The query engine prototype/signature looks like:
 **_queryDirectives:_** queryDirectives?
 > The queryDirectives parameter is a JavaScript key:value pair object providing additional sort
 > and pagination details to be applied to the query result. For a detailed description of the
-> queryDirective properties, see the store API [queryDirectives](wiki/Store-API#queryDirectives).
+> queryDirective properties, see the store API [queryDirectives](Store-API#queryDirectives).
 
 **returns:** Function
 > The function returned has the following signature: **queryFunction( Object[] )**
