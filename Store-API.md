@@ -91,7 +91,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 > **_DEFAULT_**: null
 
-#### dataHandler:
+<h4 id="datahandler">dataHandler:</h4>
 > **_TYPE_**: Function | Object
 
 > The data handler for the store data or server response. If _dataHandler_ is an
@@ -115,7 +115,7 @@ represent properties in the keyword object passed to the store constructor. For 
 >		handler( response )
 
 > The response argument is a JavaScript key:value pairs object with a
-> "text" or "data" property.
+> "text" and/or "data" property.
 
 > **_DEFAULT_**: null
 
@@ -415,7 +415,8 @@ with the synchronous result of the store function.
 Store Directives are JavaScript objects whose key:value pairs serve as additional parameters to store
 operations. In general, directive objects are passed to store functions as an optional argument.
 
-<h4 id="LoadDirectives">LoadDirectives</h4>
+<h2 id="LoadDirectives"></h2>
+#### LoadDirectives
 > Directives passed to the load() method.
 
 **_all:_** Boolean?
@@ -429,7 +430,8 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h4 id="PutDirectives">PutDirectives</h4>
+<h2 id="PutDirectives"></h2>
+#### PutDirectives
 > Directives passed to put() and add() functions for guiding the update and creation
 > of store objects. PutDirectives is a JavaScript object with the following optional
 > properties:
@@ -464,7 +466,8 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h4 id="QueryDirectives">QueryDirectives</h4>
+<h2 id="QueryDirectives">QueryDirectives</h2>
+#### QueryDirectives
 > Optional object with additional parameters for query results.
 
 **_sort:_** [SortDirective](#SortDirective)[]?
@@ -489,7 +492,8 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h4 id="SortDirective">SortDirective</h4>
+<h2 id="SortDirective">SortDirective</h2>
+#### SortDirective
 > An object describing what attribute/property to sort on, and the direction of the sort.
 
 **_attribue:_** String

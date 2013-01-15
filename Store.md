@@ -1,14 +1,19 @@
-# Store
+# Stores
 
 The CheckBox Tree package comes with a set stores and a store wrapper. Each store
-implements the <strong>cbtree/store/api/Store</strong> API or parts thereof.
-The <strong>cbtree/store/api/Store</strong> API is an extension to the
-<strong>dojo/store/api/Store</strong> API, as a result, the usage of these stores is
+implements the **cbtree/store/api/Store** API or parts thereof.
+The **cbtree/store/api/Store** API is an extension to the
+**dojo/store/api/Store** API, as a result, the usage of these stores is
 not limited to a CheckBox Tree environment.
+
+Before selecting the store you want to use in a CheckBox Tree environment it is important
+to understand the pros and cons of each of them. Please read the [store selection](model#selecting-a-store)
+section of the cbtree models.
 
 <h2 id="store-types">Store Types</h2>
 All cbtree stores are in-memory stores, that is, the store content is loaded in memory
-without the support of persistent storage. The following store type are available.
+without the support of persistent storage. Any changes to the store are lost after
+your session is terminated. The following store type are available.
 
 * [Memory](#the-memory-store)
 * [Natural](#the-natural-store)
@@ -16,13 +21,18 @@ without the support of persistent storage. The following store type are availabl
 * [ObjectStore](#the-object-store)
 * [FileStore](#the-file-system-store)
 
-The <strong>cbtree/store/Memory</strong> store serves as the base class for the
+The **cbtree/store/Memory** store serves as the base class for the
 Natural, Hierarchy and Object stores, therefore all features available with the
 Memory store are also provided by the Natural, Hierarchy and Object stores.
+The basic store inheritance is as follows:
 
-<h3 id="the-memory-store">The Memory Store</h3>
+> Store-API < Memory < Natural < Hierarchy < ObjectStore
 
-The <strong>cbtree/store/Memory</strong> store is a simple in-memory store similar
+> Store-API < FileStore
+
+<h2 id="the-memory-store">The Memory Store</h2>
+
+The **cbtree/store/Memory** store is a simple in-memory store similar
 to the dojo/store/Memory store with the following extensions:
 
 1. Loading data using a Universal Resource Location (URL).
@@ -32,7 +42,7 @@ to the dojo/store/Memory store with the following extensions:
 5. Full support for array property values, including querying.
 6. Case insensitive queries and sorting.
 
-The <strong>cbtree/store/Memory</strong> implements the following cbtree/store/api/Store
+The **cbtree/store/Memory** implements the following cbtree/store/api/Store
 properties:
 
 * autoLoad
@@ -44,7 +54,7 @@ properties:
 * queryEngine
 * url
 
-The <strong>cbtree/store/Memory</strong> implements the following cbtree/store/api/Store
+The **cbtree/store/Memory** implements the following cbtree/store/api/Store
 API methods:
 
 * add()
@@ -57,14 +67,15 @@ API methods:
 * ready()
 * remove()
 
-See the [cbtree/store/api/Store](Store-API) API for a detailed description.
+See the [cbtree/store/api/Store](Store-API) API for a detailed description of the properties
+and functions.
 
-<h3 id="the-natural-store">The Natural Store</h3>
+<h2 id="the-natural-store">The Natural Store</h2>
 
-The <strong>cbtree/store/Natural</strong> store extends the Memory store by adding
-support for the cbtree/store [PutDirectives](Store-API#PutDirectives) property "before" allowing for store
-objects to be arranged in a natural order. The before property value is either an
-object or object identifier.
+The **cbtree/store/Natural** store extends the Memory store by adding support for
+the cbtree/store [PutDirectives](Store-API#PutDirectives) property "before" allowing
+for store objects to be arranged in a natural order.
+The before property value is either an object or object identifier.
 
 	require( ["cbtree/store/Natural"], function (Natural) {
 		var myStore = new Natural( {idProperty:"name"} ));
@@ -74,11 +85,11 @@ object or object identifier.
 		myStore.put( {name:"Lisa", lastName:"Simpson"}, {before:"Bart"} );
 	}
 
-The <strong>cbtree/store/Natural</strong> serves as the base class for the Hierarchy store.
+The **cbtree/store/Natural** serves as the base class for the Hierarchy store.
 
-<h3 id="the-hierarchy-store">The Hierarchy Store</h3>
+<h2 id="the-hierarchy-store">The Hierarchy Store</h2>
 
-The <strong>cbtree/store/Hierarchy</strong> store extends the Natural store by adding
+The **cbtree/store/Hierarchy** store extends the Natural store by adding
 support for the cbtree/store [PutDirectives](Store-API#PutDirectives) "parent" property.
 Objects loaded into the store will automatically get a "parent" property if they don't already have one.
 The object's parent property value is the identifier, or an array of identifiers, of the
@@ -101,7 +112,7 @@ support for so-called multi-parented objects.
 Because the Hierarchy store is derived from the Natural store it automatically
 inherits the ability to maintain a natural store order as shown in the above example.
 
-The <strong>cbtree/store/Hierarchy</strong> implements the following additional cbtree/store/api/Store
+The **cbtree/store/Hierarchy** implements the following additional cbtree/store/api/Store
 properties:
 
 * hierarchical
@@ -109,7 +120,7 @@ properties:
 * multiParented
 * parentProperty
 
-The <strong>cbtree/store/Hierarchy</strong> implements the following cbtree/store/api/Store
+The **cbtree/store/Hierarchy** implements the following cbtree/store/api/Store
 API methods:
 
 * addParent()
@@ -120,24 +131,24 @@ API methods:
 
 For more detailed information on the Hierarchy Store click [here](Hierarchy-Store)
 
-<h3 id="the-object-store">The Object Store</h3>
+<h2 id="the-object-store">The Object Store</h2>
 
-The <strong>cbtree/store/ObjectStore</strong> is similar to the Hierarchy store but with
+The **cbtree/store/ObjectStore** is similar to the Hierarchy store but with
 build-in event capabilities. This store type is the preferred store when multiple tree
 models operate on a single store.
 
 See also [Eventable](#eventable).
 
-<h3 id="the-file-system-store">The File System Store</h3>
+<h2 id="the-file-system-store">The File System Store</h2>
 
-The <strong>cbtree/store/FileStore</strong> retrieves file and directory information
+The **cbtree/store/FileStore** retrieves file and directory information
 from a back-end server which is then cached as an in-memory object store.
 The store allows applications to add custom properties to file object not provided by
 the server side application such as a checked state. The in-memory FileStore is
 dynamic in that file object may be added, removed or change based on the responses
 received from the back-end server.
 
-The <strong>cbtree/store/FileStore</strong> implements the following cbtree/store/api/Store
+The **cbtree/store/FileStore** implements the following cbtree/store/api/Store
 API methods:
 
 * get()
@@ -163,8 +174,10 @@ with the cbtree query engine API.
 
 <h2 id="eventable">Eventable</h2>
 
-Eventable is a store wrapper which will enable the generation of events whenever the
-content of a store changes. Events are emitted for any of the following store operations:
+Eventable is a store wrapper enabling event generation whenever the content of a
+store changes. An eventable store does **NOT** rely on, or even care about, previously
+executed queries like an Observable store does. It merely emit notifications when
+the store content changes. Events are emitted for any of the following store operations:
 
 * add
 * put
@@ -195,7 +208,7 @@ notified of new objects being added to the store consider the following example:
 
 	}
 
-Any store that exposes the dojo/store/api/Store API can be made Eventable creating an
+Any store that exposes the cbtree/store/api/Store API can be made Eventable creating an
 easy to use store notification system which carries alot less overhead than an observable
 store does. (See the [observable](#observable) section below).
 
@@ -210,9 +223,10 @@ However, the latter, offers better performance and carries less overhead.
 
 <h2 id="observable">Observable</h2>
 
-<strong>dojo/store/Observable</strong> is an object store wrapper that adds support for
+**dojo/store/Observable** is an object store wrapper that adds support for
 notification of data changes to query result sets. The query result sets returned from
-a Observable store will include a observe function that can be used to monitor for changes.
+a Observable store will include a "observe" function that can be used to monitor the
+query result for any changes due to changes in the store.
 
 Whenever the store content changes, the new, updated or deleted object is run by every
 previous query result that have registered listeners. If the object affects the query
@@ -248,10 +262,13 @@ store instead of the Object store.
 
 Careful considerations should be made when selecting an observable store in a CheckBox Tree
 environment. As the checked state of any tree node is maintained in the store, any update
-to the object's checked state will result in running the updated object againts all observable
-queries. If you have a large tree with many branches each branch represents a single
-store query which can severly impact the tree performance.
+to the object's checked state will result in running the updated object againts **ALL** observable
+queries. If you have a large tree with many branches, keep in mind that each branch represents
+a single store query which can severly impact the tree performance. In addition, if you use a
+tree model with its _checkedStrict_ property set to true, each tree node represents a store
+query.
 
+**From a performance stand point the cbtree Object Store or an Eventable Store is the better choice.**
 
 <h2 id="store-data-format">Store Data Format</h2>
 
@@ -269,7 +286,7 @@ The following is a valid object array:
 
 	var myStore = new Memory( {data:myData} );
 
-However, when loading data using a URL the data must be JSON encoded, that is, all key
+However, when loading data using a URL the data must be **JSON** encoded, that is, all key
 or property names MUST be double-quoted strings:
 
 	[
@@ -278,29 +295,36 @@ or property names MUST be double-quoted strings:
 		{ "name::"Bart", "lastName":"Simpson", "hair":"blond" }
 	]
 
-Note that the proprty names <em><strong>name, lastName</strong></em> and <em><strong>hair</strong></em>
-are all enclosed in double quotes.
+Note that the proprty names **_name, lastName_** and **_hair_** are all enclosed in double
+quotes.
+
+If your data is not a plain array of JavaScript objects the cbtree stores still offer the options
+to load it using a custom data handler. For detail refer to the [Data Handler](#data-handlers)
+section below.
 
 <h2 id="data-handlers">Data Handlers</h2>
 
 All cbtree stores, with the exception of the FileStore, offer the option of pre-processing
-data using either one of the default <strong>dojo/request</strong> handlers or registering
+data using either one of the default **dojo/request** handlers or registering
 a custom data handler. Typically, a data handler takes an arbitrary data format and converts
 the data returning an array of plain JavaScript key:value pairs objects ready for consumption
 by the store loader. (see [Store Data Format](#store-data-format))
 
-This ability eliminates the need having to create a new store for every data format. In addition,
-because the stores register any custom data handler with <strong>dojo/request/handlers</strong>
-the data handler automatically becomes available to the <strong>dojo/request</strong> module.
+This ability eliminates the need of having to create a new store for every data format or having
+to handle XHR requests yourself. In addition, because the stores register any custom data handler
+with **dojo/request/handlers** the data handler automatically becomes available to the
+**dojo/request** module.
 
 The cbtree stores comes with two sample data handlers:
 
 1. Comma Separated Value (CSV) data handler (csvHandler.js)
 2. ItemFileReadStore data handler (ifrsHandler.js)
 
-The CSV data handler enables you to load rfc1480 compliant comma-separated-value files or objects
-without any further processing. The following example demonstrates how to use a custom data handler
-with the cbtree stores:
+Both sample handlers can be found at **_/cbtree/store/handlers/_**
+
+The CSV data handler enables you to load [rfc4180](http://datatracker.ietf.org/doc/rfc4180/)
+compliant comma-separated-value files or objects without any further processing.
+The following example demonstrates how to use a custom data handler with the cbtree stores:
 
 	require(["cbtree/store/ObjectStore",		 // Eventable Object Store with Hierarchy
 			 "cbtree/store/handlers/csvHandler"	 // CSV Data Handler.
@@ -319,10 +343,7 @@ with the cbtree stores:
 									  }
 									});
 
-See also <strong>cbtree/demos/store/tree11.html</strong> for an alternative way of registring
-a custom data handler.
-
-If you need to convert any legacy <strong>dojo/data/ItemFileReadStore</strong> formatted data
+If you need to convert any legacy **dojo/data/ItemFileReadStore** formatted data
 consider to following example using the ifrsHandler.
 
 	require(["cbtree/store/ObjectStore",		 // Eventable Object Store with Hierarchy
@@ -338,3 +359,6 @@ consider to following example using the ifrsHandler.
 									});
 
 Notice the above example uses the short notation for the dataHandler property.
+
+For a detailed description of the implementation of a custom Data Handler please refer
+to the [Data Handler](Data-Handlers) wiki page.
