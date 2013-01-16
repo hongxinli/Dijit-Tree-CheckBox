@@ -2,8 +2,8 @@
 
 The **cbtree/store/api/Store** API is an extension to the **dojo/store/api/Store** API. Therefore, any store
 that exposes the **dojo/store/api/Store** API is by default compliant with this API definition.
-The API documentation is devided into three section, the [store properties](#store-properties)
-, [store functions](#store-functions) and [store directives](#store-directives)
+The API documentation is devided into three section, the [store properties](#wiki-store-properties)
+, [store functions](#wiki-store-functions) and [store directives](#wiki-store-directives)
 
 #### IMPORTANT
 
@@ -65,7 +65,7 @@ In the context of this API, property values, arguments and operand types are def
 
 
 
-<h2 id="store-properties">Store Properties</h2>
+<h2 id="wiki-store-properties">Store Properties</h2>
 Store properties define specific features or characteristics of a store, The property names also
 represent properties in the keyword object passed to the store constructor. For example:
 
@@ -79,7 +79,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 > Indicates, when a URL is specified, if the data should be loaded during store
 > construction or deferred until the user explicitly calls the load function.
-> See the store [load](#load) function for additional information.
+> See the store [load](#wiki-load) function for additional information.
 
 > **_DEFAULT_**: true
 
@@ -91,7 +91,7 @@ represent properties in the keyword object passed to the store constructor. For 
 
 > **_DEFAULT_**: null
 
-<h4 id="datahandler">dataHandler:</h4>
+<h4 id="wiki-datahandler">dataHandler:</h4>
 > **_TYPE_**: Function | Object
 
 > The data handler for the store data or server response. If _dataHandler_ is an
@@ -145,7 +145,7 @@ represent properties in the keyword object passed to the store constructor. For 
 > determine if it has to set the parent property of an object or if the
 > store will handle it.
 > If true, the store MUST implement all logic required to support the
-> [PutDirective](#PutDirectives) "parent" and the store's "parentProperty" property.
+> [PutDirective](#wiki-PutDirectives) "parent" and the store's "parentProperty" property.
 
 > **_DEFAULT_**: false
 
@@ -207,11 +207,11 @@ represent properties in the keyword object passed to the store constructor. For 
 
 
 
-<h2 id="store-functions">Store Functions</h2>
+<h2 id="wiki-store-functions">Store Functions</h2>
 As stated above, all store functions are optional and may return a dojo/promise/Promise which then resolves
 with the synchronous result of the store function.
 
-<h2 id="add"></h2>
+<h2 id="wiki-add"></h2>
 #### add( object, options? )
 >	Add a new object to the store, throws an exception if an object with the same identifier already exists.
 
@@ -219,13 +219,13 @@ with the synchronous result of the store function.
 
 > The object to be added to the store.
 
-**_options:_** [PutDirectives](#PutDirectives)?
+**_options:_** [PutDirectives](#wiki-PutDirectives)?
 > Additional directives for creating objects.
 
 **returns:** id
 
 
-<h2 id="addParent"></h2>
+<h2 id="wiki-addParent"></h2>
 #### addParent( child, parents )
 > Add parent or parents to the list of parents of child.
 
@@ -239,12 +239,12 @@ with the synchronous result of the store function.
 > true if parents were successfully added otherwise false.
 
 
-<h2 id="destroy"></h2>
+<h2 id="wiki-destroy"></h2>
 #### destroy()
 > Release all memory and mark store as destroyed.
 
 
-<h2 id="get"></h2>
+<h2 id="wiki-get"></h2>
 #### get( id )
 > Retrieves an object by its identity
 
@@ -256,14 +256,14 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="getChildren"></h2>
+<h2 id="wiki-getChildren"></h2>
 #### getChildren( parent, options? )
 > Retrieves the children of an object.
 
 **_parent:_** Object
 > The object to retrieve the children for.
 
-**_options:_** [QueryDirectives](#QueryDirectives)?
+**_options:_** [QueryDirectives](#wiki-QueryDirectives)?
 > Additional options to apply to the retrieval of the children.
 
 **returns:** dojo/store/api/Store.QueryResults
@@ -273,7 +273,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="getIdentity"></h2>
+<h2 id="wiki-getIdentity"></h2>
 #### getIdentity( object )
 > Returns an object's identity. See also the store property "idProperty"
 
@@ -283,7 +283,7 @@ with the synchronous result of the store function.
 **returns:** id | void
 
 
-<h2 id="getParents"></h2>
+<h2 id="wiki-getParents"></h2>
 #### getParents( child )
 > Retrieve the parent(s) of a store object.
 
@@ -297,7 +297,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="hasChildren"></h2>
+<h2 id="wiki-hasChildren"></h2>
 #### hasChildren( parent )
 > Returns boolean true if a parent object has known children otherwise false.
 
@@ -309,7 +309,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="isItem"></h2>
+<h2 id="wiki-isItem"></h2>
 #### isItem( object )
 > Evaluate if an object is a valid member of this store, that is, it came from this store
 > instance. This method MUST execute synchronously.
@@ -323,11 +323,11 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="load"></h2>
+<h2 id="wiki-load"></h2>
 #### load( options? )
 > load the store data from a URL.
 
-**_options:_** [LoadDirectives](#LoadDirectives)?
+**_options:_** [LoadDirectives](#wiki-LoadDirectives)?
 > Optional load directives.
 
 **returns:** dojo/promise/Promise
@@ -338,7 +338,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="put"></h2>
+<h2 id="wiki-put"></h2>
 #### put( object, options? )
 > Stores an object. Throws an exception if an object with the same identification
 > already exists **AND** the PutDirective.overwrite is set to false.
@@ -346,14 +346,14 @@ with the synchronous result of the store function.
 **_object:_** Object
 > The object to store.
 
-**_options:_** [PutDirectives](#PutDirectives)?
+**_options:_** [PutDirectives](#wiki-PutDirectives)?
 > Additional directives for storing objects.
 
 **returns:** id
 
 
 
-<h2 id="query"></h2>
+<h2 id="wiki-query"></h2>
 #### query( query, options? )
 > Queries the store for objects. The query function does not alter the store, but returns a set
 > of objects from the store.
@@ -361,7 +361,7 @@ with the synchronous result of the store function.
 **_query:_** String | Object | Function
 > The query to use for retrieving objects from the store.
 
-**_options:_** [QueryDirectives](#QueryDirectives)?
+**_options:_** [QueryDirectives](#wiki-QueryDirectives)?
 > The optional arguments to apply to the resultset.
 
 **returns:** dojo/store/api/Store.QueryResults
@@ -371,7 +371,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="ready"></h2>
+<h2 id="wiki-ready"></h2>
 #### ready( callback, errback )
 > Execute the callback when the store data has been loaded. If an error occurred
 > during the loading process errback is called instead.
@@ -386,7 +386,7 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="remove"></h2>
+<h2 id="wiki-remove"></h2>
 #### remove( id )
 > Deletes an object by its identity.
 
@@ -394,7 +394,7 @@ with the synchronous result of the store function.
 > The identity to use to delete the object
 
 
-<h2 id="removeParent"></h2>
+<h2 id="wiki-removeParent"></h2>
 #### removeParent( child, parents )
 > Remove parent(s) from the list of parents of child.
 
@@ -411,11 +411,11 @@ with the synchronous result of the store function.
 
 
 
-<h2 id="store-directives">Store Directives</h2>
+<h2 id="wiki-store-directives">Store Directives</h2>
 Store Directives are JavaScript objects whose key:value pairs serve as additional parameters to store
 operations. In general, directive objects are passed to store functions as an optional argument.
 
-<h2 id="LoadDirectives"></h2>
+<h2 id="wiki-LoadDirectives"></h2>
 #### LoadDirectives
 > Directives passed to the load() method.
 
@@ -430,7 +430,7 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h2 id="PutDirectives"></h2>
+<h2 id="wiki-PutDirectives"></h2>
 #### PutDirectives
 > Directives passed to put() and add() functions for guiding the update and creation
 > of store objects. PutDirectives is a JavaScript object with the following optional
@@ -466,11 +466,11 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 
-<h2 id="QueryDirectives">QueryDirectives</h2>
+<h2 id="wiki-QueryDirectives">QueryDirectives</h2>
 #### QueryDirectives
 > Optional object with additional parameters for query results.
 
-**_sort:_** [SortDirective](#SortDirective)[]?
+**_sort:_** [SortDirective](#wiki-SortDirective)[]?
 > An array of one or more sort directives. If more than one sort directive
 > is provided the sort directives are processed in the order in which they
 > appear in the sort array.
@@ -489,10 +489,12 @@ operations. In general, directive objects are passed to store functions as an op
 > only the cache is searched without fetching any data from an external
 > data source like a back-end server. Default is false.
 
+**Example:**
+
+	{ sort:[{attribute:"directory"}, {attribute:"name", ignoreCase:true}], count: 10 }
 
 
-
-<h2 id="SortDirective">SortDirective</h2>
+<h2 id="wiki-SortDirective">SortDirective</h2>
 #### SortDirective
 > An object describing what attribute/property to sort on, and the direction of the sort.
 
@@ -504,3 +506,8 @@ operations. In general, directive objects are passed to store functions as an op
 
 **_ignoreCase:_** Boolean?
 > Compare attribute/property values case insensitive. Default is false.
+
+**Example:**
+
+	{ attribute:"name", descending:true, ignoreCase:true }
+

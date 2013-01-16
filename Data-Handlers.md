@@ -46,7 +46,7 @@ The cbtree stores have two properties to enable a custom data handler, _handleAs
 _dataHandler_.
 The first, _handleAs_, defines the data type or format the data handler is capable of
 converting. The second, _dataHandler_, is the actual data handler function or object.
-See the [store API](Store-API#datahandler) for more details.
+See the [store API](Store-API#wiki-datahandler) for more details.
 
 If you want to use any of the default **dojo/request** data handlers such as "json"
 you must **NOT** specify the store property _dataHandler_ when creating a store otherwise
@@ -68,7 +68,7 @@ The simplest form of declaring a Data Handler as a loadable AMD module is as fol
 	});
 
 
-<h2 id="handler-registration">Handler Registration</h2>
+<h2 id="wiki-handler-registration">Handler Registration</h2>
 Every custom data handler must be registered with **_/dojo/request/handlers_** in order to
 take effect. To do so you must also specify the store property _handleAs_ as a symbolic name
 which will be associated with the data handler and serves as the handlers "data type", for
@@ -138,20 +138,20 @@ following example:
 
 
 
-<h2 id="advanced-data-handler">Advanced Data Handler</h2>
+<h2 id="wiki-advanced-data-handler">Advanced Data Handler</h2>
 The examples shown above are basic data handlers which can create the required plain
 JavaScript objects using the input data. It is assumed the input data holds both the property
 names (keys) and associated values. However, many times you will have to supply the object
 property names a different way. For example, the following dataset is a simple
 comma-separated-value (CSV) set without any object property name information:
 
-	Lisa  , blond, true
-	Bart  , blond, true
-	Maggie, blond, true
-	Patty , blond, true
-	Selma , blond, false
-	Rod   , blond, true
-	Todd  , blond, true
+	Lisa   ,blond ,true
+	Bart   ,blond ,true
+	Maggie ,blond ,true
+	Patty  ,blue  ,true
+	Selma  ,blue  ,false
+	Rod    ,brown ,true
+	Todd   ,brown ,true
 
 The first column corresponds to the object's _name_, the second to its _hair_ color
 and the third its _checked_ state. In order to solve this problem we must provide a
@@ -170,7 +170,7 @@ example of how you could do this:
 
 	    var self = this;
 
-	    // Next define the data handler as a property of scopedHandler.
+	    // Next define the data handler as the 'handler' property of scopedHandler.
 
 	    this.handler = function ( response ) {
 	      var rawData   = response.data || response.txt;
@@ -234,7 +234,7 @@ and instantiate it if required. Therefore, you could simply write:
 
 However, in this case the cbtree store explicitly looks for the property name **_handler_**.
 For additional information on the usage of the stores _dataHandler_ and _handleAs_ properties
-please refer to the [store API](Store-API#datahandler).
+please refer to the [store API](Store-API#wiki-datahandler).
 
 For a complete example of a data handler that fully exploits the data handler scope see
 **_/cbtree/store/handlers/csvHandler.js_** and the cbtree demos **_tree10.html_** and

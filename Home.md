@@ -1,7 +1,7 @@
 Welcome to the CheckBox Tree wiki.
 
 > This wiki is currently under **construction** all information found here is
-> intended for the upcoming release of the cbtree which would cbtree-v09.3-0
+> intended for the upcoming release of the cbtree which would be cbtree-v09.3-0,
 > please stay tuned...
 
 ## CheckBox Tree Components
