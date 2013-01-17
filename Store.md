@@ -166,9 +166,9 @@ For more detailed information on the FileStore click [here](File-Store)
 <h2 id="wiki-query-engine">Query Engine</h2>
 
 Each store that inherits from the Memory Store will, by default, use the cbtree
-[Query Engine](QueryEngine) to search and query store objects. A separate
+[Query Engine](Query-Engine) to search and query store objects. A separate
 wiki page is available describing the API, functionality and capabilities of the
-_/cbtree/store/util/QueryEngine_. You can however, provide your own query engine
+**cbtree/store/util/QueryEngine**. You can however, provide your own query engine
 using the store **_queryEngine_** property as long as the query engine complies
 with the cbtree query engine API.
 
@@ -183,10 +183,11 @@ the store content changes. Events are emitted for any of the following store ope
 * put
 * remove
 
-A store event is a JavaScript key:value pairs object with the following general format:
+A store event is a JavaScript key:value pairs object with the following ABNF
+notation:
 
-	store-event = { type: event-name, item: object [,oldItem: object] }
-	even-name = "new" | "change" | "delete"
+	store-event = "{" "type:" event-name "," "item:" object ["," "oldItem:" object] "}"
+	event-name  = "new" / "change" / "delete"
 
 To listen for store events the application has to register an event listener using either
 the store's on() method or the dojo/on on() method. For example, if you want to get

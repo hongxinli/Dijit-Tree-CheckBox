@@ -470,16 +470,21 @@ operations. In general, directive objects are passed to store functions as an op
 #### QueryDirectives
 > Optional object with additional parameters for query results.
 
-**_sort:_** [SortDirective](#wiki-SortDirective)[]?
+**_sort:_** ([SortDirective](#wiki-SortDirective)[] | Function)?
 > An array of one or more sort directives. If more than one sort directive
 > is provided the sort directives are processed in the order in which they
-> appear in the sort array.
+> appear in the sort array. If a compare function is specified, the array 
+> elements are sorted according to the return value of the compare function.
+> See the JavaScript [Array.sort()](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/sort)
+function for details.
 
 **_start:_** Number?
-> The first result to begin iteration on.
+> The first result to begin iteration on. Start identifies an index number
+> in the array of result.
 
 **_count:_** Number?
-> The maximum number of results that should be returned.
+> The maximum number of results that should be returned. If there are less than
+> *count* results all available results are returned.
 
 **_ignoreCase:_** Boolean?
 > Match object properties case insensitive. Default is false.
@@ -496,10 +501,14 @@ operations. In general, directive objects are passed to store functions as an op
 
 <h2 id="wiki-SortDirective">SortDirective</h2>
 #### SortDirective
-> An object describing what attribute/property to sort on, and the direction of the sort.
+> An object describing what object property to sort on, and the direction of the sort.
 
-**_attribue:_** String
-> The name of the attribute/property to sort on.
+**_property:_** String
+> The name of the property to sort on.
+
+**_attribue:_** String (dojo compatibility only)
+> The name of the property to sort on. Note: This property is provided for
+> dojo/store compatibility only, use _property_ instead.
 
 **_descending:_** Boolean?
 > The direction of the sort. Default is false.
