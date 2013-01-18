@@ -39,8 +39,7 @@ to the dojo/store/Memory store with the following extensions:
 2. Allow for pre-processing of loaded data using custom [data handlers](#wiki-data-handlers).
 3. Deferred data loading when using URL's.
 4. Apply default properties to store objects.
-5. Full support for array property values, including querying.
-6. Case insensitive queries and sorting.
+5. Enhanced [Query Engine](wiki/Query-Engine)
 
 The **cbtree/store/Memory** implements the following cbtree/store/api/Store
 properties:
@@ -162,15 +161,6 @@ API methods:
 * remove()
 
 For more detailed information on the FileStore click [here](File-Store)
-
-<h2 id="wiki-query-engine">Query Engine</h2>
-
-Each store that inherits from the Memory Store will, by default, use the cbtree
-[Query Engine](Query-Engine) to search and query store objects. A separate
-wiki page is available describing the API, functionality and capabilities of the
-**cbtree/store/util/QueryEngine**. You can however, provide your own query engine
-using the store **_queryEngine_** property as long as the query engine complies
-with the cbtree query engine API.
 
 <h2 id="wiki-eventable">Eventable</h2>
 
@@ -305,16 +295,17 @@ section below.
 
 <h2 id="wiki-data-handlers">Data Handlers</h2>
 
-All cbtree stores, with the exception of the FileStore, offer the option of pre-processing
-data using either one of the default **dojo/request** handlers or registering
-a custom data handler. Typically, a data handler takes an arbitrary data format and converts
-the data returning an array of plain JavaScript key:value pairs objects ready for consumption
-by the store loader. (see [Store Data Format](#wiki-store-data-format))
+All cbtree stores, with the exception of the FileStore, offer the option of
+pre-processing data, before populating the store, using either one of the default
+**dojo/request** handlers or registering a custom data handler.
+Typically, a data handler takes an arbitrary data format and converts the data
+returning an array of plain JavaScript key:value pairs objects ready for
+consumption by the store loader. (see [Store Data Format](#wiki-store-data-format))
 
-This ability eliminates the need of having to create a new store for every data format or having
-to handle XHR requests yourself. In addition, because the stores register any custom data handler
-with **dojo/request/handlers** the data handler automatically becomes available to the
-**dojo/request** module.
+This ability eliminates the need of having to create a new store for every data 
+format or having to handle XHR requests yourself. In addition, because the stores
+register any custom data handler with **dojo/request/handlers** the data handler
+automatically becomes available to the **dojo/request** module.
 
 The cbtree stores comes with two sample data handlers:
 
@@ -325,41 +316,40 @@ Both sample handlers can be found at **_/cbtree/store/handlers/_**
 
 The CSV data handler enables you to load [rfc4180](http://datatracker.ietf.org/doc/rfc4180/)
 compliant comma-separated-value files or objects without any further processing.
-The following example demonstrates how to use a custom data handler with the cbtree stores:
+The following example demonstrates how to use a custom data handler with the
+cbtree stores:
 
-	require(["cbtree/store/ObjectStore",		 // Eventable Object Store with Hierarchy
-			 "cbtree/store/handlers/csvHandler"	 // CSV Data Handler.
-			], function( ObjectStore, csvHandler) {
+	require(["cbtree/store/ObjectStore",		     // Eventable Object Store with Hierarchy
+	         "cbtree/store/handlers/csvHandler"	 // CSV Data Handler.
+	        ], function( ObjectStore, csvHandler) {
 
-		// Create an object store and register a custom data handler.
-		var store = new ObjectStore( { url:"../../store/csv/Simpsons.csv",
-									   idProperty:"name",
-									   handleAs: "csv",
-									   dataHandler: {
-										 handler: csvHandler,
-										 options: {
-											fieldNames:["name", "parent", "hair", "checked"],
-											trim:true
-										 }
-									  }
-									});
+	  // Create an object store and register a custom data handler.
+	  var store = new ObjectStore( { url:"../../store/csv/Simpsons.csv",
+	                                 idProperty:"name",
+	                                 handleAs: "csv",
+	                                 dataHandler: {
+	                                   handler: csvHandler,
+	                                   options: {
+	                                     fieldNames:["name", "parent", "hair", "checked"],
+	                                     trim:true
+	                                   }
+	                                 }
+	                               });
 
 If you need to convert any legacy **dojo/data/ItemFileReadStore** formatted data
 consider to following example using the ifrsHandler.
 
 	require(["cbtree/store/ObjectStore",		 // Eventable Object Store with Hierarchy
-			 "cbtree/store/handlers/ifrsHandler" // ItemFileReadStore Data Handler.
-			], function( ObjectStore, ifrsHandler) {
+	         "cbtree/store/handlers/ifrsHandler" // ItemFileReadStore Data Handler.
+	        ], function( ObjectStore, ifrsHandler) {
 
-		// Create an object store and register a custom data handler.
-		var store = new ObjectStore( { url:"../../store/json/Simpsons_IFRS.json",
-									   idProperty:"name",
-									   handleAs: "ifrs",
-									   dataHandler: ifrsHandler
-									 }
-									});
+	  // Create an object store and register a custom data handler.
+	  var store = new ObjectStore( { url:"../../store/json/Simpsons_IFRS.json",
+	                                 idProperty:"name",
+	                                 handleAs: "ifrs",
+	                                 dataHandler: ifrsHandler
+	                               }
+	                             });
 
-Notice the above example uses the short notation for the dataHandler property.
-
-For a detailed description of the implementation of a custom Data Handler please refer
-to the [Data Handler](Data-Handlers) wiki page.
+For a detailed description of the implementation of a custom Data Handler please
+refer to the [Data Handler](Data-Handlers) wiki page.

@@ -10,16 +10,19 @@ The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and ha
 * [Tree](wiki/Tree)
 * [Models](wiki/Model)
 * [Stores](wiki/Store)
-	- [API](wiki/Store-API)
-	- [Data Handlers](wiki/Data-Handlers)
 	- [Query Engine](wiki/Query-Engine)
+	- [Data Handlers](wiki/Data-Handlers)
+	- [Store API](wiki/Store-API)
 * [Extensions](wiki/Extensions)
+	- [Tree Styling](wiki/Tree-Styling)
 
 ## Usage
+* Working with Events
+* Styling the Tree
 
 ## Demos
-The cbtree packages comes with a set of demos and unit tests each demonstrating
-the CheckBox Tree features and capabilities. A comprehensive [live demo](http://thejekels.com/cbtree/demos)
+The cbtree packages comes with a set of demos each demonstrating the CheckBox
+Tree features and capabilities. A comprehensive [live demo](http://thejekels.com/cbtree/demos)
 is also available at:
 
 * [http://thejekels.com/cbtree/demos](http://thejekels.com/cbtree/demos)
@@ -38,6 +41,15 @@ section:
 	    <th>Description</th>
 	  </tr>
 	</thead>
+    <tr style="vertical-align:top">
+      <td>cbtree-v09.3-0</td>
+      <td style="color:red;">TBD: Feb 2013</td>
+      <td>1.8</td>
+      <td>
+	New stores implementing the dojo/store/api/Store API.<br/>
+	New models for the new stores and much more...
+      <td>
+    </tr>
     <tr style="vertical-align:top">
       <td>cbtree-v09.2-0</td>
       <td>Aug-15 2012</td>
@@ -69,3 +81,6 @@ section:
     </tr>
   </tbody>
 </table>
+
+## Installation
+For detailed installation instructions please click [here](wiki/Installation)
