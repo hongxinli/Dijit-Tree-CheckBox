@@ -10,31 +10,31 @@ query() function, it provides the functionality to enable the implementation of
 such a function. The Query Engine can be used with any arbitrary set of JavaScript
 key:value pairs objects, not just store objects.
 
-<h2 id="wiki-queryEngine"></h2>
+<h2 id="queryEngine"></h2>
 #### queryEngine( query, options? )
 > Returns a JavaScript function capable of executing a store query and optionally 
 > apply pagination and sorting to the result.
 
 **_query:_** Object | Function | String
 > The query argument is either a JavaScript key:value pairs object, a function or
-> a string. Please see [The Query Argument](#wiki-the-query-argument) below for
+> a string. Please see [The Query Argument](#the-query-argument) below for
 > a detailed description an examples.
 
 
-**_options:_** [queryDirectives](Store-API#wiki-queryDirectives)?
+**_options:_** [queryDirectives](Store-API#queryDirectives)?
 > The options parameter is a JavaScript key:value pair object providing
 > additional sort and pagination details to be applied to the query result.
-> See the [query options](#wiki-the-query-options) section below.
+> See the [query options](#the-query-options) section below.
 
 **returns:** Function
 > A JavaScript function referred to as "The Query Function". 
-> (See [The Query Function](#wiki-the-query-function) below).
+> (See [The Query Function](#the-query-function) below).
 
-<h2 id="wiki-the-query-argument">The Query Argument</h2>
+<h2 id="the-query-argument">The Query Argument</h2>
 The query argument passed to the Query Engine can be an object,
 a function or a string. The next sections provide a detailed description
 of their usage and some examples. 
-All examples use the same [dataset](#wiki-sample-data) listed at the bottom.
+All examples use the same [dataset](#sample-data) listed at the bottom.
 
 ### Object as Query Argument
 If the query argument is a key:value pairs object, each	key:value pair is matched
@@ -74,7 +74,7 @@ capital letter 'M' and the value of its *age* property is greater than 20.
 
 ### Function as Query Argument
 If the query argument is a filter function, the filter function is called once
-for every object in the  object array passed to _[The Query Function](#wiki-the-query-function)_.
+for every object in the  object array passed to _[The Query Function](#the-query-function)_.
 The argument passed to the filter function is a single object as in: 
 **filterFunc(object)**. The filter function must return Boolean true, indicating 
 a match, or false if no match.  
@@ -116,7 +116,7 @@ For additional information see the <em>Query as a Function</em> section above.
 
 
 
-<h2 id="wiki-the-query-options">The Query Options</h2>
+<h2 id="the-query-options">The Query Options</h2>
 The query options argument is an additional set of optional properties that are
 passed to the Query Engine and are applied to the query results by the Query Function. 
 In general, the query options effect the total number and range of the objects
@@ -143,7 +143,7 @@ Please note, pagination is performed after any optional sort is performed.
 Query results can be sorted using the optional **_sort_** property. The **_sort_**
 property value can be an array of, per property, sort directives or a compare
 function.  
-A [sort directive](wiki/Store-API#wiki-sortDirective) is a JavaScript key:value
+A [sort directive](wiki/Store-API#sortDirective) is a JavaScript key:value
 pairs object describing what property to sort on, the direction of the sort and
 if operation property values should be compared case insensitive.
 
@@ -153,12 +153,12 @@ if operation property values should be compared case insensitive.
 
 
 For additional query options information please refer to the 
-[queryDirectives](wiki/Store-API#wiki-queryDirectives) section of the Store API.
+[queryDirectives](wiki/Store-API#queryDirectives) section of the Store API.
 
 
 
 
-<h2 id="wiki-the-query-function">The Query Function</h2>
+<h2 id="the-query-function">The Query Function</h2>
 The Query Engine, when called, returns a function that takes an array of objects
 as its only argument, this function is referred to as "The Query Function".
 Typically, in the context of a store, the Query Function is passed an array with
@@ -228,9 +228,9 @@ for any that have the word "Tutorial" in the innerHTML property.
 
 
 
-<h2 id="wiki-matching-objects">Matching Objects</h2>
+<h2 id="matching-objects">Matching Objects</h2>
 Objects are matched based on the value(s) of its properties. To test an object 
-property value the _[Query Function](#wiki-the-query-function)_ offers three
+property value the _[Query Function](#the-query-function)_ offers three
 basic methods:
 
 1. The equal (==) operator.
@@ -321,7 +321,7 @@ If you use regular expressions you can simply add the RegEx flag 'i'
 
 
 
-<h2 id="wiki-querying-arrays">Querying Arrays</h2>
+<h2 id="querying-arrays">Querying Arrays</h2>
 The cbtree Query Engine provide full support for querying object properties
 whose value is an array. In addition, as shown in the ABNF notation, query 
 object properties can also be specified as an array of values or regular 
@@ -369,13 +369,13 @@ whereas _parents_ and _children_ are both value array properties.
 	QueryEngine( { children:/(L|R)/ } )( myObjects );
 	
 
-<h2 id="wiki-querying-a-store">Querying a Store</h2>
+<h2 id="querying-a-store">Querying a Store</h2>
 All examples listed above invoke the Query Engine directly. However, all cbtree
 stores use the Query Engine functionality to implement the **cbtree/store/api/Store.query()**
 function. Therefore, whenever dealing with a store, you should simply call the
 store's query() function to query the store objects. The arguments passed to the
 store query() function are the same as those passed to the Query Engine.
-See the [Store API](wiki/Store-API#wiki-query) for more details.
+See the [Store API](wiki/Store-API#query) for more details.
 
 The following is a simple example how to use the store query function:
 
@@ -393,7 +393,7 @@ The example above creates a cbtree Hierarchy store and displays all children
 whose parent include "Homer", have "blond" hair and whose checked state is true.
 
 
-<h2 id="wiki-sample-data">Sample Data</h2>
+<h2 id="sample-data">Sample Data</h2>
 All examples included on this page use the same dataset as shown below.
 The data is a JSON encoded file called 'Simpsons.json': 
 
