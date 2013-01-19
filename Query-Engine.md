@@ -21,7 +21,7 @@ key:value pairs objects, not just store objects.
 > a detailed description an examples.
 
 
-**_options:_** [queryDirectives](Store-API#queryDirectives)?
+**_options:_** [queryDirectives](Store-API#wiki-queryDirectives)?
 > The options parameter is a JavaScript key:value pair object providing
 > additional sort and pagination details to be applied to the query result.
 > See the [query options](#the-query-options) section below.
@@ -143,7 +143,7 @@ Please note, pagination is performed after any optional sort is performed.
 Query results can be sorted using the optional **_sort_** property. The **_sort_**
 property value can be an array of, per property, sort directives or a compare
 function.  
-A [sort directive](wiki/Store-API#sortDirective) is a JavaScript key:value
+A [sort directive](wiki/Store-API#wiki-sortDirective) is a JavaScript key:value
 pairs object describing what property to sort on, the direction of the sort and
 if operation property values should be compared case insensitive.
 
@@ -153,7 +153,7 @@ if operation property values should be compared case insensitive.
 
 
 For additional query options information please refer to the 
-[queryDirectives](wiki/Store-API#queryDirectives) section of the Store API.
+[queryDirectives](wiki/Store-API#wiki-queryDirectives) section of the Store API.
 
 
 
@@ -375,7 +375,7 @@ stores use the Query Engine functionality to implement the **cbtree/store/api/St
 function. Therefore, whenever dealing with a store, you should simply call the
 store's query() function to query the store objects. The arguments passed to the
 store query() function are the same as those passed to the Query Engine.
-See the [Store API](wiki/Store-API#query) for more details.
+See the [Store API](wiki/Store-API#wiki-query) for more details.
 
 The following is a simple example how to use the store query function:
 
