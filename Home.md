@@ -14,7 +14,7 @@ The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and ha
 	- [Data Handlers](wiki/Data-Handlers)
 	- [Store API](wiki/Store-API)
 * [Extensions](wiki/Extensions)
-	- [Tree Styling](wiki/Tree-Styling)
+	- [Styling & Icons](wiki/Tree-Styling)
 
 ## Usage
 * Working with Events

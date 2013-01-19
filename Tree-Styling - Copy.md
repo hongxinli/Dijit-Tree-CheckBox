@@ -7,16 +7,14 @@ item basis.
 The Tree Styling extension is not limited to the CheckBox Tree but can also
 be used with the default `dijit/Tree` tree.
 
-<h2>
-<img src="wiki/images/readme-mega.png" />
-</h2>
-* [Loading the Extension](#wiki-loading-the-styling-extension)
+## On This Page
+* [Loading the Extension](#wiki-loading-the-extension)
 * [Styling Properties](#wiki-styling-properties)
 * [Styling API](#wiki-the-styling-api)
 * [Adding Custom Icons](#wiki-adding-custom-icons)
 * [Sample Applications](#wiki-sample-application)
 
-## Loading the Styling Extension
+<h2 id="wiki-loading-the-extension">Loading the Styling Extension</h2>
 Tree Styling is implemented as an extension to the CheckBox Tree and as such
 needs to be loaded as a separate module. The following sample shows how to load
 the Styling extension. The Style extension is located at `cbtree/extensions/Styling`
@@ -40,7 +38,7 @@ programmatically, this because it is an extension and has no constructor.
 
 Also, see the second [example](#wiki-sample-application) below.
 
-## Styling Properties
+<h2 id="wiki-styling-properties">Styling Properties</h2>
 ### Tree Properties
 Whenever the Styling extension is loaded the CheckBox Tree gets one more public
 property:
@@ -77,7 +75,7 @@ A style property looks like:
 
 
 
-## The Styling API
+<h2 id="wiki-the-styling-api">The Styling API</h2>
 The Styling extension extends the Tree API with two simple to use accessors to
 either get or set styling properties of the tree, or tree nodes on a per item
 basis.
@@ -131,7 +129,7 @@ The following are several examples of the Tree API extensions and Styling proper
 
 
 
-## Adding Custom Icons
+<h2 id="wiki-adding-custom-icons">Adding Custom Icons</h2>
 The Styling extension provides different methods to add custom icons to your
 tree. These methods are:
 
@@ -164,7 +162,7 @@ Alternatively you could import your css file in one of the theme related css fil
 used by cbtree. For example: claro.css, tundra.css located in one of the themes
 related directories.
 
-### Icon Properties
+<h3 id="wiki-icon-properties">Icon Properties</h3>
 The CheckBox Tree and Styling extension functions accept icons either as a 
 string argument or as an icon object. An icon object is JavaScript key:value
 pairs objects with the following properties:
@@ -347,7 +345,7 @@ or, set it dynamically after tree creation:
 Demo application `cbtree/demos/store/tree09.html` demonstrates the implementation 
 and use of multi level icons.
 
-## Sample Application
+<h2 id="wiki-sample-application">Sample Application</h2>
 
 The following sample application demonstrates some of the Tree Styling API features.
 
