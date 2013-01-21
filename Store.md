@@ -15,7 +15,7 @@ All cbtree stores are in-memory stores, that is, the store content is loaded in 
 without the support of persistent storage. Any changes to the store are lost after
 your session is terminated. The following store type are available.
 
-* [Memory](#wiki-the-memory-store)
+* [Memory](#the-memory-store)
 * [Natural](#wiki-the-natural-store)
 * [Hierarchy](#wiki-the-hierarchy-store)
 * [ObjectStore](#wiki-the-object-store)
@@ -39,7 +39,7 @@ to the dojo/store/Memory store with the following extensions:
 2. Allow for pre-processing of loaded data using custom [data handlers](#wiki-data-handlers).
 3. Deferred data loading when using URL's.
 4. Apply default properties to store objects.
-5. Enhanced [Query Engine](wiki/Query-Engine)
+5. Enhanced [Query Engine](Query-Engine)
 
 The **cbtree/store/Memory** implements the following cbtree/store/api/Store
 properties:
@@ -72,10 +72,11 @@ and functions.
 <h2 id="wiki-the-natural-store">The Natural Store</h2>
 
 The **cbtree/store/Natural** store extends the Memory store by adding support for
-the cbtree/store [PutDirectives](Store-API#wiki-PutDirectives) property "before" allowing
-for store objects to be arranged in a natural order.
-The before property value is either an object or object identifier.
+the cbtree/store [PutDirectives](Store-API#wiki-PutDirectives) **_"before"_** property
+allowing for store objects to be arranged in a natural order.
+The **_before_** property value is either an object or object identifier.
 
+```javascript
 	require( ["cbtree/store/Natural"], function (Natural) {
 		var myStore = new Natural( {idProperty:"name"} ));
 				...
@@ -83,20 +84,22 @@ The before property value is either an object or object identifier.
 				...
 		myStore.put( {name:"Lisa", lastName:"Simpson"}, {before:"Bart"} );
 	}
-
+```
 The **cbtree/store/Natural** serves as the base class for the Hierarchy store.
 
 <h2 id="wiki-the-hierarchy-store">The Hierarchy Store</h2>
 
 The **cbtree/store/Hierarchy** store extends the Natural store by adding
-support for the cbtree/store [PutDirectives](Store-API#wiki-PutDirectives) "parent" property.
-Objects loaded into the store will automatically get a "parent" property if they don't already have one.
-The object's parent property value is the identifier, or an array of identifiers, of the
-object's parent(s). The store maintains the hierarchy and natural order amongst the store
-objects.
+support for the cbtree/store [PutDirectives](Store-API#wiki-PutDirectives) 
+**_"parent"_** property.
+Objects loaded into the store will automatically get a **_parent_** property
+if they don't already have one.
+The object's parent property value is the identifier, or an array of identifiers, 
+of the object's parent(s). The store maintains the hierarchy and natural order
+amongst the store objects.
 
-As indicated above, the object's parent property value can be an array of parent ids enabling
-support for so-called multi-parented objects.
+As indicated above, the object's parent property value can be an array of parent 
+ids enabling support for so-called multi-parented objects.
 
 	require( ["cbtree/store/Hierarchy"], function (Hierarchy) {
 		var myStore = new Hierarchy( {idProperty:"name", multiParented:true} ));
