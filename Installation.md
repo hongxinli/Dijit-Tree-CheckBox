@@ -55,7 +55,7 @@ related models.
 
 `/icons`
 > The /icons directory holds sample custom icons and their associated css files,
-> please refer to [Tree Styling](TreeStyling.md) for a detailed description
+> please refer to [Tree Styling](Tree-Styling) for a detailed description
 > on how to use custom icons.
 
 

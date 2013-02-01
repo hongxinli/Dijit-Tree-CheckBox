@@ -1,4 +1,4 @@
-# Styling & Icons#
+
 The CheckBox Tree comes with a simple Styling extension which is loaded as a
 separate module. The Styling extension allows you to dynamically manage
 tree node icons, labels and row styling either for the entire tree or on a per
@@ -17,8 +17,9 @@ be used with the default `dijit/Tree` tree.
 <h2 id="loading-the-styling-extension">Loading the Styling Extension</h2>
 Tree Styling is implemented as an extension to the CheckBox Tree and as such
 needs to be loaded as a separate module. The following sample shows how to load
-the Styling extension. The Style extension is located at `cbtree/extensions/Styling`
+the Styling extension. The Style extension is located at **cbtree/extensions/Styling**
 
+```javascript
     require(["cbtree/store/Hierarchy", 
              "cbtree/Tree",
              "cbtree/model/TreeStoreModel", 
@@ -27,14 +28,16 @@ the Styling extension. The Style extension is located at `cbtree/extensions/Styl
                     ...
       }
     );
-
+```
 If you instantiate your tree declarative you **MUST** load the Styling extension
 programmatically, this because it is an extension and has no constructor.
 
+```javascript
     require(["dojo/parser",                // dojo parser
              "cbtree/Tree",                // CheckBox Tree
              "cbtree/extensions/Styling"   // Tree styling extensions
             ]);
+```
 
 Also, see the second [example](#sample-application) below.
 
@@ -68,8 +71,9 @@ The **_Class_** properties are all of type String, whereas all **_Style_** prope
 are JavaScript key:value pairs objects suitable for the input to `domStyle.set()`  
 A style property looks like:
 
-      {color:"red", border:"solid"}
-
+```javascript
+{color:"red", border:"solid"}
+```
 
 
 
@@ -84,6 +88,7 @@ on the type of model that is associated with the tree.
 If for example the model is one of the store models than an item represents an
 object in a `cbtree/store`.
 
+********************************************
 #### get( propertyName, item? )
 
 **_propertyName_**: String  
@@ -97,7 +102,7 @@ object in a `cbtree/store`.
 > Returns a string if the property refers to a 'Class' property otherwise an 
 > object.
 
-<h2></h2>
+********************************************
 #### set( propertyName, newValue, item? )
 
 **_propertyName_**: String  
@@ -116,16 +121,16 @@ object in a `cbtree/store`.
 ### Styling API Usage
 The following are several examples of the Tree API extensions and Styling properties:
 
-      get("iconClass", item)
-      get("labelStyle", item)
-      get("labelStyle")
-      
-      set("labelStyle", {color:"red"}, item)
-      set("labelStyle", {color:"red"})
-      set("icon", {iconClass:"myIcons", indent: false}, item);
-      set("icon", "myIcons")
+```javascript
+get("iconClass", item)
+get("labelStyle", item)
+get("labelStyle")
 
-
+set("labelStyle", {color:"red"}, item)
+set("labelStyle", {color:"red"})
+set("icon", {iconClass:"myIcons", indent: false}, item);
+set("icon", "myIcons")
+```
 
 
 
@@ -207,10 +212,13 @@ greater than the indent value no additional class name is generated.
 
 ##### Examples
 
+
+```javascript
     icon = { iconClass:"myIcons", iconStyle:{border:"solid"}, fixed:"myIconNode", indent:false};
     icon = { iconClass:"myIcons", indent: 3 };
     icon = { iconClass:"myIcons" }
     icon = "myIcons"
+```
 
 If the icon is a string argument, as in the last example, the Tree Styling API will
 automatically convert it to an icon object like:  
@@ -221,8 +229,9 @@ automatically convert it to an icon object like:
 Assuming you are creating the css file for the css class name 'myIcons' and each of the
 icon bitmaps is 16 pixels wide, the basic (minimal) css file MUST look like:
 
+```css
       .myIcons {
-        background-image: url("images/myIcons.gif");
+        background-image: url( "images/myIcons.gif" );
         background-repeat: no-repeat;
       }
 
@@ -237,6 +246,7 @@ icon bitmaps is 16 pixels wide, the basic (minimal) css file MUST look like:
       .myIcons.myIconsExpanded {
         background-position: -32px;
       }
+```
 
 *NOTE:* There is **NO** white space between the css class names.
 
@@ -249,9 +259,10 @@ set accordingly:
 
 Example:
 
+```html
       <link rel="stylesheet" href="../cbtree/icons/myIcons.css" />
                         ...
-      <script>
+      <script type="text/javascript">
         require(["cbtree/store/Hierarchy", 
                  "cbtree/Tree",
                  "cbtree/extensions/Styling",
@@ -273,6 +284,7 @@ Example:
                         ...
                     });
       </script>
+```
 
 ### Icon as item property ###
 
@@ -289,6 +301,7 @@ For example, if you create a JSON store item like:
     
 You could create your model as follows:
 
+```javascript
 	var model = new TreeStoreModel( {
 			store: store,
 			query: {type: "parent"},
@@ -296,6 +309,7 @@ You could create your model as follows:
 			iconAttr:"icon",
 				...
 			}); 
+```
 
 In the above example the store model is told that the **_icon_** property of a 
 data item needs to be handled as the icon class. 
@@ -319,28 +333,34 @@ css classes are set for the iconNode:
 Add at least one more icon to your sprite (e.g icon (3)) and add the following
 to your css file.
     
+```css
 	  .myIcons.myIconsTerminal_1,
 	  .myIcons.myIconsCollapsed_1,
 	  .myIcons.myIconsExpanded_1 {
 		background-position: -48px;
 	  }
+```
 
 Now create the tree with the icon property **_ident_** set to true (default):
   
+```javascript
       var myTree = new Tree( {
               model: model,
               id: "MenuTree",
               icon: { iconClass: "myIcons", indent: true },
                   ...
               });
+```
 
 or, set it dynamically after tree creation:
 
+```javascript
       myTree.set("icon", { iconClass: "myIcons" })
 
               or simply:
       
       myTree.set("icon", "myIcons" })
+```
 
 Demo application `cbtree/demos/store/tree09.html` demonstrates the implementation 
 and use of multi level icons.
@@ -349,6 +369,7 @@ and use of multi level icons.
 
 The following sample application demonstrates some of the Tree Styling API features.
 
+```html
     <!DOCTYPE html>
     <html>
       <head> 
@@ -359,7 +380,7 @@ The following sample application demonstrates some of the Tree Styling API featu
           @import "../../themes/claro/claro.css";
         </style>
 
-        <script type="text/javascript">
+        <script type='text/javascript'>
           var dojoConfig = { async: true, parseOnLoad: true,  isDebug: false,
                 baseUrl: "../../../",
                 packages: [
@@ -419,10 +440,12 @@ The following sample application demonstrates some of the Tree Styling API featu
         <h2>Click a checkbox</h2>
       </body> 
     </html>
+```
 
 The following is the same sample application but this time we instantiate the
 store, model and tree declarative:
 
+```html
     <!DOCTYPE html>
     <html>
       <head> 
@@ -455,7 +478,6 @@ store, model and tree declarative:
           function checkBoxClicked( item, nodeWidget, evt ) {
             var newState = nodeWidget.get("checked" );
             var label    = this.getLabel(item);
-            
             if( newState ) {
               this.set("iconStyle", {border:"solid"}, item );
               this.set("labelStyle",{color:"red"}, item );
@@ -466,14 +488,12 @@ store, model and tree declarative:
             alert( "The new state for " + label + " is: " + newState );
           }
         </script>
-
       </head>
-        
       <body class="claro">
         <h1 class="DemoTitle">CheckBox Tree Styling</h1>
         <div id="content">
           <div data-dojo-id="store" data-dojo-type="cbtree/store/Hierarchy" 
-            data-dojo-props='url:"../../store/json/Family.json", idProperty:"name"'>
+           data-dojo-props='url:"../../store/json/Family.json", idProperty:"name"'>
           </div>
           <div data-dojo-id="model" data-dojo-type="cbtree/model/TreeStoreModel"
             data-dojo-props='store:store, query:{name:"Root"}, rootLabel:"The Family"'>
@@ -485,3 +505,7 @@ store, model and tree declarative:
         <h2>Click a checkbox</h2>
       </body> 
     </html>
+```
+
+The CheckBox tree comes with several examples of custom icons and their associated
+css files. These examples can be found at **cbtree/icons** and **cbtree/icons/images**.

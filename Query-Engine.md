@@ -1,4 +1,3 @@
-# Query Engine
 
 The **cbtree/store/util/QueryEngine** provides the underlying search and
 query functionality for all cbtree stores. The name "query engine" is somewhat
@@ -10,7 +9,7 @@ query() function, it provides the functionality to enable the implementation of
 such a function. The Query Engine can be used with any arbitrary set of JavaScript
 key:value pairs objects, not just store objects.
 
-<h2 id="queryEngine"></h2>
+<h2 id="the-query-engine-api">The Query Engine API</h2>
 #### queryEngine( query, options? )
 > Returns a JavaScript function capable of executing a store query and optionally 
 > apply pagination and sorting to the result.
@@ -56,6 +55,7 @@ The following is the ABNF notation of the query object:
 
 Next, some examples of the query argument as an object are:
 
+```javascript
 	{ name: "Homer" }
 	{ name: /^Homer$/ }
 	{ parent: ["Homer", "Marge"], checked: true }
@@ -67,6 +67,7 @@ Next, some examples of the query argument as an object are:
 	          }
 	        }
 	}
+```
 
 The last example above demonstrates the use of a function as the query property 
 value. In this case an object is considered a match if its name starts with a
@@ -80,17 +81,18 @@ The argument passed to the filter function is a single object as in:
 a match, or false if no match.  
 For example:
 
-	require(["cbtree/store/util/QueryEngine"], function ( QueryEngine ) {
+```javascript
+require(["cbtree/store/util/QueryEngine"], function ( QueryEngine ) {
 
-	  function myFilterFunc( object ) {
-	              ...
-	    return true;
-	  }
-
-	  var queryFunc = QueryEngine( myFilterFunc, {count:5, ...} );
-	  var results   = queryFunc( myObjects );
-	              ...
-	}
+  function myFilterFunc( object ) {
+              ...
+    return true;
+  }
+  var queryFunc = QueryEngine( myFilterFunc, {count:5, ...} );
+  var results   = queryFunc( myObjects );
+              ...
+}
+```
 
 ### String as Query Argument
 If the query argument is a string, the string value is the name of a store function
@@ -98,17 +100,18 @@ that returns Boolean true or false. In order to use this approach with the cbtre
 stores you must first extend the store with the required filter functionality.
 An example of such store extension could look like:
 
-	require(["cbtree/Memory"], function (Memory) {
-	  function myFilterFunc( object ) {
-	              ...
-	    return true;
-	  }
+```javascript
+require(["cbtree/Memory"], function (Memory) {
+  function myFilterFunc( object ) {
+              ...
+    return true;
+  }
 
-	  var myStore = new Memory( {myQFilter: myFilterFunc, ... });
-	              ...
-	  var result = store.query( "myQFilter", {count:5, ...});
-	}
-
+  var myStore = new Memory( {myQFilter: myFilterFunc, ... });
+              ...
+  var result = store.query( "myQFilter", {count:5, ...});
+}
+```
 Alternatively you could use the **dojo/_base/lang** extend() method to extend
 the store or pass the function <em>myFilterFunc</em> directly as the query argument.  
 For additional information see the <em>Query as a Function</em> section above.
@@ -131,8 +134,10 @@ index (zero based) of the first object in the result set to be returned. The
 If no sort options are supplied the result set is returned in the natural order, 
 if any, maintained by the store. (See the Natural and Hierarchy stores for details).
 
-	var queryFunc = QueryEngine( {hair:"blond"}, {start:5, count:10});
-	var results   = queryFunc( myObjects );
+```javascript
+var queryFunc = QueryEngine( {hair:"blond"}, {start:5, count:10});
+var results   = queryFunc( myObjects );
+```
 
 The above example returns at a maximum 10 objects whose *hair* property equal
 "blond" starting at index number 5 of the results.
@@ -147,10 +152,11 @@ A [sort directive](wiki/Store-API#wiki-sortDirective) is a JavaScript key:value
 pairs object describing what property to sort on, the direction of the sort and
 if operation property values should be compared case insensitive.
 
-	var sortSet   = [ {property:"name", descending:true, ignoreCase:true}, {property:"age"} ];
-	var queryFunc = QueryEngine( {hair:"blond"}, {sort:sortSet, start:5, count:10});
-	var results   = queryFunc( myObjects );
-
+```javascript
+var sortSet   = [ {property:"name", descending:true, ignoreCase:true}, {property:"age"} ];
+var queryFunc = QueryEngine( {hair:"blond"}, {sort:sortSet, start:5, count:10});
+var results   = queryFunc( myObjects );
+```
 
 For additional query options information please refer to the 
 [queryDirectives](wiki/Store-API#wiki-queryDirectives) section of the Store API.
@@ -181,46 +187,48 @@ The signature of the Query Function returned by the Query  Engine is as follows:
 The following example shows a basic implementation of the **cbtree/store/api/Store.query()**
 function using the Query Engine and Query Function.
 
-	require(["dojo/store/util/QueryResult",
-	         "cbtree/store/util/QueryEngine", 
-	              ...
-	        ], function ( QueryResult, QueryEngine, ... ) {
+```javascript
+require(["dojo/store/util/QueryResult",
+         "cbtree/store/util/QueryEngine", 
+              ...
+        ], function ( QueryResult, QueryEngine, ... ) {
 
-	  var store = declare([], {
-	    queryEngine: QueryEngine,
-	    storeObjects: [],
+  var store = declare([], {
+    queryEngine: QueryEngine,
+    storeObjects: [],
+              ...
+    query: function ( query, queryDirectives ) {
+      var queryFunc = this.queryEngine( query, queryDirectives );
+      var matches   = queryFunc( this.storeObjects );
+    
+      return QueryResult( matches );
+    }
 
-	              ...
-	
-	    query: function ( query, queryDirectives ) {
-	      var queryFunc = this.queryEngine( query, queryDirectives );
-	      var matches   = queryFunc( this.storeObjects );
-	    
-	      return QueryResult( matches );
-	    }
+  }); /* end declare() */
 
-	  }); /* end declare() */
+  return store;
+  
+}); /* end require() */
+```
 
-	  return store;
-	  
-	}); /* end require() */
-	
 ### Other Usage
 
 As stated before, the usage of the Query Engine is not limited to just object
 stores. It can be used with an arbitrary array of JavaScript key:value pairs
 object as the following example demonstrates:
 
-	require(["cbtree/store/util/QueryEngine", 
-	              ...
-	        ], function ( queryEngine, ... ) {
+```javascript
+require(["cbtree/store/util/QueryEngine", 
+              ...
+        ], function ( queryEngine, ... ) {
 
-	  var queryFunc = queryEngine( {innerHTML:/Tutorial/} );
-	  var anchors   = Array.prototype.slice.call( document.anchors );
+  var queryFunc = queryEngine( {innerHTML:/Tutorial/} );
+  var anchors   = Array.prototype.slice.call( document.anchors );
 
-	  var result = queryFunc( anchors );
-	              ...
-	});
+  var result = queryFunc( anchors );
+              ...
+});
+```
 
 The example above gets all the anchors in a document and queries them looking
 for any that have the word "Tutorial" in the innerHTML property.
@@ -246,10 +254,11 @@ merely tests if two values are equal assuming both values are the same data type
 If you are looking to match objects based on an exact property value match, than 
 this is the way to go. Example query arguments are:
 
-	{ hair:"brown" }
-	{ hair:"brown", checked:true }
-	{ hair:"brown", checked:true, age:65 }
-
+```javascript
+{ hair:"brown" }
+{ hair:"brown", checked:true }
+{ hair:"brown", checked:true, age:65 }
+```
 
 #### Using Regular Expressions
 Regular Expressions (RegEx) can be used to query object properties whenever 
@@ -261,10 +270,12 @@ expensive in terms of performance especially if your expression is not optimized
 causing potentially hundreds of iterations on a single property value. Example 
 query arguments using regular expressions are:
 
-	{ name:/^H/ }
-	{ name:/^(H|M)/
-	{ filename:/^(.*)\.txt$/ }
-	
+```javascript
+{ name:/^H/ }
+{ name:/^(H|M)/
+{ filename:/^(.*)\.txt$/ }
+```
+
 #### Using Custom Functions
 If your object query can **NOT** be achieved using the 'is equal' or regular
 expression method or a combination of those two. You also have the option of
@@ -272,13 +283,15 @@ custom validation function. For example, if you what to match an object based
 on a numeric range you can write your own matching algorithm. An example of
 a query argument with a custom function is:
 
-	{ age: function (value, key, object) {
-	         if (value >= 18 && value <= 40) {
-	           return true;
-	         }
-	         return false;
-	       }
-	}
+```javascript
+{ age: function (value, key, object) {
+         if (value >= 18 && value <= 40) {
+           return true;
+         }
+         return false;
+       }
+}
+```
 
 #### Combining methods
 For more complex object matching logic, you can combine any of the matching
@@ -286,20 +299,22 @@ methods in a single query. Let's assume we want to get the first 5 images in a
 document that are 'draggable', have a base URI which include a path segment
 '/images/' and whose width is in the range of 16 and 64 pixels.
 
-	require(["cbtree/store/util/QueryEngine"], function (QueryEngine) {
-	  var images = Array.prototype.slice.call( document.images );
-	  var query  = { draggable: true, 
-	                 baseURI:/\/images\//,
-	                 width: function (value, key, object ) {
-	                          if (value >= 16 && value <= 64) {
-	                            return true;
-	                          }
-	                        }
-		             };
-	  var queryFunc = QueryEngine( query, {count:5} );
-	  var results   = queryFunc( images );
-	           ...
-	});
+```javascript
+require(["cbtree/store/util/QueryEngine"], function (QueryEngine) {
+  var images = Array.prototype.slice.call( document.images );
+  var query  = { draggable: true, 
+                 baseURI:/\/images\//,
+                 width: function (value, key, object ) {
+                          if (value >= 16 && value <= 64) {
+                            return true;
+                          }
+                        }
+               };
+  var queryFunc = QueryEngine( query, {count:5} );
+  var results   = queryFunc( images );
+           ...
+});
+```
 
 #### Case sensitivity
 By default, property values are matched case sensitive however, depending on 
@@ -314,9 +329,10 @@ ALL property values that support a toLowerCase() method.
 
 If you use regular expressions you can simply add the RegEx flag 'i'
 
-	var query   = { name:/^(homer|marge)$/i };
-	QueryEngine( query );
-
+```javascript
+var query   = { name:/^(homer|marge)$/i };
+QueryEngine( query );
+```
 
 
 
@@ -329,11 +345,13 @@ expression or a combination of those. This section details how the cbtree
 Query Engine deals with arrays and array values. To better explain the Query
 Engine behavior let's assume we have two store objects defined as follows:
 
-	var myObjects = [
-	  { name:"Homer", age: 42, parents:["Abe", "Mona"], hair: "none",  children:["Bart", "Lisa", "Maggie"] }
-	  { name:"Ned"  , age: 40, parents:["Root"],        hair: "brown", children:["Rod", "Tod"] }
-	];
-	
+```javascript
+var myObjects = [
+  { name:"Homer", age: 42, parents:["Abe", "Mona"], hair: "none",  children:["Bart", "Lisa", "Maggie"] }
+  { name:"Ned"  , age: 40, parents:["Root"],        hair: "brown", children:["Rod", "Tod"] }
+];
+```
+
 The object properties _name_, _age_ and _hair_ are all single value properties
 whereas _parents_ and _children_ are both value array properties.
 
@@ -379,15 +397,17 @@ See the [Store API](wiki/Store-API#wiki-query) for more details.
 
 The following is a simple example how to use the store query function:
 
-	require(["cbtree/store/Hierarchy"], function ( Hierarchy ) {
-	  var store  = new Hierary( {url:"./Simpsons.json", multiParented: true} );
-	  var query  = { parent:"Homer", hair:"blond", checked:true };
-	  var result = store.query( query );
+```javascript
+require(["cbtree/store/Hierarchy"], function ( Hierarchy ) {
+  var store  = new Hierary( {url:"./Simpsons.json", multiParented: true} );
+  var query  = { parent:"Homer", hair:"blond", checked:true };
+  var result = store.query( query );
 
-	  result.forEach( function ( child ) {
-	    console.log( "Checked child: " + child.name );
-	  });
-	}
+  result.forEach( function ( child ) {
+    console.log( "Checked child: " + child.name );
+  });
+}
+```
 
 The example above creates a cbtree Hierarchy store and displays all children
 whose parent include "Homer", have "blond" hair and whose checked state is true.

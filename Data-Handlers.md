@@ -1,4 +1,3 @@
-# Data Handlers
 
 Store data handlers allow you to load any arbitray data format into the cbtree stores
 with the exception of the FileStore which does not support data handlers.
@@ -31,15 +30,16 @@ The signature or prototype of a data handler is a s follows:
 
 **example:**
 
-	function dataHandler( response ) {
-	  var rawData   = response.data || response.text;
-	  var storeData = [];
+```javascript
+function dataHandler( response ) {
+  var rawData   = response.data || response.text;
+  var storeData = [];
 
-	  // Convert the rawData here
-	             ...
-
-	  return storeData;
-	}
+  // Convert the rawData here
+             ...
+  return storeData;
+}
+```
 
 ### Store Properties
 The cbtree stores have two properties to enable a custom data handler, _handleAs_ and
@@ -56,17 +56,18 @@ _handleAs_ as "json".
 ### Data Handler Declaration
 The simplest form of declaring a Data Handler as a loadable AMD module is as follows:
 
-	declare([], function () {
-	  return function ( response ) {
-	    var rawData   = response.data || response.txt;
-	    var storeData = [];
+```javascript
+declare([], function () {
+  return function ( response ) {
+    var rawData   = response.data || response.txt;
+    var storeData = [];
 
-	    // Convert the rawData here
-	             ...
-	    return storeData;
-	  };
-	});
-
+    // Convert the rawData here
+             ...
+    return storeData;
+  };
+});
+```
 
 <h2 id="handler-registration">Handler Registration</h2>
 Every custom data handler must be registered with **_/dojo/request/handlers_** in order to
@@ -81,61 +82,65 @@ There are to ways of registering your data handler:
 The first example shows how to register your data handler using the store's _dataHandler_
 and _handleAs_ properties.
 
-	require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
-	         "./myDataHandler"               // Your custom Data Handler.
-	        ], function( ObjectStore, myHandler) {
+```javascript
+require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
+         "./myDataHandler"               // Your custom Data Handler.
+        ], function( ObjectStore, myHandler) {
 
-	  // Create an object store and register a custom data handler.
-	  var store = new ObjectStore( { url:"/your/data/file/here",
-	                                 handleAs: "yourDataType",
-	                                 dataHandler: myHandler
-                                 });
-	             ...
-	});
+  // Create an object store and register a custom data handler.
+  var store = new ObjectStore( { url:"/your/data/file/here",
+                                 handleAs: "yourDataType",
+                                 dataHandler: myHandler
+                               });
+             ...
+});
+```
 
 The next example demonstrates direct registration with **_/dojo/request/handlers_**. In this
 case, after registration, we can simply tell the store how to handle the data using the handler's
 data type.
 
-	require(["dojo/request/handlers",
-	         "cbtree/store/ObjectStore",     // Evented Object Store with Hierarchy
-	         "./myDataHandler"               // Your custom Data Handler.
-	        ], function ( dojoHandlers, ObjectStore, myHandler) {
+```javascript
+require(["dojo/request/handlers",
+         "cbtree/store/ObjectStore",     // Evented Object Store with Hierarchy
+         "./myDataHandler"               // Your custom Data Handler.
+        ], function ( dojoHandlers, ObjectStore, myHandler) {
 
-	  // Register data handler with /dojo/request/handlers
-	  dojoHandlers.register("myDataType", myHandler );
+  // Register data handler with /dojo/request/handlers
+  dojoHandlers.register("myDataType", myHandler );
 
-	  var store = new ObjectStore( { url:"/your/data/file/here",
-	                                 handleAs: "myDataType"
-                                 });
-	             ...
-	});
+  var store = new ObjectStore( { url:"/your/data/file/here",
+                                 handleAs: "myDataType"
+                               });
+             ...
+});
+```
 
 Regardless of which method you use to register your data handler, once the handler is
 registered it is also available to dojo/request and dojo/request/xhr as shown in the
 following example:
 
-	require(["dojo/request",
-	         "dojo/request/handlers",
-	         "cbtree/store/ObjectStore",     // Evented Object Store with Hierarchy
-	         "./myDataHandler"               // Your custom Data Handler.
-	        ], function ( request, dojoHandlers, ObjectStore, myHandler) {
+```javascript
+require(["dojo/request",
+         "dojo/request/handlers",
+         "cbtree/store/ObjectStore",     // Evented Object Store with Hierarchy
+         "./myDataHandler"               // Your custom Data Handler.
+        ], function ( request, dojoHandlers, ObjectStore, myHandler) {
 
-	  // Register data handler with /dojo/request
-	  dojoHandlers.register("myDataType", myHandler );
+  // Register data handler with /dojo/request
+  dojoHandlers.register("myDataType", myHandler );
 
-	  var store = new ObjectStore( { url:"/your/data/file/here",
-	                                 handleAs: "myDataType"
-                                 });
-	             ...
+  var store = new ObjectStore( { url:"/your/data/file/here",
+                                 handleAs: "myDataType"
+                               });
+             ...
 
-	  var result = request("/some/other/file", {handleAs:"myDataType"});
-	  result.then( function (convertedData) {
-	             ...
-	  });
-
-	});
-
+  var result = request("/some/other/file", {handleAs:"myDataType"});
+  result.then( function (convertedData) {
+             ...
+  });
+});
+```
 
 
 <h2 id="advanced-data-handler">Advanced Data Handler</h2>
@@ -158,79 +163,83 @@ and the third its _checked_ state. In order to solve this problem we must provid
 scope, or closure, in which our data handler will operate. The following is a simple
 example of how you could do this:
 
-	declare([], function () {
+```javascript
+declare([], function () {
 
-	  // Define the data handler scope/closure
+  // Define the data handler scope/closure
 
-	  function scopedHandler() {
+  function scopedHandler() {
 
-	    this.propNames = ["name", "hair", "checked"];
-	    this.delimiter = ",";
-	    this.newLine   = "\r\n";
+    this.propNames = ["name", "hair", "checked"];
+    this.delimiter = ",";
+    this.newLine   = "\r\n";
 
-	    var self = this;
+    var self = this;
 
-	    // Next define the data handler as the 'handler' property of scopedHandler.
+    // Next define the data handler as the 'handler' property of scopedHandler.
 
-	    this.handler = function ( response ) {
-	      var rawData   = response.data || response.txt;
-	      var storeData = [];
+    this.handler = function ( response ) {
+      var rawData   = response.data || response.txt;
+      var storeData = [];
 
-	      var dataLines = rawData.split( self.newLine );
-	      var propNames = self.propNames;
+      var dataLines = rawData.split( self.newLine );
+      var propNames = self.propNames;
 
-	      dataLines.forEach( function( line ) {
-	        var values  = line.split( self.delimiter );
-	        var dataObj = {};
+      dataLines.forEach( function( line ) {
+        var values  = line.split( self.delimiter );
+        var dataObj = {};
 
-	        values.forEach( function( value, index ) {
-	          dataObj[propNames[index]] = value;
-	        });
-	        storeData.push( dataObj );
-	      });
-	      return storeData;
+        values.forEach( function( value, index ) {
+          dataObj[propNames[index]] = value;
+        });
+        storeData.push( dataObj );
+      });
+      return storeData;
 
-	    }; /* end data handler */
+    }; /* end data handler */
 
-	  }; /* end data handler scope/closure */
-
-	  return scopedHandler;
-
-	});
+  }; /* end data handler scope/closure */
+  return scopedHandler;
+});
+```
 
 Because the actual data handler is now a property of _scopedHandler_ we will have to
 create an instance of _scopedHandler_ before we can register the data handler.
 Lets assume the above code snippet is stored in a local file named myCsvHandler.js
 
-	require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
-	         "./myCsvHandler"                // Your CVS Data Handler.
-	        ], function( ObjectStore, myCsvHandler) {
+```javascript
+require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
+         "./myCsvHandler"                // Your CVS Data Handler.
+        ], function( ObjectStore, myCsvHandler) {
 
-	  // Instantiate the data handler...
-	  var csvConverter = new myCsvHandler();
+  // Instantiate the data handler...
+  var csvConverter = new myCsvHandler();
 
-	  // Create an object store and register a custom data handler.
-	  var store = new ObjectStore( { url:"/your/data/file/here",
-	                                 handleAs: "csv",
-	                                 dataHandler: csvConverter.handler
-                                 });
-	             ...
-	});
+  // Create an object store and register a custom data handler.
+  var store = new ObjectStore( { url:"/your/data/file/here",
+                                 handleAs: "csv",
+                                 dataHandler: csvConverter.handler
+                               });
+             ...
+});
+```
 
 To make it even simpler, the cbtree stores are able to inspect the _dataHandler_ property
 and instantiate it if required. Therefore, you could simply write:
 
-	require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
-	         "./myCsvHandler"                // Your CVS Data Handler.
-	        ], function( ObjectStore, myCsvHandler) {
+```javascript
+require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarchy
+         "./myCsvHandler"                // Your CVS Data Handler.
+        ], function( ObjectStore, myCsvHandler) {
 
-	  // Create an object store and register a custom data handler.
-	  var store = new ObjectStore( { url:"/your/data/file/here",
-	                                 handleAs: "csv",
-	                                 dataHandler: csvConverter
-                                 });
-	             ...
-	});
+  // Create an object store and register a custom data handler.
+  var store = new ObjectStore( { url:"/your/data/file/here",
+                                 handleAs: "csv",
+                                 dataHandler: csvConverter
+                               });
+             ...
+});
+```
 
 However, in this case the cbtree store explicitly looks for the property name **_handler_**.
 For additional information on the usage of the stores _dataHandler_ and _handleAs_ properties

@@ -7,8 +7,8 @@ Welcome to the CheckBox Tree wiki.
 ## CheckBox Tree Components
 The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and has three primary components plus a set of extensions
 
-* [Tree](wiki/Tree)
-* [Models](wiki/Model)
+* [CheckBox Tree](wiki/CheckBox-Tree)
+* [The Models](wiki/Store-Models)
 * [Stores](wiki/Store)
 	- [Query Engine](wiki/Query-Engine)
 	- [Data Handlers](wiki/Data-Handlers)
@@ -17,7 +17,7 @@ The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and ha
 	- [Styling & Icons](wiki/Tree-Styling)
 
 ## Usage
-* Working with Events
+* [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
 * Styling the Tree
 
 ## Demos
