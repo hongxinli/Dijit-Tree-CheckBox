@@ -20,23 +20,23 @@ needs to be loaded as a separate module. The following sample shows how to load
 the Styling extension. The Style extension is located at **cbtree/extensions/Styling**
 
 ```javascript
-    require(["cbtree/store/Hierarchy", 
-             "cbtree/Tree",
-             "cbtree/model/TreeStoreModel", 
-             "cbtree/extensions/Styling"]  // Load Tree Styling extension
-      function( Hierarchy, Tree, TreeStoreModel, TreeStyling ) {
-                    ...
-      }
-    );
+require(["cbtree/store/Hierarchy", 
+         "cbtree/Tree",
+         "cbtree/model/TreeStoreModel", 
+         "cbtree/extensions/Styling"]  // Load Tree Styling extension
+  function( Hierarchy, Tree, TreeStoreModel, TreeStyling ) {
+                ...
+  }
+);
 ```
 If you instantiate your tree declarative you **MUST** load the Styling extension
 programmatically, this because it is an extension and has no constructor.
 
 ```javascript
-    require(["dojo/parser",                // dojo parser
-             "cbtree/Tree",                // CheckBox Tree
-             "cbtree/extensions/Styling"   // Tree styling extensions
-            ]);
+require(["dojo/parser",                // dojo parser
+         "cbtree/Tree",                // CheckBox Tree
+         "cbtree/extensions/Styling"   // Tree styling extensions
+        ]);
 ```
 
 Also, see the second [example](#sample-application) below.
@@ -212,12 +212,11 @@ greater than the indent value no additional class name is generated.
 
 ##### Examples
 
-
 ```javascript
-    icon = { iconClass:"myIcons", iconStyle:{border:"solid"}, fixed:"myIconNode", indent:false};
-    icon = { iconClass:"myIcons", indent: 3 };
-    icon = { iconClass:"myIcons" }
-    icon = "myIcons"
+icon = { iconClass:"myIcons", iconStyle:{border:"solid"}, fixed:"myIconNode", indent:false};
+icon = { iconClass:"myIcons", indent: 3 };
+icon = { iconClass:"myIcons" }
+icon = "myIcons"
 ```
 
 If the icon is a string argument, as in the last example, the Tree Styling API will
@@ -230,22 +229,22 @@ Assuming you are creating the css file for the css class name 'myIcons' and each
 icon bitmaps is 16 pixels wide, the basic (minimal) css file MUST look like:
 
 ```css
-      .myIcons {
-        background-image: url( "images/myIcons.gif" );
-        background-repeat: no-repeat;
-      }
+.myIcons {
+  background-image: url( "images/myIcons.gif" );
+  background-repeat: no-repeat;
+}
 
-      .myIcons.myIconsTerminal {
-        background-position: -0px;
-      }
+.myIcons.myIconsTerminal {
+  background-position: -0px;
+}
 
-      .myIcons.myIconsCollapsed {
-        background-position: -16px;
-      }
+.myIcons.myIconsCollapsed {
+  background-position: -16px;
+}
 
-      .myIcons.myIconsExpanded {
-        background-position: -32px;
-      }
+.myIcons.myIconsExpanded {
+  background-position: -32px;
+}
 ```
 
 *NOTE:* There is **NO** white space between the css class names.
@@ -255,35 +254,37 @@ icon bitmaps is 16 pixels wide, the basic (minimal) css file MUST look like:
 To create the tree with a default set of icons the icon property of the tree must be
 set accordingly:
 
-      icon: { iconClass: "myIcons", indent: false },
+```javascript
+icon: { iconClass: "myIcons", indent: false },
+```
 
 Example:
 
 ```html
-      <link rel="stylesheet" href="../cbtree/icons/myIcons.css" />
-                        ...
-      <script type="text/javascript">
-        require(["cbtree/store/Hierarchy", 
-                 "cbtree/Tree",
-                 "cbtree/extensions/Styling",
-                 "cbtree/model/TreeStoreModel"], 
-          function( Hierarchy, Tree, TreeStyling, TreeStoreModel ) {
+<link rel="stylesheet" href="../cbtree/icons/myIcons.css" />
+                  ...
+<script type="text/javascript">
+  require(["cbtree/store/Hierarchy", 
+           "cbtree/Tree",
+           "cbtree/extensions/Styling",
+           "cbtree/model/TreeStoreModel"], 
+    function( Hierarchy, Tree, TreeStyling, TreeStoreModel ) {
 
-            var store = new Hierarchy( { url: "myFamilyTree.json" });
-            var model = new TreeStoreModel( {
-                    store: store,
-                    query: {type: "parent"},
-                    rootLabel: "The Family",
-                        ...
-                    }); 
+      var store = new Hierarchy( { url: "myFamilyTree.json" });
+      var model = new TreeStoreModel( {
+              store: store,
+              query: {type: "parent"},
+              rootLabel: "The Family",
+                  ...
+              }); 
 
-            var tree = new Tree( {
-                    model: model,
-                    id: "MenuTree",
-                    icon: { iconClass: "myIcons", indent: false },
-                        ...
-                    });
-      </script>
+      var tree = new Tree( {
+              model: model,
+              id: "MenuTree",
+              icon: { iconClass: "myIcons", indent: false },
+                  ...
+              });
+</script>
 ```
 
 ### Icon as item property ###
@@ -302,13 +303,13 @@ For example, if you create a JSON store item like:
 You could create your model as follows:
 
 ```javascript
-	var model = new TreeStoreModel( {
-			store: store,
-			query: {type: "parent"},
-			rootLabel: "The Family",
-			iconAttr:"icon",
-				...
-			}); 
+var model = new TreeStoreModel( {
+                    store: store,
+                    query: {type: "parent"},
+                    rootLabel: "The Family",
+                    iconAttr:"icon",
+                         ...
+                  }); 
 ```
 
 In the above example the store model is told that the **_icon_** property of a 
@@ -334,32 +335,32 @@ Add at least one more icon to your sprite (e.g icon (3)) and add the following
 to your css file.
     
 ```css
-	  .myIcons.myIconsTerminal_1,
-	  .myIcons.myIconsCollapsed_1,
-	  .myIcons.myIconsExpanded_1 {
-		background-position: -48px;
-	  }
+.myIcons.myIconsTerminal_1,
+.myIcons.myIconsCollapsed_1,
+.myIcons.myIconsExpanded_1 {
+  background-position: -48px;
+}
 ```
 
 Now create the tree with the icon property **_ident_** set to true (default):
   
 ```javascript
-      var myTree = new Tree( {
-              model: model,
-              id: "MenuTree",
-              icon: { iconClass: "myIcons", indent: true },
-                  ...
-              });
+var myTree = new Tree( {
+        model: model,
+        id: "MenuTree",
+        icon: { iconClass: "myIcons", indent: true },
+            ...
+        });
 ```
 
 or, set it dynamically after tree creation:
 
 ```javascript
-      myTree.set("icon", { iconClass: "myIcons" })
+myTree.set("icon", { iconClass: "myIcons" })
 
-              or simply:
-      
-      myTree.set("icon", "myIcons" })
+        or simply:
+
+myTree.set("icon", "myIcons" })
 ```
 
 Demo application `cbtree/demos/store/tree09.html` demonstrates the implementation 
@@ -370,114 +371,41 @@ and use of multi level icons.
 The following sample application demonstrates some of the Tree Styling API features.
 
 ```html
-    <!DOCTYPE html>
-    <html>
-      <head> 
-        <meta charset="utf-8">
-        <title>The CheckBox Tree</title>     
-        <style type="text/css">
-          @import "../../../dijit/themes/claro/claro.css";
-          @import "../../themes/claro/claro.css";
-        </style>
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <title>The CheckBox Tree</title>     
+    <style type="text/css">
+      @import "../../../dijit/themes/claro/claro.css";
+      @import "../../themes/claro/claro.css";
+    </style>
 
-        <script type='text/javascript'>
-          var dojoConfig = { async: true, parseOnLoad: true,  isDebug: false,
-                baseUrl: "../../../",
-                packages: [
-                  { name: "dojo",  location: "dojo" },
-                  { name: "dijit", location: "dijit" },
-                  { name: "cbtree",location: "cbtree" }
-                ]
-          };
-        </script>
+    <script type='text/javascript'>
+      var dojoConfig = { async: true, parseOnLoad: true,  isDebug: false,
+            baseUrl: "../../../",
+            packages: [
+              { name: "dojo",  location: "dojo" },
+              { name: "dijit", location: "dijit" },
+              { name: "cbtree",location: "cbtree" }
+            ]
+      };
+    </script>
 
-        <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
-        <script type="text/javascript">
-          require([
-            "dojo/ready",
-            "cbtree/Tree",                    // Checkbox tree
-            "cbtree/extensions/Styling",      // Tree styling extensions
-            "cbtree/model/TreeStoreModel",    // TreeStoreModel
-            "cbtree/store/Hierarchy",
-            ], function( ready, Tree, TreeStyling, TreeStoreModel, Hierarchy ) {
-
-              function checkBoxClicked( item, nodeWidget, evt ) {
-                var newState = nodeWidget.get("checked" );
-                var label    = this.getLabel(item);
-                
-                if( newState ) {
-                  this.set("iconStyle", {border:"solid"}, item );
-                  this.set("labelStyle",{color:"red"}, item );
-                } else {
-                  this.set("iconStyle", {border:"none"}, item );
-                  this.set("labelStyle",{color:"black"}, item );
-                }
-                alert( "The new state for " + label + " is: " + newState );
-              }
-
-              var store = new Hierarchy( { url: "../../store/json/Family.json", idProperty:"name" });
-              var model = new TreeStoreModel( {
-                        store: store,
-                        query: {name: "Root"},
-                        rootLabel: "The Family",
-                        checkedRoot: true
-                      }); 
-
-              ready(function() {
-                var tree = new Tree( { model: model, id: "MenuTree"  }, "CheckboxTree" );
-                tree.on( "checkBoxClick", checkBoxClicked );
-                tree.startup();
-              });
-            });
-        </script>
-
-      </head>
-        
-      <body class="claro">
-        <h1 class="DemoTitle">CheckBox Tree Styling</h1>
-        <div id="CheckboxTree">  
-        </div>
-        <h2>Click a checkbox</h2>
-      </body> 
-    </html>
-```
-
-The following is the same sample application but this time we instantiate the
-store, model and tree declarative:
-
-```html
-    <!DOCTYPE html>
-    <html>
-      <head> 
-        <meta charset="utf-8">
-        <title>Dijit Tree with Checkboxes</title>     
-        <style type="text/css">
-          @import "../../../dijit/themes/claro/claro.css";
-          @import "../../themes/claro/claro.css";
-        </style>
-
-        <script type="text/javascript">
-          var dojoConfig = { async: true, parseOnLoad: true,  isDebug: false,
-                baseUrl: "../../../",
-                packages: [
-                  { name: "dojo",  location: "dojo" },
-                  { name: "dijit", location: "dijit" },
-                  { name: "cbtree",location: "cbtree" }
-                ]
-          };
-        </script>
-
-        <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
-        <script type="text/javascript">
-          require([
-            "dojo/parser",              // dojo parser
-            "cbtree/Tree",              // CheckBox Tree
-            "cbtree/extensions/Styling" // Tree styling extensions
-          ]);
+    <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
+    <script type="text/javascript">
+      require([
+        "dojo/ready",
+        "cbtree/Tree",                    // Checkbox tree
+        "cbtree/extensions/Styling",      // Tree styling extensions
+        "cbtree/model/TreeStoreModel",    // TreeStoreModel
+        "cbtree/store/Hierarchy",
+        ], function( ready, Tree, TreeStyling, TreeStoreModel, Hierarchy ) {
 
           function checkBoxClicked( item, nodeWidget, evt ) {
             var newState = nodeWidget.get("checked" );
             var label    = this.getLabel(item);
+            
             if( newState ) {
               this.set("iconStyle", {border:"solid"}, item );
               this.set("labelStyle",{color:"red"}, item );
@@ -487,24 +415,97 @@ store, model and tree declarative:
             }
             alert( "The new state for " + label + " is: " + newState );
           }
-        </script>
-      </head>
-      <body class="claro">
-        <h1 class="DemoTitle">CheckBox Tree Styling</h1>
-        <div id="content">
-          <div data-dojo-id="store" data-dojo-type="cbtree/store/Hierarchy" 
-           data-dojo-props='url:"../../store/json/Family.json", idProperty:"name"'>
-          </div>
-          <div data-dojo-id="model" data-dojo-type="cbtree/model/TreeStoreModel"
-            data-dojo-props='store:store, query:{name:"Root"}, rootLabel:"The Family"'>
-          </div>
-          <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, 
-            onCheckBoxClick: checkBoxClicked, id:"tree"'>
-          </div>
-        </div>
-        <h2>Click a checkbox</h2>
-      </body> 
-    </html>
+
+          var store = new Hierarchy( { url: "../../store/json/Family.json", idProperty:"name" });
+          var model = new TreeStoreModel( {
+                              store: store,
+                              query: {name: "Root"},
+                              rootLabel: "The Family",
+                              checkedRoot: true
+                            }); 
+
+          ready(function() {
+            var tree = new Tree( { model: model, id: "MenuTree"  }, "CheckboxTree" );
+            tree.on( "checkBoxClick", checkBoxClicked );
+            tree.startup();
+          });
+        });
+    </script>
+
+  </head>
+    
+  <body class="claro">
+    <h1 class="DemoTitle">CheckBox Tree Styling</h1>
+    <div id="CheckboxTree">  
+    </div>
+    <h2>Click a checkbox</h2>
+  </body> 
+</html>
+```
+
+The following is the same sample application but this time we instantiate the
+store, model and tree declarative:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <title>Dijit Tree with Checkboxes</title>     
+    <style type="text/css">
+      @import "../../../dijit/themes/claro/claro.css";
+      @import "../../themes/claro/claro.css";
+    </style>
+
+    <script type="text/javascript">
+      var dojoConfig = { async: true, parseOnLoad: true,  isDebug: false,
+            baseUrl: "../../../",
+            packages: [
+              { name: "dojo",  location: "dojo" },
+              { name: "dijit", location: "dijit" },
+              { name: "cbtree",location: "cbtree" }
+            ]
+      };
+    </script>
+
+    <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
+    <script type="text/javascript">
+      require([
+        "dojo/parser",              // dojo parser
+        "cbtree/Tree",              // CheckBox Tree
+        "cbtree/extensions/Styling" // Tree styling extensions
+      ]);
+
+      function checkBoxClicked( item, nodeWidget, evt ) {
+        var newState = nodeWidget.get("checked" );
+        var label    = this.getLabel(item);
+        if( newState ) {
+          this.set("iconStyle", {border:"solid"}, item );
+          this.set("labelStyle",{color:"red"}, item );
+        } else {
+          this.set("iconStyle", {border:"none"}, item );
+          this.set("labelStyle",{color:"black"}, item );
+        }
+        alert( "The new state for " + label + " is: " + newState );
+      }
+    </script>
+  </head>
+  <body class="claro">
+    <h1 class="DemoTitle">CheckBox Tree Styling</h1>
+    <div id="content">
+      <div data-dojo-id="store" data-dojo-type="cbtree/store/Hierarchy" 
+       data-dojo-props='url:"../../store/json/Family.json", idProperty:"name"'>
+      </div>
+      <div data-dojo-id="model" data-dojo-type="cbtree/model/TreeStoreModel"
+        data-dojo-props='store:store, query:{name:"Root"}, rootLabel:"The Family"'>
+      </div>
+      <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, 
+        onCheckBoxClick: checkBoxClicked, id:"tree"'>
+      </div>
+    </div>
+    <h2>Click a checkbox</h2>
+  </body> 
+</html>
 ```
 
 The CheckBox tree comes with several examples of custom icons and their associated

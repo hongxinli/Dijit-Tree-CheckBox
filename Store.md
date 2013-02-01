@@ -302,7 +302,7 @@ If your data is not a plain array of JavaScript objects the cbtree stores still 
 to load it using a custom data handler. For detail refer to the [Data Handler](#data-handlers)
 section below.
 
-<h2 id="data-handlers">Data Handlers</h2>
+<h2 id="store-data-hierarchy">Store Data Hierarchy</h2>
 
 <h2 id="data-handlers">Data Handlers</h2>
 
