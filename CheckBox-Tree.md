@@ -28,7 +28,7 @@ not control whether or not a tree node is eligible to get a checkbox, that is
 actually determined by the model. The CheckBox Tree comes with three 
 [Store Models](Store-Models):
 
-* [TreeStoreModel](Store-Models#tree-store-model)
+* [TreeStoreModel](Store-Models#wiki-tree-store-model)
 * [ForestStoreModel](Store-Models#wiki-forest-store-model)
 * [FileStoreModel](Store-Models#wiki-file-store-model)
 
