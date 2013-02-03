@@ -10,6 +10,15 @@ to understand the pros and cons of each of them. Please read the
 [store selection](Store-Models#wiki-selecting-a-store)
 section of the cbtree models.
 
+## In this section
+* [Store Types](#store-types)
+* [Eventable](#eventable)
+* [Observable](#observable)
+* [Data Format](#store-data-format)
+* [Data Hierarchy](#store-data-hierarchy)
+* [Data Handlers](#data-handlers)
+
+
 <h2 id="store-types">Store Types</h2>
 All cbtree stores are in-memory stores, that is, the store content is loaded in memory
 without the support of persistent storage. Any changes to the store are lost after
@@ -279,39 +288,109 @@ The following is a valid object array:
 ```javascript
 var myData = [
   { name:"Homer", lastName:"Simpson", hair:"none" },
-  { name:"Marge", lastName:"Simpson", hair:"blond" },
-  { name:"Bart", lastName:"Simpson", hair:"blond" }
+  { name:"Marge", lastName:"Simpson", hair:"blue" },
+  { name:"Bart" , lastName:"Simpson", hair:"blond" }
 ];
 
 var myStore = new Memory( {data:myData} );
 ```
 
-However, when loading data using a URL the data must be **JSON** encoded, that is, all key
-or property names MUST be double-quoted strings:
+When loading data using a URL the data must be **JSON** encoded, that is, as of
+dojo 1.8 all key or property names MUST be double-quoted strings. For the JSON
+encoding rules please refer to [http://www.json.org](http://www.json.org/).
 
-	[
-		{ "name":"Homer", "lastName":"Simpson", "hair":"none" },
-		{ "name":"Marge", "lastName":"Simpson", "hair":"blond" },
-		{ "name::"Bart", "lastName":"Simpson", "hair":"blond" }
-	]
+```
+[
+  { "name":"Homer", "lastName":"Simpson", "hair":"none" },
+  { "name":"Marge", "lastName":"Simpson", "hair":"blue" },
+  { "name":"Bart" , "lastName":"Simpson", "hair":"blond" }
+]
+```
 
 Note that the proprty names **_name, lastName_** and **_hair_** are all enclosed in double
 quotes.
 
-If your data is not a plain array of JavaScript objects the cbtree stores still offer the options
-to load it using a custom data handler. For detail refer to the [Data Handler](#data-handlers)
-section below.
+However, if your data is not a plain array of JavaScript objects the cbtree 
+stores still offers the options to load it using a custom data handler. For
+details refer to the [Data Handler](#data-handlers) section below.
+
+
 
 <h2 id="store-data-hierarchy">Store Data Hierarchy</h2>
 
-<h2 id="data-handlers">Data Handlers</h2>
+In essence every `dojo/store` or derivative, including the `cbtree/store`, store
+is, in most cases, a flat array of JavaScript objects without a natural order or
+hierarchy. Lets take a look at a simple set of object as an example:
 
-All cbtree stores, with the exception of the FileStore, offer the option of
-pre-processing data, before populating the store, using either one of the default
-**dojo/request** handlers or registering a custom data handler.
+```javascript
+[
+  { name:"Audi"  ,type:"factory" },
+  { name:"BMW"   ,type:"factory" },
+  { name:"A3"    ,type:"sedan" },
+  { name:"Q5"    ,type:"suv" },
+  { name:"M3"    ,type:"sedan" },
+  { name:"535"   ,type:"sedan" },
+  { name:"750"   ,type:"sedan" }
+]
+```
+The above objects all have a name and some type but there is no way we could
+derive some sort of hierarchical relationship. To create a hierarchy we need
+some object property, like *parent*, that defines the relation between the
+objects. Both the cbtree [Hierarchy](#the-hierarchy-store) and [Object](#the-object-store) 
+store provide support for a parent property which enable them to fetch either
+the children or the parent(s) of an object. The actual object property to be
+used is set using the store's **_parentProperty_** attribute. The default for
+this property is "parent".
+
+```javascript
+[
+  { name:"Audi"  ,type:"factory" },
+  { name:"BMW"   ,type:"factory" },
+  { name:"A3"    ,parent:"Audi", type:"sedan" },
+  { name:"Q7"    ,parent:"Audi", type:"suv" },
+  { name:"M3"    ,parent:"BMW" , type:"sedan" },
+  { name:"535"   ,parent:"BMW" , type:"sedan" },
+  { name:"750"   ,parent:"BMW" , type:"sedan" }
+]
+```
+Above we have added a **_parent_** property to those objects who have an obvious
+parent in our store. However, the objects 'Audi' and 'BMW' still don't have a 
+*parent* property. Please note that instead of the default "parent" property
+name we could have used a different property name like "manufaturer" and create
+the store as follows:
+
+```javascript
+var myStore = new Hierarchy( {data:carData, idProperty:"name", parentProperty:"manufaturer", ...});
+```
+The updated set of objects now has a limited hierarchy, that is, not all objects
+have a parent. In order to create a hierachy with a single root object, add one
+more object that serves as the parent of 'Audi' and 'BMW'.
+
+```javascript
+[
+  { name:"Cars"  ,parent:null  , type:"toys" },
+  { name:"Audi"  ,parent:"Cars", type:"factory" },
+  { name:"BMW"   ,parent:"Cars", type:"factory" },
+  { name:"A3"    ,parent:"Audi", type:"sedan" },
+  { name:"Q7"    ,parent:"Audi", type:"suv" },
+  { name:"M3"    ,parent:"BMW" , type:"sedan" },
+  { name:"535"   ,parent:"BMW" , type:"sedan" },
+  { name:"750"   ,parent:"BMW" , type:"sedan" },
+]
+```
+Because we now have an object store with a single root object we could select
+a Tree Model with this store instead of a Forest Model. See the [Tree vs Forest Model](Store-Models#tree-versus-forest-model) section and the 
+[Hierarchy Store](Hierarchy-Store) for more details.
+
+<h2 id="data-handlers">Data Handlers</h2>
+If your data does not comply with the required [Store Data Format](#store-data-format)
+the cbtree stores offer the option of so-called data handlers. All cbtree stores, 
+with the exception of the FileStore, offer the option of pre-processing data, before
+populating the store, using either one of the default **dojo/request** handlers
+or registering a custom data handler.
 Typically, a data handler takes an arbitrary data format and converts the data
 returning an array of plain JavaScript key:value pairs objects ready for
-consumption by the store loader. (see [Store Data Format](#store-data-format))
+consumption by the store loader.
 
 This ability eliminates the need of having to create a new store for every data 
 format or having to handle XHR requests yourself. In addition, because the stores

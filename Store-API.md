@@ -155,7 +155,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 > If the store has a single primary key, this indicates the property to use as the
 > identity property. The values of this property should be unique.
 
-> **_DEFAULT_**: undefined
+> **_DEFAULT_**: "id"
 
 #### multiParented:
 > **_TYPE_**: Boolean | String
