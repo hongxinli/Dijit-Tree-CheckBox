@@ -11,7 +11,6 @@ The distinct differences are explained in the sections below.
 * [Store Model Properties](#store-model-properties)
 * [Store Model API](#store-model-api)
 * [Selecting a Store](#selecting-a-store)
-* [Build Your Own Model](#build-your-own-model)
 
 <h2 id="the-model">The Model</h2>
 In a Model-View-Controller (MVC) pattern the model is the glue between the *View*
@@ -20,6 +19,8 @@ Each controller may require a specific model. Please note that all models
 that come with the CheckBox Tree are so-called store models, that is,
 they interface with objects (controllers) that expose the 
 [cbtree/store/api/Store](Store-API) API.
+
+All Checkbox Tree models implement the **cbtree/model/api/Model** API
 
 ### Model Foundation
 
@@ -34,8 +35,7 @@ Please note that any model derived from the **_BaseStoreModel_** will also work
 with the default `dijit/tree`. The base class **_CheckedStoreModel_** inherits 
 for **_BaseStoreModel_** and adds
 the capabilities to maintain and manipulate a so-called 'checked' state for store
-objects. See the [BYOM](#build-your-own-model) section below for more details
-on these two base classes.
+objects.
 
 The following table lists all [stores](Store#wiki-store-types) types and store
 wrappers supported by the base class **_BaseStoreModel_**:
@@ -70,7 +70,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<td>Hierarchy Store</td>
     <td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td>
-			A derived from the Memory store providing support for natural order and
+			A derived from the Memory store adding support for natural order and
 			hierarchical organized data object.
 		</td>	
 	</tr>
@@ -228,10 +228,16 @@ Tree Store Model.
 
 <h2 id="forest-store-model">Forest Store Model</h2>
 
-The Forest Store Model is used whenever a store query could potentially return
-multiple store items in which case the model will fabricate a artificial root
-item. The fabricated root item does **NOT** represent any store object and is
-merely used to anchor the tree.
+The Forest Store Model is used whenever the tree root query could potentially
+return multiple store objects. The Forest Store model fabricates a artificial
+root object and the objects returned as the result of the root query become
+children of this fabricate root. The fabricated root object does **NOT** represent
+any store object and is merely used to anchor the tree.
+
+There are two specific properties that effect the fabricated root, the model
+property **_checkedRoot_** and the tree property [showRoot](CheckBox-Tree#showRoot). 
+If the tree property **_showRoot_** is set to false the fabricated root is not 
+displayed as part of the tree.
 
 ```javascript
 var store = new Hierarchy( {data:myData} );
@@ -253,30 +259,30 @@ var model = new ForestStoreModel( {store: store, query: {type:"parent"}} );
 ```
 
 If you can structure your data and associated root query such that a single store
-object is returned it is recommended to do so because of the added overhead of
-a Forest Tree Store.
+object is returned it is recommended to do so and use the Tree Store Model 
+instead because of the additional overhead of a Forest Tree Store.
 
 
 <h2 id="file-store-model">File Store  Model</h2>
 
-Similar to the Forest Store Model, the File Store Model allows the user to present
-the back-end server file system as a traditional UI directory tree. 
+The File Store Model allows the user to present the back-end server file system
+as a traditional UI directory tree. 
 The model is designed to be used with the cbtree FileStore which, like the other
-store, implements the *cbtree/store/api/Store* API offering the functionality
+cbtree stores, implements the `cbtree/store/api/Store` API offering the functionality
 to query the back-end servers file system, add lazy loading and provide limited
 support for store write operations.
-Please refer to the [File Store](FileStore) documentation for details. 
+Please refer to the [File Store](File-Store) documentation for details. 
 
 Because the content of a File Store is treated as read-only, that is, you can't
-add new items to the store, any attempt to do so will throw an error. You can 
-however add custom properties to store items which will be writeable or rename
+add new items to the store, any attempt to do so will throw an exception. You can 
+however add custom properties to store items which will be writeable, or rename
 or delete store items. The File Store Model also supports drag and drop
 operations using the File Store rename capabilities.
 
-In addition to the common Store Model Properties, the File Store Model has an
-additional set of properties to help query the File Store. Also, because of the
-reduced function set supported, some of common store model properties will be
-ignored by the File Store Model.
+Because of the reduced function set supported, some of common store model 
+properties are ignored by the File Store Model.
+
+<img src="images/FileStore.png" alt="FileStore"></img>
 
 <h2 id="tree-versus-forest-model">Tree versus Forest Model</h2>
 
@@ -458,26 +464,31 @@ The following is a list of the default functions available with the CheckBox Tre
 store models.
 
 *********************************************
-#### fetchItemByIdentity( keywordArgs )
-> Fetch a store object by its identity.
+### fetchItemByIdentity( keywordArgs )
+> Given the identity of an item, this method returns the item that has that 
+> identity through the onItem callback.
 
 **_keywordArgs:_** Object
 > A JavaScript key:value pairs object that defines the object to locate and
 > callbacks to invoke when the object has been located. The format of the object
 > is as follows:
-```
+>
+<pre>
 {
   identity: String|Number,
   onItem: Function,
   onError: Function,
   scope: object
 }
-```
+</pre>
+
+**returns:** void
+
 <span class="mega-icon mega-icon-exclamation"></span> This method is for backward
 compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 
 *********************************************
-#### getChecked ( item )
+### getChecked ( item )
 > Get the current checked state from the object store. The checked state
 > in the store can be: 'mixed', true, false or undefined. Undefined in this
 > context means no checked property (see checkedAttr) was found in the store.
@@ -489,8 +500,8 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 
 *********************************************
 #### getChildren( parent, onComplete, onError )
-> Calls onComplete() with array of child items of given parent item,
-> all loaded. Note: Only the immediate descendents are returned.
+> Calls onComplete() with an array of child items of given parent item.
+> Note: Only the immediate descendents are returned.
 
 **_parent:_** Object
 > A valid store object.
@@ -502,6 +513,8 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 **_onError:_** Function (optional)
 > Called when an error occured.
 
+**returns:** void
+
 *********************************************
 #### getEnabled( item )
 > Returns the current 'enabled' state of an item as a boolean. See the *enabledAttr*
@@ -509,6 +522,9 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 
 **_item:_** Object
 > A valid store object.
+
+**returns:** Boolean
+> The state returned is the value of the checked widget "readOnly" property.
 
 *********************************************
 #### getIcon( item )
@@ -518,12 +534,18 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 **_item:_** Object
 > A valid store object.
 
+**returns:** Object | String
+> Returns an [icon](Tree-Styling#wiki-icon-properties) object or a string
+
+
 *********************************************
 #### getIdentity( item )
 > Get the identity of an item.
 
 **_item:_** Object
 > A valid store object.
+
+**returns:** String | Number
 
 *********************************************
 #### getLabel( item )
@@ -533,6 +555,8 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 
 **_item:_** Object
 > A valid store object.
+
+**returns:** String
 
 *********************************************
 #### getParents ( item )
@@ -556,13 +580,17 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 **_onError:_** Function (optional)
 > Called when an error occured.
 
-*********************************************
-#### isItem( something )
-> Returns true is parameter *something* is a valid store item or, in case of a
-> Forest Store Model, the fabricated tree root.
+**returns:** void
 
 *********************************************
-#### isChildOf( parent, item )
+#### isItem( something )
+> Returns true if *something* is an item and came from this model instance.
+> Returns false if *something* is a literal, an item from another model instance,
+> or is any object other than an item.
+
+**_something:_** Any
+
+**returns:** Boolean
 
 *********************************************
 #### mayHaveChildren( item )
@@ -584,6 +612,8 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 **_newState:_** Boolean | String
 > The new checked state. The state can be either a boolean (true | false) or a string ('mixed')
 
+**returns:** void
+
 *********************************************
 #### setEnabled( item, value )
 > Set the new 'enabled' state of an item. See the *enabledAttr* property description for more
@@ -593,6 +623,8 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 > A valid store object.
 
 **_value:_** Any
+
+**returns:** void
 
 
 
@@ -606,5 +638,3 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 Although the cbtree models can operate on a wide variety of stores it is important to
 understand the pros and cons of each of them. This section gives general guidelines
 for the best store practices...
-
-<h2 id="build-your-own-model">Build Your Own Model</h2>

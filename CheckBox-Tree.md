@@ -162,6 +162,15 @@ value is listed.
 
 > **_DEFAULT_**: true
 
+<h4 id="showRoot">showRoot:</h4>
+> **_TYPE_**: Boolean
+
+> Determines if the tree root is displayed or not. This property is specificly
+> helpful when using a Forest Store Model and you don't want to display the
+> fabricate root.
+
+> **_DEFAULT_**: true
+
 #### widget:
 > **_TYPE_**: Object
 
