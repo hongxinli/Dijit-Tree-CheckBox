@@ -10,7 +10,7 @@ to understand the pros and cons of each of them. Please read the
 [store selection](Store-Models#wiki-selecting-a-store)
 section of the cbtree models.
 
-## In this section
+<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
 * [Store Types](#store-types)
 * [Eventable](#eventable)
 * [Observable](#observable)

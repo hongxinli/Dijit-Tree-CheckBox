@@ -1,5 +1,5 @@
 
-The **cbtree/store/util/QueryEngine** provides the underlying search and
+The **cbtree/store/util/QueryEngine** module provides the underlying search and
 query functionality for all cbtree stores. The name "query engine" is somewhat
 misleading in the sense that it does NOT actually query the store, instead when 
 called, it returns a function capable of executing the required query.  
@@ -9,8 +9,23 @@ query() function, it provides the functionality to enable the implementation of
 such a function. The Query Engine can be used with any arbitrary set of JavaScript
 key:value pairs objects, not just store objects.
 
+<h3><span class="mega-icon mega-icon-readme"></span>Content</h3>
+* [The Query Engine API](#the-query-engine-api)
+* [The Query Argument](#the-query-argument)
+* [The Query Options](#the-query-options)
+* [The Query Function](#the-query-function)
+* [Matching Objects](#matching-objects)
+* [Querying Arrays](#querying-arrays)
+* [Querying a Store](#querying-a-store)
+
+
 <h2 id="the-query-engine-api">The Query Engine API</h2>
-#### queryEngine( query, options? )
+To use the Query Engine you must first load module **_cbtree/store/util/QueryEngine_** like:
+````javascript
+require(["cbtree/store/util/QueryEngine", ... ], function (QueryEngine, ... ) { ... });
+```
+The signature of the function returned by the loader is as follows:
+#### QueryEngine( query, options? )
 > Returns a JavaScript function capable of executing a store query and optionally 
 > apply pagination and sorting to the result.
 
@@ -28,6 +43,8 @@ key:value pairs objects, not just store objects.
 **returns:** Function
 > A JavaScript function referred to as "The Query Function". 
 > (See [The Query Function](#the-query-function) below).
+
+
 
 <h2 id="the-query-argument">The Query Argument</h2>
 The query argument passed to the Query Engine can be an object,
@@ -142,7 +159,8 @@ var results   = queryFunc( myObjects );
 The above example returns at a maximum 10 objects whose *hair* property equal
 "blond" starting at index number 5 of the results.
 
-Please note, pagination is performed after any optional sort is performed.
+<span class="mini-icon mini-icon-exclamation"></span> Pagination is performed
+after any optional sort is performed.
 
 #### Sorting Results
 Query results can be sorted using the optional **_sort_** property. The **_sort_**

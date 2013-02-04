@@ -71,7 +71,7 @@ represent properties in the keyword object passed to the store constructor. For 
 ```javascript
 require(["cbtree/store/Memory"], function (Memory) {
   var keywordArgs = {url:"some/path/myData", multiParented:true, defaultProperties:{checked:true}};
-  new Memory( keywordArgs );
+  var store = new Memory( keywordArgs );
 }
 ```
 

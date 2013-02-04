@@ -7,8 +7,8 @@ item basis.
 The Tree Styling extension is not limited to the CheckBox Tree but can also
 be used with the default `dijit/Tree` tree.
 
-## In this section
-* [Loading the Extension](#loading-the-styling-extension)
+<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+* [Loading the Styling Extension](#loading-the-styling-extension)
 * [Styling Properties](#styling-properties)
 * [Styling API](#the-styling-api)
 * [Adding Custom Icons](#adding-custom-icons)

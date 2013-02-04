@@ -6,8 +6,14 @@ which converts the input data into an array of JavaScript key:value pairs object
 The data handlers act upon data passed to the store using either the stores _data_ or
 _url_ property.
 
-The signature or prototype of a data handler is a s follows:
+<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+* [Data Handler Signature](#data-handler-signature)
+* [Data Handler Registration](#data-handler-registration)
+* [Advanced Data Handler](#advanced-data-handler)
 
+
+<h2 id="data-handler-signature">Data Handler Signature</h2>
+The signature or prototype of a data handler is a s follows:
 #### dataHandler( response )
 > Convert the raw data contained by the _reponse_ argument into an array of JavaScript
 > key:value pairs object (hash). The array of objects is returned as the result of this
@@ -69,7 +75,10 @@ declare([], function () {
 });
 ```
 
-<h2 id="handler-registration">Handler Registration</h2>
+
+
+
+<h2 id="data-handler-registration">Data Handler Registration</h2>
 Every custom data handler must be registered with **_/dojo/request/handlers_** in order to
 take effect. To do so you must also specify the store property _handleAs_ as a symbolic name
 which will be associated with the data handler and serves as the handlers "data type", for

@@ -7,7 +7,8 @@ This document describes the CheckBox Tree extensions only. Details of the
 standard dijit tree can be found 
 [here](http://dojotoolkit.org/reference-guide/1.7/dijit/Tree.html).
 
-## In this Section
+<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+
 * [CheckBox Tree Basics](#checkbox-tree-basics)
 * [CheckBox Tree Properties](#checkbox-tree-properties)
 * [CheckBox Tree API](#checkbox-tree-api)
@@ -95,9 +96,10 @@ an existing data store and use the API to add, remove or change store items.
 In addition, you can simply check/uncheck a single store item or a set of store
 items using a store query.  
 
-**Note:** this version of the cbtree no longer supports the *setItemAttr()* and 
-*getItemAttr()* methods, to change store object properties use the appropriate
-store interface. Some of the Store Model API methods are:
+<span class="mega-icon mega-icon-exclamation"></span> This version of the cbtree 
+no longer supports the *setItemAttr()* and *getItemAttr()* methods, to change
+store object properties use the appropriate store interface. Some of the Store 
+Model API methods are:
 
 * check(), uncheck()
 * getChecked(), setChecked()
@@ -139,8 +141,9 @@ value is listed.
 
 > **_DEFAULT_**: true
 
-> NOTE: if checkBoxes is true, the model for the tree **MUST** support the 
-> getChecked() and setChecked() methods.
+> <span class="mega-icon mega-icon-exclamation"></span>If checkBoxes is true, 
+> the model for the tree **MUST** support the getChecked() and setChecked() 
+> methods.
 
 #### leafReadOnly:
 > **_TYPE_**: Boolean
@@ -499,7 +502,7 @@ In the following example the ToggleButton widget is used instead of the default
 CheckBox Tree multi-state checkbox. **Note:** this example also relies on the
 Tree Styling extension being loaded to hide the tree node labels and icons.
 
-```javascript
+```html
 <script type="text/javascript">
   require([
     "dojo/ready",
