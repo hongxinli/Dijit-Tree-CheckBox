@@ -7,7 +7,6 @@ The distinct differences are explained in the sections below.
 * [Tree Store Model](#tree-store-model)
 * [Forest Store Model](#forest-store-model)
 * [File Store Model](#file-store-model)
-* [Tree versus Forest Model](#tree-versus-forest-model)
 * [Store Model Properties](#store-model-properties)
 * [Store Model API](#store-model-api)
 * [Selecting a Store](#selecting-a-store)
@@ -70,8 +69,8 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<td>Hierarchy Store</td>
     <td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td>
-			A derived from the Memory store adding support for natural order and
-			hierarchical organized data object.
+			A derived from the Memory store adding support for natural order,
+			hierarchical organized data object and multi-parenting.
 		</td>	
 	</tr>
 	<tr>
@@ -271,7 +270,8 @@ The model is designed to be used with the cbtree FileStore which, like the other
 cbtree stores, implements the `cbtree/store/api/Store` API offering the functionality
 to query the back-end servers file system, add lazy loading and provide limited
 support for store write operations.
-Please refer to the [File Store](File-Store) documentation for details. 
+Please refer to the [File Store](File-Store) documentation for details and 
+examples. 
 
 Because the content of a File Store is treated as read-only, that is, you can't
 add new items to the store, any attempt to do so will throw an exception. You can 
@@ -279,10 +279,10 @@ however add custom properties to store items which will be writeable, or rename
 or delete store items. The File Store Model also supports drag and drop
 operations using the File Store rename capabilities.
 
-Because of the reduced function set supported, some of common store model 
-properties are ignored by the File Store Model.
+<span class="mega-icon mega-icon-exclamation"></span> Because of the reduced
+function set supported, some of the common store model properties are ignored 
+by the File Store Model.
 
-<img src="images/FileStore.png" alt="FileStore"></img>
 
 <h2 id="tree-versus-forest-model">Tree versus Forest Model</h2>
 
@@ -457,13 +457,12 @@ stores like a File Store.
 
 
 
+
 <h2 id="store-model-api">Store Model API</h2>
 
-
-The following is a list of the default functions available with the CheckBox Tree
+The following section list the default functions available with the CheckBox Tree
 store models.
 
-*********************************************
 ### fetchItemByIdentity( keywordArgs )
 > Given the identity of an item, this method returns the item that has that 
 > identity through the onItem callback.
@@ -491,7 +490,7 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 ### getChecked ( item )
 > Get the current checked state from the object store. The checked state
 > in the store can be: 'mixed', true, false or undefined. Undefined in this
-> context means no checked property (see checkedAttr) was found in the store.
+> context means the object has no checked property (see checkedAttr).
 
 **_item:_** Object
 > A valid store object.

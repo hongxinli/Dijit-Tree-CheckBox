@@ -1,8 +1,8 @@
 Welcome to the CheckBox Tree wiki.
 
-> <span class="mini-icon mini-icon-exclamation"></span> This wiki is currently under **construction** all information found here is
-> intended for the upcoming release of the cbtree which would be cbtree-v09.3-0,
-> please stay tuned...
+> <span class="mini-icon mini-icon-exclamation"></span> This wiki is currently 
+> under **construction** all information found here is intended for the upcoming
+> release of the cbtree which would be cbtree-v09.3-0, please stay tuned...
 
 ## CheckBox Tree Components
 The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and has three primary components plus a set of extensions
@@ -32,7 +32,6 @@ To get the latest stable version please visit the [download](https://github.com/
 section:
 
 <table>
-  <tbody>
 	<thead>
 	  <tr>
 	    <th style="width:15%;">Version</th>
@@ -41,6 +40,7 @@ section:
 	    <th>Description</th>
 	  </tr>
 	</thead>
+  <tbody>
     <tr style="vertical-align:top">
       <td>cbtree-v09.3-0</td>
       <td style="color:red;">TBD: Feb 2013</td>
@@ -48,7 +48,7 @@ section:
       <td>
 	New stores implementing the dojo/store/api/Store API.<br/>
 	New models for the new stores and much more...
-      <td>
+      </td>
     </tr>
     <tr style="vertical-align:top">
       <td>cbtree-v09.2-0</td>
@@ -60,7 +60,7 @@ section:
 	Per store item read-only checkboxes.<br/>
 	New declarative demos added.<br/>
 	Updated documentation.<br/>
-      <td>
+      </td>
     </tr>
     <tr style="vertical-align:top">
       <td>cbtree-v09.1-0</td>
@@ -71,7 +71,7 @@ section:
 	New and updated demos.<br/>
 	Updated documentation.<br/>
 	Minor software updates.
-      <td>
+      </td>
     </tr>
     <tr style="vertical-align:top">
       <td>cbtree-v09.0-0</td>

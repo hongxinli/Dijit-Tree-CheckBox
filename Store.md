@@ -379,7 +379,8 @@ more object that serves as the parent of 'Audi' and 'BMW'.
 ]
 ```
 Because we now have an object store with a single root object we could select
-a Tree Model with this store instead of a Forest Model. See the [Tree vs Forest Model](Store-Models#tree-versus-forest-model) section and the 
+a Tree Model with this store instead of a Forest Model. See the 
+[Tree Store Model](Store-Models#tree-store-model) section and the 
 [Hierarchy Store](Hierarchy-Store) for more details.
 
 <h2 id="data-handlers">Data Handlers</h2>
