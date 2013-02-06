@@ -397,8 +397,8 @@ and [functions](Store-API#store-functions) each store implements.
 
 <table>
 	<tr>
-		<th>Store API</>
-		<th>Name</>
+		<th>Store API</th>
+		<th>Name</th>
 		<th>Memory Store</th>
 		<th>Natural Store</th>
 		<th><a href="Hierarchy-Store">Hierarchy Store</a></th>
@@ -625,8 +625,8 @@ and [functions](Store-API#store-functions) each store implements.
 
 <table>
 	<tr>
-		<th>Extensions<sup>2</sup></>
-		<th>Name</>
+		<th>Extensions<sup>2</sup></th>
+		<th>Name</th>
 		<th>Memory Store</th>
 		<th>Natural Store</th>
 		<th><a href="Hierarchy-Store">Hierarchy Store</a></th>
