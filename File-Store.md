@@ -386,7 +386,6 @@ function for details.
 
 <h2 id="file-store-api">File Store API</h2>
 
-**********************************************
 #### get( id, storeOnly? )
 > Retrieves an object by its identity
 
@@ -511,6 +510,7 @@ function for details.
 **returns:** dojo/promise/Promise
 
 
+**********************************************
 #### rename( object, newPath)
 > Rename an object
 

@@ -284,10 +284,6 @@ function set supported, some of the common store model properties are ignored
 by the File Store Model.
 
 
-<h2 id="tree-versus-forest-model">Tree versus Forest Model</h2>
-
-
-
 
 <h2 id="store-model-properties">Store Model Properties</h2>
 

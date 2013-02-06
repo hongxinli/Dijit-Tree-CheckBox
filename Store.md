@@ -17,6 +17,7 @@ section of the cbtree models.
 * [Data Format](#store-data-format)
 * [Data Hierarchy](#store-data-hierarchy)
 * [Data Handlers](#data-handlers)
+* [Implementation Maxtrix](#implementation-matrix)
 
 
 <h2 id="store-types">Store Types</h2>
@@ -42,7 +43,7 @@ The basic store inheritance is as follows:
 <h2 id="the-memory-store">The Memory Store</h2>
 
 The **cbtree/store/Memory** store is a simple in-memory store similar
-to the dojo/store/Memory store with the following extensions:
+to the dojo/store/Memory store with the following enhancements:
 
 1. Loading data using a Universal Resource Location (URL).
 2. Allow for pre-processing of loaded data using custom [data handlers](#data-handlers).
@@ -50,33 +51,6 @@ to the dojo/store/Memory store with the following extensions:
 4. Apply default properties to store objects.
 5. Enhanced [Query Engine](Query-Engine)
 
-The **cbtree/store/Memory** implements the following cbtree/store/api/Store
-properties:
-
-* autoLoad
-* data
-* dataHandler
-* defaultProperties
-* handleAs
-* idProperty
-* queryEngine
-* url
-
-The **cbtree/store/Memory** implements the following cbtree/store/api/Store
-API methods:
-
-* add()
-* get()
-* getIdentity()
-* isItem()
-* load()
-* put()
-* query()
-* ready()
-* remove()
-
-See the [cbtree/store/api/Store](Store-API) API for a detailed description of the properties
-and functions.
 
 <h2 id="the-natural-store">The Natural Store</h2>
 
@@ -126,23 +100,6 @@ require( ["cbtree/store/Hierarchy"], function (Hierarchy) {
 Because the Hierarchy store is derived from the Natural store it automatically
 inherits the ability to maintain a natural store order as shown in the above example.
 
-The **cbtree/store/Hierarchy** implements the following additional cbtree/store/api/Store
-properties:
-
-* hierarchical
-* indexChildren
-* multiParented
-* parentProperty
-
-The **cbtree/store/Hierarchy** implements the following cbtree/store/api/Store
-API methods:
-
-* addParent()
-* hasChildren()
-* getChildren()
-* getParents()
-* removeParent()
-
 For more detailed information on the Hierarchy Store click [here](Hierarchy-Store)
 
 <h2 id="the-object-store">The Object Store</h2>
@@ -161,19 +118,6 @@ The store allows applications to add custom properties to file object not provid
 the server side application such as a checked state. The in-memory FileStore is
 dynamic in that file object may be added, removed or change based on the responses
 received from the back-end server.
-
-The **cbtree/store/FileStore** implements the following cbtree/store/api/Store
-API methods:
-
-* get()
-* getChildren()
-* getIdentity()
-* isItem()
-* load()
-* put()
-* query()
-* ready()
-* remove()
 
 For more detailed information on the FileStore click [here](File-Store)
 
@@ -195,24 +139,19 @@ notation:
 	event-name  = "new" / "change" / "delete"
 
 To listen for store events the application has to register an event listener using either
-the store's on() method or the dojo/on on() method. For example, if you want to get
+the store's on() method or the dojo/on `on()` method. For example, if you want to get
 notified of new objects being added to the store consider the following example:
 
 ```javascript
 require( ["cbtree/store/Memory",
           "cbtree/store/Eventable"], function (Memory, Eventable) {
-
-      ...
-
+                    ...
   var myStore = Eventable( new Memory( {idProperty:"name", data: myData} ));
   myStore.on( "new", function (event) {
     console.log( "Object with id: " + this.getIdentity( event.item ) + " was added");
   });
-
-      ...
-
+                    ...
   myStore.put( {name:"Lisa", lastName:"Simpson", hair:"blond"} );
-
 }
 ```
 
@@ -228,6 +167,8 @@ two statements have the same effect:
 	myStore = new ObjectStore( ... )
 
 However, the latter, offers better performance and carries less overhead.
+For more details on event handling see the [working with events](CheckBox-Tree-Usage#working-with-events)
+section.
 
 <h2 id="observable">Observable</h2>
 
@@ -448,3 +389,310 @@ require(["cbtree/store/ObjectStore",     // Eventable Object Store with Hierarch
 
 For a detailed description of the implementation of a custom Data Handler please
 refer to the [Data Handler](Data-Handlers) wiki page.
+
+<h2 id="implementation-matrix">Implementation Matrix</h2>
+
+The following table show which `cbtree/store/api/Store` API [properties](Store-API#store-properties)
+and [functions](Store-API#store-functions) each store implements.
+
+<table>
+	<tr>
+		<th>Store API</>
+		<th>Name</>
+		<th>Memory Store</th>
+		<th>Natural Store</th>
+		<th><a href="Hierarchy-Store">Hierarchy Store</a></th>
+		<th>Object Store</th>
+		<th><a href="File-Store">File Store</a></th>
+	</tr>
+	<tr>
+		<td rowspan="11">Property</td>
+		<td>autoLoad</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>data</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>dataHandler</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>defaultProperty</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>handleAs</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Hierarchical</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>idProperty</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>multiParented</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>parentProperty</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>queryEngine</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>url</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+
+
+	<tr>
+		<td rowspan="15">Function</td>
+		<td>add<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>addParent</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>destroy</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>get<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>getChildren<sup>1</sup></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>getIdentity<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>getParents</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>hasChildren</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>isItem</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>load</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>put<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>query<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>ready</td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>remove<sup>1</sup></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>removeParent</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+
+</table>
+
+<sup>1</sup> Functions defined as part of the default `dojo/store/api/Store` API
+
+
+<table>
+	<tr>
+		<th>Extensions<sup>2</sup></>
+		<th>Name</>
+		<th>Memory Store</th>
+		<th>Natural Store</th>
+		<th><a href="Hierarchy-Store">Hierarchy Store</a></th>
+		<th>Object Store</th>
+		<th><a href="File-Store">File Store</a></th>
+	</tr>
+	<tr>
+		<td rowspan="6">Properties</td>
+		<td>authToken</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>indexChildren</td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>basePath</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>options</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>preventCache</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td>sort</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+
+	<tr>
+		<td rowspan="1">Function</td>
+		<td>rename</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+</table>
+
+<sup>2</sup> Extension to the `cbtree/store/api/Store` API.
+

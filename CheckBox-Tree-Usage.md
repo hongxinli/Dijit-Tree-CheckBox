@@ -8,82 +8,82 @@ With dojo 1.7 a new event handling module was introduced called `dojo/on`.
 The intend of this module is/was to make event handling with dojo easier and 
 mimic some of the DOM4 Event system. However, `dojo/on` is far from a self 
 contained DOM-4 Event system implementation.  
-In addition, dijit widgets implement a modified version of `dojo/on` to make it
+In addition, dijit widgets inherit a modified version of `dojo/on` to make it
 backward compatible with callback methods and non-DOM compliant events.
-The `dijit/_WidgetBase.on()` method tries to map event names, case insensitive
-that is, to callback methods whose name starts with "on" like *onClick()* or 
+The `dijit/_WidgetBase.on()` method tries to map event types, case insensitive
+that is, to callback functions whose name starts with "on" like *onClick()* or 
 *onDblClick()*.
 
-The next sections show and discuss the difference in implementation of callbacks
-and events.
+The next sections discuss the difference in implementation of event listeners
+for callbacks and events.
 
-<h3>
-	<span class="mega-icon mega-icon-arr-collapsed" style="margin-left:-8px;"></span>Callbacks
-</h3>
+<h3><span class="mega-icon mega-icon-arr-collapsed"></span>Callbacks</h3>
 
 Before we establish an event listener with a dijit widget we must fist check if
-the widget has a method that could be auto linked with the event name. 
-For example, if I want to listen for an event named "myEvent", does the widget
-have a method called "onMyEvent" or "onmyevent"? If so, we need to define our
-event listener as a callback function with the same set of argument as the 
-widget's onMyEvent() method.
+the widget has a method that could be auto linked with the event type. 
+For example, if we want to listen for an event named "myEvent", does the widget
+have a method called `onMyEvent()` or `onmyevent()`?  
+If so, we need to define our event listener as a callback function with the
+same set of argument as the widget's onMyEvent() method.
 
-let's assume our widget has a method (callback) called `onMyEvent()` with a
+Let's assume our widget has a method (callback) called `onMyEvent()` with a
 signature like: `onMyEvent( item, node, event )` in which case we can establish
 our event listener in two ways:
 
-1. Using *dojo/aspect* or,
-2. Call the widget's *on()* method.
+1. Using `dojo/aspect` or,
+2. Call the widget's `on()` method.
 
 ##### Using dojo/aspect.
-Using `dojo/aspect` we attach *after* advice to the widget method so our event
+Using `dojo/aspect` we attach **_after_** advice to the widget method so our event
 listener gets called each time the widget calls `onMyEvent()` like:
 
 ```javascript
 require(["dojo/aspect", "cbtree/Tree", ... ], function (aspect, Tree, ... ) {
-		function clickEvent( item, node, event ) {
-			console.log( "A Tree Node was clicked" );
-		}
+    // Event listener
+    function clickEvent( item, node, event ) {
+      console.log( "A Tree Node was clicked" );
+    }
                    ...
-		var myTree  = new Tree( {model:someModel, ... } );
-		aspect.after( myTree, "onMyEvent", clickEvent, true );
+    var myTree  = new Tree( {model:someModel, ... } );
+    aspect.after( myTree, "onMyEvent", clickEvent, true );
                    ...
 })
 ```
 <span class="mega-icon mega-icon-exclamation"></span> Make sure the fourth
 argument is set to **_true_** otherwise `clickEvent()` is not called with the
 original arguments of `onMyEvent()` but with the result instead. Also, notice
-that when calling *aspect.after()* we specify the callback name "onMyEvent"
-and not an event name.
+that when calling `aspect.after()` we specify the callback function name 
+"onMyEvent" and not an event type.
+
+
 
 ##### Using widget on() method.
-Using the widget's on() method we specify the event name "myEvent" and not the
-callback name, like:
+Using the widget's `on()` method we specify the event type "myEvent" and not the
+callback function name, like:
 
 ```javascript
 require(["cbtree/Tree", ... ], function (Tree, ... ) {
-		function clickEvent( item, node, event ) {
-			console.log( "A Tree Node was clicked" );
-		}
+    // Event listener
+    function clickEvent( item, node, event ) {
+      console.log( "A Tree Node was clicked" );
+    }
                    ...
-		var myTree  = new Tree( {model:someModel, ... } );
-		myTree.on( "myEvent", clickEvent );
+    var myTree  = new Tree( {model:someModel, ... } );
+    myTree.on( "myEvent", clickEvent );
                    ...
 })
 ```
 The above example accomplishes exactly the same thing as dojo/aspect did in the
-first example simply because the _WidgetBase.on() method is able to map the event
-name "myEvent" to the callabck "onMyEvent" and as a result calls dojo/aspect on
-your behalf.
+first example simply because the underlaying `_WidgetBase.on()` method is able
+to map the event type "myEvent" to the callback `onMyEvent()` and as a result
+calls dojo/aspect on our behalf.
 
-<h3>
-	<span class="mega-icon mega-icon-arr-collapsed" style="margin-left:-8px;"></span>Events
-</h3>
+<h3><span class="mega-icon mega-icon-arr-collapsed"></span>Events</h3>
 
-This time, let's assume our widget does **_NOT_** have a callback that could be auto
-linked to the event name "myEvent". Instead the widget actually emits events of
-type "myEvent". In this case both dojo/aspect and the widget.on() method will 
-automatically create the callback, which in our case will be named "onMyEvent".
+This time, let's assume our widget does **_NOT_** have a callback that could be
+auto linked to the event type "myEvent". Instead the widget actually emits events 
+of type "myEvent". In this case both dojo/aspect and the widget's on() method
+will automatically create the callback, which in our case will be named "onmyEvent".
 
 The big difference between the widget calling callback functions programmatically
 and emitting events is the way the event listener will be called. In the latter 
@@ -91,30 +91,61 @@ case the event handlers are called with just one argument, the event.
 
 ```javascript
 require(["cbtree/Tree", ... ], function (Tree, ... ) {
-		function clickEvent( event ) {
-			console.log( "A Tree Node was clicked" );
-		}
+    // Event listener
+    function clickEvent( event ) {
+      console.log( "A Tree Node was clicked" );
+    }
                    ...
-		var myTree  = new Tree( {model:someModel, ... } );
-		myTree.on( "myEvent", clickEvent );
+    var myTree  = new Tree( {model:someModel, ... } );
+    myTree.on( "myEvent", clickEvent );
                    ...
 })
 ```
-In the above example notice that the function *clickEvent()* now is called with
+In the above example notice that the function `clickEvent()` now is called with
 just a single argument **_event_**. The event is a JavaScript key:value pairs
 object.
 
+<span class="mega-icon mega-icon-exclamation"></span> In case of true events 
+that is, the event name can not be mapped to a callback function, the event name 
+is handled case sensitive. Therefore, as a good practise, always use the correct
+case for event names regardless if you are registering for an event or callback.
+Note that DOM-3/4 always handles event types case sensitive.
 
-If you interested in a dojo style implementation of a fully DOM-4 compliant Event 
-system checkout the event system as part of my [IndexedDB](https://github.com/pjekel/indexedDB/tree/master/dom/event)
-project.
+<h2 id="callbacks-and-events">Callbacks and Events</h2>
 
-<h3 id="tree-events">Tree Events</h3>
+The CheckBox Tree modules use both callbacks and events. Callbacks are used 
+whenever dojo or dijit API's require them, for example the dijit model API 
+`dijit/tree/model`, otherwise events are used.
 
+The tables below list the event names and associated callback by CheckBox Tree
+module. If for any given event type a callback is specified, the arguments
+column specifies the list of arguments passed to the event listener.
+
+The arguments passed to event handles are defined as follows:
 
 <table>
 	<tr>
-		<th>Event</th>
+		<th>Argument</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>event</td>
+		<td>Event object, the object is context specific</td>
+	</tr>
+	<tr>
+		<td>item</td>
+		<td>Store object</td>
+	</tr>
+	<tr>
+		<td>node</td>
+		<td>Tree node widget</td>
+	</tr>
+</table>
+
+### Tree Events
+<table>
+	<tr>
+		<th>Event Type</th>
 		<th>Callback</th>
 		<th>Arguments</th>
 		<th>Description</th>
@@ -124,7 +155,7 @@ project.
     <td>onClick</td>
     <td>(item, node, event)</td>
 		<td>
-			The tree node is clicked.
+			A tree node is clicked.
 		</td>
 	</tr>
 	<tr>
@@ -132,7 +163,7 @@ project.
     <td>onCheckBoxClick</td>
     <td>(item, node, event)</td>
 		<td>
-			Checkbox got clicked.
+			A checkbox is clicked.
 		</td>
 	</tr>
 	<tr>
@@ -140,7 +171,7 @@ project.
     <td>onClose</td>
     <td>(item, node)</td>
 		<td>
-			Node closed.
+			Node closed, a tree node collapsed.
 		</td>
 	</tr>
 	<tr>
@@ -156,7 +187,7 @@ project.
     <td>onOpen</td>
     <td>(item, node)</td>
 		<td>
-			Node opened
+			Node opened. a tree node is expanded.
 		</td>
 	</tr>
 	<tr>
@@ -180,11 +211,14 @@ project.
 
 
 
-<h3 id="model-events">Model Events</h3>
+### Model Events
+The CheckBox Tree models, although not widgets, offer the same `on()`
+functionality as widgets do. Therefore you can simple register a model event
+listener like `model.on( "dataValidated", myEventHandler );`
 
 <table>
 	<tr>
-		<th>Event</th>
+		<th>Event Type</th>
 		<th>Callback</th>
 		<th>Arguments</th>
 		<th>Description</th>
@@ -192,7 +226,7 @@ project.
 	<tr>
 		<td>change</td>
     <td>onChange</td>
-    <td>(item, property, newValue, oldValue)</td>
+    <td>(item, propertyName, newValue, oldValue)</td>
 		<td>
 			Property of a store item changed.
 		</td>
@@ -202,7 +236,7 @@ project.
     <td>onChildrenChange</td>
     <td>(parent, newChildrenList)</td>
 		<td>
-			The children of an node changed.
+			The children of a node changed.
 		</td>
 	</tr>
 	<tr>
@@ -231,11 +265,15 @@ project.
 	</tr>
 </table>
 
-<h3 id="store-events">Store Events</h3>
+### Store Events
+
+<span class="mega-icon mega-icon-exclamation"></span> Store events are available
+if, and only if, the store is made [Eventable](Store#wiki-eventable) or the 
+store is a [cbtree/store/Object](Store#wiki-the-object-store) store.
 
 <table>
 	<tr>
-		<th>Event</th>
+		<th>Event Type</th>
 		<th>Callback</th>
 		<th>Argument</th>
 		<th>Description</th>
@@ -245,7 +283,7 @@ project.
     <td></td>
     <td>(event)</td>
 		<td>
-			Property of a store item changed.
+			Property of a store object changed.
 		</td>
 	</tr>
 	<tr>
@@ -253,7 +291,7 @@ project.
     <td></td>
     <td>(event)</td>
 		<td>
-			Store item added
+			A new store object was added.
 		</td>
 	</tr>
 	<tr>
@@ -261,7 +299,48 @@ project.
     <td></td>
     <td>(event)</td>
 		<td>
-			Store item removed/deleted.
+			A store object was removed/deleted.
 		</td>
 	</tr>
 </table>
+
+### An example
+The following example demonstrate the use of events and callbacks:
+
+```javascript
+require( ["cbtree/Tree",
+          "cbtree/model/ForestStoreModel",
+          "cbtree/store/Memory",
+          "cbtree/store/Eventable"], function (Tree, ForestStoreModel, Memory, Eventable) {
+                    ...
+  // Create an eventable store and listen for events of type "new".
+  var myStore = Eventable( new Memory( {data: myData, idProperty:"name"} ));
+  myStore.on( "new", function (event) {
+    console.log( "An event of type: " + event.type + "was recieved" );
+    console.log( "Object with id: " + this.getIdentity( event.item ) + " was added");
+  });
+
+  var myModel = new ForestStoreModel( {store:myStore, query:{type:"parent"}} );
+  myModel.on( "dataValidated", function () {
+    console.log( "Store data has been validated" );
+  });
+
+  var myTree  = new Tree( {model:myModel}, "CheckboxTree" };
+  myTree.on( "load", function () {
+    console.log( "The Tree has been loaded." );
+  }
+  myTree.startup();
+                    ...
+  myStore.put( {name:"Lisa", lastName:"Simpson", hair:"blond"} );
+}
+```
+
+
+
+
+#### DOM-4 Events
+If you want to learn more about the DOM-4 Events checkout [DOM Events](http://www.w3.org/TR/dom/#events).
+If you're interested in a dojo style implementation of a fully DOM-4 compliant Event 
+system checkout the event system as part of my [IndexedDB](https://github.com/pjekel/indexedDB/tree/master/dom/event)
+project.
+

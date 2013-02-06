@@ -336,10 +336,10 @@ require(["cbtree/store/util/QueryEngine"], function (QueryEngine) {
 
 #### Case sensitivity
 By default, property values are matched case sensitive however, depending on 
-then matching method used, you can turn case sensitive matching off. If you use 
+the matching method used, you can turn case sensitive matching off. If you use 
 the standard 'is equal' method you can set the query options property 
 **_ignoreCase_** to true. If set, the **_ignoreCase_** option is applied to
-ALL property values that support a toLowerCase() method.
+ALL property values that support a `toLowerCase()` method.
 
 	var query   = { name:["homer", "marge"] };
 	var options = { ignoreCase:true };
@@ -348,7 +348,7 @@ ALL property values that support a toLowerCase() method.
 If you use regular expressions you can simply add the RegEx flag 'i'
 
 ```javascript
-var query   = { name:/^(homer|marge)$/i };
+var query = { name:/^(homer|marge)$/i };
 QueryEngine( query );
 ```
 

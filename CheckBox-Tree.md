@@ -37,13 +37,13 @@ The [model properties](Store-Models#store-model-properties) and configuration
 determine checkbox eligibility for tree nodes. By default, all models are configured 
 to generate a checkbox for every tree node. 
 
-If you are planning to write your own model, please refer to **/cbtree/model/api/model.js**
+If you are planning to write your own model, please refer to `cbtree/model/api/model`
 for the model interface definition.
 
 ### CheckBox vs Checked State 
 
 The model provides the primary interface to get or set the checked state for any
-data item by means of the **_getChecked()_** and **_setChecked()_** methods. 
+data item by means of the `getChecked()` and `setChecked()` methods. 
 In general, a model refers to the 'checked' state rather than a checkbox state
 simply because a checkbox is just the visual representation of a state. As a 
 case in point, one could simply replace the default checkbox with a third party
@@ -86,20 +86,18 @@ function updateStyle( item ) {
   }
 }
 ```
-### Store Model API
+### Store Model Extension
 
-As stated before, the CheckBox Tree comes with an optional [Store Model API](Store-Model-API)
+The CheckBox Tree comes with an optional [Store Model Extension](Store-Model-Extension)
 which serves both the TreeStoreModel as well as the ForestStoreModel. The Store
-Model API allows the user to programmatically build and maintain checkbox trees.
-For example, you can create your store starting with an empty JSON dataset or use
-an existing data store and use the API to add, remove or change store items.
-In addition, you can simply check/uncheck a single store item or a set of store
-items using a store query.  
+Model extension allows the user to programmatically manipulate checkbox trees.
+You can simply check/uncheck a single store item or a set of store items using
+a store query.  
 
 <span class="mega-icon mega-icon-exclamation"></span> This version of the cbtree 
 no longer supports the *setItemAttr()* and *getItemAttr()* methods, to change
 store object properties use the appropriate store interface. Some of the Store 
-Model API methods are:
+Model extension functions are:
 
 * check(), uncheck()
 * getChecked(), setChecked()
@@ -186,11 +184,7 @@ Please note that if the default property value is used the property can be
 omitted, therefore the example below is for demonstation purposes only.
 
 ```javascript
-require(["cbtree/Tree",
-         "cbtree/model/TreeStoreModel",
-         "cbtree/store/Hierarchy",
-                ...
-         ], function( Tree, TreeStoreModel, Hierarchy, ... ) {
+require(["cbtree/Tree",  ... ], function( Tree, ... ) {
                 ...
     var myTree = new Tree( {
             model: model,
