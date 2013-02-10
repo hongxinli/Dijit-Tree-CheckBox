@@ -7,9 +7,8 @@ The distinct differences are explained in the sections below.
 * [Tree Store Model](#tree-store-model)
 * [Forest Store Model](#forest-store-model)
 * [File Store Model](#file-store-model)
-* [Store Model Properties](#store-model-properties)
-* [Store Model API](#store-model-api)
 * [Selecting a Store](#selecting-a-store)
+* [Model API Matrix](#model-api-matrix)
 
 <h2 id="the-model">The Model</h2>
 In a Model-View-Controller (MVC) pattern the model is the glue between the *View*
@@ -49,7 +48,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	
 	<tr>
 		<td rowspan="6">CheckBox Tree</td>
-		<td>cbtree/store/api/Store</td>
+		<td>cbtree/store/api/Store<sup>1</sup></td>
     <td></td>
 		<td>
 			Any store implenting the <strong>cbtree/store/api/Store</strong> API.
@@ -97,7 +96,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 
 	<tr>
 		<td rowspan="2">Dojo Toolkt</td>
-		<td>dojo/store/api/Store</td>
+		<td>dojo/store/api/Store<sup>1</sup></td>
     <td></td>
 		<td>
 			Any store implenting the dojo/store/api/Store API. The store must at a
@@ -158,6 +157,34 @@ The folowing table lists the stores supported by CheckBox Tree model type.
   </tbody>
 </table>
 
+<h3 id="store-requirements">Store Requirements</h3>
+In order for any store to work with the CheckBox Tree store models they must,
+at a minimum, implement the following `cbtree/store/api/Store` API functions:
+
+* [get()](Store-API#wiki-get)
+* [put()](Store-API#wiki-put)
+* [query()<sup>1</sup>](Store-API#wiki-query)
+
+<sup>1</sup> In case of a Forest Store Model the store must implement either
+the [query()](Store-API#wiki-query) or [getChildren()](Store-API#wiki-getchildren)
+function.
+
+<h3 id="extending-a-store">Extending a Store</h3>
+The **_BaseStoreModel_** class will automatically try to extend a store if
+certain functionality is not offered by the store. The model tests the store for
+the presence of the [hierarchical](Store-API#wiki-hierarchical) property.
+If missing, or set to false, the model adds *before* advice to the store
+methods `add()` and `put()` adding support for the [PutDirectives](Store-API#wiki-putdirectives)
+property **_parent_**. 
+
+If the store does not have a [getChildren()](Store-API#wiki-getchildren)
+method one will be added using the store's [query()](Store-API#wiki-query)
+function. If the store does not have a `query()` method either an exception
+is thrown.
+
+If the store has a [load()](Store-API#wiki-load) method it is called just before
+the first store query is executed.
+
 <h3 id="creating-a-model">Creating a Model</h3>
 
 In order to explain some of the models inner workings we need to declare a simple
@@ -202,6 +229,12 @@ Which store model to use primarily depends on:
 
 1. How many store objects matched the root query.
 
+
+
+
+
+
+
 <h2 id="tree-store-model">Tree Store Model</h2>
 
 The Tree Store Model is used if, and only if, the tree root query is guaranteed
@@ -225,6 +258,10 @@ it all depends on the number of objects the root query returns if we can use a
 Tree Store Model. 
 
 
+
+
+
+
 <h2 id="forest-store-model">Forest Store Model</h2>
 
 The Forest Store Model is used whenever the tree root query could potentially
@@ -234,7 +271,7 @@ children of this fabricate root. The fabricated root object does **NOT** represe
 any store object and is merely used to anchor the tree.
 
 There are two specific properties that effect the fabricated root, the model
-property **_checkedRoot_** and the tree property [showRoot](CheckBox-Tree#showRoot). 
+property [checkedRoot](Model-API#wiki-checkedroot) and the tree property [showRoot](CheckBox-Tree-API#wiki-showroot). 
 If the tree property **_showRoot_** is set to false the fabricated root is not 
 displayed as part of the tree.
 
@@ -285,347 +322,6 @@ by the File Store Model.
 
 
 
-<h2 id="store-model-properties">Store Model Properties</h2>
-
-Model properties define specific features or characteristics of a store model,
-The property names also represent properties in the keyword object passed to 
-the model constructor. For example:
-
-```javascript
-require(["cbtree/model/TreeStoreModel", ... ], function (TreeStoreModel, ... ) {
-  var keywordArgs = { store:myStore, checkedAll:true, query:{type:"Monarch"} };
-  var model = new TreeStoreModel( keywordArgs );
-}
-```
-
-#### checkedAll: 
-> **_TYPE_**: Boolean
-
-> If true, every store object will receive a so-called 'checked' state property.
-> The name of the actual property is defined by the value of the model property 
-> **_checkedAttr_**. If the 'checked' state property is added to a store object,
-> its initial state is defined by the value of the model property **_checkedState_**
-> (see also *checkedAttr*)
-
-> **_DEFAULT_**: true
-
-#### checkedAttr: 
-> **_TYPE_**: String
-
-> The property name of a store object that holds its *checked* state. On store 
-> load it specifies the object's initial checked state.
-> For example: `{ name:"Egypt", type:"country", checked: true }`
-> If a store object has no *checked* property it depends on the model property 
-> **_checkedAll_** if one will be added in which case the initial value is 
-> set according to the value of **_checkedState_**.
-
-> **_DEFAULT_**: "checked"
-
-<span class="mega-icon mega-icon-exclamation"></span> If a store object has no
-'checked' state property and **_checkedAll_** is *false* no checkbox will be 
-created by the tree for the object.
-
-#### checkedState: 
-> **_TYPE_**: Boolean
-
-> The default *checked* state applied to every store item unless otherwise
-> specified in the object store (see also: *checkedAttr*)
-
-> **_DEFAULT_**: false
-
-#### checkedRoot: 
-> **_TYPE_**: Boolean
-
-> If true, the tree root node will receive a checked state even though it may not 
-> represent an actual entry in the store. This property is independent of the
-> tree property **_showRoot_**. If the tree property *showRoot* is set to false the
-> checked state for the root will not show either.
-
-> **_DEFAULT_**: false
-
-#### checkedStrict: 
-> **_TYPE_**: Boolean | String
-
-> If true, a strict parent-child relation is maintained. For example, if all 
-> children of an object are checked the parent will automatically receive the
-> same checked state. If any of the children are unchecked the parent will, 
-> depending on, if multi state is enabled, receive either a mixed or unchecked
-> state. If set to "inherit", children will inherit the parent checked state
-> when changed. However, the parent checked state is **_NOT_** updated when a
-> child's checked state changes.
-
-> **_DEFAULT_**: true
-
-<span class="mega-icon mega-icon-exclamation"></span> If set to true, the model
-will request a full store load which may impact performance on very large object
-stores like a File Store.
-
-#### enabledAttr: 
-> **_TYPE_**: String
-
-> The name of the store object property that holds the 'enabled' state of the
-> checkbox or alternative widget. Note: Eventhough it is referred to as the
-> 'enabled' state the tree will only use this property to enable/disable the 
-> 'ReadOnly' property of a checkbox or alternative widget. This because disabling
-> a widget (DOM element) may exclude it from HTTP POST operations.
-
-> **_DEFAULT_**: null
-
-#### iconAttr: 
-> **_TYPE_**: String
-
-> The name of the store object property whose value is considered a tree node
-> icon (css class name). If specified, get the icon from an object using this
-> property name. (see [Tree Styling](Tree-Styling))
-
-> **_DEFAULT_**: ""
-
-#### labelAttr: 
-> **_TYPE_**: String
-
-> The name of the store object property whose value is returned as the label
-> for the tree node.
-
-> **_DEFAULT_**: "name"
-
-#### multiState: 
-> **_TYPE_**: Boolean
-
-> Determines if the object checked state is to be maintained as multi state or 
-> as dual state, that is, {"mixed", true, false} versus {true, false}. If true
-> multi state is enabled.
-
-> **_DEFAULT_**: true
-
-#### normalize: 
-> **_TYPE_**: Boolean
-
-> If true, the checked state of any non branch (leaf) checkbox is normalized, 
-> that is, true or false. When normalization is enabled checkboxes associated
-> with tree leafs (e.g. nodes without children) can never have a "mixed" state.
-
-> **_DEFAULT_**: true
-
-#### parentProperty:
-> **_TYPE_**: String
-
-> The property name of a store object whose value represents the object's parent
-> id or ids. If the store assigned to the model has a **_parentProperty_** 
-> property the store value is used.
-
-> **_DEFAULT_**: "parent"
-
-#### query: 
-> **_TYPE_**: Object
-
-> A JavaScript key:value pairs object used the query the store to determine the
-> tree root object or, in case the query returns multiple objects, the children
-> of the fabricated root object. For example: `{type:"parent"}`.
-> If not specified, a wildcard search is performed using the store's 
-> **_idProperty_** property value. (See also [Tree Store Model](#tree-store-model)
-> and [Forest Store Model](#forest-store-model))
-
-> **_DEFAULT_**: null
-
-#### rootLabel: 
-> **_TYPE_**: String
-
-> Label of the fabricated tree root object ([Forest Store Model](#forest-store-model)
-> only) or the alternative label in case the tree root is represented by a store
-> object ([Tree Store Model](#tree-store-model) only)
-
-> **_DEFAULT_**: "ROOT"
-
-#### rootId: 
-> **_TYPE_**: String
-
-> ID of the fabricated root item, Only valid for a Forest Store Model.
-
-> **_DEFAULT_**: "$root$"
-
-#### store: 
-> **_TYPE_**: Object
-
-> The underlying object store.
-
-> **_DEFAULT_**: null
-
-
-
-
-
-<h2 id="store-model-api">Store Model API</h2>
-
-The following section list the default functions available with the CheckBox Tree
-store models.
-
-### fetchItemByIdentity( keywordArgs )
-> Given the identity of an item, this method returns the item that has that 
-> identity through the onItem callback.
-
-**_keywordArgs:_** Object
-> A JavaScript key:value pairs object that defines the object to locate and
-> callbacks to invoke when the object has been located. The format of the object
-> is as follows:
->
-<pre>
-{
-  identity: String|Number,
-  onItem: Function,
-  onError: Function,
-  scope: object
-}
-</pre>
-
-**returns:** void
-
-<span class="mega-icon mega-icon-exclamation"></span> This method is for backward
-compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
-
-*********************************************
-### getChecked ( item )
-> Get the current checked state from the object store. The checked state
-> in the store can be: 'mixed', true, false or undefined. Undefined in this
-> context means the object has no checked property (see checkedAttr).
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** Boolean | String | undefined
-
-*********************************************
-#### getChildren( parent, onComplete, onError )
-> Calls onComplete() with an array of child items of given parent item.
-> Note: Only the immediate descendents are returned.
-
-**_parent:_** Object
-> A valid store object.
-
-**_onComplete:_** Function (optional)
-> If an onComplete callback is specified, the callback function will be called
-> just once, as *onComplete( children )*.
-
-**_onError:_** Function (optional)
-> Called when an error occured.
-
-**returns:** void
-
-*********************************************
-#### getEnabled( item )
-> Returns the current 'enabled' state of an item as a boolean. See the *enabledAttr*
-> property description for more details.
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** Boolean
-> The state returned is the value of the checked widget "readOnly" property.
-
-*********************************************
-#### getIcon( item )
-> If the *iconAttr* property of the model is set, get the icon for *item* from
-> the store otherwise *undefined* is returned.
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** Object | String
-> Returns an [icon](Tree-Styling#wiki-icon-properties) object or a string
-
-
-*********************************************
-#### getIdentity( item )
-> Get the identity of an item.
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** String | Number
-
-*********************************************
-#### getLabel( item )
-> Get the label for an item. If the model property *labelAttr* is set, the
-> associated property of the item is retrieved otherwise the *labelAttr*
-> property of the store is used.
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** String
-
-*********************************************
-#### getParents ( item )
-> Get the parent(s) of a store item. Returns an array of store items.	
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** dojo/promise/Promise
-> Returns a promise. If resolved the result of the promise is an array of parent
-> objects.
-
-*********************************************
-#### getRoot( onItem, onError )
-> Calls onItem with the root item for the tree, possibly a fabricated item.
-> Calls onError on error.
-
-**_onItem:_** Function
-> Callback function. On successful completion called as *onItem( root )*.
-
-**_onError:_** Function (optional)
-> Called when an error occured.
-
-**returns:** void
-
-*********************************************
-#### isItem( something )
-> Returns true if *something* is an item and came from this model instance.
-> Returns false if *something* is a literal, an item from another model instance,
-> or is any object other than an item.
-
-**_something:_** Any
-
-**returns:** Boolean
-
-*********************************************
-#### mayHaveChildren( item )
-> Returns true if an item has or may have children.
-
-**_item:_** Object
-> A valid store object.
-
-**returns:** Boolean
-
-*********************************************
-#### setChecked ( item, newState )
-> Update the checked state of a store item. If the model property *checkedStrict*
-> is true, the items parent(s) and children, if any, are updated accordingly.
-
-**_item:_** Object
-> A valid store object.
-
-**_newState:_** Boolean | String
-> The new checked state. The state can be either a boolean (true | false) or a string ('mixed')
-
-**returns:** void
-
-*********************************************
-#### setEnabled( item, value )
-> Set the new 'enabled' state of an item. See the *enabledAttr* property description for more
-> details.
-
-**_item:_** Object
-> A valid store object.
-
-**_value:_** Any
-
-**returns:** void
-
-
-
-
-
-
 
 
 
@@ -633,3 +329,196 @@ compatability with **dijit/tree/model** only. use `store.get(identity)` instead.
 Although the cbtree models can operate on a wide variety of stores it is important to
 understand the pros and cons of each of them. This section gives general guidelines
 for the best store practices...
+
+
+<h2 id="model-api-matrix">Model API Matrix</h2>
+
+The following tables show which `cbtree/model/api/Model` API [properties](Model-API#model-properties)
+and [functions](Model-API#model-functions) each model implements.
+
+<table>
+	<tr>
+		<th>Model API</th>
+		<th>Name</th>
+		<th>Tree Store Model</th>
+		<th>Forest Store Model</th>
+		<th>File Store Model</th>
+	</tr>
+	<tr>
+		<td rowspan="15">Property</td>
+		<td><a href="Model-API#wiki-checkedall">checkedAll</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-checkedattr">checkedAttr</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-checkedstate">checkedState</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-checkedroot">checkedRoot</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-checkedstrict">checkedStrict</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-">enabledAttr</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-iconattr">iconAttr</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-labelattr">labelAttr</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-multistate">multiState</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-normalize">normalize</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-parentproperty">parentProperty</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-query">query</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-rootlabel">rootLabel</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-rootid">rootId</a></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-store">store</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+</table>
+
+
+<table>
+	<tr>
+		<th>Model API</th>
+		<th>Name</th>
+		<th>Tree Store Model</th>
+		<th>Forest Store Model</th>
+		<th>File Store Model</th>
+	</tr>
+	<tr>
+		<td rowspan="12">Function</td>
+		<td><a href="Model-API#wiki-getchecked">getChecked</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getchildren">getChildren</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getenabled">getEnabled</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-geticon">getIcon</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getidentity">getIdentity</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getlabel">getLabel</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getparents">getParents</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-getroot">getRoot</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-isitem">isItem</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-mayhavechildren">mayHaveChildren</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-setchecked">setChecked</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-setenabled">setEnabled</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+
+</table>
+

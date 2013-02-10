@@ -159,16 +159,15 @@ var results   = queryFunc( myObjects );
 The above example returns at a maximum 10 objects whose *hair* property equal
 "blond" starting at index number 5 of the results.
 
-<span class="mini-icon mini-icon-exclamation"></span> Pagination is performed
+<span class="mega-icon mega-icon-exclamation"></span> Pagination is performed
 after any optional sort is performed.
 
 #### Sorting Results
 Query results can be sorted using the optional **_sort_** property. The **_sort_**
-property value can be an array of, per property, sort directives or a compare
-function.  
-A [sort directive](Store-API#wiki-sortDirective) is a JavaScript key:value
+property value is an array of [sort directive](Store-API#wiki-sortDirective)
+or a comparison function. A sort directive is a JavaScript key:value
 pairs object describing what property to sort on, the direction of the sort and
-if operation property values should be compared case insensitive.
+if property values should be compared case insensitive.
 
 ```javascript
 var sortSet   = [ {property:"name", descending:true, ignoreCase:true}, {property:"age"} ];
@@ -232,7 +231,7 @@ require(["dojo/store/util/QueryResult",
 ### Other Usage
 
 As stated before, the usage of the Query Engine is not limited to just object
-stores. It can be used with an arbitrary array of JavaScript key:value pairs
+stores. It can be used with any arbitrary array of JavaScript key:value pairs
 object as the following example demonstrates:
 
 ```javascript
@@ -265,7 +264,7 @@ basic methods:
 
 Of course, as with anything else, each approach has its pros and cons.
 
-#### Using 'is equal'
+#### Using 'is equal' operator
 
 Using the 'is equal' method is the simplest and fastest approach, the Query Function
 merely tests if two values are equal assuming both values are the same data type.
@@ -341,15 +340,17 @@ the standard 'is equal' method you can set the query options property
 **_ignoreCase_** to true. If set, the **_ignoreCase_** option is applied to
 ALL property values that support a `toLowerCase()` method.
 
-	var query   = { name:["homer", "marge"] };
-	var options = { ignoreCase:true };
-	QueryEngine( query, options );
+```javascript
+var query     = { name:["homer", "marge"] };
+var options   = { ignoreCase:true };
+var queryFunc = QueryEngine( query, options );
+```
 
-If you use regular expressions you can simply add the RegEx flag 'i'
+If you use regular expressions you can simply add the RegExp flag 'i'
 
 ```javascript
-var query = { name:/^(homer|marge)$/i };
-QueryEngine( query );
+var query     = { name:/^(homer|marge)$/i };
+var queryFunc = QueryEngine( query );
 ```
 
 
@@ -359,7 +360,7 @@ QueryEngine( query );
 The cbtree Query Engine provide full support for querying object properties
 whose value is an array. In addition, as shown in the ABNF notation, query 
 object properties can also be specified as an array of values or regular 
-expression or a combination of those. This section details how the cbtree
+expression or a combination. This section details how the cbtree
 Query Engine deals with arrays and array values. To better explain the Query
 Engine behavior let's assume we have two store objects defined as follows:
 

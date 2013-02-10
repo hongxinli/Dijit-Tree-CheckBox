@@ -3,16 +3,13 @@ The CheckBox Tree is an extension of the standard dijit tree, therefore all
 features available with the dijit tree are also offered by the CheckBox Tree
 with the exception of dijit Tree V1.0 backward compatibility, that is, you must 
 provide the **_model_** argument when creating the tree.
-This document describes the CheckBox Tree extensions only. Details of the
+This document describes the CheckBox Tree extensions only. Details on the
 standard dijit tree can be found 
 [here](http://dojotoolkit.org/reference-guide/1.7/dijit/Tree.html).
 
 <h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
 
 * [CheckBox Tree Basics](#checkbox-tree-basics)
-* [CheckBox Tree Properties](#checkbox-tree-properties)
-* [CheckBox Tree API](#checkbox-tree-api)
-* [Callbacks and Events](#callbacks-and-events)
 * [CheckBox Tree Placement](#checkbox-tree-placement)
 * [CheckBox Tree Advanced](#checkbox-tree-advanced)
 * [Sample Application](#sample-application)
@@ -27,33 +24,35 @@ The tree component, the part you actually see in your browser, is considered the
 The tree offers the ability to instantiate a checkbox for tree nodes but does
 not control whether or not a tree node is eligible to get a checkbox, that is
 actually determined by the model. The CheckBox Tree comes with three 
-[Store Models](Store-Models):
+[Store Models](Model):
 
-* [TreeStoreModel](Store-Models#wiki-tree-store-model)
-* [ForestStoreModel](Store-Models#wiki-forest-store-model)
-* [FileStoreModel](Store-Models#wiki-file-store-model)
+* [TreeStoreModel](Model#wiki-tree-store-model)
+* [ForestStoreModel](Model#wiki-forest-store-model)
+* [FileStoreModel](Model#wiki-file-store-model)
 
-The [model properties](Store-Models#store-model-properties) and configuration 
-determine checkbox eligibility for tree nodes. By default, all models are configured 
+The [model properties](Model-API#model-properties) and configuration determine
+checkbox eligibility for tree nodes. By default, all models are configured 
 to generate a checkbox for every tree node. 
 
-If you are planning to write your own model, please refer to `cbtree/model/api/model`
+If you are planning to write your own model, please refer to `cbtree/model/api/Model`
 for the model interface definition.
 
 ### CheckBox vs Checked State 
 
 The model provides the primary interface to get or set the checked state for any
-data item by means of the `getChecked()` and `setChecked()` methods. 
+data item by means of the [getChecked()](Model-API#wiki-getchecked) and 
+[setChecked()](Model-API#wiki-setchecked) methods. 
 In general, a model refers to the 'checked' state rather than a checkbox state
 simply because a checkbox is just the visual representation of a state. As a 
 case in point, one could simply replace the default checkbox with a third party
-widget, using the trees *widget* property, as long as the widget is capable of 
-representing a 'checked' state. (See [Mixing in other Widgets](#mixing-in-other-widgets)
-for an example).
+widget, using the trees [widget](CheckBox-Tree-API#wiki-widget) property, as 
+long as the widget is capable of representing a 'checked' state. 
+(See [Mixing in other Widgets](#mixing-in-other-widgets) for an example).
 
-Although you can get or set the checked state of a tree node using *get("checked")* 
-or *set("checked", false)*, *checked* is not an actual property of a tree node instead
-the request is redirected to the models *getChecked()* and *setChecked()* methods.
+Although you can get or set the checked state of a tree node using `get("checked")`
+or `set("checked", false)`, *checked* is not an actual property of a tree node
+, instead the request is redirected to the models `getChecked()` and `setChecked()`
+methods.
 
 ### Parent-Child Relationship
 One of the Store Model features is the ability to maintain a parent-child relationship.
@@ -61,13 +60,16 @@ The parent checked state, represented as a tree branch checkbox, is the composit
 state of all its child checkboxes. For example, if the child checkboxes are either
 all checked or unchecked the parent will get the same checked or unchecked state.
 If however, the children checked state is mixed, that is, some are checked while
-others are unchecked, the parent will get a so called 'mixed' state.
+others are unchecked, the parent will get a so called 'mixed' state as shown in
+the picture below.
+
+<img src="images/TheTree.png"></img>
 
 ### CheckBox Tree Styling
 The Tree Styling extension allows you to dynamically manage the tree styling 
-on a per data item basis. Using the simple to use accessor **_set()_** you can
+on a per data item basis. Using the simple to use accessor `set()` you can
 alter the icon, label and row styling for the entire tree or just a single data
-object. For example: *set("iconClass", "myIcon", item)* changes the css icon 
+object. For example: `set("iconClass", "myIcon", item)` changes the css icon 
 class associated with all tree node instances of data object *item*, or if you 
 want to change the label style:
 
@@ -86,9 +88,13 @@ function updateStyle( item ) {
   }
 }
 ```
+
+See the [Tree Styling](Tree-Styling) extension for more details and examples.
+
+
 ### Store Model Extension
 
-The CheckBox Tree comes with an optional [Store Model Extension](Store-Model-Extension)
+The CheckBox Tree also comes with a [Store Model Extension](Model-Extension)
 which serves both the TreeStoreModel as well as the ForestStoreModel. The Store
 Model extension allows the user to programmatically manipulate checkbox trees.
 You can simply check/uncheck a single store item or a set of store items using
@@ -100,197 +106,11 @@ store object properties use the appropriate store interface. Some of the Store
 Model extension functions are:
 
 * check(), uncheck()
-* getChecked(), setChecked()
 * fetchItem(), fetchItemsWithChecked()
 * addParent(), removeParent()
 
-For a detailed description of all API methods, please refer to [Store Model API](Store-Model-API). 
-
-<h2 id="checkbox-tree-properties">CheckBox Tree Properties</h2>
-
-In addition to the standard dijit tree properties the CheckBox Tree has the
-following set of public properties. For each property the type and default
-value is listed. 
-
-#### branchIcons:
-> **_TYPE_**: Boolean
-
-> Determines if the FolderOpen/FolderClosed icon or their custom equivalent is
-> displayed. If false, the branch icon is hidden.
-
-> **_DEFAULT_**: true
-
-#### branchReadOnly:
-> **_TYPE_**: Boolean
-
-> Determines if branch checkboxes are read only. If true, the user must explicitly
-> check/uncheck every child checkbox individually. This property overrides the
-> per store item 'enabled' features for any store item associated with a tree
-> branch.
-
-> **_DEFAULT_**: false
-
-#### checkBoxes:
-> **_TYPE_**: Boolean
-
-> If true it enables the creation of checkboxes, If a tree node actually gets a
-> checkbox depends on the configuration of the [model properties](Store-Models#store-model-properties)
-> If false no checkboxes will be created regardless of the model configuration.
-
-> **_DEFAULT_**: true
-
-> <span class="mega-icon mega-icon-exclamation"></span>If checkBoxes is true, 
-> the model for the tree **MUST** support the getChecked() and setChecked() 
-> methods.
-
-#### leafReadOnly:
-> **_TYPE_**: Boolean
-
-> Determines if leaf checkboxes are read only. If true, the  user can only
-> check/uncheck branch checkboxes. This property overrides the per store item 
-> 'enabled' features for any store item associated with a tree leaf.
-
-> **_DEFAULT_**: false
-
-#### nodeIcons:
-> **_TYPE_**: Boolean
-
-> Determines if the Leaf icon, or its custom equivalent, is displayed. If false,
-> the node or leaf icon is hidden.
-
-> **_DEFAULT_**: true
-
-<h4 id="showRoot">showRoot:</h4>
-> **_TYPE_**: Boolean
-
-> Determines if the tree root is displayed or not. This property is specificly
-> helpful when using a Forest Store Model and you don't want to display the
-> fabricate root.
-
-> **_DEFAULT_**: true
-
-#### widget:
-> **_TYPE_**: Object
-
-> Specifies the checkbox widget to be instanciated for the tree node. The 
-> default is the CheckBox Tree multi-state checkbox. (see [mixin widgets](#mixing-in-other-widgets)
-> for details).
-
-> **_DEFAULT_**: null
-
-##### Example
-The following example illustrates how to apply the CheckBox Tree properties.
-Please note that if the default property value is used the property can be
-omitted, therefore the example below is for demonstation purposes only.
-
-```javascript
-require(["cbtree/Tree",  ... ], function( Tree, ... ) {
-                ...
-    var myTree = new Tree( {
-            model: model,
-            id: "MenuTree",
-            branchIcons: true,
-            branchReadOnly: false,
-            checkBoxes: true,
-            nodeIcons: true,
-                ...
-            });
-```
-
-Additional CheckBox Tree Properties are available when the Tree Styling extension
-is loaded, see [Tree Styling Properties](Tree-Styling#styling-properties) 
-for details.
-
-<h2 id="checkbox-tree-api">CheckBox Tree API</h2>
-### Accessors
-
-As of dojo 1.6 all dijit widgets come with the so called auto-magic accessors
-*get()* and *set()*. All CheckBox Tree API's, that is, the CheckBox Tree, Tree
-Styling and Store Model API, use these accessors as their primary interface.
-For example, to get the checked state of a tree node one could simply call: 
-*get("checked")* or to change the checked state call: *set("checked",true)*.
-
-#### Note:
-The property names *"checked"* and *"enabled"* are automatically mapped to the 
-appropriate store item properties based on the store models *checkedAttr* and
-*enabledAttr* values. Therefore, at the application level you can simple  use
-the keywords *"checked"* and *"enabled"* regardless of the actual store item
-properties.
- 
-***********************************************
-#### get( propertyName )
-> Returns the value of the tree or tree node property identified by *propertyName*.
-
-**_propertyName:_** String
-> Name of the tree or tree node property.
-
-**returns:** any
-> Returns the property value
-
-***********************************************
-#### set( propertyName, newValue )
-> Set the value of the tree or tree node property identified by *propertyName*.
-
-**_propertyName:_** String
-> Name of the tree or tree node property.
-
-**_value:_** AnyType
-> New value to be assigned.
-
-<h2 id="callbacks-and-events">Callbacks and Events</h2>
-There are two ways to capture tree events, either establish an event listener 
-(the preferred method) or connect to the callback method associated with an event,
-assuming there is one. The name of the callback is typically the camelcase name
-of the event prefixed with the word 'on'. For example, the callback name for 
-the event **checkBoxClick** is **_onCheckBoxClick_**.
-
-See also [Working with Events](CheckBox-Tree-Usage#wiki-working-with-events) for
-a more detailed description of events in general.
-
-***********************************************
-#### onCheckBoxClick( item, nodeWidget, evt )
-> Callback routine called each time a checkbox is clicked.
-
-**_item:_** Object
-> The data object associated with the nodeWidget whose checkbox got clicked.
-
-**_nodeWidget:_** dijit.widget
-> The tree node widget whose checkbox was clicked.
-
-**_evt:_** Object
-> A dojo or native HTML event object.
-
-##### Examples
-
-To establish an event listener, call the tree **_on()_** method with the event
-name.
-
-```javascript
-require(["cbtree/Tree",  ... ], function ( Tree, ... ) {
-  function checkBoxClicked( item, nodeWidget, evt ) {
-    alert( "The new state for " + this.getLabel(item) + " is: " + nodeWidget.get("checked") );
-  }
-            ...
-  var myTree = new Tree( ... );
-
-  myTree.on( "checkBoxClick", checkBoxClicked );
-});
-```
-
-To connect to the callback, call **_dojo/aspect()_** with the name of the callback.
-```javascript
-require(["dojo/aspect", "cbtree/Tree", ... ], function (aspect, Tree, ... ) {
-  function checkBoxClicked( item, nodeWidget, evt ) {
-    alert( "The new state for " + this.getLabel(item) + " is: " + nodeWidget.get("checked") );
-  }
-            ...
-  var myTree = new Tree( ... );
-
-  aspect.after( myTree, "onCheckBoxClick", checkboxClicked, true );
-});
-```
-**Note:** the use of _dojo/aspect_ to connect to tree callbacks is likely to be 
-deprecated in the future.
+For a detailed description of all model and extension functions, please refer to
+[Model API](Model-API) documentation
 
 
 <h2 id="checkbox-tree-placement">CheckBox Tree Placement</h2>
@@ -304,7 +124,8 @@ assume you have a `<div>` element defined in your document as follows:
 </div>
 ```
 
-Notice the `<div>` element has a width, height and border property specified.  
+Notice that the `<div>` element has inline style properties width, height
+and border specified.  
 
 The first option is to create the CheckBox Tree and specify "CheckBoxTree" as 
 the parent DOM node like:
@@ -326,7 +147,7 @@ myTree.startup();
 ```
 
 You can also specify the location of the child node as a second parameter to the 
-*placeAt()* method like:
+`placeAt()` method like:
 
 ```javascript
 myTree.placeAt( "CheckBoxTree", "last" );
@@ -338,6 +159,7 @@ location parameter accepts: *"after"*, *"before"*, *"replace"*, *"only"*, *"firs
 and *"last"*. The default location is *"last"*.
 See the **_place()_** method of dojo/dom-construct for more details.
 
+<span class="mega-icon mega-icon-exclamation"></span>
 Please note that as of dojo 1.8 it is required to call the tree widget startup()
 method after creating a tree.
 
@@ -354,33 +176,10 @@ and model will generate an event accordingly however, the tree does not known
 how the 'age' property of the data objetc relates to any of the tree node 
 properties and therefore ignores the event.
 
-However, the CheckBox Tree offers an additional method to map item update events,
-generated by the store and model, to tree node properties.
+However, the CheckBox Tree function `mapEventToAttr()` offers the ability to 
+map item update events, generated by the store and model, to tree node
+properties. 
 
-***********************************************
-#### mapEventToAttr( oldPropName, property, nodeProp, value? )
-> Map an object property name to a tree node property. If the optional *value*
-> argument is specified, its value is assigned to the tree node property. If 
-> *value* is a function, the result returned by the function is assigned to the
-> tree node property.
-
-**_oldPropName:_** String
-> Property name that is currently mapped to an tree node attribute. If present
-> its entry in the mapping table is removed.
-
-**_property:_** String
-> Object property name to be mapped to a tree node property.
-
-**_nodeProp:_** String
-> Property name of a tree node to which argument *property* is mapped.
-
-**_value:_** AnyType
-> Optional, a fixed value to be assigned to *nodeProp* or a function. If value
-> is a function, the function is called as `value(item, nodeProp, modelValue)`
-> and the result returned is assigned to *nodeProp* instead. If the *value*
-> argument is omitted, the event value passed from the model is used.
-
-##### Example  
 The following example maps the **_age_** property of a data object to the tree
 node property *label* resulting in a new label text each time a checkbox is
 clicked. 
@@ -449,57 +248,7 @@ In the above example the following sequence of events take place:
 By default the CheckBox Tree uses its own multi state checkbox widget to represent
 a data items checked state. However, the CheckBox Tree also allows you to mixin
 other widgets which are capable of representing a checked state using the tree 
-**_widget_** property.
-
-The optional CheckBox Tree property **_widget_** is an object with the following
-properties:
-
-#### type:
-> **_TYPE_**: Widget | String
-
-> The widget must support the accessors *get()* and *set()* and must have a
-> *checked* property. In addition, the widgets should not stop any onClick'
-> events calling *event.stop()* nor should it change any related widget
-> instances without generating an onClick event for those widgets.
-> If *type* is a string, the string value must be a module ID. For example 
-> "dojox/form/TriStateCheckbox"
-
-> **_DEFAULT_**: null
-
-#### args:
-> **_TYPE_**: Object?
-
-> An optional JavaScript 'key:value' pairs object to be passed to the
-> constructor of the widget.
-
-> **_DEFAULT_**: null
-
-#### target:
-> **_TYPE_**: String
-
-> Optional name of the target DOM node of a click event, The default is 'INPUT'.
-
-> **_DEFAULT_**: "INPUT"
-
-#### mixin:
-> **_TYPE_**: Function
-
-> Optional function called prior to instantiation of the widget. If specified,
-> called as: `mixin( args )` were *args* is the list of arguments to be passed
-> to the widget constructor. Argument *args* is the widget property *args* with
-> the default arguments required by the CheckBox Tree mixed in. In the function
-> body the "this" object equates to the enclosing node widget.
-
-> **_DEFAULT_**: null
-
-#### postCreate:
-> **_TYPE_**: Function
-
-> Optional function called immediately after the creation of the widget.
-> If specified, called as: `postCreate()`. In the function body the "this" object
-> equates to the newly created widget.
-
-> **_DEFAULT_**: null
+[widget](CheckBox-Tree-API#wiki-widget) property.
 
 In the following example the ToggleButton widget is used instead of the default
 CheckBox Tree multi-state checkbox. **Note:** this example also relies on the
@@ -648,18 +397,15 @@ loaded you will not see the tree in your browser.
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script>
     <script type="text/javascript">
+      // Explicitly declare dependencies.
       require([
           "dojo/parser",
+          "dojo/on",
           "cbtree/Tree",                     // Checkbox tree
           "cbtree/model/TreeStoreModel",     // Object Store Tree Model
           "cbtree/store/ObjectStore"         // Evented Object Store with Hierarchy
         ]);
-
-        function checkBoxClicked( item, nodeWidget, event ) {
-          alert( "The new state for " + this.getLabel(item) + " is: " + nodeWidget.get("checked") );
-        }
       </script>
-
   </head>
   <body class="claro">
     <h1 class="DemoTitle">Dijit Tree with Multi State CheckBoxes</h1>
@@ -671,8 +417,10 @@ loaded you will not see the tree in your browser.
         data-dojo-props='store:store, query:{name:"Root"}, rootLabel:"The Family", checkedRoot:true,
         checkedState:true'>
       </div>
-      <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, 
-        onCheckBoxClick: checkBoxClicked, id:"tree"'>
+      <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, id:"tree"'>
+        <script type="dojo/on" data-dojo-event="checkBoxClick" data-dojo-args="item, nodeWidget, event">
+          alert( "The new state for " + this.getLabel(item) + " is: " + nodeWidget.get("checked") );
+        </script>
       </div>
     </div>
     <h3>Click a checkbox</h3>

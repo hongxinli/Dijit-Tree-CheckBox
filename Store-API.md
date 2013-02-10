@@ -1,10 +1,8 @@
 
 The **cbtree/store/api/Store** API is an extension to the **dojo/store/api/Store** API. Therefore, any store
 that exposes the **dojo/store/api/Store** API is by default compliant with this API definition.
-The API documentation is devided into three section, the [store properties](#store-properties)
-, [store functions](#store-functions) and [store directives](#store-directives)
 
-#### IMPORTANT
+#### <span class="mega-icon mega-icon-exclamation"></span> IMPORTANT
 
 This API defines function signatures **ONLY** without providing implementation details.
 All store functions and properties defined in this API are optional and require implemention
@@ -20,7 +18,9 @@ Whenever a store function returns a promise, the following conditions **MUST** b
 with the specified synchronous return value as its result.
 2. On exception, the promise is rejected with the error condition (exception) as its result.
 
-Please refer to the store specific documentation to see which properties and functions are supported.
+Please refer to the store specific documentation and 
+[Store API Matrix](Store#wiki-store-api-matrix) to see which properties and
+functions are supported.
 
 
 In the context of this API, property values, arguments and operand types are defined as follows:
@@ -62,11 +62,19 @@ In the context of this API, property values, arguments and operand types are def
 	</tbody>
 </table>
 
+<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+* [Store Properties](#store-properties)
+* [Store Functions](#store-functions)
+* [Store Directives](#store-directives)
+
+
+
 
 
 <h2 id="store-properties">Store Properties</h2>
-Store properties define specific features or characteristics of a store, The property names also
-represent properties in the keyword object passed to the store constructor. For example:
+Store properties enable or disable specific features or define characteristics
+of a store. The property names also represent properties in the keyword object
+passed to the store constructor. For example:
 
 ```javascript
 require(["cbtree/store/Memory"], function (Memory) {
@@ -75,7 +83,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 }
 ```
 
-#### autoLoad:
+<h3 id="autoload">autoLoad:</h3>
 > **_TYPE_**: Boolean
 
 > Indicates, when a URL is specified, if the data should be loaded during store
@@ -84,7 +92,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: true
 
-#### data:
+<h3 id="data">data:</h3>
 > **_TYPE_**: Object []
 
 > An array of JavaScript key:value pairs objects to be loaded into the store as the
@@ -92,7 +100,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: null
 
-<h4 id="datahandler">dataHandler:</h4>
+<h3 id="datahandler">dataHandler:</h3>
 > **_TYPE_**: Function | Object
 
 > The data handler for the store data or server response. If _dataHandler_ is an
@@ -119,16 +127,16 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: null
 
-#### defaultProperties:
+<h3 id="defaultproperties">defaultProperties:</h3>
 > **_TYPE_**: Object
 
-> A JavaScript key:values pairs object whose properties and associated
-> values are added to new store objects if such properties are missing
-> from a new store object.
+> A JavaScript key:values pairs object whose properties and their value are
+> added to new store objects if such properties are missing from a new store
+> object.
 
 > **_DEFAULT_**: null
 
-#### handleAs:
+<h3 id="handleas">handleAs:</h3>
 > **_TYPE_**: String
 
 > Specifies how to interpret the payload returned in a server response
@@ -137,7 +145,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: null
 
-#### hierarchical:
+<h3 id="hierarchical">hierarchical:</h3>
 > **_TYPE_**: Boolean (read-only)
 
 > Indicates if the store is capable of maintaining an object hierarchy.
@@ -145,11 +153,12 @@ require(["cbtree/store/Memory"], function (Memory) {
 > determine if it has to set the parent property of an object or if the
 > store will handle it.
 > If true, the store MUST implement all logic required to support the
-> [PutDirective](#PutDirectives) "parent" and the store's "parentProperty" property.
+> [PutDirective](#PutDirectives) property "parent" and optionally the store 
+> property [parentProperty](#parentproperty).
 
 > **_DEFAULT_**: false
 
-#### idProperty:
+<h3 id="idproperty">idProperty:</h3>
 > **_TYPE_**: String | Number
 
 > If the store has a single primary key, this indicates the property to use as the
@@ -157,7 +166,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: "id"
 
-#### multiParented:
+<h3 id="">multiParented:</h3>
 > **_TYPE_**: Boolean | String
 
 > Indicates if the store is to support multi-parented objects. Multi Parented
@@ -165,7 +174,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: false
 
-#### parentProperty:
+<h3 id="parentproperty">parentProperty:</h3>
 > **_TYPE_**: String
 
 > The property name of an object whose value represents the object's parent id
@@ -173,7 +182,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: "parent"
 
-#### queryEngine:
+<h3 id="queryengine">queryEngine:</h3>
 > **_TYPE_**: Function
 
 > If the store can be queried locally (on the client side in JS), this property
@@ -196,7 +205,7 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: null
 
-#### url:
+<h3 id="url">url:</h3>
 > **_TYPE_**: String
 
 > The Universal Resource Location (URL) to retrieve the store data from.
@@ -209,7 +218,8 @@ As stated above, all store functions are optional and may return a dojo/promise/
 with the synchronous result of the store function.  
 
 **********************************************
-#### add( object, options? )
+
+<h3 id="add">add( object, options? )</h3>
 >	Add a new object to the store, throws an exception if an object with the same identifier already exists.
 
 **_object:_** Object
@@ -223,7 +233,8 @@ with the synchronous result of the store function.
 
 
 **********************************************
-#### addParent( child, parents )
+
+<h3 id="addparent">addParent( child, parents )</h3>
 > Add parent or parents to the list of parents of child.
 
 **_child:_** Object
@@ -237,12 +248,14 @@ with the synchronous result of the store function.
 
 
 **********************************************
-#### destroy()
+
+<h3 id="destroy">destroy()</h3>
 > Release all memory and mark store as destroyed.
 
 
 **********************************************
-#### get( id )
+
+<h3 id="get">get( id )</h3>
 > Retrieves an object by its identity
 
 **_id:_** String | Number
@@ -250,11 +263,9 @@ with the synchronous result of the store function.
 **returns:** Object | void
 > The object found otherwise void.
 
-
-
-
 **********************************************
-#### getChildren( parent, options? )
+
+<h3 id="getchildren">getChildren( parent, options? )</h3>
 > Retrieves the children of an object.
 
 **_parent:_** Object
@@ -267,11 +278,9 @@ with the synchronous result of the store function.
 > Note: An empty _QueryResults_ may indicate the parent does not have children or
 > the parent itself was not found in the store.
 
-
-
-
 **********************************************
-#### getIdentity( object )
+
+<h3 id="getidentity">getIdentity( object )</h3>
 > Returns an object's identity. See also the store property "idProperty"
 
 **_object:_** Object
@@ -279,9 +288,9 @@ with the synchronous result of the store function.
 
 **returns:** id | void
 
-
 **********************************************
-#### getParents( child )
+
+<h3 id="getparents">getParents( child )</h3>
 > Retrieve the parent(s) of a store object.
 
 **_child:_** Object
@@ -289,13 +298,9 @@ with the synchronous result of the store function.
 
 **returns:** Object[] | void
 
-
-
-
-
-
 **********************************************
-#### hasChildren( parent )
+
+<h3 id="haschildren">hasChildren( parent )</h3>
 > Returns boolean true if a parent object has known children otherwise false.
 
 **_parent:_** Object
@@ -304,10 +309,9 @@ with the synchronous result of the store function.
 **returns:** Boolean
 > true if the parent object has known children otherwise false.
 
-
-
 **********************************************
-#### isItem( object )
+
+<h3 id="isitem">isItem( object )</h3>
 > Evaluate if an object is a valid member of this store, that is, it came from this store
 > instance. This method MUST execute synchronously.
 
@@ -317,11 +321,9 @@ with the synchronous result of the store function.
 **returns:** Boolean
 > true if the object is a member of this store otherwise false.
 
-
-
-
 **********************************************
-#### load( options? )
+
+<h3 id="load">load( options? )</h3>
 > load the store data from a URL.
 
 **_options:_** [LoadDirectives](#LoadDirectives)?
@@ -331,12 +333,9 @@ with the synchronous result of the store function.
 > On successful completion the promise resolves to void. On error the promise is
 > rejected with the error condition as its result.
 
-
-
-
-
 **********************************************
-#### put( object, options? )
+
+<h3 id="put">put( object, options? )</h3>
 > Stores an object. Throws an exception if an object with the same identification
 > already exists **AND** the PutDirective.overwrite is set to false.
 
@@ -348,10 +347,9 @@ with the synchronous result of the store function.
 
 **returns:** id
 
-
-
 **********************************************
-#### query( query, options? )
+
+<h3 id="query">query( query, options? )</h3>
 > Queries the store for objects. The query function does not alter the store, but returns a set
 > of objects from the store.
 
@@ -364,12 +362,9 @@ with the synchronous result of the store function.
 **returns:** dojo/store/api/Store.QueryResults
 > The results of the query, extended with iterative methods.
 
-
-
-
-
 **********************************************
-#### ready( callback, errback )
+
+<h3 id="ready">ready( callback, errback )</h3>
 > Execute the callback when the store data has been loaded. If an error occurred
 > during the loading process errback is called instead.
 
@@ -379,20 +374,17 @@ with the synchronous result of the store function.
 **_errback:_** Function
 > Function called if an error occurred during the store load.
 
-
-
-
-
 **********************************************
-#### remove( id )
+
+<h3 id="remove">remove( id )</h3>
 > Deletes an object by its identity.
 
 **_id:_** String | Number
 > The identity to use to delete the object
 
-
 **********************************************
-#### removeParent( child, parents )
+
+<h3 id="removeparent">removeParent( child, parents )</h3>
 > Remove parent(s) from the list of parents of child.
 
 **_child:_** Object
@@ -408,12 +400,14 @@ with the synchronous result of the store function.
 
 
 
+
+
 <h2 id="store-directives">Store Directives</h2>
 Store Directives are JavaScript objects whose key:value pairs serve as additional parameters to store
 operations. In general, directive objects are passed to store functions as an optional argument.
 
 <h2 id="LoadDirectives"></h2>
-#### LoadDirectives
+### LoadDirectives
 > Directives passed to the load() method.
 
 **_all:_** Boolean?
@@ -428,10 +422,10 @@ operations. In general, directive objects are passed to store functions as an op
 
 
 <h2 id="PutDirectives"></h2>
-#### PutDirectives
-> Directives passed to put() and add() functions for guiding the update and creation
-> of store objects. PutDirectives is a JavaScript object with the following optional
-> properties:
+### PutDirectives
+> Directives passed to put() and add() functions for guiding the update and
+> creation of store objects. PutDirectives is a JavaScript key:value pairs
+> object with the following optional properties:
 
 **_id:_** (String | Number)?
 > Indicates the identity of the object if a new object is created.
@@ -459,19 +453,21 @@ operations. In general, directive objects are passed to store functions as an op
 
 **Example:**
 
-	{ parent:"Homer", before:"Bart", overwrite:true }
+```javascript
+{ parent:"Homer", before:"Bart", overwrite:true }
+```
 
 
-
-<h2 id="QueryDirectives">QueryDirectives</h2>
-#### QueryDirectives
-> Optional object with additional parameters for query results.
+<h2 id="QueryDirectives"></h2>
+### QueryDirectives
+> Optional object with additional parameters for query results. QueryDirectives
+> is a JavaScript key:value pairs object with the following optional properties:
 
 **_sort:_** ([SortDirective](#SortDirective)[] | Function)?
 > An array of one or more sort directives. If more than one sort directive
 > is provided the sort directives are processed in the order in which they
-> appear in the sort array. If a compare function is specified, the array 
-> elements are sorted according to the return value of the compare function.
+> appear in the sort array. If a comparison function is specified, the array 
+> elements are sorted according to the return value of the comparison function.
 > See the JavaScript [Array.sort()](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/sort)
 function for details.
 
@@ -497,8 +493,12 @@ function for details.
 { sort:[{attribute:"directory"}, {attribute:"name", ignoreCase:true}], count: 10 }
 ```
 
-<h2 id="SortDirective">SortDirective</h2>
-#### SortDirective
+
+
+
+
+<h2 id="SortDirective"></h2>
+### SortDirective
 > An object describing what object property to sort on, and the direction of the sort.
 
 **_property:_** String

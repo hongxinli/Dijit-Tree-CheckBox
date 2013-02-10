@@ -167,6 +167,13 @@ Alternatively you could import your css file in one of the theme related css fil
 used by cbtree. For example: claro.css, tundra.css located in one of the themes
 related directories.
 
+As an example, the picture below is a single image file containing three icons,
+each icon is 16 pixels wide. The icon on the left at offset -0 is referred to as
+the *Terminal* icon, the icon in the middle at offset -16 is the *Collapsed* 
+icon and the icon at the right at offset -32 is the *Expanded* icon.
+
+<img src="images/CustomIcons.png" alt="sprite"></img>
+
 <h3 id="icon-properties">Icon Properties</h3>
 The CheckBox Tree and Styling extension functions accept icons either as a 
 string argument or as an icon object. An icon object is JavaScript key:value
@@ -394,13 +401,12 @@ The following sample application demonstrates some of the Tree Styling API featu
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
     <script type="text/javascript">
-      require([
-        "dojo/ready",
-        "cbtree/Tree",                    // Checkbox tree
-        "cbtree/extensions/Styling",      // Tree styling extensions
-        "cbtree/model/TreeStoreModel",    // TreeStoreModel
-        "cbtree/store/Hierarchy",
-        ], function( ready, Tree, TreeStyling, TreeStoreModel, Hierarchy ) {
+      require(["dojo/ready",
+               "cbtree/Tree",                    // Checkbox tree
+               "cbtree/extensions/Styling",      // Tree styling extensions
+               "cbtree/model/TreeStoreModel",    // TreeStoreModel
+               "cbtree/store/Hierarchy",
+              ], function( ready, Tree, TreeStyling, TreeStoreModel, Hierarchy ) {
 
           function checkBoxClicked( item, nodeWidget, evt ) {
             var newState = nodeWidget.get("checked" );
@@ -431,9 +437,7 @@ The following sample application demonstrates some of the Tree Styling API featu
           });
         });
     </script>
-
   </head>
-    
   <body class="claro">
     <h1 class="DemoTitle">CheckBox Tree Styling</h1>
     <div id="CheckboxTree">  
@@ -470,24 +474,14 @@ store, model and tree declarative:
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
     <script type="text/javascript">
-      require([
-        "dojo/parser",              // dojo parser
-        "cbtree/Tree",              // CheckBox Tree
-        "cbtree/extensions/Styling" // Tree styling extensions
-      ]);
-
-      function checkBoxClicked( item, nodeWidget, evt ) {
-        var newState = nodeWidget.get("checked" );
-        var label    = this.getLabel(item);
-        if( newState ) {
-          this.set("iconStyle", {border:"solid"}, item );
-          this.set("labelStyle",{color:"red"}, item );
-        } else {
-          this.set("iconStyle", {border:"none"}, item );
-          this.set("labelStyle",{color:"black"}, item );
-        }
-        alert( "The new state for " + label + " is: " + newState );
-      }
+      // Load dependencies...
+      require(["dojo/parser",                   // dojo parser
+               "dojo/on",
+               "cbtree/Tree",                   // CheckBox Tree
+               "cbtree/extensions/Styling",     // Tree styling extensions
+               "cbtree/model/TreeStoreModel",   // TreeStoreModel
+               "cbtree/store/Hierarchy"
+              ]);
     </script>
   </head>
   <body class="claro">
@@ -499,8 +493,19 @@ store, model and tree declarative:
       <div data-dojo-id="model" data-dojo-type="cbtree/model/TreeStoreModel"
         data-dojo-props='store:store, query:{name:"Root"}, rootLabel:"The Family"'>
       </div>
-      <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, 
-        onCheckBoxClick: checkBoxClicked, id:"tree"'>
+      <div data-dojo-id="tree", data-dojo-type="cbtree/Tree" data-dojo-props='model:model, id:"tree"'>
+        <script type="dojo/on" data-dojo-event="checkBoxClick" data-dojo-args="item, nodeWidget, event">
+          var newState = nodeWidget.get("checked" );
+          var label    = this.getLabel(item);
+          if( newState ) {
+            this.set("iconStyle", {border:"solid"}, item );
+            this.set("labelStyle",{color:"red"}, item );
+          } else {
+            this.set("iconStyle", {border:"none"}, item );
+            this.set("labelStyle",{color:"black"}, item );
+          }
+          alert( "The new state for " + label + " is: " + newState );
+        </script>
       </div>
     </div>
     <h2>Click a checkbox</h2>

@@ -277,7 +277,7 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 ```
 
 
-#### autoLoad:
+### autoLoad:
 > **_TYPE_**: Boolean
 
 > If set to true, the File Store is loaded immediately when the store is created 
@@ -287,7 +287,7 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 
 > **_DEFAULT_**: false
 
-#### authToken:
+### authToken:
 > **_TYPE_**: Object
 
 > An arbitrary JavaScript object which is passed to the back-end server with each XHR call.
@@ -295,7 +295,7 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 
 > **_DEFAULT_**: null
 
-#### basePath:
+### basePath:
 > **_TYPE_**: String
 
 > The basePath property is a URI reference (rfc 3986) relative to the
@@ -310,14 +310,14 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 
 > **_DEFAULT_**: "./"
 
-#### defaultProperties:
+### defaultProperties:
 > **_TYPE_**: Object
 > A JavaScript key:values pairs object whose properties are mixed in with any
 > new store object.
 
 > **_DEFAULT_**: null
 
-#### options:
+### options:
 > **_TYPE_**: String | String[]
 
 > A string of comma separated keywords or an array of keyword strings. Some of
@@ -336,7 +336,7 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 
 > **_DEFAULT_**: [] (empty array)
 
-#### sort:
+### sort:
 > **_TYPE:_** [SortDirective](Store-API#wiki-SortDirective)[] | Function
 
 > An array of one or more sort directives. If more than one sort directive
@@ -350,7 +350,7 @@ function for details.
 
 > **_DEFAULT_**: [] (empty array)
 
-#### queryEngine:
+### queryEngine:
 > **_TYPE_**: Function
 
 > This property defines the query engine to use for querying the store data.
@@ -372,7 +372,7 @@ function for details.
 
 > **_DEFAULT_**: cbtree/store/util/QueryEngine
 
-#### url:
+### url:
 > **_TYPE_**: String
 
 > The public URL of the Server Side Application serving the File Store. For
@@ -386,7 +386,7 @@ function for details.
 
 <h2 id="file-store-api">File Store API</h2>
 
-#### get( id, storeOnly? )
+### get( id, storeOnly? )
 > Retrieves an object by its identity
 
 **_id:_** String | Number
@@ -398,7 +398,7 @@ function for details.
 
 
 **********************************************
-#### getChildren( parent, options? )
+### getChildren( parent, options? )
 > Retrieves the children of an object.
 
 **_parent:_** Object
@@ -413,7 +413,7 @@ function for details.
 
 
 *********************************************
-#### getIdentity( item )
+### getIdentity( item )
 > Returns a unique identifier for an item. The default identifier for the File Store 
 > is the attribute *path* unless otherwise specified by the back-end server. The return
 > value will be either a string or something that has a toString() method.
@@ -422,7 +422,7 @@ function for details.
 > A valid file.store item.
 
 **********************************************
-#### hasChildren( parent )
+### hasChildren( parent )
 > Returns boolean true if a parent object has known children otherwise false.
 
 **_parent:_** Object
@@ -432,7 +432,7 @@ function for details.
 > true if the parent object has known children otherwise false.
 
 *********************************************
-#### isItem( something )
+### isItem( something )
 > Returns true if *something* is an item and came from the store instance. Returns
 > false if *something* is a literal, an item from another store instance, or is any
 > object other than an item.
@@ -444,7 +444,7 @@ function for details.
 > Returns true if 'something' is a store object otherwise false.
 
 **********************************************
-#### load( options? )
+### load( options? )
 > Initiate store load.
 
 **_options:_** [LoadDirectives](#LoadDirectives)?
@@ -456,7 +456,7 @@ function for details.
 
 
 **********************************************
-#### put( object, options? )
+### put( object, options? )
 > Stores an object. Throws an exception if an object with the same identification
 > already exists **AND** the PutDirective.overwrite is set to false.
 
@@ -469,7 +469,7 @@ function for details.
 **returns:** id
 
 **********************************************
-#### query( query, options? )
+### query( query, options? )
 > Queries the store for objects. The query function does not alter the store, 
 > but returns a set of objects from the store.
 
@@ -486,7 +486,7 @@ function for details.
 
 
 **********************************************
-#### ready( callback, errback )
+### ready( callback, errback )
 > Execute the callback when the store data has been loaded. If an error occurred
 > during the loading process errback is called instead.
 
@@ -501,7 +501,7 @@ function for details.
 
 
 **********************************************
-#### remove( id )
+### remove( id )
 > Deletes an object by its identity.
 
 **_id:_** String | Number
@@ -511,7 +511,7 @@ function for details.
 
 
 **********************************************
-#### rename( object, newPath)
+### rename( object, newPath)
 > Rename an object
 
 **_object:_** Object
@@ -608,12 +608,11 @@ is disabled the FileStoreModel will automatically apply lazy loading.
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script>
     <script type="text/javascript">
-      require([
-        "dojo/ready",
-        "cbtree/Tree",                  // Checkbox tree
-        "cbtree/model/FileStoreModel",
-        "cbtree/store/FileStore"
-        ], function (ready, Tree, FileStoreModel, FileStore) {
+      require(["dojo/ready",
+               "cbtree/Tree",                  // Checkbox tree
+               "cbtree/model/FileStoreModel",
+               "cbtree/store/FileStore"
+              ], function (ready, Tree, FileStoreModel, FileStore) {
         
            // Because we don't have knowledge of the file system layout of the HTTP server
            // the 'basePath' is set to the document root.
@@ -622,14 +621,11 @@ is disabled the FileStoreModel will automatically apply lazy loading.
                                        basePath:"./",
                                        sort: [{attribute:"directory"},{attribute:"name", ignoreCase: true}]
                                      } );
-          var model = new FileStoreModel( {
-                  store: store,
-                  rootLabel: 'My HTTP Document Root',
-                  checkedRoot: true,
-                  checkedStrict: false
-               });
-
-          ready(function() {
+          var model = new FileStoreModel( { store: store,
+                                            rootLabel: 'My HTTP Document Root',
+                                            checkedRoot: true,
+                                            checkedStrict: false });
+          ready( function() {
             var tree = new Tree( { model: model, id: "MenuTree", persist:false }, "CheckboxTree" );
             tree.startup();
           });
@@ -689,28 +685,24 @@ store object and finally we set the File Store Model property *iconAttr*.
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script>
     <script type="text/javascript">
-      require([
-        "dojo/ready",
-        "cbtree/Tree",                  // Checkbox tree
-        "cbtree/store/FileStore",       // File Store
-        "cbtree/model/FileStoreModel",  // File Store Model
-        "cbtree/extensions/Styling"     // Tree Styling extension
-        ], function (ready, Tree, FileStore, FileStoreModel, TreeStyling ) {
+      require(["dojo/ready",
+               "cbtree/Tree",                  // Checkbox tree
+               "cbtree/store/FileStore",       // File Store
+               "cbtree/model/FileStoreModel",  // File Store Model
+               "cbtree/extensions/Styling"     // Tree Styling extension
+              ], function (ready, Tree, FileStore, FileStoreModel, TreeStyling ) {
 
           var store = new FileStore( { url: "../../store/server/PHP/cbtreeFileStore.php",
                                        basePath:"./",
                                        options:["iconClass"],
                                        sort: [{attribute:"directory"},{attribute:"name", ignoreCase: true}]
                                      } );
-          var model = new FileStoreModel( {
-                  store: store,
-                  rootLabel: 'My HTTP Document Root',
-                  checkedRoot: true,
-                  checkedStrict: "inherit",
-                  iconAttr: "icon"
-               });
-
-          ready(function() {
+          var model = new FileStoreModel( { store: store,
+                                            rootLabel: 'My HTTP Document Root',
+                                            checkedRoot: true,
+                                            checkedStrict: "inherit",
+                                            iconAttr: "icon" });
+          ready( function() {
             var tree = new Tree( { model: model, id: "MenuTree", persist:false }, "CheckboxTree" );
             tree.startup();
           });
