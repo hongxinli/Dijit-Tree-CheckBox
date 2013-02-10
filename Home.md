@@ -20,19 +20,19 @@ has three primary components plus a set of extensions.
 
 ## Sub Components
 
-* [Query Engine](Query-Engine)
-* [Data Handlers](Data-Handlers)
+* [Query Engine](wiki/Query-Engine)
+* [Data Handlers](wiki/Data-Handlers)
 
 ## Extensions
 
-* [Tree Styling](Tree-Styling)
-* [Model Extension](Model-Extension)
+* [Tree Styling](wiki/Tree-Styling)
+* [Model Extension](wiki/Model-Extension)
 
 ## API's
 
-* [CheckBox Tree API](CheckBox-Tree-API)
-* [Model API](Model-API)
-* [Store API](Store-API)
+* [CheckBox Tree API](wiki/CheckBox-Tree-API)
+* [Model API](wiki/Model-API)
+* [Store API](wiki/Store-API)
 
 ## Usage
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
