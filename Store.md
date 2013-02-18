@@ -436,8 +436,8 @@ header. See the [CORS standard](http://www.w3.org/TR/cors/) for more details.
 
 <h2 id="store-api-matrix">Store API Matrix</h2>
 
-The following table shows which `cbtree/store/api/Store` API [properties](Store-API#store-properties)
-and [functions](Store-API#store-functions) each store implements.
+The following table shows which `cbtree/store/api/Store` API [properties](Store-API#wiki-store-properties)
+and [functions](Store-API#wiki-store-functions) each store implements.
 
 <table>
 	<tr>

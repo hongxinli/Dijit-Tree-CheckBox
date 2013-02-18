@@ -334,8 +334,8 @@ for the best store practices...
 
 <h2 id="model-api-matrix">Model API Matrix</h2>
 
-The following tables show which `cbtree/model/api/Model` API [properties](Model-API#model-properties)
-and [functions](Model-API#model-functions) each model implements.
+The following tables show which `cbtree/model/api/Model` API [properties](Model-API#wiki-model-properties)
+and [functions](Model-API#wiki-model-functions) each model implements.
 
 <table>
 	<tr>

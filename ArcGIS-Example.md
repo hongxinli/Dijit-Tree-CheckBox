@@ -79,7 +79,7 @@ filter = QueryEngine( {"feature.attributes.Score":100, "feature.attributes.Addr_
 ```
   
 For additional information please refer to querying
-[Nested Object Properties](Query-Engine#nested-object-properties).
+[Nested Object Properties](Query-Engine#wiki-nested-object-properties).
 
 #### Populating the ObjectStore
 In order to populate the ObjectStore we must first capture the search results
