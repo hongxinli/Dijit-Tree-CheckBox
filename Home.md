@@ -38,7 +38,7 @@ has three primary components plus a set of sub-components and extensions.
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
 
 ## Examples
-* [ArcGIS Points Of Interest](ArcGIS-Example)
+* [ArcGIS Points Of Interest](wiki/ArcGIS-Example)
 
 ## Demos
 The cbtree packages comes with a set of demos each demonstrating the CheckBox
