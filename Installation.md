@@ -27,7 +27,6 @@ After installation the `/cbtree` directory will have the following subdirectorie
     /cbtree
       /data           (deprecated)
       /demos
-      /documentation  (deprecated)
       /extensions
       /icons
       /model
@@ -52,12 +51,6 @@ only and will be removed in the future.
 > The `/data` subdirectory holds demos using the deprecated dojo/data/ItemFile
 > stores and related models. The `/store` subdirectory holds demos using the
 > new cbtree/store Stores.
-
-#### /documentation
-> The /documentation directory holds all CheckBox Tree documentation related to
-> previous cbtree release. Starting with cbtree release v0.9.3-0 this wiki will
-> serves as the online documentation. Be adviced, these documents will be removed
-> in the future.
 
 ### /extensions
 > The /extensions directory holds the optional tree extensions.

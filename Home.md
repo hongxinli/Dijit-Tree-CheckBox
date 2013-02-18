@@ -12,7 +12,7 @@ specific tree and/or model properties.
 
 ## CheckBox Tree Components
 The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and
-has three primary components plus a set of extensions.
+has three primary components plus a set of sub-components and extensions.
 
 * [Tree](wiki/CheckBox-Tree)
 * [Model](wiki/Model)
@@ -36,6 +36,9 @@ has three primary components plus a set of extensions.
 
 ## Usage
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
+
+## Examples
+* [ArcGIS Points Of Interest](ArcGIS-Example)
 
 ## Demos
 The cbtree packages comes with a set of demos each demonstrating the CheckBox

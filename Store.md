@@ -1,22 +1,23 @@
 
-The CheckBox Tree package comes with a set stores and a store wrapper. Each store
-implements the **cbtree/store/api/Store** API or parts thereof.
+The CheckBox Tree package comes with a set of stores and a store wrapper. 
+Each store implements the [cbtree/store/api/Store](Store-API) API or parts thereof.
 The **cbtree/store/api/Store** API is an extension to the
 **dojo/store/api/Store** API, as a result, the usage of these stores is
 not limited to a CheckBox Tree environment.
 
 Before selecting the store you want to use in a CheckBox Tree environment it is
 important to understand the pros and cons of each of them. Please read the 
-[store selection](Store-Models#wiki-selecting-a-store)
+[store selection](Model#wiki-selecting-a-store)
 section of the cbtree models.
 
 <h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
 * [Store Types](#store-types)
 * [Eventable](#eventable)
 * [Observable](#observable)
-* [Data Format](#store-data-format)
-* [Data Hierarchy](#store-data-hierarchy)
+* [Data Format](#data-format)
+* [Data Filter](#data-filter)
 * [Data Handlers](#data-handlers)
+* [CORS Support](#cors-support)
 * [Store API Maxtrix](#store-api-matrix)
 
 
@@ -47,7 +48,7 @@ to the dojo/store/Memory store with the following enhancements:
 
 1. Loading data using a Universal Resource Location (URL).
 2. Allow for pre-processing of loaded data using custom [data handlers](#data-handlers).
-3. Deferred data loading when using URL's.
+3. Deferred data loading and filtering.
 4. Apply default properties to store objects.
 5. Enhanced [Query Engine](Query-Engine)
 
@@ -115,7 +116,7 @@ require( ["cbtree/store/Hierarchy"], function (Hierarchy) {
 Because the Hierarchy store is derived from the Natural store it automatically
 inherits the ability to maintain a natural store order as shown in the above example.
 
-See the [Hierarchy Store](Hierarchy-Store) page for additional information.
+See the [Hierarchy Store](Hierarchy-Store) page for more detailed information.
 
 
 
@@ -270,7 +271,7 @@ is the better choice.**
 
 
 
-<h2 id="store-data-format">Store Data Format</h2>
+<h2 id="data-format">Data Format</h2>
 
 By default, each store is loaded with plain JavaScript key:value pairs objects (hash)
 which are either passed to the store constructor as the "data" keyword argument or by
@@ -311,82 +312,26 @@ details refer to the [Data Handler](#data-handlers) section below.
 
 
 
+<h2 id="data-filter">Data Filter</h2>
+If you are working with large and potentically complex data sets it may be useful
+to only load those objects in the store that are really required by your application.
+For example, you have a large file with geographical data but your application
+only need those records identifying capital cities.  
+Rather than loading the entire file with thousands of records you can pre-filter
+the ones you really need using the store [filter](Store-API#wiki-filter)
+property.
 
+This approach has a number of advantages:
 
-<h2 id="store-data-hierarchy">Store Data Hierarchy</h2>
-
-In essence every `dojo/store` or derivative, including the `cbtree/store`, store
-is, in most cases, a flat array of JavaScript objects without a natural order or
-hierarchy. Lets take a look at a simple set of object as an example:
-
-```javascript
-[
-  { name:"Audi"  ,type:"factory" },
-  { name:"BMW"   ,type:"factory" },
-  { name:"A3"    ,type:"sedan" },
-  { name:"Q5"    ,type:"suv" },
-  { name:"M3"    ,type:"sedan" },
-  { name:"535"   ,type:"sedan" },
-  { name:"750"   ,type:"sedan" }
-]
-```
-The above objects all have a name and some type but there is no way we could
-derive some sort of hierarchical relationship. To create a hierarchy we need
-some object property, like *parent*, that defines the relation between the
-objects. Both the cbtree [Hierarchy](#the-hierarchy-store) and [Object](#the-object-store) 
-store provide support for a parent property which enable them to fetch either
-the children or the parent(s) of an object. The actual object property to be
-used is set using the store's [parentProperty](Store-API#wiki-parentproperty)
-attribute. The default value for this property is "parent".
-
-```javascript
-[
-  { name:"Audi"  ,type:"factory" },
-  { name:"BMW"   ,type:"factory" },
-  { name:"A3"    ,parent:"Audi", type:"sedan" },
-  { name:"Q7"    ,parent:"Audi", type:"suv" },
-  { name:"M3"    ,parent:"BMW" , type:"sedan" },
-  { name:"535"   ,parent:"BMW" , type:"sedan" },
-  { name:"750"   ,parent:"BMW" , type:"sedan" }
-]
-```
-Above we have added a **_parent_** property to those objects who have an obvious
-parent in our store. However, the objects 'Audi' and 'BMW' still don't have a 
-*parent* property. Please note that instead of the default "parent" property
-name we could have used a different property name like "manufaturer" and create
-the store as follows:
-
-```javascript
-var myStore = new Hierarchy( {data:carData, idProperty:"name", parentProperty:"manufaturer", ...});
-```
-The updated set of objects now has a limited hierarchy, that is, not all objects
-have a parent. In order to create a hierachy with a single root object, add one
-more object that serves as the parent of 'Audi' and 'BMW'.
-
-```javascript
-[
-  { name:"Cars"  ,parent:null  , type:"toys" },
-  { name:"Audi"  ,parent:"Cars", type:"factory" },
-  { name:"BMW"   ,parent:"Cars", type:"factory" },
-  { name:"A3"    ,parent:"Audi", type:"sedan" },
-  { name:"Q7"    ,parent:"Audi", type:"suv" },
-  { name:"M3"    ,parent:"BMW" , type:"sedan" },
-  { name:"535"   ,parent:"BMW" , type:"sedan" },
-  { name:"750"   ,parent:"BMW" , type:"sedan" },
-]
-```
-Because we now have an object store with a single root object we could select
-a Tree Model with this store instead of a Forest Model. See the 
-[Tree Store Model](Store-Models#tree-store-model) section and the 
-[Hierarchy Store](Hierarchy-Store) for more details.
-
-
+1. Less memory used.
+2. Simpler Store queries.
+3. Store queries execute faster.
 
 
 
 
 <h2 id="data-handlers">Data Handlers</h2>
-If your data does not comply with the required [Store Data Format](#store-data-format)
+If your data does not comply with the required [Data Format](#data-format),
 the cbtree stores offer the option of so-called data handlers. All cbtree stores, 
 with the exception of the FileStore, offer the option of pre-processing data, before
 populating the store, using either one of the default **dojo/request** handlers
@@ -400,12 +345,13 @@ format or having to handle XHR requests yourself. In addition, because the store
 register any custom data handler with **dojo/request/handlers** the data handler
 automatically becomes available to the **dojo/request** module.
 
-The cbtree stores comes with two sample data handlers:
+The cbtree stores comes with three sample data handlers:
 
 1. Comma Separated Value (CSV) data handler (csvHandler.js)
 2. ItemFileReadStore data handler (ifrsHandler.js)
+3. [ArcGIS Geocoder](http://help.arcgis.com/en/webapi/javascript/arcgis/jssamples/#sample/locator_simple) data handler (arcGisHandler.js)
 
-Both sample handlers can be found at **_/cbtree/store/handlers/_**
+All sample handlers can be found at **_/cbtree/store/handlers/_**
 
 The CSV data handler enables you to load [rfc4180](http://datatracker.ietf.org/doc/rfc4180/)
 compliant comma-separated-value files or objects without any further processing.
@@ -457,6 +403,37 @@ refer to the [Data Handler](Data-Handlers) wiki page.
 
 
 
+<h2 id="cors-support">CORS Support</h2>
+Cross-Origin Resource Sharing (CORS) is a mechanism to allow XMLHttpRequests to
+other domains. By default, cross-domain requests are forbidden by web browsers.
+CORS defines a way in which the browser and the server can interact to determine
+whether or not to allow the cross-origin request.
+
+All cbtree stores, with the exception of the FileStore, can be extended with CORS
+support. Please note that CORS support is only required when loading a store
+with data retrieved from remote domains.
+
+To extand a cbtree store with CORS support consider to following example:
+
+```javascript
+required(["dojo/_base/declare",
+          "cbtree/store/Hierarchy",
+          "cbtree/store/_CORS"
+         ], function ( declare, Heirarchy, _CORS ) {
+  var corsStore = declare( [Hierarchy, _CORS] );
+  var myStore   = new corsStore( {url:"http://some-remote-site"} );
+                  ...
+});
+```
+
+Once CORS support is added to a store you can start using URL with the schema
+'http' or 'https'.
+
+<span class="mega-icon mega-icon-exclamation"></span> The remote domain must 
+support the [Access-Control-Allow-Origin](http://www.w3.org/TR/cors/#access-control-allow-origin-response-header)
+header. See the [CORS standard](http://www.w3.org/TR/cors/) for more details.
+
+
 <h2 id="store-api-matrix">Store API Matrix</h2>
 
 The following table shows which `cbtree/store/api/Store` API [properties](Store-API#store-properties)
@@ -473,7 +450,7 @@ and [functions](Store-API#store-functions) each store implements.
 		<th><a href="File-Store">File Store</a></th>
 	</tr>
 	<tr>
-		<td rowspan="11">Property</td>
+		<td rowspan="12">Property</td>
 		<td><a href="Store-API#wiki-autoload">autoLoad</a></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -504,6 +481,14 @@ and [functions](Store-API#store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-filter">filter</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-handleas">handleAs</a></td>

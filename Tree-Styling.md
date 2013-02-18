@@ -12,6 +12,7 @@ be used with the default `dijit/Tree` tree.
 * [Styling Properties](#styling-properties)
 * [Styling API](#the-styling-api)
 * [Adding Custom Icons](#adding-custom-icons)
+* [Item Property Mapping](#item-property-mapping)
 * [Sample Applications](#sample-application)
 
 <h2 id="loading-the-styling-extension">Loading the Styling Extension</h2>
@@ -43,14 +44,38 @@ Also, see the second [example](#sample-application) below.
 
 <h2 id="styling-properties">Styling Properties</h2>
 ### Tree Properties
-Whenever the Styling extension is loaded the CheckBox Tree gets one more public
-property:
+Whenever the Styling extension is loaded the CheckBox Tree gets two more public
+properties:
 
 #### icon:
 > **_TYPE:_** String | Object
 
 > Set the default icon or set of icons for the CheckBox Tree.
 > see [icon properties](#icon-properties) for more details.
+
+> **_DEFAULT:_** null
+
+#### valueToIconMap:
+> **_TYPE:_** Object
+
+> Maps item property values to icons. The tree node icons can be set based on 
+> the value of an item property. The object is defined using the following ABNF
+> notation:
+>
+><pre>valueToIconMap = "{" property-map *("," property-map) "}"
+property-map   = property ":" mapping
+mapping        = string-array / keyval-object
+string-array   = "[" [string] *("," string) "]"
+keyval-object  = "{" [keyval] *("," keyval) "}"
+keyval         = key ":" value
+key            = property / wildcard
+value          = string / icon-object / wildcard / "null"
+property       = js-identifier / DQUOTE js-identifier DQUOTE
+string         = DQUOTE *CHAR DQUOTE
+wildcard       = DQUOTE "*" DQUOTE
+</pre>
+> Please see [Item Property Mapping](#item-property-mapping) for additional information
+> and examples.
 
 > **_DEFAULT:_** null
 
@@ -139,10 +164,11 @@ The Styling extension provides different methods to add custom icons to your
 tree. These methods are:
 
 1. Using the trees **_icon_** property in which case you set the default 
-	icons for the entire tree.
+	icons for the entire tree,
 2. Using the accessor `set()` allowing you to set the icons for	the entire tree
-	or for individual data items.
-3. As a property of a data item
+	or for individual data items,
+3. As a property of a data item or,
+4. By mapping property value.
 
 In order to add custom icons to the CheckBox or dijit Tree the following items
 are required:
@@ -152,6 +178,7 @@ are required:
    1. Terminal
    2. Collapsed
    3. Expanded
+<br /><br />
 
 2.  A css file defining the icon class. If you want to create multiple custom
     icon sets it is recommended to create a 'master' css file which imports the
@@ -179,7 +206,7 @@ The CheckBox Tree and Styling extension functions accept icons either as a
 string argument or as an icon object. An icon object is JavaScript key:value
 pairs objects with the following properties:
 
-#### iconClass
+<h4 id="iconclass">iconClass</h4>
 > **_TYPE:_** String
 
 > Required, the *iconClass* property identifies the css class of the icon. You
@@ -297,7 +324,8 @@ Example:
 ### Icon as item property ###
 
 In addition to setting the trees **_icon_** property or using the `set()`
-function you can also set the **_iconAttr_** property of the store model. 
+function you can also set the [iconAttr](Model-API#wiki-iconattr) property of
+the store model.
 If set, the **_iconAttr_** identifies the property of a data item as being an
 icon class and every tree node, as part of its creation, will test if the data
 item has the property set. If so, the value is passed to the Styling extension
@@ -322,7 +350,8 @@ var model = new TreeStoreModel( {
 In the above example the store model is told that the **_icon_** property of a 
 data item needs to be handled as the icon class. 
 Also, any updates to the specified property of the data item will be treated by
-the tree as an update to the item's icon.
+the tree as an update to the item's icon. 
+See also [Item Property Mapping](#item-property-mapping)
 
 ### Multi Level Icons ###
     
@@ -373,9 +402,94 @@ myTree.set("icon", "myIcons" })
 Demo application `cbtree/demos/store/tree09.html` demonstrates the implementation 
 and use of multi level icons.
 
+
+<h2 id="item-property-mapping">Item Property Mapping</h2>
+Tree node icons can also be assigned based on the value of item properties. The
+tree property **_valueToIconMap_** defines the mapping of item properties to
+icons. The following is a description of the different methods to map item
+property to icons.
+
+#### Property value as iconClass
+The simplest method is to use the item property value as the [iconClass](#iconclass)
+ by mapping the property name to an empty object. The following example maps the 
+ item property **_type_** to an empty object, both assignments are functionally
+ identical:
+```javascript
+valueToIconMap = { type: {} };
+			or
+valueToIconMap = { type: [] };
+```
+In this case the value of the property item **_test_** is used as the iconClass.
+For example, if the value of test is *StreetAddress* the iconClass will also be
+*StreetAddress*.
+
+#### Using specific values only
+Instead of simply using any item property value as the iconClass you can also 
+specify specific property value. For example, if you want to map only certain
+property values consider the following syntax:
+
+```javascript
+{ type: [ "POI", "StreetAddress", "City", "Store" ] };
+			or
+{ type: { "POI": null, "StreetAddress": null, "City": null, "Store": null };
+```
+In this case only the property values *POI*, *StreetAddress*, *City* and *Store*
+are used as the iconClass. Any other property value will be ignored and therefore
+have no effect on the tree node icon. See also  *Using wildcards*.
+
+#### Mapping value to iconClass
+The third method is to map item property values to specific icon class names or
+icon objects. First we map specific property values to distinct iconClass names:
+
+```javascript
+{ type: { "POI": "pointOfInterest", "StreetAddress":"streetAddress"} }
+```
+Next we map a property value to a specific icon  object:
+
+```javascript
+{ type: { "POI": {iconClass: "pointOfInterest", iconStyle: {border:"solid"}, indent: false} } }
+```
+#### Using wildcards
+Sometimes it is not feasable to map every possible value of an item property or
+you just want to map a subset of the values and have other values default to a
+standard icon. To do this you can use the wildcard character '*' as shown below:
+
+```javascript
+{ type: { "POI": "pointOfInterest", "StreetAddress":"streetAddress", "*":"defaultIcon"} }
+```
+In this case the destinct **_type_** property values *POI* and *StreetAddress*
+are mapped to specific iconClass names while any other value will be mapped
+to the iconClass *defaultIcon*. If you omit the wildcard any value not mapped
+will default to either:
+
+1. The specific icon set for the item.
+2. The default icon set for the tree.
+3. The default dijit icons.
+
+<span class="mega-icon mega-icon-exclamation"></span>
+Icons mapped using the trees *valueToIconMap* property will **_NOT_** trigger
+an automatic tree update if the value of the associated property is changed in
+the store unless you also set the [iconAttr](Model-API#wiki-iconattr) property
+of the model.
+
+<h2 id="icon-assignment-order">Icon Assignment Order</h2>
+The css class name(s) assigned to tree nodes is determined in the following order
+
+1. By mapping an item property value, if the tree *valueToIconMap* property is
+set and a mapping can be made, otherwise use:
+2. The specific icon set for a given item, otherwise use:
+3. The default icon set for the tree, otherwise use:
+4. The default dijit tree icon classes.
+
+<span class="mega-icon mega-icon-exclamation"></span>
+Regardless of how the css class name(s) for a tree node are determined it is
+paramount you have the appropriate css class name definitions loaded along with
+the dojo, dijit and cbtree modules. If any css class name definition is missing
+the intended icon will not show in your browser.
+
 <h2 id="sample-application">Sample Application</h2>
 
-The following sample application demonstrates some of the Tree Styling API features.
+The first sample application demonstrates some of the Tree Styling API features.
 
 ```html
 <!DOCTYPE html>

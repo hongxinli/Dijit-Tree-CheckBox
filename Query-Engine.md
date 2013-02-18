@@ -1,12 +1,12 @@
 
-The **cbtree/store/util/QueryEngine** module provides the underlying search and
-query functionality for all cbtree stores. The name "query engine" is somewhat
-misleading in the sense that it does NOT actually query the store, instead when 
-called, it returns a function capable of executing the required query.  
+The **cbtree/util/QueryEngine** module provides the functionality to query and
+filter JavaScript object arrays. The name *Query Engine* is somewhat
+misleading in the sense that it does not actually query the object arrays,
+instead when called, it returns a function capable of executing the requested
+query.  
 
-The Query Engine is **_NOT_** an implementation of the **cbtree/store/api/Store API**
-query() function, it provides the functionality to enable the implementation of
-such a function. The Query Engine can be used with any arbitrary set of JavaScript
+<span class="mega-icon mega-icon-exclamation"></span>
+The Query Engine can be used with any arbitrary array of JavaScript
 key:value pairs objects, not just store objects.
 
 <h3><span class="mega-icon mega-icon-readme"></span>Content</h3>
@@ -20,14 +20,14 @@ key:value pairs objects, not just store objects.
 
 
 <h2 id="the-query-engine-api">The Query Engine API</h2>
-To use the Query Engine you must first load module **_cbtree/store/util/QueryEngine_** like:
+To use the Query Engine you must first load module **_cbtree/util/QueryEngine_** like:
 ````javascript
-require(["cbtree/store/util/QueryEngine", ... ], function (QueryEngine, ... ) { ... });
+require(["cbtree/util/QueryEngine", ... ], function (QueryEngine, ... ) { ... });
 ```
 The signature of the function returned by the loader is as follows:
 #### QueryEngine( query, options? )
-> Returns a JavaScript function capable of executing a store query and optionally 
-> apply pagination and sorting to the result.
+> Returns a JavaScript function capable of executing the query identified by the
+> query argument and optionally apply pagination and sorting to the result.
 
 **_query:_** Object | Function | String
 > The query argument is either a JavaScript key:value pairs object, a function or
@@ -65,7 +65,7 @@ The following is the ABNF notation of the query object:
 
 	query-object   = "{" query-property *("," query-property) "}";
 	query-property = property-name ":" property-value
-	property-name  = js-identifier
+	property-name  = js-identifier / DQUOTE js-identifier DQUOTE
 	property-value = value-array / value / Function
 	value-array    = "[" value *("," value) "]"
 	value          = String / Number / RegEx
@@ -90,6 +90,19 @@ The last example above demonstrates the use of a function as the query property
 value. In this case an object is considered a match if its name starts with a
 capital letter 'M' and the value of its *age* property is greater than 20.
 
+<h4 id="nested-object-properties">Nested object properties</h4>
+If objects are nested, that is, objects contains other objects, you can query
+such objects by specifying the property or key name as a dot (.) separated path
+enclosed in double quotes. If, for example, you would like to query the street
+name in the following object:
+```javascript
+{ name:"Homer", address:{ street: {name:"Dork Road", number: 10}, city:"Springfield", state:"CO"} }
+```
+The query object would look like:
+```javascript
+var query = { "address.street.name":"Dork Road" };
+```
+
 ### Function as Query Argument
 If the query argument is a filter function, the filter function is called once
 for every object in the  object array passed to _[The Query Function](#the-query-function)_.
@@ -99,7 +112,7 @@ a match, or false if no match.
 For example:
 
 ```javascript
-require(["cbtree/store/util/QueryEngine"], function ( QueryEngine ) {
+require(["cbtree/util/QueryEngine"], function ( QueryEngine ) {
 
   function myFilterFunc( object ) {
               ...
@@ -130,8 +143,9 @@ require(["cbtree/Memory"], function (Memory) {
 }
 ```
 Alternatively you could use the **dojo/_base/lang** extend() method to extend
-the store or pass the function <em>myFilterFunc</em> directly as the query argument.  
-For additional information see the <em>Query as a Function</em> section above.
+the store or pass the function <em>myFilterFunc</em> directly as the query argument.
+For additional information see also the <em>Function as Query Argument</em>
+section above.
 
 
 
@@ -141,7 +155,7 @@ The query options argument is an additional set of optional properties that are
 passed to the Query Engine and are applied to the query results by the Query Function. 
 In general, the query options effect the total number and range of the objects
 returned and their order. Note: both pagination and sort operations are
-applied to the result set, that is, after the query is executed.
+applied to the result set after the query executed.
 
 #### Paginate Results
 To return a subset of the query results the Query Engine support two optional
@@ -160,7 +174,7 @@ The above example returns at a maximum 10 objects whose *hair* property equal
 "blond" starting at index number 5 of the results.
 
 <span class="mega-icon mega-icon-exclamation"></span> Pagination is performed
-after any optional sort is performed.
+**_after_** any optional sort is performed.
 
 #### Sorting Results
 Query results can be sorted using the optional **_sort_** property. The **_sort_**
@@ -206,7 +220,7 @@ function using the Query Engine and Query Function.
 
 ```javascript
 require(["dojo/store/util/QueryResult",
-         "cbtree/store/util/QueryEngine", 
+         "cbtree/util/QueryEngine", 
               ...
         ], function ( QueryResult, QueryEngine, ... ) {
 
@@ -235,7 +249,7 @@ stores. It can be used with any arbitrary array of JavaScript key:value pairs
 object as the following example demonstrates:
 
 ```javascript
-require(["cbtree/store/util/QueryEngine", 
+require(["cbtree/util/QueryEngine", 
               ...
         ], function ( queryEngine, ... ) {
 
@@ -317,7 +331,7 @@ document that are 'draggable', have a base URI which include a path segment
 '/images/' and whose width is in the range of 16 and 64 pixels.
 
 ```javascript
-require(["cbtree/store/util/QueryEngine"], function (QueryEngine) {
+require(["cbtree/util/QueryEngine"], function (QueryEngine) {
   var images = Array.prototype.slice.call( document.images );
   var query  = { draggable: true, 
                  baseURI:/\/images\//,

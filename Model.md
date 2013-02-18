@@ -35,7 +35,7 @@ for **_BaseStoreModel_** and adds
 the capabilities to maintain and manipulate a so-called 'checked' state for store
 objects.
 
-The following table lists all [stores](Store#wiki-store-types) types and store
+The following table lists all [store](Store#wiki-store-types) types and store
 wrappers supported by the base class **_BaseStoreModel_**:
 
 <table>
@@ -99,8 +99,9 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<td>dojo/store/api/Store<sup>1</sup></td>
     <td></td>
 		<td>
-			Any store implenting the dojo/store/api/Store API. The store must at a
-			minimum implement the <em>get(), put()</em> and <em>query()</em> methods.
+			Any store implenting the <strong>dojo/store/api/Store</strong> API. The
+			store must at a minimum implement the <em>get(), put()</em> and
+			<em>query()</em> methods.
 		</td>
 	</tr>
 	<tr>
@@ -252,7 +253,7 @@ at **_cbtree/model/TreeStoreModel_**.
 
 However, querying the same store with a query argument like `query:{type:"parent"}`
 would throw an exception because this particular query would return 4 store 
-objects instead of just 1.
+objects instead of just one.
 This shows that even though the store data is needly organized in a tree hierarchy 
 it all depends on the number of objects the root query returns if we can use a
 Tree Store Model. 

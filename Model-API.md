@@ -153,7 +153,7 @@ stores like a File Store.
 > only) or the alternative label in case the tree root is represented by a store
 > object ([Tree Store Model](#tree-store-model) only)
 
-> **_DEFAULT_**: "ROOT"
+> **_DEFAULT_**: null
 
 <h3 id="rootid">rootId:</h3>
 > **_TYPE_**: String
@@ -337,6 +337,64 @@ store models.
 
 <h2 id="model-callbacks">Model Callbacks</h2>
 
+The CheckBox Tree models, although not widgets, offer the same `on()`
+functionality as widgets do. Therefore you can simple register a model event
+listener like `model.on( "dataValidated", myEventHandler );`
 
+The tables below list the event names and associated callback. If for any given
+event type a callback is specified, the arguments column specifies the list of
+arguments passed to the event listener.
+
+<table>
+	<tr>
+		<th>Event Type</th>
+		<th>Callback</th>
+		<th>Arguments</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>change</td>
+    <td>onChange</td>
+    <td>(item, propertyName, newValue, oldValue)</td>
+		<td>
+			Property of a store item changed.
+		</td>
+	</tr>
+	<tr>
+		<td>childrenChange</td>
+    <td>onChildrenChange</td>
+    <td>(parent, newChildrenList)</td>
+		<td>
+			The children of a node changed.
+		</td>
+	</tr>
+	<tr>
+		<td>delete</td>
+    <td>onDelete</td>
+    <td>(item)</td>
+		<td>
+			Store item removed
+		</td>
+	</tr>
+	<tr>
+		<td>rootChange</td>
+    <td>onRootChange</td>
+    <td>(item, action)</td>
+		<td>
+			The children of the tree root changed.
+		</td>
+	</tr>
+	<tr>
+		<td>dataValidated</td>
+    <td>onDataValidated</td>
+    <td>(void)</td>
+		<td>
+			The store data has been validated.
+		</td>
+	</tr>
+</table>
+
+See [Working with Events](CheckBox-Tree-Usage#wiki-working-with-events) for a
+detailed description.
 
 

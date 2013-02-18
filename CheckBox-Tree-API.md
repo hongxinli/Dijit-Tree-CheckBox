@@ -199,20 +199,78 @@ of the actual store item properties.
 
 
 <h2 id="tree-callbacks">Tree Callbacks</h2>
-See also the usage section on [Callbacks and Events](CheckBox-Tree-Usage#wiki-callbacks-and-events).
 
-<h3 id="">onCheckBoxClick( item, nodeWidget, evt )</h3>
-> Callback routine called each time a checkbox is clicked.
+The tables below list the event names and associated callback. If for any given
+event type a callback is specified, the arguments column specifies the list of
+arguments passed to the event listener.
 
-**_item:_** Object
-> The data object associated with the nodeWidget whose checkbox got clicked.
+<table>
+	<tr>
+		<th>Event Type</th>
+		<th>Callback</th>
+		<th>Arguments</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>click</td>
+    <td>onClick</td>
+    <td>(item, node, event)</td>
+		<td>
+			A tree node is clicked.
+		</td>
+	</tr>
+	<tr>
+		<td>checkBoxClick</td>
+    <td>onCheckBoxClick</td>
+    <td>(item, node, event)</td>
+		<td>
+			A checkbox is clicked.
+		</td>
+	</tr>
+	<tr>
+		<td>close</td>
+    <td>onClose</td>
+    <td>(item, node)</td>
+		<td>
+			Node closed, a tree node collapsed.
+		</td>
+	</tr>
+	<tr>
+		<td>dblClick</td>
+    <td>onDblClick</td>
+    <td>(item, node, event)</td>
+		<td>
+			Double click
+		</td>
+	</tr>
+	<tr>
+		<td>open</td>
+    <td>onOpen</td>
+    <td>(item, node)</td>
+		<td>
+			Node opened. a tree node is expanded.
+		</td>
+	</tr>
+	<tr>
+		<td>event</td>
+    <td>onEvent</td>
+    <td>(item, event, value)</td>
+		<td>
+			User event successful.
+		</td>
+	</tr>
+	<tr>
+		<td>load</td>
+    <td>onLoad</td>
+    <td>(void)</td>
+		<td>
+			Tree finished loading.
+		</td>
+	</tr>
+</table>
 
-**_nodeWidget:_** dijit.widget
-> The tree node widget whose checkbox was clicked.
-
-**_evt:_** Object
-> A dojo or native HTML event object.
-
+See [Working with Events](CheckBox-Tree-Usage#wiki-working-with-events) for a
+detailed description.
 
 
 <h2 id="widget-object">Widget Object</h2>

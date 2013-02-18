@@ -14,7 +14,7 @@ _url_ property.
 
 <h2 id="data-handler-signature">Data Handler Signature</h2>
 The signature or prototype of a data handler is a s follows:
-#### dataHandler( response )
+### dataHandler( response )
 > Convert the raw data contained by the _reponse_ argument into an array of JavaScript
 > key:value pairs object (hash). The array of objects is returned as the result of this
 > function.
@@ -48,16 +48,17 @@ function dataHandler( response ) {
 ```
 
 ### Store Properties
-The cbtree stores have two properties to enable a custom data handler, _handleAs_ and
-_dataHandler_.
-The first, _handleAs_, defines the data type or format the data handler is capable of
-converting. The second, _dataHandler_, is the actual data handler function or object.
-See the [store API](Store-API#datahandler) for more details.
+The cbtree stores have two properties to enable a custom data handler, _handleAs_
+and _dataHandler_.
+The first, [handleAs](Store-API#wiki-handleas), defines the data type or format
+the data handler is capable of converting.
+The second, [dataHandler](Store-API#wiki-datahandler), is the actual data handler
+function or object.
 
 If you want to use any of the default **dojo/request** data handlers such as "json"
-you must **NOT** specify the store property _dataHandler_ when creating a store otherwise
-you would override the standard dojo JSON handler. Instead, only specify the property
-_handleAs_ as "json".
+you must **NOT** specify the store property _dataHandler_ when creating a store
+otherwise you would override the standard dojo JSON handler. Instead, only specify
+the property _handleAs_ as "json".
 
 ### Data Handler Declaration
 The simplest form of declaring a Data Handler as a loadable AMD module is as follows:

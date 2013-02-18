@@ -256,22 +256,19 @@ Tree Styling extension being loaded to hide the tree node labels and icons.
 
 ```html
 <script type="text/javascript">
-  require([
-    "dojo/ready",
-    "dijit/form/ToggleButton",
-    "cbtree/Tree",                      // CheckBox Tree              
-    "cbtree/store/ObjectStore",         // Eventable Object Store
-    "cbtree/model/ForestStoreModel",    // Tree Forest Store Model
-    "cbtree/extensions/Styling"         // Tree Styling extension
-    ], function( ready, ToggleButton, Tree, ObjectStore, ForestStoreModel ) {
+  require(["dojo/ready",
+           "dijit/form/ToggleButton",
+           "cbtree/Tree",                      // CheckBox Tree              
+           "cbtree/store/ObjectStore",         // Eventable Object Store
+           "cbtree/model/ForestStoreModel",    // Tree Forest Store Model
+           "cbtree/extensions/Styling"         // Tree Styling extension
+          ], function( ready, ToggleButton, Tree, ObjectStore, ForestStoreModel ) {
 
       var store = new ObjectStore( { url: "../../datastore/Simpsons.json" });
-      var model = new ForestStoreModel( {
-                                store: store,
-                                query: {type: 'parent'},
-                                rootLabel: 'The Simpsons',
-                                checkedRoot: true
-                              }); 
+      var model = new ForestStoreModel( {store: store,
+                                         query: {type: 'parent'},
+                                         rootLabel: 'The Simpsons',
+                                         checkedRoot: true  }); 
       ready( function() {
         var tree = new Tree( { model: model,
                                id: "MyTree",
@@ -295,10 +292,11 @@ Tree Styling extension being loaded to hide the tree node labels and icons.
 
 <h2 id="sample-application">Sample Application</h2>
 ### Programmatically
-The following is a basic sample of how to create a model, associate the model
-with the tree and display the tree itself. In addition, the sample application
-listens for the *checkBoxClick* event of the tree and as a result every time
-a checkbox is clicked the function *checkBoxClicked()* is called.
+The following is a basic sample of how to create a store, model, associate the
+model with the tree and display the tree itself. 
+In addition, the sample application listens for the *checkBoxClick* event of
+the tree and as a result each time a checkbox is clicked the function 
+`checkBoxClicked()` is called.
 
 ```html
 <!DOCTYPE html>
@@ -327,19 +325,17 @@ a checkbox is clicked the function *checkBoxClicked()* is called.
 
     <script type="text/javascript" src="../../../dojo/dojo.js"></script>
     <script type="text/javascript">
-      require([
-        "dojo/ready",
-        "cbtree/Tree",                     // Checkbox tree
-        "cbtree/model/TreeStoreModel",     // Object Store Tree Model
-        "cbtree/store/ObjectStore"         // Evented Object Store with Hierarchy
-        ], function( ready, Tree, ObjectStoreModel, ObjectStore) {
+      require(["dojo/ready",
+               "cbtree/Tree",                     // Checkbox tree
+               "cbtree/model/TreeStoreModel",     // Object Store Tree Model
+               "cbtree/store/ObjectStore"         // Evented Object Store with Hierarchy
+              ], function( ready, Tree, ObjectStoreModel, ObjectStore) {
 
           var store = new ObjectStore( { url:"../../store/json/Simpsons.json", idProperty:"name"});
-          var model = new ObjectStoreModel( { store: store,
-                                               query: {name: "Root"},
-                                               rootLabel: "The Family",
-                                               checkedRoot: true
-                                             });
+          var model = new ObjectStoreModel( {store: store,
+                                             query: {name: "Root"},
+                                             rootLabel: "The Family",
+                                             checkedRoot: true} );
 
           function checkBoxClicked( item, nodeWidget, event ) {
             alert( "The new state for " + this.getLabel(item) + " is: " + nodeWidget.get("checked") );
@@ -351,10 +347,8 @@ a checkbox is clicked the function *checkBoxClicked()* is called.
             tree.startup();
           });
         });
-      </script>
-
+    </script>
   </head>
-
   <body class="claro">
     <h1 class="DemoTitle">The CheckBox Tree with Multi State CheckBoxes</h1>
     <div id="CheckboxTree">
@@ -398,14 +392,13 @@ loaded you will not see the tree in your browser.
     <script type="text/javascript" src="../../../dojo/dojo.js"></script>
     <script type="text/javascript">
       // Explicitly declare dependencies.
-      require([
-          "dojo/parser",
-          "dojo/on",
-          "cbtree/Tree",                     // Checkbox tree
-          "cbtree/model/TreeStoreModel",     // Object Store Tree Model
-          "cbtree/store/ObjectStore"         // Evented Object Store with Hierarchy
-        ]);
-      </script>
+      require(["dojo/parser",
+               "dojo/on",
+               "cbtree/Tree",                     // Checkbox tree
+               "cbtree/model/TreeStoreModel",     // Object Store Tree Model
+               "cbtree/store/ObjectStore"         // Evented Object Store with Hierarchy
+              ]);
+    </script>
   </head>
   <body class="claro">
     <h1 class="DemoTitle">Dijit Tree with Multi State CheckBoxes</h1>

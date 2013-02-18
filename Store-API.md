@@ -86,25 +86,29 @@ require(["cbtree/store/Memory"], function (Memory) {
 <h3 id="autoload">autoLoad:</h3>
 > **_TYPE_**: Boolean
 
-> Indicates, when a URL is specified, if the data should be loaded during store
-> construction or deferred until the user explicitly calls the load function.
+> Indicates if the store data should be loaded immediately when available or
+> deferred until the store method `load()` is called.
 > See the store [load](#load) function for additional information.
 
 > **_DEFAULT_**: true
 
 <h3 id="data">data:</h3>
-> **_TYPE_**: Object []
+> **_TYPE_**: Object [] | Any
 
-> An array of JavaScript key:value pairs objects to be loaded into the store as the
-> initial store content. See also _url_
+> An array of JavaScript key:value pairs objects to be loaded into the store as
+> the initial store content. If data is any other data type, the store must also
+> implement [dataHandler](#datahandler) and [handleAs](#handleas).
+> See also [url](#url)
 
 > **_DEFAULT_**: null
 
 <h3 id="datahandler">dataHandler:</h3>
 > **_TYPE_**: Function | Object
 
-> The data handler for the store data or server response. If _dataHandler_ is an
-> key:value pairs object, the object should support the following properties:
+> The data handler for the store data or server response. A data handler convert
+> an arbitrary data format into an array of JavaScript key:value pairs objects
+> ready for consumption by the store. If _dataHandler_ is an key:value pairs
+> object, the object should support the following properties:
 >
 >		{ handler: Function|Object,
 >		  options: Object?
@@ -115,9 +119,10 @@ require(["cbtree/store/Memory"], function (Memory) {
 > object provides	the scope/closure for the handler function	and the
 > options, if any, are mixed into the scope. For example:
 >
->	dataHandler: { handler: csvHandler,
->	               options: { fieldNames:["col1", "col2"] }
->	             }
+>     dataHandler: { handler: csvHandler,
+>                    options: { fieldNames:["col1", "col2"] }
+>                  }
+>
 > The handler function has the following signature:
 >
 >		handler( response )
@@ -136,12 +141,21 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: null
 
+<h3 id="filter">filter:</h3>
+> **_TYPE_**: Object | Function
+
+> Query style filter object or function applied to the store data prior to
+> populating the store. The filter property can be used to load a subset of
+> objects into the store. See also [LoadDirectives](#LoadDirectives)
+
+> **_DEFAULT_**: null
+
 <h3 id="handleas">handleAs:</h3>
 > **_TYPE_**: String
 
 > Specifies how to interpret the payload returned in a server response
 > or the data passed to a store method responsible for populating the
-> store, if any. (typically the store constructor).
+> store, if any. (typically the store constructor or load() method).
 
 > **_DEFAULT_**: null
 
@@ -324,7 +338,8 @@ with the synchronous result of the store function.
 **********************************************
 
 <h3 id="load">load( options? )</h3>
-> load the store data from a URL.
+> Load the store data using the data identified by the store property [data](#data)
+> or [url](#url).
 
 **_options:_** [LoadDirectives](#LoadDirectives)?
 > Optional load directives.
@@ -412,7 +427,18 @@ operations. In general, directive objects are passed to store functions as an op
 
 **_all:_** Boolean?
 
-> Indicates if all available data should be loaded.
+> Indicates if all available data should be loaded. If set to `true`, overrides
+> the *filter* property.
+
+**_data:_** any?
+> Identifies the data to be loaded.
+
+**_filter:_** (Object | Function)?
+> If specified, the objects that match the filter are loaded into the store.
+> If filter is a key:value pairs object, each key:value pair is matched with
+> the corresponding key:value pair of the store data being loaded. If filter
+> is a function, the function is called once for every object to be loaded as: 
+> `func( object )`. The function must return either `true` or `false`.
 
 **_url:_** String?
 

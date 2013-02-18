@@ -6,8 +6,8 @@
 
 With dojo 1.7 a new event handling module was introduced called `dojo/on`. 
 The intend of this module is/was to make event handling with dojo easier and 
-mimic some of the DOM4 Event system. However, `dojo/on` is far from a self 
-contained DOM-4 Event system implementation.  
+mimic some of the DOM4 Event system. However, `dojo/on` is not a self contained
+DOM-4 Event system implementation.  
 In addition, dijit widgets inherit a modified version of `dojo/on` to make it
 backward compatible with callback methods and non-DOM compliant events.
 The `dijit/_WidgetBase.on()` method tries to map event types, case insensitive
@@ -19,7 +19,7 @@ for callbacks and events.
 
 <h3><span class="mega-icon mega-icon-arr-collapsed"></span>Callbacks</h3>
 
-Before we establish an event listener with a dijit widget we must fist check if
+Before registering an event listener with a dijit widget we must first check if
 the widget has a method that could be auto linked with the event type. 
 For example, if we want to listen for an event named "myEvent", does the widget
 have a method called `onMyEvent()` or `onmyevent()`?  
@@ -44,7 +44,7 @@ require(["dojo/aspect", "cbtree/Tree", ... ], function (aspect, Tree, ... ) {
       console.log( "A Tree Node was clicked" );
     }
                    ...
-    var myTree  = new Tree( {model:someModel, ... } );
+    var myTree = new Tree( {model:someModel, ... } );
     aspect.after( myTree, "onMyEvent", clickEvent, true );
                    ...
 })
@@ -68,7 +68,7 @@ require(["cbtree/Tree", ... ], function (Tree, ... ) {
       console.log( "A Tree Node was clicked" );
     }
                    ...
-    var myTree  = new Tree( {model:someModel, ... } );
+    var myTree = new Tree( {model:someModel, ... } );
     myTree.on( "myEvent", clickEvent );
                    ...
 })
