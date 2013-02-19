@@ -1,13 +1,13 @@
 
-The CheckBox Tree comes with a simple Styling extension which is loaded as a
-separate module. The Styling extension allows you to dynamically manage
+The CheckBox Tree comes with a simple to use Styling extension which is loaded
+as a separate module. The Styling extension allows you to dynamically manage
 tree node icons, labels and row styling either for the entire tree or on a per
 item basis. 
 
 The Tree Styling extension is not limited to the CheckBox Tree but can also
 be used with the default `dijit/Tree` tree.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+### Content
 * [Loading the Styling Extension](#loading-the-styling-extension)
 * [Styling Properties](#styling-properties)
 * [Styling API](#the-styling-api)
@@ -17,7 +17,7 @@ be used with the default `dijit/Tree` tree.
 
 <h2 id="loading-the-styling-extension">Loading the Styling Extension</h2>
 Tree Styling is implemented as an extension to the CheckBox Tree and as such
-needs to be loaded as a separate module. The following sample shows how to load
+must to be loaded as a separate module. The following sample shows how to load
 the Styling extension. The Style extension is located at **cbtree/extensions/Styling**
 
 ```javascript
@@ -93,13 +93,15 @@ the following property names are available:
 - rowClass & rowStyle
 
 The **_Class_** properties are all of type String, whereas all **_Style_** properies
-are JavaScript key:value pairs objects suitable for the input to `domStyle.set()`  
+are JavaScript key:value pairs objects suitable for the input to `domStyle.set()`
 A style property looks like:
 
 ```javascript
 {color:"red", border:"solid"}
 ```
-
+<span class="mini-icon mini-icon-exclamation"></span>`domStyle.set()` objects
+requires camelcase property names, therefore a css property like `border-width`
+is specified as `borderWidth`.
 
 
 
@@ -168,19 +170,19 @@ tree. These methods are:
 2. Using the accessor `set()` allowing you to set the icons for	the entire tree
 	or for individual data items,
 3. As a property of a data item or,
-4. By mapping property value.
+4. By mapping property values.
 
 In order to add custom icons to the CheckBox or dijit Tree the following items
 are required:
 
-1. An image sprite containing at least three icon types:
+1. An image sprite containing at least three icons which are referenced as:
   
    1. Terminal
    2. Collapsed
    3. Expanded
 <br /><br />
 
-2.  A css file defining the icon class. If you want to create multiple custom
+2.  A css file defining the icon classes. If you want to create multiple custom
     icon sets it is recommended to create a 'master' css file which imports the
     individual css files. As an example: `cbtree/icons/cbtreeIcons.css` is the
     default master css file.
@@ -201,16 +203,33 @@ icon and the icon at the right at offset -32 is the *Expanded* icon.
 
 <img src="images/CustomIcons.png" alt="sprite"></img>
 
-<h3 id="icon-properties">Icon Properties</h3>
+<h3 id="icon-object">Icon Object</h3>
 The CheckBox Tree and Styling extension functions accept icons either as a 
 string argument or as an icon object. An icon object is JavaScript key:value
-pairs objects with the following properties:
+pairs objects with the following ABNF notation:
+
+```
+icon-object  = "{" icon-class *("," icon-prop) "}"
+icon-class   = "iconClass" ":" class-string
+icon-prop    = icon-style / fixed / indent
+icon-style   = "iconStyle" ":" style-object
+fixed        = "fixed" ":" css-class
+indent       = "indent" ":" (boolean / 1*DIGIT)
+class-string = DQUOTE base-class *(WSP css-class) DQUOTE
+base-class   = css-class
+style-object = "{" style-prop *("," style-prop) "}"
+style-prop   = property ":" json-value
+property     = js-identifier / DQUOTE js-identifier DQUOTE
+boolean      = "true" / "false"
+```
+
+<h3 id="icon-properties">Icon Properties</h3>
 
 <h4 id="iconclass">iconClass</h4>
 > **_TYPE:_** String
 
-> Required, the *iconClass* property identifies the css class of the icon. You
-> can specify multiple class names if needed. 
+> Required, the *iconClass* property identifies the css classes of the icon. 
+> The class string is a space separated list of css class names.
 > If multiple class names are specified the first in the list is used as the
 > icons base class (see indent)
 
@@ -219,7 +238,10 @@ pairs objects with the following properties:
 
 > Optional, the *iconStyle* property specifies the css style of the icon. The
 > iconStyle is an object suitable for the input to domStyle.set() like {border:"solid"}
-  
+> <span class="mini-icon mini-icon-exclamation"></span>`domStyle.set()` objects
+requires camelcase property names, therefore a css property like `border-width`
+is specified as `borderWidth`.
+
 #### fixed
 > **_TYPE:_** String
 
@@ -284,15 +306,16 @@ icon bitmaps is 16 pixels wide, the basic (minimal) css file MUST look like:
 *NOTE:* There is **NO** white space between the css class names.
 
 ### Creating the Checkbox Tree ###
-    
-To create the tree with a default set of icons the icon property of the tree must be
-set accordingly:
+Now that we have created our icon image file (sprite) and the associated css
+file we can create the tree and set our custom icon as the default for the tree.
+The default tree icon is set using the trees **_icon_** property:
+
 
 ```javascript
 icon: { iconClass: "myIcons", indent: false },
 ```
 
-Example:
+##### Example
 
 ```html
 <link rel="stylesheet" href="../cbtree/icons/myIcons.css" />
@@ -301,18 +324,12 @@ Example:
   require(["cbtree/store/Hierarchy", 
            "cbtree/Tree",
            "cbtree/extensions/Styling",
-           "cbtree/model/TreeStoreModel"], 
-    function( Hierarchy, Tree, TreeStyling, TreeStoreModel ) {
+           "cbtree/model/TreeStoreModel"
+          ], function( Hierarchy, Tree, TreeStyling, TreeStoreModel ) {
 
       var store = new Hierarchy( { url: "myFamilyTree.json" });
-      var model = new TreeStoreModel( {
-              store: store,
-              query: {type: "parent"},
-              rootLabel: "The Family",
-                  ...
-              }); 
-
-      var tree = new Tree( {
+      var model = new TreeStoreModel( { store: store, ... });
+      var tree  = new Tree( {
               model: model,
               id: "MenuTree",
               icon: { iconClass: "myIcons", indent: false },
@@ -320,21 +337,22 @@ Example:
               });
 </script>
 ```
+<span class="mini-icon mini-icon-exclamation"></span>
+Make sure you first load the css file (line 1) otherwise the icons will not show in your
+browser.
 
-### Icon as item property ###
+### Icon as an item property ###
 
 In addition to setting the trees **_icon_** property or using the `set()`
 function you can also set the [iconAttr](Model-API#wiki-iconattr) property of
 the store model.
-If set, the **_iconAttr_** identifies the property of a data item as being an
-icon class and every tree node, as part of its creation, will test if the data
-item has the property set. If so, the value is passed to the Styling extension
-becoming the default icon class for the given data item. 
+The model **_iconAttr_** property identifies the property name of a data item as
+being either an icon object or icon class name.
 
 For example, if you create a JSON store item like:
-
-    { "name":"Lisa", "checked":true, "icon":"myIcon" }
-    
+```json
+{ "name":"Lisa", "checked":true, "icon":"myIcon" }
+```
 You could create your model as follows:
 
 ```javascript
@@ -357,7 +375,7 @@ See also [Item Property Mapping](#item-property-mapping)
     
 In addition to the basic configuration described above, the CheckBox Tree
 also allows for the use of different icons depending on the tree node indent
-level. Whenever the icon property **_indent_** is true the CheckBox Tree adds an
+level. Whenever the icon property **_indent_** is set, the CheckBox Tree adds an
 additional css class for each icon which is the iconClass with the current
 indent level appended. For example: assuming your icon class is still 
 'myIcons' and an expanded icon is located at indent level 1 the following
@@ -367,9 +385,12 @@ css classes are set for the iconNode:
 2. myIconsExpanded
 3. myIconsExpanded_1
 
-Add at least one more icon to your sprite (e.g icon (3)) and add the following
-to your css file.
-    
+To use multi level icons add at least one more icon to your sprite. The icon on 
+the right is now at offset -48.
+
+<img src="images/CustomIcons2.png" alt="sprite"></img>
+
+Add the following to your css file.
 ```css
 .myIcons.myIconsTerminal_1,
 .myIcons.myIconsCollapsed_1,
@@ -377,6 +398,10 @@ to your css file.
   background-position: -48px;
 }
 ```
+<span class="mini-icon mini-icon-exclamation"></span>
+Notice though that all class names map to the same icon, the one on the right.
+To get the full user experiance you would need to add an icon for each icon
+class and define the css classes accordingly.
 
 Now create the tree with the icon property **_ident_** set to true (default):
   
@@ -415,9 +440,9 @@ The simplest method is to use the item property value as the [iconClass](#iconcl
  item property **_type_** to an empty object, both assignments are functionally
  identical:
 ```javascript
-valueToIconMap = { type: {} };
+var valueToIconMap = { type: {} };
 			or
-valueToIconMap = { type: [] };
+var valueToIconMap = { type: [] };
 ```
 In this case the value of the property item **_test_** is used as the iconClass.
 For example, if the value of test is *StreetAddress* the iconClass will also be
@@ -442,8 +467,12 @@ The third method is to map item property values to specific icon class names or
 icon objects. First we map specific property values to distinct iconClass names:
 
 ```javascript
-{ type: { "POI": "pointOfInterest", "StreetAddress":"streetAddress"} }
+{ type: { "POI": "pointOfInterest", "StreetAddress":"poiAddress"} }
 ```
+If the item property **_type_** has a value of *POI* the icon class name for the
+tree node is set to *pointOfInterest* or if the value is *StreetAddress* the
+icon class name is set to *poiAddress*.
+
 Next we map a property value to a specific icon  object:
 
 ```javascript
@@ -471,6 +500,40 @@ Icons mapped using the trees *valueToIconMap* property will **_NOT_** trigger
 an automatic tree update if the value of the associated property is changed in
 the store unless you also set the [iconAttr](Model-API#wiki-iconattr) property
 of the model.
+
+### Mapping Multiple Properties
+The tree property **_valueToIconMap_** allows you to map multiple item properties
+to further fine tune the icon class that will be assigned. Whenever multiple
+properties are defined a logical OR is performed on the properties. Consider the 
+following example:
+
+```javascript
+var valueToIconMap = { type: ["POI", "StreetAddress"], 
+                       class: ["map"],
+                       id: { "*":"defaultIcon" } 
+                     };
+                       
+```
+If an item has a property *type* with a value of either *POI* or *StreetAddress* 
+then the *type* value is used as the icon class. Otherwise, if the item has a 
+property *class* with the value *map* then *map* is used as the icon class.
+Otherwise, if the item  has a property *id* then the icon class will be set to 
+*defaultIcon*.
+
+<h3 id="nested-item-properties">Nested Item Properties</h3>
+If an item property value is an object or a nested object you can specify the
+property name you want to map as a dot (.) separated path enclosed in double
+quotes. 
+If, for example, you would like to map the *type* property of the following
+object:
+```javascript
+{ name: "New York", feature: { attributes: { type:"city", harbor: true }, ... }}
+```
+The *valueToIconMap* object would look something like:
+```javascript
+var valueToIconMap = { "feature.attributes.type": {"city":"poiCity"} };
+```
+
 
 <h2 id="icon-assignment-order">Icon Assignment Order</h2>
 The css class name(s) assigned to tree nodes is determined in the following order
