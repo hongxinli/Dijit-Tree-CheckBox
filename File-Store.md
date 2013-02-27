@@ -562,7 +562,7 @@ not look at the files content type.
 To enable and use the Fancy Tree Styling in your applications the following 
 requirements must be met:
 
-* The Tree Styling extension must have been loaded. (`cbtree/extensions/Styling`)
+* The Tree Styling extension must have been loaded. (`cbtree/extensions/TreeStyling`)
 * A set of icons or an icon sprite must be available.
 * A CSS definitions file must be available and loaded.
 * The FileStoreModel and optionally the tree must be configured for icon support.
@@ -689,7 +689,7 @@ store object and finally we set the File Store Model property *iconAttr*.
                "cbtree/Tree",                  // Checkbox tree
                "cbtree/store/FileStore",       // File Store
                "cbtree/model/FileStoreModel",  // File Store Model
-               "cbtree/extensions/Styling"     // Tree Styling extension
+               "cbtree/extensions/TreeStyling" // Tree Styling extension
               ], function (ready, Tree, FileStore, FileStoreModel, TreeStyling ) {
 
           var store = new FileStore( { url: "../../store/server/PHP/cbtreeFileStore.php",

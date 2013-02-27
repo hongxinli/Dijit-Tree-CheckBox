@@ -325,6 +325,63 @@ with the synchronous result of the store function.
 
 **********************************************
 
+<h3 id="isAncestorOf">isAncestorOf( ancestor, item )</h3>
+> Returns true if the object identified by argument `ancestor` is an ancestor
+> of the object identified by argument `item`.
+
+**_ancestor:_** Object | Id
+> The ancestor Object or id
+
+**_item:_** Object | Id
+> Child object or id to evaluate
+
+**returns:** Boolean
+> true if ancestor is an ancestor of item otherwise false.
+
+**********************************************
+
+<h3 id="isBefore">isBefore( itemA, itemB )</h3>
+> Evaluate if objectA appears before objectB in the natural order of store objects.
+
+**_itemA:_** Object | Id
+> The first Object or id
+
+**_itemB:_** Object | Id
+> The second Object or id
+
+**returns:** Boolean
+> true if itemA appears before itemB otherwise false.
+
+**********************************************
+
+<h3 id="isChildOf">isChildOf( item, parent )</h3>
+> Evaluate if an item is a child of a given parent.
+
+**_item:_** Object | Id
+> Child object or id to evaluate
+
+**_parent:_** Object | Id
+> The parent Object or id
+
+**returns:** Boolean
+> true if the object is a child otherwise false.
+
+**********************************************
+
+<h3 id="isDescendantOf">isDescendantOf( item, ancestor )</h3>
+> Evaluate if an item is a descendant of a given parent.
+
+**_item:_** Object | Id
+> Child object or id to evaluate
+
+**_ancestor:_** Object | Id
+> The ancestor Object or id
+
+**returns:** Boolean
+> true if the child object is a descendant otherwise false.
+
+**********************************************
+
 <h3 id="isitem">isItem( object )</h3>
 > Evaluate if an object is a valid member of this store, that is, it came from this store
 > instance. This method MUST execute synchronously.

@@ -561,7 +561,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<th><a href="File-Store">File Store</a></th>
 	</tr>
 	<tr>
-		<td rowspan="15">Function</td>
+		<td rowspan="19">Function</td>
 		<td><a href="Store-API#wiki-add">add<sup>2</sup></a></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -624,6 +624,38 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-isancestorof">isAncestorOf</a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-isbefore">isBefore</a></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-ischildof">isChildOf</a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-isdescendantof">isDescendantOf</a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-isitem">isItem</a></td>
@@ -699,7 +731,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	</tr>
 	<tr>
 		<td rowspan="6">Properties</td>
-		<td><a href="Store-API#wiki-authtoken">authToken</a></td>
+		<td><a href="File-Store#wiki-authtoken">authToken</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -707,7 +739,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Store-API#wiki-indexchildren">indexChildren</a></td>
+		<td><a href="Hierarchy-Store#wiki-indexchildren">indexChildren</a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -715,7 +747,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Store-API#wiki-basepath">basePath</a></td>
+		<td><a href="File-Store#wiki-basepath">basePath</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -723,7 +755,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Store-API#wiki-options">options</a></td>
+		<td><a href="File-Store#wiki-options">options</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -731,7 +763,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Store-API#wiki-preventcache">preventCache</a></td>
+		<td><a href="File-Store#wiki-preventcache">preventCache</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -739,7 +771,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Store-API#wiki-sort">sort</a></td>
+		<td><a href="File-Store#wiki-sort">sort</a></td>
 		<td></td>
 		<td></td>
 		<td></td>
@@ -749,7 +781,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 
 	<tr>
 		<td rowspan="1">Function</td>
-		<td><a href="Store-API#wiki-rename">rename</a></td>
+		<td><a href="File-Store#wiki-rename">rename</a></td>
 		<td></td>
 		<td></td>
 		<td></td>

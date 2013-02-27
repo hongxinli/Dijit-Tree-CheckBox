@@ -337,7 +337,7 @@ Tree Styling extension being loaded to hide the tree node labels and icons.
     "cbtree/Tree",                      // CheckBox Tree              
     "cbtree/store/ObjectStore",         // Eventable Object Store
     "cbtree/model/ForestStoreModel",    // Tree Forest Store Model
-    "cbtree/extensions/Styling"         // Tree Styling extension
+    "cbtree/extensions/TreeStyling"     // Tree Styling extension
     ], function( ready, ToggleButton, Tree, ObjectStore, ForestStoreModel ) {
 
       var store = new ObjectStore( { url: "../../datastore/Simpsons.json" });

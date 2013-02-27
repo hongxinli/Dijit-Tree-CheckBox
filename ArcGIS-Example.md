@@ -207,7 +207,7 @@ and create your own data handlers.
 ### Want More?
 Consider using the [Tree Styling](Tree-Styling) extension to apply custom icons
 to your tree. For example, you could simply map the address type of a location
-to a specific set of icons. After loading the Tree Styling extension `cbtree/extensions/Styling`
+to a specific set of icons. After loading the Tree Styling extension `cbtree/extensions/TreeStyling`
 you would create your tree as follows:
 
 ```javascript

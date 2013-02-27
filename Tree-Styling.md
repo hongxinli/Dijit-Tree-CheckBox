@@ -18,13 +18,13 @@ be used with the default `dijit/Tree` tree.
 <h2 id="loading-the-styling-extension">Loading the Styling Extension</h2>
 Tree Styling is implemented as an extension to the CheckBox Tree and as such
 must to be loaded as a separate module. The following sample shows how to load
-the Styling extension. The Style extension is located at **cbtree/extensions/Styling**
+the Styling extension. The Style extension is located at **cbtree/extensions/TreeStyling**
 
 ```javascript
 require(["cbtree/store/Hierarchy", 
          "cbtree/Tree",
          "cbtree/model/TreeStoreModel", 
-         "cbtree/extensions/Styling"]  // Load Tree Styling extension
+         "cbtree/extensions/TreeStyling"]  // Load Tree Styling extension
   function( Hierarchy, Tree, TreeStoreModel, TreeStyling ) {
                 ...
   }
@@ -34,9 +34,9 @@ If you instantiate your tree declarative you **MUST** load the Styling extension
 programmatically, this because it is an extension and has no constructor.
 
 ```javascript
-require(["dojo/parser",                // dojo parser
-         "cbtree/Tree",                // CheckBox Tree
-         "cbtree/extensions/Styling"   // Tree styling extensions
+require(["dojo/parser",                  // dojo parser
+         "cbtree/Tree",                  // CheckBox Tree
+         "cbtree/extensions/TreeStyling" // Tree styling extensions
         ]);
 ```
 
@@ -323,7 +323,7 @@ icon: { iconClass: "myIcons", indent: false },
 <script type="text/javascript">
   require(["cbtree/store/Hierarchy", 
            "cbtree/Tree",
-           "cbtree/extensions/Styling",
+           "cbtree/extensions/TreeStyling",
            "cbtree/model/TreeStoreModel"
           ], function( Hierarchy, Tree, TreeStyling, TreeStoreModel ) {
 
@@ -580,7 +580,7 @@ The first sample application demonstrates some of the Tree Styling API features.
     <script type="text/javascript">
       require(["dojo/ready",
                "cbtree/Tree",                    // Checkbox tree
-               "cbtree/extensions/Styling",      // Tree styling extensions
+               "cbtree/extensions/TreeStyling",  // Tree styling extensions
                "cbtree/model/TreeStoreModel",    // TreeStoreModel
                "cbtree/store/Hierarchy",
               ], function( ready, Tree, TreeStyling, TreeStoreModel, Hierarchy ) {
@@ -652,11 +652,11 @@ store, model and tree declarative:
     <script type="text/javascript" src="../../../dojo/dojo.js"></script> 
     <script type="text/javascript">
       // Load dependencies...
-      require(["dojo/parser",                   // dojo parser
+      require(["dojo/parser",                    // dojo parser
                "dojo/on",
-               "cbtree/Tree",                   // CheckBox Tree
-               "cbtree/extensions/Styling",     // Tree styling extensions
-               "cbtree/model/TreeStoreModel",   // TreeStoreModel
+               "cbtree/Tree",                    // CheckBox Tree
+               "cbtree/extensions/TreeStyling",  // Tree styling extensions
+               "cbtree/model/TreeStoreModel",    // TreeStoreModel
                "cbtree/store/Hierarchy"
               ]);
     </script>
