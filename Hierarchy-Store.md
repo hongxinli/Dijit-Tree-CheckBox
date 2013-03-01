@@ -140,7 +140,7 @@ property value.
 
 <h2 id="multi-parented-objects">Multi Parented Objects</h2>
 Multi parented objects are objects that have more than one parent. A perfect
-example is a family tree were each child has two parent. A parent, in the 
+example is a family tree were each child has two parents. A parent, in the 
 context of a store, is an abstract data type that merely defines some sort of
 relation between objects. 
 If, for example, your store represents geographical data including a train station,

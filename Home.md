@@ -27,6 +27,7 @@ has three primary components plus a set of sub-components and extensions.
 
 * [Tree Styling](wiki/Tree-Styling)
 * [Model Extension](wiki/Model-Extension)
+* [Store Ancestry](wiki/Ancestry-Extension)
 
 ## API's
 

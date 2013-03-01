@@ -327,8 +327,14 @@ This approach has a number of advantages:
 2. Simpler Store queries.
 3. Store queries execute faster.
 
+For example, consider the following:
 
+```javascript
+var myStore = new Hierarchy( {url:"some/large/file", filter:{type:"capital"}, ... } }; 
+```
 
+Please not that if the store `filter` property is set, the filter is applied 
+**_after_** any data handler is called.
 
 <h2 id="data-handlers">Data Handlers</h2>
 If your data does not comply with the required [Data Format](#data-format),
@@ -342,7 +348,7 @@ consumption by the store loader.
 
 This ability eliminates the need of having to create a new store for every data 
 format or having to handle XHR requests yourself. In addition, because the stores
-register any custom data handler with **dojo/request/handlers** the data handler
+registers any custom data handler with **dojo/request/handlers** the data handler
 automatically becomes available to the **dojo/request** module.
 
 The cbtree stores comes with three sample data handlers:
@@ -413,20 +419,19 @@ All cbtree stores, with the exception of the FileStore, can be extended with COR
 support. Please note that CORS support is only required when loading a store
 with data retrieved from remote domains.
 
-To extand a cbtree store with CORS support consider to following example:
+To extend a cbtree store with CORS support simply load the extension:
 
 ```javascript
-required(["dojo/_base/declare",
-          "cbtree/store/Hierarchy",
-          "cbtree/store/_CORS"
-         ], function ( declare, Heirarchy, _CORS ) {
-  var corsStore = declare( [Hierarchy, _CORS] );
-  var myStore   = new corsStore( {url:"http://some-remote-site"} );
+required(["cbtree/store/Hierarchy",
+          "cbtree/store/extensions/CORS"
+         ], function ( Hierarchy, CORS ) {
+
+  var myStore   = new Hierarchy( {url:"http://some-remote-site"} );
                   ...
 });
 ```
 
-Once CORS support is added to a store you can start using URL with the schema
+Once the CORS extension is loaded you can start using URL with the schema
 'http' or 'https'.
 
 <span class="mega-icon mega-icon-exclamation"></span> The remote domain must 
