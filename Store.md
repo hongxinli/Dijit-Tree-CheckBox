@@ -754,7 +754,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 
 	<tr>
 		<td rowspan="10">Function</td>
-		<td><a href="Ancestry#wiki-getancestors">getAncestors<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-getancestors">getAncestors<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -762,7 +762,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-getdescendants">getDescendants<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-getdescendants">getDescendants<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -770,7 +770,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-getpaths">getPaths<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-getpaths">getPaths<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -778,7 +778,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-getsiblings">getSiblings<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-getsiblings">getSiblings<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -786,7 +786,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-isancestorof">isAncestorOf<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-isancestorof">isAncestorOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -794,7 +794,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-isbefore">isBefore<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-isbefore">isBefore<sup>4</sup></a></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -802,7 +802,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-ischildof">isChildOf<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-ischildof">isChildOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -810,7 +810,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-isdescendantof">isDescendantOf<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-isdescendantof">isDescendantOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -818,7 +818,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Ancestry#wiki-issiblingof">isSiblingOf<sup>4</sup></a></td>
+		<td><a href="Ancestry-Extension#wiki-issiblingof">isSiblingOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
