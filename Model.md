@@ -68,7 +68,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<td>Hierarchy Store</td>
     <td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td>
-			A derived from the Memory store adding support for natural order,
+			Derived from the Memory store adding support for natural order,
 			hierarchical organized data object and multi-parenting.
 		</td>	
 	</tr>

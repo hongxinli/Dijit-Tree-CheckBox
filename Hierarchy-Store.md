@@ -133,7 +133,7 @@ to `false` because we already known these are single parent objects and thus
 there is no need for the store to inspecting the objects to determine the 
 property value.
 
-
+To fully exploit the store hierarchy see the [Ancestry](Ancestry-Extension) extension.
 
 
 

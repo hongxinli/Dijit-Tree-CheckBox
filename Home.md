@@ -64,7 +64,7 @@ section:
   <tbody>
     <tr style="vertical-align:top">
       <td>cbtree-v09.3-0</td>
-      <td style="color:red;">TBD: Feb 2013</td>
+      <td style="color:red;">TBD: Mar 2013</td>
       <td>1.8+</td>
       <td>
 	New stores implementing the dojo/store/api/Store API.<br/>

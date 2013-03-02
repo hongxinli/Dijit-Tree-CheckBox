@@ -566,7 +566,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<th><a href="File-Store">File Store</a></th>
 	</tr>
 	<tr>
-		<td rowspan="19">Function</td>
+		<td rowspan="15">Function</td>
 		<td><a href="Store-API#wiki-add">add<sup>2</sup></a></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -629,38 +629,6 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
-	</tr>
-	<tr>
-		<td><a href="Store-API#wiki-isancestorof">isAncestorOf</a></td>
-		<td></td>
-		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><a href="Store-API#wiki-isbefore">isBefore</a></td>
-		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><a href="Store-API#wiki-ischildof">isChildOf</a></td>
-		<td></td>
-		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><a href="Store-API#wiki-isdescendantof">isDescendantOf</a></td>
-		<td></td>
-		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-isitem">isItem</a></td>
@@ -785,7 +753,79 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	</tr>
 
 	<tr>
-		<td rowspan="1">Function</td>
+		<td rowspan="10">Function</td>
+		<td><a href="Ancestry#wiki-getancestors">getAncestors<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-getdescendants">getDescendants<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-getpaths">getPaths<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-getsiblings">getSiblings<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-isancestorof">isAncestorOf<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-isbefore">isBefore<sup>4</sup></a></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-ischildof">isChildOf<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-isdescendantof">isDescendantOf<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Ancestry#wiki-issiblingof">isSiblingOf<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td><a href="File-Store#wiki-rename">rename</a></td>
 		<td></td>
 		<td></td>
@@ -795,5 +835,6 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	</tr>
 </table>
 
-<sup>3</sup> Extension to the `cbtree/store/api/Store` API.
-
+<sup>3</sup> Extension to the `cbtree/store/api/Store` API.  
+<sup>4</sup> Requires the [Ancestry](Ancestry) extension `cbtree/store/extensions/Ancestry`
+to be loaded.
