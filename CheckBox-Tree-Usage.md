@@ -240,6 +240,14 @@ listener like `model.on( "dataValidated", myEventHandler );`
 		</td>
 	</tr>
 	<tr>
+		<td>dataValidated</td>
+    <td>onDataValidated</td>
+    <td>(void)</td>
+		<td>
+			The store data has been validated.
+		</td>
+	</tr>
+	<tr>
 		<td>delete</td>
     <td>onDelete</td>
     <td>(item)</td>
@@ -248,19 +256,19 @@ listener like `model.on( "dataValidated", myEventHandler );`
 		</td>
 	</tr>
 	<tr>
+		<td>pasteItem</td>
+    <td>onPasteItem</td>
+    <td>(item, insertINdex, before)</td>
+		<td>
+			Item was pasted at a new location.
+		</td>
+	</tr>
+	<tr>
 		<td>rootChange</td>
     <td>onRootChange</td>
     <td>(item, action)</td>
 		<td>
 			The children of the tree root changed.
-		</td>
-	</tr>
-	<tr>
-		<td>dataValidated</td>
-    <td>onDataValidated</td>
-    <td>(void)</td>
-		<td>
-			The store data has been validated.
 		</td>
 	</tr>
 </table>

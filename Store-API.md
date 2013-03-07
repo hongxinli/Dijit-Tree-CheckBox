@@ -379,7 +379,7 @@ with the synchronous result of the store function.
 
 **********************************************
 
-<h3 id="ready">ready( callback, errback )</h3>
+<h3 id="ready">ready( callback, errback, scope? )</h3>
 > Execute the callback when the store data has been loaded. If an error occurred
 > during the loading process errback is called instead.
 
@@ -388,6 +388,10 @@ with the synchronous result of the store function.
 
 **_errback:_** Function
 > Function called if an error occurred during the store load.
+
+**_scope:_** Object
+> The scope or context in which the callback and errback functions are executed.
+> If omitted both functions will be executed in the scope of the store.
 
 **********************************************
 

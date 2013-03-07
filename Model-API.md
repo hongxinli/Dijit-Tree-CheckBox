@@ -369,11 +369,27 @@ arguments passed to the event listener.
 		</td>
 	</tr>
 	<tr>
+		<td>dataValidated</td>
+    <td>onDataValidated</td>
+    <td>(void)</td>
+		<td>
+			The store data has been validated.
+		</td>
+	</tr>
+	<tr>
 		<td>delete</td>
     <td>onDelete</td>
     <td>(item)</td>
 		<td>
 			Store item removed
+		</td>
+	</tr>
+	<tr>
+		<td>pasteItem</td>
+    <td>onPasteItem</td>
+    <td>(item, insertINdex, before)</td>
+		<td>
+			Item was pasted at a new location.
 		</td>
 	</tr>
 	<tr>
@@ -384,15 +400,8 @@ arguments passed to the event listener.
 			The children of the tree root changed.
 		</td>
 	</tr>
-	<tr>
-		<td>dataValidated</td>
-    <td>onDataValidated</td>
-    <td>(void)</td>
-		<td>
-			The store data has been validated.
-		</td>
-	</tr>
 </table>
+
 
 See [Working with Events](CheckBox-Tree-Usage#wiki-working-with-events) for a
 detailed description.

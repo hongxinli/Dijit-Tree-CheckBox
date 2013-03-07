@@ -100,8 +100,23 @@ require(["dojo/parser",                      // dojo parser
 
 
 <h2 id="ancestry-functions">Ancestry Functions</h2>
+The following section provides a detailed description of the Ancestry functions:
 
 
+<h3 id="analyze">analyze()</h3>
+> Analyze the hierarchy of the store and reports if there are any broken links.
+> All parent references are checked for their presence in the store.
+
+**_maxCount:_** Number
+> The maximum number of missing object deteced before the store analysis is
+> aborted. If 0 or less all missing objects will be reported.
+
+**returns:** Object || null
+> A key:value pairs JavaScript object. Each key represents the identifier of a 
+> missing object. The associated value is an array of identifiers referencing
+> the missing object. If no object is missing null is returned.
+
+**********************************************
 
 <h3 id="getancestors">getAncestors( item, idOnly? )</h3>
 > Get all ancestors (parent, grandparent, great-grandparent, and so forth) of a
@@ -123,7 +138,7 @@ require(["dojo/parser",                      // dojo parser
 
 <h3 id="getdescendants">getDescendants( item, idOnly? )</h3>
 > Get all descendants (children, grandchildren, great-grandchildren, and so forth)
-> of a given item.
+> in hierarchical order of a given item.
 
 **_item:_** Object | Id
 > Store object or id to evaluate
@@ -142,7 +157,7 @@ require(["dojo/parser",                      // dojo parser
 <h3 id="getpaths">getPaths( item, separator? )</h3>
 > Returns the virtual path(s) of an item. Each path segment represents the 
 > identifier of an ancestor with the exception of the last segment	which is
-> the item identifier.
+> the item identifier. The default format of a path is a URI.
 
 **_item:_** Object | Id
 > The item whose path(s) are to be returned. Item is either an object	or an
@@ -153,7 +168,8 @@ require(["dojo/parser",                      // dojo parser
 > Default is the forward slash (/).
 
 **returns:** PathList
-> A PathList. If the item does not exist undefined is returned.
+> If the item exists a PathList otherwise undefined. A PathList is an array 'like'
+> object.
 
 **********************************************
 

@@ -127,8 +127,9 @@ See the [Hierarchy Store](Hierarchy-Store) page for more detailed information.
 <h2 id="the-object-store">The Object Store</h2>
 
 The **cbtree/store/ObjectStore** is similar to the Hierarchy store but with
-build-in event capabilities. This store type is the preferred store when multiple tree
-models operate on a single store.
+build-in event capabilities. This store type is the preferred store when multiple
+tree models operate on a single store or when content is added or removed
+dynamically.
 
 ```javascript
 require( ["cbtree/store/ObjectStore"], function (ObjectStore) {
@@ -753,7 +754,15 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	</tr>
 
 	<tr>
-		<td rowspan="10">Function</td>
+		<td rowspan="11">Function</td>
+		<td><a href="Ancestry-Extension#wiki-analyze">analyze<sup>4</sup></a></td>
+		<td></td>
+		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td><a href="Ancestry-Extension#wiki-getancestors">getAncestors<sup>4</sup></a></td>
 		<td></td>
 		<td></td>

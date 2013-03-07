@@ -13,24 +13,26 @@ on the tree will, depending on the checkbox state, add or remove a marker for
 the given location.
 
 <span class="mega-icon mega-icon-exclamation"></span>
-This tutorial is not an introduction to the [ArcGIS 3.3 API for JavaScript](http://help.arcgis.com/en/webapi/javascript/arcgis/), instead it
-demonstrates how you can leverage the CheckBox Tree in your ArcGIS projects.
+**This tutorial is not an introduction to the [ArcGIS 3.3 API for JavaScript](http://help.arcgis.com/en/webapi/javascript/arcgis/), it is intended
+to demonstrate how you can leverage the CheckBox Tree and some of its extensions
+in your ArcGIS, or other, projects.**
 
 ### How it works
 In addition to loading the ArcGIS 3.3 API for JavaScript, we must also load the
-CheckBox Tree JavaScript modules and related css files. The first link below
-loads the css file(s) for the dijit theme called claro.
-The second link loads the claro theme css file(s) for the CheckBox Tree (notice
+CheckBox Tree JavaScript modules and related css files. The second link below
+loads the css file(s) for the dijit theme called *claro*.
+The third link loads the *claro* theme css file(s) for the CheckBox Tree (notice
 that the CheckBox Tree files are loaded locally).
 
 
 ```html
+<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/esri/css/esri.css">
 <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/claro/claro.css">
 <link rel="stylesheet" href="../../themes/claro/claro.css">
 ```
 Next, we must tell the application the location of the **_cbtree_** package. This
 must be done **BEFORE** loading the ArcGIS API simply because the ArcGIS API also
-loads the dojo, dojox and dijit libraries.
+loads the dojo and dijit libraries.
 
 ```html
 <script type="text/javascript">
@@ -252,8 +254,8 @@ The  full code listed below can be found at **cbtree/demos/store/tree15.html**
     <!-- Note: Not all ArcGIS 3.3 modules are AMD compliant... -->
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3"></script>
     <script type="text/javascript">
+      // Load non-AMD modules
       dojo.require("esri.map");
-      dojo.require("esri.dijit.Popup");
       dojo.require("esri.dijit.Geocoder");
     </script>
 
@@ -261,18 +263,19 @@ The  full code listed below can be found at **cbtree/demos/store/tree15.html**
       require(["dojo/ready",
                "dojo/when",
                "dojo/dom-style",
+               "esri/dijit/Popup",
                "cbtree/Tree",
                "cbtree/store/ObjectStore", 
                "cbtree/model/ForestStoreModel",
                "cbtree/util/QueryEngine"
-              ], function (ready, when, domStyle, Tree, ObjectStore, StoreModel, QueryEngine) {
+              ], function (ready, when, domStyle, Popup, Tree, ObjectStore, StoreModel, QueryEngine) {
 
         var popup, map, geocoder, layer, template, symbol;
         var store, model, tree, filter;
         
         ready(function() {
           // create the map
-          popup = new esri.dijit.Popup(null, dojo.create("div"));
+          popup = new Popup(null, dojo.create("div"));
           map = new esri.Map("map",{
             basemap: "topo",
             center: [ -100, 37 ], // long, lat
@@ -303,7 +306,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree15.html**
           // Create store, model and checkbox tree...
           store  = new ObjectStore();
           model  = new StoreModel({ store:store, query:{type:"parent"} });
-          tree   = new Tree( {model:model, showRoot:false}, "tree" );
+          tree   = new Tree( {model:model, showRoot:false, persist:false}, "tree" );
           tree.startup();
 
           // Create geocoder results filter. (only exact matches)

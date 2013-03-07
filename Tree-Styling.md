@@ -478,7 +478,20 @@ Next we map a property value to a specific icon  object:
 ```javascript
 { type: { "POI": {iconClass: "pointOfInterest", iconStyle: {border:"solid"}, indent: false} } }
 ```
-#### Using wildcards
+
+#### Mapping value to a Function
+The last method is to map a property value to a function. The function is called
+with three arguments as in `function (item, property, value)`. The function must
+either return a valid string of css class names or `null`.
+```javascript
+{ type: { "POI": function (item, property, value) {
+                           ...
+                   return cssClassname;
+                 }
+        }
+```
+
+#### Using a wildcard
 Sometimes it is not feasable to map every possible value of an item property or
 you just want to map a subset of the values and have other values default to a
 standard icon. To do this you can use the wildcard character '*' as shown below:
@@ -494,6 +507,19 @@ will default to either:
 1. The specific icon set for the item.
 2. The default icon set for the tree.
 3. The default dijit icons.
+
+##### Wildcard as a Placeholder.
+The wildacard character (*) can also be used as a placeholder for property value
+injection. Lets assume that in addition to the property value itself you also 
+want to add an additional base class the your icon:
+
+```javascript
+{ type: { "*": "makiIcon *" } }
+```
+Now, if we have an item with the type property value of 'CityStreet', than the
+above mapping will take the items *type* property value and creates the css
+class `makiIcon CityStreet`. Simply speaking, the wildcard character (*) is
+replaced with the property value.
 
 <span class="mega-icon mega-icon-exclamation"></span>
 Icons mapped using the trees *valueToIconMap* property will **_NOT_** trigger

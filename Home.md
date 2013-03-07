@@ -40,6 +40,7 @@ has three primary components plus a set of sub-components and extensions.
 
 ## Examples
 * [ArcGIS Points Of Interest](wiki/ArcGIS-Example)
+* [ArcGIS Map Layers TOC](wiki/ArcGIS-Layers)
 
 ## Demos
 The cbtree packages comes with a set of demos each demonstrating the CheckBox
@@ -65,7 +66,7 @@ section:
     <tr style="vertical-align:top">
       <td>cbtree-v09.3-0</td>
       <td style="color:red;">TBD: Mar 2013</td>
-      <td>1.8+</td>
+      <td>1.8 - 1.9</td>
       <td>
 	New stores implementing the dojo/store/api/Store API.<br/>
 	New models for the new stores and much more...
@@ -74,7 +75,7 @@ section:
     <tr style="vertical-align:top">
       <td>cbtree-v09.2-0</td>
       <td>Aug-15 2012</td>
-      <td>1.8+</td>
+      <td>1.8</td>
       <td>
 	Updated The CheckBox Tree to work with dojo 1.8.<br/>
 	Official release File Store and File Store Model.<br/>
