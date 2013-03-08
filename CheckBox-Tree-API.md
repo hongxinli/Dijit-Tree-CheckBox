@@ -63,6 +63,14 @@ for details.
 > the model for the tree **MUST** support the [getChecked()](Model-API#wiki-getchecked)
 > and [setChecked()](Model-API#wiki-setchecked) methods.
 
+<h3 id="leaficons">leafIcons:</h3>
+> **_TYPE_**: Boolean
+
+> Determines if the Leaf icon, or its custom equivalent, is displayed. If false,
+> the node or leaf icon is hidden.
+
+> **_DEFAULT_**: true
+
 <h3 id="leafreadonly">leafReadOnly:</h3>
 > **_TYPE_**: Boolean
 
@@ -79,14 +87,6 @@ for details.
 > for handling drop operations (i.e drag and drop onto the tree)
 
 > **_DEFAULT_**: null
-
-<h3 id="nodeicons">nodeIcons:</h3>
-> **_TYPE_**: Boolean
-
-> Determines if the Leaf icon, or its custom equivalent, is displayed. If false,
-> the node or leaf icon is hidden.
-
-> **_DEFAULT_**: true
 
 <h3 id="openonclick">openOnClick:</h3>
 > **_TYPE_**: Boolean

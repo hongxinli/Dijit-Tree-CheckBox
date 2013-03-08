@@ -162,15 +162,15 @@ set("icon", "myIcons")
 
 
 <h2 id="adding-custom-icons">Adding Custom Icons</h2>
-The Styling extension provides different methods to add custom icons to your
+The Tree Styling extension provides different methods to add custom icons to your
 tree. These methods are:
 
-1. Using the trees **_icon_** property in which case you set the default 
+1. Using the tree **_icon_** property in which case you set the default 
 	icons for the entire tree,
 2. Using the accessor `set()` allowing you to set the icons for	the entire tree
 	or for individual data items,
 3. As a property of a data item or,
-4. By mapping property values.
+4. By item property value mapping.
 
 In order to add custom icons to the CheckBox or dijit Tree the following items
 are required:

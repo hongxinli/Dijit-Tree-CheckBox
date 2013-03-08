@@ -420,7 +420,7 @@ All cbtree stores, with the exception of the FileStore, can be extended with COR
 support. Please note that CORS support is only required when loading a store
 with data retrieved from remote domains.
 
-To extend a cbtree store with CORS support simply load the extension:
+To extend a cbtree store with CORS support simply load CORS the extension:
 
 ```javascript
 required(["cbtree/store/Hierarchy",
@@ -432,7 +432,7 @@ required(["cbtree/store/Hierarchy",
 });
 ```
 
-Once the CORS extension is loaded you can start using URL with the schema
+Once the CORS extension is loaded you can start using URLs with the schema
 'http' or 'https'.
 
 <span class="mega-icon mega-icon-exclamation"></span> The remote domain must 

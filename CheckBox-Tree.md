@@ -65,6 +65,14 @@ the picture below.
 
 <img src="images/TheTree.png"></img>
 
+### Manage CheckBox Tree Icons
+By default each tree node is assigned an icon. The icons may differ depending on
+the expanded state of the tree node. You can simply hide icons using the tree
+properties [branchIcons](Checkbox-Tree-Api#wiki-branchicons) and
+[leafIcons](Checkbox-Tree-Api#wiki-leaficons). In addition, you can use your own
+custom icons, to customize tree icons please refer to the
+[Tree Styling](Tree-Styling#wiki-adding-custom-icons) section.
+
 ### CheckBox Tree Styling
 The Tree Styling extension allows you to dynamically manage the tree styling 
 on a per data item basis. Using the simple to use accessor `set()` you can
