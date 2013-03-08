@@ -77,15 +77,19 @@ later.
 
 ```javascript
 function buildTOC (location) {
-  var index = [  { id:"layers", name:"Layers", type:"TOC"}  ];
+  var index = [  { id:"layers", tocName:"Layers", type:"TOC" }  ];
 
   store = new ObjectStore({data: index});
-  model = new ForestStoreModel( {store: store, query:{type:"TOC"} });
+  model = new ForestStoreModel( { store: store, 
+                                  labelAttr:"tocName",
+                                  checkedAttr:"defaultVisibility",
+                                  query:{"type":"TOC"} 
+                                });
   // Create the checkbox tree adding DnD support and value to icon mapping.
   tree  = new Tree( { model: model, 
                       dndController: dndSource,
                       betweenThreshold: 5,
-                      valueToIconMap: { name: {"*":"* maki"} },
+                      valueToIconMap: { "tocName": {"*":"* maki"} },
                       autoExpand: true,
                       showRoot:false
                      },
@@ -132,26 +136,36 @@ function storeLayers(layerInfos) {
     var dynLayerInfos = layerInfos.dynamicLayerInfos
   }
   dynLayerInfos.forEach( function (layerInfo) {
-    var layerName = layerInfo.name.split(".").pop();
-    var storeId   = "layer_" + layerName;
-
-    if (!store.get(storeId)) {
-      var layerRec = { id: storeId, name: layerName, type: "layerInfo", 
-                        checked: layerInfo.defaultVisibility,
-                        info: layerInfo };
-      // Add record to the store
-      store.put( layerRec, { parent: "layers"} );
+    if (!store.get(layerInfo.id)) {
+      layerInfo.tocName = layerInfo.name.split(".").pop();
+      layerInfo.type    = "layerInfo";
+      
+      store.put( layerInfo, { parent: "layers"} );
     }
   },this);
 }
 ```
-For each new layer a record is added to the store with its *type* property set
-to **_layerInfo_** and the *info* property holds a reference to the actual dynamic
-layer object. When the record is inserted we also say that the store object
-with id **_layers_** will be the parent object making this record a child.
+To each layerInfo object we add a *tocName* and *type* property. The type
+property makes it easy to query the store. When the record is inserted we tell
+the store that the store object with id **_layers_** will be the parent object 
+making this record a child. Because the parent is specified as a literal and not 
+an object we could have written:
+
+```javascript
+  dynLayerInfos.forEach( function (layerInfo) {
+    if (!store.get(layerInfo.id)) {
+      layerInfo.tocName = layerInfo.name.split(".").pop();
+      layerInfo.type    = "layerInfo";
+      layerInfo.parent  = "layers";
+            
+      store.put( layerInfo );
+    }
+  },this);
+```
+
 
 Because the ForestStoreModel is automatically notified of any changes to the
-ObjectStore, it starts updating the CheckBox Tree accordingly and on completion
+ObjectStore, it starts updating the CheckBox Tree accordingly and, on completion,
 the TOC should look like:
 
 <img src="images/ArcGIS-TOC-tree.png" alt="TOC-Tree"></img>
@@ -163,13 +177,13 @@ we need to add an event handler to the tree which will capture events of type
 
 ```javascript
 function layerClicked (item, treeNode, event ) {
-	// A checkbox was clicked, get all layers from the store whose checked
-	// state is 'true' and update layer visibility.
-	var layers   = store.query( {type:"layerInfo", checked:true} );
-	var layerIds = layers.map( function(layer) {
-		return layer.info.id; 
-	});
-	map.getLayer("usa").setVisibleLayers(layerIds.length ? layerIds : [-1]);
+  // A checkbox was clicked, get all layers from the store whose checked
+  // state is 'true' and update layer visibility.
+  var layers   = store.query( {"type":"layerInfo", defaultVisibility:true} );
+  var layerIds = layers.map( function(layer) {
+    return layer.id; 
+  });
+  map.getLayer("usa").setVisibleLayers(layerIds.length ? layerIds : [-1]);
 }
 
 tree.on("checkBoxClick", layerClicked);
@@ -178,14 +192,15 @@ tree.on("checkBoxClick", layerClicked);
 To change a layers visibility we must pass the `setVisibleLayers()` function 
 an array of **_all_** layer Ids that will be visible. Therefore, instead of 
 focusing on the specific checkbox that was clicked, we simply query the store
-for all objects of type **_layerInfo_** with their current checked state set to
-`true`.
+for all objects of type **_layerInfo_** with their current checked state 
+(defaultVisibility) set to `true`.
 
 #### Changing the layer order
 The layer order determines how the layers are stacked on the canvas. The layer
 first in the list is always drawn on top. You can change the layer order as follows:
-Click a layer and drag it to a new location in the TOC. The CheckBox Tree
-configuration in this particular demo gives you two options:
+Click a layer and drag it to a new location in the TOC.
+
+The CheckBox Tree configuration in this particular demo gives you two options:
 
 1. Drop the layer in between two other layers or,
 2. Drop the layer on top of another layer.
@@ -211,18 +226,14 @@ function reorderLayers(item, insertIndex, before) {
       getLayers(child, layers);
     });
     if (parent.type == "layerInfo") {
-      layers.push( parent.info );
+      layers.push( parent );
     }
     return layers;
   }
-  
-  switch (item.type) {
-    case "layerInfo":
-      var layers = getLayers( store.get("layers") );            
-      if (layers && layers.length) {
-        map.getLayer("usa").setDynamicLayerInfos(layers);
-      }
-      break;
+
+  var layers = getLayers( store.get("layers") );            
+  if (layers.length) {
+    map.getLayer("usa").setDynamicLayerInfos(layers);
   }
 }
 
@@ -250,18 +261,10 @@ require([          ...
   var queryFunction = QueryEngine( {type:"layerInfo"} );  
                   ...
   function reorderLayers(item, insertIndex, before) {
-    // Layer was dragged to a new location.
-    switch (item.type) {
-      case "layerInfo":
-        // Get all descendants of "layers" whose type is "layerInfo".
-        var records = queryFunction( store.getDescendants("layers") );
-        if (records && records.length) {
-          var layers = records.map( function(record) {
-            return record.info; 
-          });
-          map.getLayer("usa").setDynamicLayerInfos(layers);
-        }
-        break;
+    // Get all descendants of "layers" whose type is "layerInfo".
+    var layers = queryFunction( store.getDescendants("layers") );
+    if (layers.length) {
+      map.getLayer("usa").setDynamicLayerInfos(layers);
     }
   }
                   ...   
@@ -278,9 +281,15 @@ To get all the desired records in the correct order we can simply write:
 ```javascript
 var records = queryFunction( store.getDescendants("layers") );
 ```
+You may wonder: What do we need to the queryFunction for? Aren't all descendants
+already layerInfo objects? The answer is *yes*. However, most of the times you 
+will have a much more elaborate TOC with many different record types. Using the
+[Query Engine](Query-Engine) makes it very easy to filter, paginate and sort
+objects.
+
 Give it a try...
 
-#### Map Table-Of-Content to icons
+#### Mapping Table-Of-Content to icons
 The CheckBox Tree and [Tree Styling](Tree-Styling) extension located at
 `cbtree/extensions/TreeStyling` offer several ways to assign custom icons to
 tree nodes. This particular demo uses the *'Value To Icon'* method which allows
@@ -310,11 +319,11 @@ What the above mapping rule does is, it replaces the wildcard character (\*)
 with the value of the store item property *name*, creating the css classname
 for the tree node icon. 
 For example, if a store item has its *name* property set to *Highways* the
-rule transforms in real-time to `{name: {"Highways":"Highways maki"}}` resulting 
-in the css classname `'Highways maki'`.
+rule transforms in real-time to `{name: {"Highways":"Highways maki"}}` mapping 
+the name property value *Highways* to the css classname `'Highways maki'`.
 
-Given the above mapping rule we can now define the css rule sets for the image
-sprite:
+Given the above mapping rule, and knowing all posible values of the name property,
+we can now define the css rule sets for the image sprite:
 
 ```css
 .maki {
@@ -364,13 +373,13 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         background: #fff;
         color: #444;
         font-family: arial;
-        height: 350px;
+        height: 310px;
         left: 30px;
         margin: 5px;
         padding: 10px;
         position: absolute;
         top: 30px;
-        width: 300px;
+        width: 310px;
         z-index: 40;
       }
       #note, #hint { font-size: 80%; }
@@ -389,7 +398,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
       };
     </script>
 
-    <!-- Note: Not all ArcGIS 3.3 modules are AMD compliant... -->
+    <!-- Load the esri ArcGIS API 3.3 for JavaScript -->
     <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
     <script>
       // Load non-AMD modules
@@ -399,7 +408,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
                "dijit/layout/ContentPane",
                "dijit/form/Button"]);
 
-      require(["dojo/aspect",                   // aspect.after()
+      require(["dojo/aspect",                    // aspect.after()
                "dojo/ready",                    // ready()
                "dijit/tree/dndSource",
                "esri/dijit/Popup",
@@ -414,19 +423,24 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
 
       function on (target, event, listener) {
         // Mimic dojo/on for non-emitters like esri.layers
-        aspect.after( target, event, listener, true );
+        var method = "on" + event.replace(/^[a-z]/, function(c) { return c.toUpperCase(); });
+        aspect.after( target, method, listener, true );
       }
 
       function buildTOC (location) {
-        var index = [  { id:"layers", name:"Layers", type:"TOC"}  ];
+        var index = [  { id:"layers", tocName:"Layers", type:"TOC" }  ];
 
         store = new ObjectStore({data: index});
-        model = new ForestStoreModel( {store: store, query:{type:"TOC"} });
+        model = new ForestStoreModel( { store: store, 
+                                        labelAttr:"tocName",
+                                        checkedAttr:"defaultVisibility",
+                                        query:{"type":"TOC"} 
+                                      });
         // Create the checkbox tree adding DnD support and value to icon mapping.
         tree  = new Tree( { model: model, 
                             dndController: dndSource,
                             betweenThreshold: 5,
-                            valueToIconMap: { name: {"*":"* maki"} },
+                            valueToIconMap: { "tocName": {"*":"* maki"} },
                             autoExpand: true,
                             showRoot:false
                            },
@@ -437,9 +451,9 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
       function layerClicked (item, treeNode, event ) {
         // A checkbox was clicked, get all layers from the store whose checked
         // state is 'true' and update layer visibility.
-        var layers   = store.query( {type:"layerInfo", checked:true} );
+        var layers   = store.query( {"type":"layerInfo", defaultVisibility:true} );
         var layerIds = layers.map( function(layer) {
-          return layer.info.id; 
+          return layer.id; 
         });
         map.getLayer("usa").setVisibleLayers(layerIds.length ? layerIds : [-1]);
       }
@@ -454,15 +468,11 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
           var dynLayerInfos = layerInfos.dynamicLayerInfos
         }
         dynLayerInfos.forEach( function (layerInfo) {
-          var layerName = layerInfo.name.split(".").pop();
-          var storeId   = "layer_" + layerName;
-
-          if (!store.get(storeId)) {
-            var layerRec = { id: storeId, name: layerName, type: "layerInfo", 
-                              checked: layerInfo.defaultVisibility,
-                              info: layerInfo };
-            // Add record to the store
-            store.put( layerRec, { parent: "layers"} );
+          if (!store.get(layerInfo.id)) {
+            layerInfo.tocName = layerInfo.name.split(".").pop();
+            layerInfo.type    = "layerInfo";
+            
+            store.put( layerInfo, { parent: "layers"} );
           }
         },this);
       }
@@ -479,43 +489,28 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
             getLayers(child, layers);
           });
           if (parent.type == "layerInfo") {
-            layers.push( parent.info );
+            layers.push( parent );
           }
           return layers;
         }
-        
-        switch (item.type) {
-          case "layerInfo":
-            var layers = getLayers( store.get("layers") );            
-            if (layers && layers.length) {
-              map.getLayer("usa").setDynamicLayerInfos(layers);
-            }
-            break;
+  
+        var layers = getLayers( store.get("layers") );            
+        if (layers && layers.length) {
+          map.getLayer("usa").setDynamicLayerInfos(layers);
         }
       }
 
       function addLakes() {
-        var layerName, dataSource, layerSource, options, drawingOptions, dynamicLayerInfo;
-
-        // disable the "Add Lakes" button
+        var dataSource, layerSource, drawingOptions, dynamicLayerInfo;
+        var layerName = "ss6.gdb.Lakes";
+        var options   = [];
+        
+        // show a loading icon and disable the "Add Lakes" button
+        dojo.style(dojo.byId("loading"), "visibility", "visible");
         dijit.byId("lakes").set("disabled", true);
 
-        // show a loading icon
-        dojo.style(dojo.byId("loading"), "visibility", "visible");
-
-        // layer name in the workspace
-        layerName = "ss6.gdb.Lakes";
-        // get existing layer info from the store. The  akes info will be appeneded
-        // to this object so it shows up in the map service image
-        var layers = store.query( {type:"layerInfo"} );
-        var dynLayerInfos = layers.map( function (layer) { return layer.info;});
-
-        // create a new dynamic layer info object for the lakes layer
-        dynamicLayerInfo      = new esri.layers.DynamicLayerInfo();
-        dynamicLayerInfo.id   = layers.total;
-        dynamicLayerInfo.name = layerName;
-        // can also set things like min/max scale to specify scale
-        // dependency on the new dynamic layer
+        // get existing layerInfos from the store.
+        var dynLayerInfos = store.query( {type:"layerInfo"} );
 
         // create a table data source to access the lakes layer
         dataSource = new esri.layers.TableDataSource();
@@ -524,6 +519,11 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         // and now a layer source
         layerSource = new esri.layers.LayerDataSource();
         layerSource.dataSource = dataSource;
+
+        // create a new dynamic layer info object for the lakes layer
+        dynamicLayerInfo        = new esri.layers.DynamicLayerInfo();
+        dynamicLayerInfo.id     = dynLayerInfos.total;
+        dynamicLayerInfo.name   = layerName;
         dynamicLayerInfo.source = layerSource;
 
         dynLayerInfos.push( dynamicLayerInfo );
@@ -531,7 +531,6 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         // drawing options are set
         map.getLayer("usa").setDynamicLayerInfos( dynLayerInfos, true);
 
-        options = [];
         drawingOptions = new esri.layers.LayerDrawingOptions();
         drawingOptions.renderer = new esri.renderer.SimpleRenderer(
           new esri.symbol.SimpleFillSymbol(
@@ -575,13 +574,13 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         }
 
         // Establish event listeners.
-        on (usaLayer, "onUpdateEnd", function() {
-          // rebuild the layer list
+        on (usaLayer, "updateEnd", function() {
+          // Add any new layers to the TOC
           storeLayers( map.getLayer("usa") );
         });
 
         // add the lakes layer to the existing map service
-        on (dijit.byId("lakes"), "onClick", addLakes);
+        on (dijit.byId("lakes"), "click", addLakes);
 
         tree.on("checkBoxClick", layerClicked);
         model.on("pasteItem", reorderLayers );
@@ -606,13 +605,11 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
           <h3>Add and Re-order Layers</h3>
           <div id="info">
             <div id="note">
-              Note:  This sample requires an ArcGIS Server version 10.1 map service
-              to generate a renderer.
+              Note:  This sample requires an ArcGIS Server version 10.1 map service to generate a renderer.
             </div>
             
             <p id="hint">
-              Click and drag a map layer name below to re-order layers. The first
-              layer in the list will be drawn on top.
+              Click and drag a map layer name below to re-order layers. The first layer in the list will be drawn on top.
             </p>
 
             <strong>Map Layers</strong>
@@ -631,4 +628,5 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
     </div>
   </body>
 </html>
+
 ```
