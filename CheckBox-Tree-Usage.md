@@ -258,7 +258,7 @@ listener like `model.on( "dataValidated", myEventHandler );`
 	<tr>
 		<td>pasteItem</td>
     <td>onPasteItem</td>
-    <td>(item, insertINdex, before)</td>
+    <td>(item, insertIndex, before)</td>
 		<td>
 			Item was pasted at a new location.
 		</td>
