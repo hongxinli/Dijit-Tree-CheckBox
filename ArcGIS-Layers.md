@@ -399,15 +399,8 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
     </script>
 
     <!-- Load the esri ArcGIS API 3.3 for JavaScript -->
-    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
-    <script>
-      // Load non-AMD modules
-      dojo.require("esri.map");
-
-      require(["dijit/layout/BorderContainer", 
-               "dijit/layout/ContentPane",
-               "dijit/form/Button"]);
-
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.3/"></script>
+    <script type="text/javascript">
       require(["dojo/aspect",                    // aspect.after()
                "dojo/ready",                    // ready()
                "dijit/tree/dndSource",
@@ -415,7 +408,11 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
                "cbtree/Tree",
                "cbtree/extensions/TreeStyling",
                "cbtree/model/ForestStoreModel",
-               "cbtree/store/ObjectStore"
+               "cbtree/store/ObjectStore",
+               "dijit/layout/BorderContainer", 
+               "dijit/layout/ContentPane",
+               "dijit/form/Button",
+               "esri/map"
               ], function (aspect, ready, dndSource, Popup, Tree, TreeStyling, 
                             ForestStoreModel, ObjectStore) {
 
@@ -495,7 +492,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         }
   
         var layers = getLayers( store.get("layers") );            
-        if (layers && layers.length) {
+        if (layers.length) {
           map.getLayer("usa").setDynamicLayerInfos(layers);
         }
       }
@@ -561,9 +558,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         var refLayer = new esri.layers.ArcGISTiledMapServiceLayer(urlRef);
         var usaLayer = new esri.layers.ArcGISDynamicMapServiceLayer(urlDyn, { "id": "usa" });
 
-        map.addLayer(basemap);
-        map.addLayer(refLayer);
-        map.addLayer(usaLayer);
+        map.addLayers([basemap, refLayer, usaLayer]);
 
         // Create TOC store, model and tree.
         buildTOC("layerList");
@@ -572,23 +567,19 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         if ( usaLayer.loaded ) {
           storeLayers( map.getLayer("usa") );
         }
-
         // Establish event listeners.
         on (usaLayer, "updateEnd", function() {
           // Add any new layers to the TOC
           storeLayers( map.getLayer("usa") );
         });
-
         // add the lakes layer to the existing map service
         on (dijit.byId("lakes"), "click", addLakes);
 
         tree.on("checkBoxClick", layerClicked);
         model.on("pasteItem", reorderLayers );
       }
-
       // Let's get started when dojo is ready...
       ready (init);
-
     });
     </script>
   </head>
@@ -617,10 +608,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
             <br />
             <div id="layerList"></div>
 
-            <button id="lakes"
-                    data-dojo-type="dijit.form.Button">
-              Add Lakes
-            </button>
+            <button id="lakes" data-dojo-type="dijit.form.Button">Add Lakes</button>
             
           </div>
         </div>
@@ -628,5 +616,4 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
     </div>
   </body>
 </html>
-
 ```
