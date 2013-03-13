@@ -77,7 +77,7 @@ later.
 
 ```javascript
 function buildTOC (location) {
-  var index = [  { id:"layers", tocName:"Layers", type:"TOC" }  ];
+  var index = [  { id:"layers", tocName:"Layers", icon:"layers", type:"TOC" }  ];
 
   store = new ObjectStore({data: index});
   model = new ForestStoreModel( { store: store, 
@@ -89,7 +89,7 @@ function buildTOC (location) {
   tree  = new Tree( { model: model, 
                       dndController: dndSource,
                       betweenThreshold: 5,
-                      valueToIconMap: { "tocName": {"*":"* maki"} },
+                      valueToIconMap: { "icon": {"*":"* maki"} },
                       autoExpand: true,
                       showRoot:false
                      },
@@ -97,8 +97,9 @@ function buildTOC (location) {
   tree.startup();
 }
 ```
-To add Drag-n-Drop (DnD) support, to allow for layers to be reordered, two specific
-CheckBox Tree properties are set:
+Notice that the model property *checkedAttr* is mapped to the **_defaultVisibility_** 
+property of the layer record. To add Drag-n-Drop (DnD) support, to allow for
+layers to be reordered, two specific CheckBox Tree properties are set:
 ```javascript
 dndController: dndSource,
 betweenThreshold: 5,
@@ -138,6 +139,7 @@ function storeLayers(layerInfos) {
   dynLayerInfos.forEach( function (layerInfo) {
     if (!store.get(layerInfo.id)) {
       layerInfo.tocName = layerInfo.name.split(".").pop();
+      layerInfo.icon    = layerInfo.tocName.toLowerCase();
       layerInfo.type    = "layerInfo";
       
       store.put( layerInfo, { parent: "layers"} );
@@ -148,21 +150,7 @@ function storeLayers(layerInfos) {
 To each layerInfo object we add a *tocName* and *type* property. The type
 property makes it easy to query the store. When the record is inserted we tell
 the store that the store object with id **_layers_** will be the parent object 
-making this record a child. Because the parent is specified as a literal and not 
-an object we could have written:
-
-```javascript
-  dynLayerInfos.forEach( function (layerInfo) {
-    if (!store.get(layerInfo.id)) {
-      layerInfo.tocName = layerInfo.name.split(".").pop();
-      layerInfo.type    = "layerInfo";
-      layerInfo.parent  = "layers";
-            
-      store.put( layerInfo );
-    }
-  },this);
-```
-
+making this record a child.
 
 Because the ForestStoreModel is automatically notified of any changes to the
 ObjectStore, it starts updating the CheckBox Tree accordingly and, on completion,
@@ -313,16 +301,16 @@ When creating the CheckBox Tree we set the [valueToIconMap](Tree-Styling#wiki-va
 property, which is part of the TreeStyling extension, as follows:
 
 ```javascript
-valueToIconMap: { name: {"*":"* maki"} }
+valueToIconMap: { icon: {"*":"* maki"} }
 ```
 What the above mapping rule does is, it replaces the wildcard character (\*) 
-with the value of the store item property *name*, creating the css classname
+with the value of the store item property *icon*, creating the css classname
 for the tree node icon. 
-For example, if a store item has its *name* property set to *Highways* the
-rule transforms in real-time to `{name: {"Highways":"Highways maki"}}` mapping 
-the name property value *Highways* to the css classname `'Highways maki'`.
+For example, if a store item has its *icon* property set to *highways* the
+rule transforms in real-time to `{icon: {"highways":"highways maki"}}` mapping 
+the icon property value *highways* to the css classname `'highways maki'`.
 
-Given the above mapping rule, and knowing all posible values of the name property,
+Given the above mapping rule, and knowing all posible values of the icon property,
 we can now define the css rule sets for the image sprite:
 
 ```css
@@ -332,12 +320,12 @@ we can now define the css rule sets for the image sprite:
 	width: 18px; height: 18px;
 	margin: 0; padding: 0;
 }
-.maki.Layers { background-position: -0px;}
-.maki.Cities { background-position: -18px;}
-.maki.Highways { background-position: -36px; }
-.maki.States {background-position: -54px;}
-.maki.Counties {background-position: -72px;}
-.maki.Lakes {background-position: -90px;}
+.maki.layers { background-position: -0px;}
+.maki.cities { background-position: -18px;}
+.maki.highways { background-position: -36px; }
+.maki.states {background-position: -54px;}
+.maki.counties {background-position: -72px;}
+.maki.lakes {background-position: -90px;}
 ```
 
 
@@ -425,7 +413,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
       }
 
       function buildTOC (location) {
-        var index = [  { id:"layers", tocName:"Layers", type:"TOC" }  ];
+        var index = [  { id:"layers", tocName:"Layers", icon:"layers", type:"TOC" }  ];
 
         store = new ObjectStore({data: index});
         model = new ForestStoreModel( { store: store, 
@@ -437,7 +425,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         tree  = new Tree( { model: model, 
                             dndController: dndSource,
                             betweenThreshold: 5,
-                            valueToIconMap: { "tocName": {"*":"* maki"} },
+                            valueToIconMap: { "icon": {"*":"* maki"} },
                             autoExpand: true,
                             showRoot:false
                            },
@@ -467,6 +455,7 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
         dynLayerInfos.forEach( function (layerInfo) {
           if (!store.get(layerInfo.id)) {
             layerInfo.tocName = layerInfo.name.split(".").pop();
+            layerInfo.icon    = layerInfo.tocName.toLowerCase();
             layerInfo.type    = "layerInfo";
             
             store.put( layerInfo, { parent: "layers"} );
@@ -616,4 +605,5 @@ The  full code listed below can be found at **cbtree/demos/store/tree17.html**
     </div>
   </body>
 </html>
+
 ```
