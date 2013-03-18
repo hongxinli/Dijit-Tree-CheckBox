@@ -381,7 +381,7 @@ arguments passed to the event listener.
     <td>onDelete</td>
     <td>(item)</td>
 		<td>
-			Store item removed
+			An item was removed from the store.
 		</td>
 	</tr>
 	<tr>

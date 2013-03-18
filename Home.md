@@ -37,6 +37,7 @@ has three primary components plus a set of sub-components and extensions.
 
 ## Usage
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
+* [Deleting Tree Nodes](wiki/CheckBox-Tree-Usage#deleting-tree-nodes)
 
 ## Examples
 * [ArcGIS Points Of Interest](wiki/ArcGIS-Example)

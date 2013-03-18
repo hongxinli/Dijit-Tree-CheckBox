@@ -63,6 +63,26 @@ for details.
 > the model for the tree **MUST** support the [getChecked()](Model-API#wiki-getchecked)
 > and [setChecked()](Model-API#wiki-setchecked) methods.
 
+<h3 id="clickeventcheckbox">clickEventCheckBox:</h3>
+> **_TYPE_**: Boolean
+
+If true, both the *click* and *checkBoxClick* events are generated when a checkbox
+is clicked. If false, only the *checkBoxClick* event is generated.
+
+> **_DEFAULT_**: true
+
+
+<h3 id="enabledelete">enableDelete:</h3>
+> **_TYPE_**: Boolean
+
+> Determines if deleting tree nodes using the keyboard is allowed. By default
+> items can only be deleted using the store interface. If set to true the user
+> can also delete tree items by selecting the desired tree node(s) and pressing
+> the CTRL+DELETE keys.
+
+> **_DEFAULT_**: false
+
+
 <h3 id="leaficons">leafIcons:</h3>
 > **_TYPE_**: Boolean
 

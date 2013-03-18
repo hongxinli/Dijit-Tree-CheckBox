@@ -92,6 +92,16 @@ require(["cbtree/store/Memory"], function (Memory) {
 
 > **_DEFAULT_**: true
 
+
+<h3 id="clearonclose">clearOnClose:</h3>
+> **_TYPE_**: Boolean
+
+> Indicates if the store content is to be deleted when the store is closed. The
+> store is closed by calling the store `close()` function.
+
+> **_DEFAULT_**: false
+
+
 <h3 id="data">data:</h3>
 > **_TYPE_**: Object [] | Any
 
@@ -259,6 +269,16 @@ with the synchronous result of the store function.
 
 **returns:** Boolean
 > true if parents were successfully added otherwise false.
+
+**********************************************
+
+<h3 id="close">close( clear? )</h3>
+> Close the store. Unless the parameter *clear* is set to `true` this function
+> has no effect.
+
+**_clear:_** Boolean
+> Indicates if the store content is to be deleted. If omitted the store property
+> *clearOnClose* is used instead.
 
 
 **********************************************

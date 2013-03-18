@@ -252,7 +252,7 @@ listener like `model.on( "dataValidated", myEventHandler );`
     <td>onDelete</td>
     <td>(item)</td>
 		<td>
-			Store item removed
+			An item was removed from the store.
 		</td>
 	</tr>
 	<tr>
@@ -295,6 +295,14 @@ store is a [cbtree/store/Object](Store#wiki-the-object-store) store.
 		</td>
 	</tr>
 	<tr>
+		<td>close<sup>1</sup></td>
+    <td>onClose</td>
+    <td>(count, cleared)</td>
+		<td>
+			The store was closed.
+		</td>
+	</tr>
+	<tr>
 		<td>new</td>
     <td></td>
     <td>(event)</td>
@@ -311,6 +319,8 @@ store is a [cbtree/store/Object](Store#wiki-the-object-store) store.
 		</td>
 	</tr>
 </table>
+<sup>1</sup> The close event is the only store event using a callback and therefore
+accessible even if the store isn't made eventable.
 
 ### An example
 The following example demonstrate the use of events and callbacks:
@@ -343,12 +353,15 @@ require( ["cbtree/Tree",
 }
 ```
 
-
-
-
 #### DOM-4 Events
 If you want to learn more about the DOM-4 Events checkout [DOM Events](http://www.w3.org/TR/dom/#events).
 If you're interested in a dojo style implementation of a fully DOM-4 compliant Event 
 system checkout the event system as part of my [IndexedDB](https://github.com/pjekel/indexedDB/tree/master/dom/event)
 project.
+
+
+<h2 id="deleting-tree-nodes">Deleting Tree Nodes</h2>
+
+In contrast to the standard dijit Tree, the CheckBox Tree offers the options to
+delete tree nodes using the keyboard.
 

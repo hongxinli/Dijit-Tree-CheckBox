@@ -18,6 +18,7 @@ section of the cbtree models.
 * [Data Filter](#data-filter)
 * [Data Handlers](#data-handlers)
 * [CORS Support](#cors-support)
+* [Reloading a Store](#reloading-a-store)
 * [Store API Maxtrix](#store-api-matrix)
 
 
@@ -440,6 +441,38 @@ support the [Access-Control-Allow-Origin](http://www.w3.org/TR/cors/#access-cont
 header. See the [CORS standard](http://www.w3.org/TR/cors/) for more details.
 
 
+
+<h2 id="Reloading-a-store">Reloading a Store</h2>
+Normally store data is loaded during the instantiation of the store and extended
+using the store functions `add()` and `put()`. However, under certain circumstances
+it may be desirable to flush and reload the store content. All cbtree stores, 
+with the exception of the FileStore, offer the ability to dynamically reload and
+refresh their content.  
+To reload the store it must be closed first calling the store `close()` function 
+with either the *clear* parameter set to true, as in `close( true )` or the store
+property *clearOnClose* set to true. Once the store is closed and cleared you 
+can simply call the store `load()` function with a new dataset or URL to initiate
+another store load. For example:
+```javascript
+var myStore = new Hierarchy( {url:"/file/path/and/file.json", clearOnClose:true} );
+                     ...
+myStore.close();
+                     ...
+myStore.load( {url:"/file/path/and/anotherFile.json"} );
+```
+<span class="mini-icon mini-icon-exclamation"></span>
+the store **_must_** be closed first before any new load request can take
+effect.
+
+As of release cbtree-v0.9.3 both the cbtree models and tree provide full support
+for dynamic store reloads. As soon as a store is closed and cleared the models
+enters the so-called *reset* stage forcing the tree to unload all nodes. At this
+point in the process both the model and tree will be empty as well.
+When the store completes the data load request the model resumes operation 
+triggering a reload of the cbtree effectively refreshing the tree with the new
+store data.
+
+
 <h2 id="store-api-matrix">Store API Matrix</h2>
 
 The following table shows which `cbtree/store/api/Store` API [properties](Store-API#wiki-store-properties)
@@ -456,13 +489,21 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<th><a href="File-Store">File Store</a></th>
 	</tr>
 	<tr>
-		<td rowspan="12">Property</td>
+		<td rowspan="13">Property</td>
 		<td><a href="Store-API#wiki-autoload">autoLoad</a></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-clearonclose">clearOnClose</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-data">data</a></td>
@@ -567,7 +608,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<th><a href="File-Store">File Store</a></th>
 	</tr>
 	<tr>
-		<td rowspan="15">Function</td>
+		<td rowspan="16">Function</td>
 		<td><a href="Store-API#wiki-add">add<sup>2</sup></a></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
@@ -579,6 +620,14 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><a href="Store-API#wiki-addparent">addParent</a></td>
 		<td></td>
 		<td></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><a href="Store-API#wiki-close">close</a></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td><span class="mini-icon mini-icon-confirm"></span></td>
 		<td></td>
