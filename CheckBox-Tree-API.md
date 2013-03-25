@@ -72,6 +72,16 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 > **_DEFAULT_**: true
 
 
+<h3 id="deleterecursive">deleteRecursive:</h3>
+> **_TYPE_**: Boolean
+
+> Determines if a delete operation, initiated from the keyboard, should include
+> all descendants of the selected item(s). If false, only the selected item(s)
+> are deleted from the store. This property has only effect when the store property 
+> *enableDelete* is true.
+
+> **_DEFAULT_**: false
+
 <h3 id="enabledelete">enableDelete:</h3>
 > **_TYPE_**: Boolean
 

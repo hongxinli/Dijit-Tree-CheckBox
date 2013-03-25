@@ -130,7 +130,7 @@ stores like a File Store.
 
 > The property name of a store object whose value represents the object's parent
 > id or ids. If the store assigned to the model has a **_parentProperty_** 
-> property the store value is used.
+> property the store property value is used.
 
 > **_DEFAULT_**: "parent"
 
@@ -194,7 +194,7 @@ store models.
 
 *********************************************
 
-<h3 id="getchildren">getChildren( parent, onComplete, onError )</h3>
+<h3 id="getchildren">getChildren( parent, onComplete, onError? )</h3>
 > Calls onComplete() with an array of child items of given parent item.
 > Note: Only the immediate descendents are returned.
 
@@ -248,8 +248,8 @@ store models.
 
 <h3 id="getlabel">getLabel( item )</h3>
 > Get the label for an item. If the model property *labelAttr* is set, the
-> associated property of the item is retrieved otherwise the *labelAttr*
-> property of the store is used.
+> associated property of the item is retrieved otherwise the default value
+> *name* is used.
 
 **_item:_** Object
 > A valid store object.
@@ -268,6 +268,13 @@ store models.
 > Returns a promise. If resolved the result of the promise is an array of parent
 > objects.
 
+**example:**
+```javascript
+var promise = model.getParents(item);
+promise.then( function (parents) {
+  parents.forEach( ... );
+});
+```
 *********************************************
 
 <h3 id="getroot">getRoot( onItem, onError? )</h3>
@@ -304,6 +311,37 @@ store models.
 **returns:** Boolean
 
 *********************************************
+<h3 id="ready">ready( callback?, errback?, scope? )</h3>
+> Execute the callback when the model is ready.  If an error is	detected that
+> will prevent the model from getting ready errback is called instead.
+> The model is considered ready when the underlaying store is ready and loaded
+> and optionally had its data validated. The store can be empty when ready.
+
+**_callback:_** Function
+> Optional, function called when the model enters the ready or active state.
+
+**_errback:_** Function
+> Optional, function called if an error occurred preventing the model from entering
+> the ready or active state.
+
+**_scope:_** Object
+> Optional, the scope or context in which the callback and errback functions are
+> executed. If omitted both functions will be executed in the scope of the model.
+
+**returns:** dojo/promise/Promise
+
+**example:**
+```javascript
+model.ready( function () {
+  console.log( "Bingo" );
+});
+          or
+model.ready().then( function () {
+  console.log( "Bingo" );
+});
+```
+
+*********************************************
 
 <h3 id="setchecked">setChecked ( item, newState )</h3>
 > Update the checked state of a store item. If the model property *checkedStrict*
@@ -321,13 +359,13 @@ store models.
 
 <h3 id="setenabled">setEnabled( item, value )</h3>
 
-> Set the new 'enabled' state of an item. See the *enabledAttr* property description for more
-> details.
+> Set the new 'enabled' state of an item. See the *enabledAttr* property description 
+> for more details.
 
 **_item:_** Object
 > A valid store object.
 
-**_value:_** Any
+**_value:_** Boolean
 
 **returns:** void
 
@@ -339,7 +377,7 @@ store models.
 
 The CheckBox Tree models, although not widgets, offer the same `on()`
 functionality as widgets do. Therefore you can simple register a model event
-listener like `model.on( "dataValidated", myEventHandler );`
+listener using the event name like `model.on( "dataValidated", myEventHandler );`
 
 The tables below list the event names and associated callback. If for any given
 event type a callback is specified, the arguments column specifies the list of
@@ -390,6 +428,14 @@ arguments passed to the event listener.
     <td>(item, insertINdex, before)</td>
 		<td>
 			Item was pasted at a new location.
+		</td>
+	</tr>
+	<tr>
+		<td>reset</td>
+    <td>onReset</td>
+    <td>(void)</td>
+		<td>
+			The model is being reset. Typically due to a store closure.
 		</td>
 	</tr>
 	<tr>

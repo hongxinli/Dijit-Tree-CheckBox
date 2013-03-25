@@ -271,6 +271,14 @@ listener like `model.on( "dataValidated", myEventHandler );`
 			The children of the tree root changed.
 		</td>
 	</tr>
+	<tr>
+		<td>reset</td>
+    <td>onReset</td>
+    <td>(void)</td>
+		<td>
+			The model is being reset.
+		</td>
+	</tr>
 </table>
 
 ### Store Events
@@ -363,5 +371,14 @@ project.
 <h2 id="deleting-tree-nodes">Deleting Tree Nodes</h2>
 
 In contrast to the standard dijit Tree, the CheckBox Tree offers the options to
-delete tree nodes using the keyboard.
+delete tree nodes using the keyboard. However, the functionality is disabled by
+default. There are two tree properties associated with this feature:
+
+* enableDelete
+* deleteRecursive
+
+The **_enableDelete_** enables or disables the keyboard delete feature whereas 
+**_deleteRecursive_** determines if the descendants of the to be deleted item(s)
+are to be removed from the store as well, the default is `false`.
+
 

@@ -399,7 +399,7 @@ with the synchronous result of the store function.
 
 **********************************************
 
-<h3 id="ready">ready( callback, errback, scope? )</h3>
+<h3 id="ready">ready( callback?, errback?, scope? )</h3>
 > Execute the callback when the store data has been loaded. If an error occurred
 > during the loading process errback is called instead.
 
@@ -412,6 +412,8 @@ with the synchronous result of the store function.
 **_scope:_** Object
 > The scope or context in which the callback and errback functions are executed.
 > If omitted both functions will be executed in the scope of the store.
+
+**returns:** dojo/promise/Promise
 
 **********************************************
 
@@ -463,6 +465,12 @@ operations. In general, directive objects are passed to store functions as an op
 > the corresponding key:value pair of the store data being loaded. If filter
 > is a function, the function is called once for every object to be loaded as: 
 > `func( object )`. The function must return either `true` or `false`.
+
+**_handleAs:_** String?
+
+> Specifies how to interpret the payload returned in a server response
+> or the data passed to a store method responsible for populating the
+> store.
 
 **_url:_** String?
 
