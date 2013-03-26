@@ -509,9 +509,9 @@ will default to either:
 3. The default dijit icons.
 
 ##### Wildcard as a Placeholder.
-The wildacard character (*) can also be used as a placeholder for property value
+The wildacard character (*) can be used as a placeholder for property value
 injection. Lets assume that in addition to the property value itself you also 
-want to add an additional base class the your icon:
+want to add an additional base class to your icon:
 
 ```javascript
 { type: { "*": "makiIcon *" } }

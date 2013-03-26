@@ -45,10 +45,10 @@ has three primary components plus a set of sub-components and extensions.
 
 ## Demos
 The cbtree packages comes with a set of demos each demonstrating the CheckBox
-Tree features and capabilities. A comprehensive [live demo](http://thejekels.com/cbtree/demos)
-is also available at:
+Tree features and capabilities. Two comprehensive demos are available online:
 
-* [http://thejekels.com/cbtree/demos](http://thejekels.com/cbtree/demos)
+* <a href="http://thejekels.com/cbtree/demos" target="_blank">Live CheckBox Tree demo</a>
+* <a href="http://thejekels.com/cbtree/demos/ArcGIS.php" target="_blank">ArcGIS demo with CheckBox Tree</a>
 
 ## Downloads
 To get the latest stable version please visit the [download](https://github.com/pjekel/cbtree/downloads)

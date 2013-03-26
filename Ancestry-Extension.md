@@ -265,7 +265,7 @@ The following section provides a detailed description of the Ancestry functions:
 <h2 id="sample-application">Sample Application</h2>
 The following is demo application `cbtree/demos/store/tree30.html`.
 
-````html
+```html
 <!DOCTYPE html>
 <html>
   <head>

@@ -362,9 +362,11 @@ require( ["cbtree/Tree",
 ```
 
 #### DOM-4 Events
-If you want to learn more about the DOM-4 Events checkout [DOM Events](http://www.w3.org/TR/dom/#events).
+If you want to learn more about the DOM-4 Events checkout 
+<a href="http://www.w3.org/TR/dom/#events" target="_blank">DOM Events</a>.
 If you're interested in a dojo style implementation of a fully DOM-4 compliant Event 
-system checkout the event system as part of my [IndexedDB](https://github.com/pjekel/indexedDB/tree/master/dom/event)
+system checkout the event system as part of my 
+<a href="https://github.com/pjekel/indexedDB/tree/master/dom/event" target="_blank">IndexedDB</a>
 project.
 
 
@@ -381,4 +383,5 @@ The **_enableDelete_** enables or disables the keyboard delete feature whereas
 **_deleteRecursive_** determines if the descendants of the to be deleted item(s)
 are to be removed from the store as well, the default is `false`.
 
-
+To delete an item using the keyboard simply select the tree node(s) and press
+the CTRL+DELETE keys.

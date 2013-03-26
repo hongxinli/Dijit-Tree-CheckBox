@@ -175,7 +175,7 @@ the store content changes. Events are emitted for any of the following store ope
 A cbtree store event is a JavaScript key:value pairs object with the following
 ABNF notation:
 
-	store-event = "{" "type:" event-name "," "item:" object ["," "oldItem:" object] "}"
+	store-event = "{" "type:" event-name "," "detail:" "{" "item:" object ["," "oldItem:" object] "}" "}"
 	event-name  = "new" / "change" / "delete"
 
 To listen for store events the application has to register an event listener using
@@ -335,7 +335,7 @@ For example, consider the following:
 var myStore = new Hierarchy( {url:"some/large/file", filter:{type:"capital"}, ... } }; 
 ```
 
-Please not that if the store `filter` property is set, the filter is applied 
+Please note that if the store `filter` property is set, the filter is applied 
 **_after_** any data handler is called.
 
 <h2 id="data-handlers">Data Handlers</h2>
