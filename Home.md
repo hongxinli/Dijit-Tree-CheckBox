@@ -6,10 +6,6 @@ The picture above shows some tree samples created with the CheckBox Tree widget.
 The tree on the left is a default CheckBox tree, the others are created using
 specific tree and/or model properties.
 
-> <span class="mega-icon mega-icon-exclamation"></span> This wiki is currently 
-> under **construction** all information found here is intended for the upcoming
-> release of the cbtree which would be cbtree-v09.3-0, please stay tuned...
-
 ## CheckBox Tree Components
 The CheckBox Tree is implemented as a Model-View-Controller (MVC) pattern and
 has three primary components plus a set of sub-components and extensions.
@@ -51,7 +47,7 @@ Tree features and capabilities. Two comprehensive demos are available online:
 * <a href="http://thejekels.com/cbtree/demos/ArcGIS.php" target="_blank">ArcGIS demo with CheckBox Tree</a>
 
 ## Downloads
-To get the latest stable version please visit the [download](https://github.com/pjekel/cbtree/downloads)
+To get the latest stable version please visit the [download](http://thejekels.com/download/cbtree/)
 section:
 
 <table>
@@ -66,7 +62,7 @@ section:
   <tbody>
     <tr style="vertical-align:top">
       <td>cbtree-v09.3-0</td>
-      <td style="color:red;">TBD: Mar 2013</td>
+      <td>May-03 2013</td>
       <td>1.8 - 1.9</td>
       <td>
 	New stores implementing the dojo/store/api/Store API.<br/>
