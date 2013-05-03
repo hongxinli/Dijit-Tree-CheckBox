@@ -444,8 +444,8 @@ var valueToIconMap = { type: {} };
 			or
 var valueToIconMap = { type: [] };
 ```
-In this case the value of the property item **_test_** is used as the iconClass.
-For example, if the value of test is *StreetAddress* the iconClass will also be
+In this case the value of the property item **_type_** is used as the iconClass.
+For example, if the value of type is *StreetAddress* the iconClass will also be
 *StreetAddress*.
 
 #### Using specific values only
@@ -494,7 +494,7 @@ either return a valid string of css class names or `null`.
 #### Using a wildcard
 Sometimes it is not feasable to map every possible value of an item property or
 you just want to map a subset of the values and have other values default to a
-standard icon. To do this you can use the wildcard character '*' as shown below:
+standard icon. To do this you can use the wildcard character (*) as shown below:
 
 ```javascript
 { type: { "POI": "pointOfInterest", "StreetAddress":"streetAddress", "*":"defaultIcon"} }
