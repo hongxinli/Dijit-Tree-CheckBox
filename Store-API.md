@@ -2,7 +2,7 @@
 The **cbtree/store/api/Store** API is an extension to the **dojo/store/api/Store** API. Therefore, any store
 that exposes the **dojo/store/api/Store** API is by default compliant with this API definition.
 
-#### <span class="mega-icon mega-icon-exclamation"></span> IMPORTANT
+#### <span class="mega-octicon octicon-alert"></span> IMPORTANT
 
 This API defines function signatures **ONLY** without providing implementation details.
 All store functions and properties defined in this API are optional and require implemention
