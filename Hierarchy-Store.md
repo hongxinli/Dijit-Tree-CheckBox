@@ -7,7 +7,7 @@ an index of all children of store objects.
 The hierarchy store and the derived Object Store are the preferred store types
 in a CheckBox Tree environment.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Store Properties](#store-properties)
 * [Data Hierarchy](#data-hierarchy)
 * [Mutli Parented Objects](#multi-parented-objects)
@@ -204,7 +204,7 @@ require(["dojo/ready",
 
 
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Be aware that if the store property _multiParented_ is set to `false` and the data
 loaded into the store is actually multi-parented only the first parent for each
 object is stored. In addition, calling the store method `addParent()` will

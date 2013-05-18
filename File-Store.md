@@ -9,7 +9,7 @@ Please note that the HTTP GET, DELETE and POST methods are supported but only
 GET is enabled by default. See the Server Side Application 
 [configuration](#server-side-configuration) for details.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [File Store Requirements](#file-store-requirements)
 * [Server Side Applications](#server-side-applications)
 * [Server Side Configuration](#server-side-configuration)
@@ -213,7 +213,7 @@ available add the following to your httpd.conf file:
 Please refer to the Apache [mod_env](http://httpd.apache.org/docs/2.2/mod/mod_env.html) section
 for additional details.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Whenever you set or change the value of the environment variables you ***MUST*** restart you HTTP
 server to make these values available to scripts and CGI applications.
 
@@ -256,7 +256,7 @@ and exclude such files from being included in a response unless the *showHiddenF
 File Store is set. In general, it is good pratice not to include any files you may consider private, 
 hidden or not, in any directory you expose to the outside world.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Only the Windwos CGI implementation will also recognize the Microsoft Windows hidden file attribute. 
 
 <h2 id="file-store-properties">File Store Properties</h2>
@@ -304,7 +304,7 @@ require(["cbtree/store/FileStore"], function (FileStore) {
 >
 > root-dir = document-root "/" basepath
 >
-> <span class="mega-icon mega-icon-exclamation"></span>
+> <span class="mega-octicon octicon-alert"></span>
 > If the environment variable CBTREE_BASEPATH is set on the HTTP server this
 > property is ignored.
 

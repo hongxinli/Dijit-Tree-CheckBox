@@ -23,7 +23,7 @@ For this particular demo we use a small subset of the open source project
 [MAKI ICONS](http://mapbox.com/maki/) by MapBox. However, you can use your own
 icons instead if you like.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 **This tutorial is not an introduction to the [ArcGIS 3.3 API for JavaScript](http://help.arcgis.com/en/webapi/javascript/arcgis/), it is intended
 to demonstrate how you can leverage the CheckBox Tree and some of its extensions
 in your ArcGIS, or other, projects.**

@@ -1,4 +1,4 @@
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Tree Properties](#tree-properties)
 * [Tree Functions](#tree-functions)
 * [Tree Callbacks](#tree-callbacks)
@@ -59,7 +59,7 @@ for details.
 
 > **_DEFAULT_**: true
 
-> <span class="mega-icon mega-icon-exclamation"></span>If checkBoxes is true, 
+> <span class="mega-octicon octicon-alert"></span>If checkBoxes is true, 
 > the model for the tree **MUST** support the [getChecked()](Model-API#wiki-getchecked)
 > and [setChecked()](Model-API#wiki-setchecked) methods.
 

@@ -1,5 +1,5 @@
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Working with Events](#working-with-events)
 
 <h2 id="working-with-events">Working with Events</h2>
@@ -17,7 +17,7 @@ that is, to callback functions whose name starts with "on" like *onClick()* or
 The next sections discuss the difference in implementation of event listeners
 for callbacks and events.
 
-<h3><span class="mega-icon mega-icon-arr-collapsed"></span>Callbacks</h3>
+<h3><span class="mega-octicon octicon-triangle-right"></span>Callbacks</h3>
 
 Before registering an event listener with a dijit widget we must first check if
 the widget has a method that could be auto linked with the event type. 
@@ -49,7 +49,7 @@ require(["dojo/aspect", "cbtree/Tree", ... ], function (aspect, Tree, ... ) {
                    ...
 })
 ```
-<span class="mega-icon mega-icon-exclamation"></span> Make sure the fourth
+<span class="mega-octicon octicon-alert"></span> Make sure the fourth
 argument is set to **_true_** otherwise `clickEvent()` is not called with the
 original arguments of `onMyEvent()` but with the result instead. Also, notice
 that when calling `aspect.after()` we specify the callback function name 
@@ -78,7 +78,7 @@ first example simply because the underlaying `_WidgetBase.on()` method is able
 to map the event type "myEvent" to the callback `onMyEvent()` and as a result
 calls dojo/aspect on our behalf.
 
-<h3><span class="mega-icon mega-icon-arr-collapsed"></span>Events</h3>
+<h3><span class="mega-octicon octicon-triangle-right"></span>Events</h3>
 
 This time, let's assume our widget does **_NOT_** have a callback that could be
 auto linked to the event type "myEvent". Instead the widget actually emits events 
@@ -105,7 +105,7 @@ In the above example notice that the function `clickEvent()` now is called with
 just a single argument **_event_**. The event is a JavaScript key:value pairs
 object.
 
-<span class="mega-icon mega-icon-exclamation"></span> In case of true events 
+<span class="mega-octicon octicon-alert"></span> In case of true events 
 that is, the event name can not be mapped to a callback function, the event name 
 is handled case sensitive. Therefore, as a good practise, always use the correct
 case for event names regardless if you are registering for an event or callback.
@@ -283,7 +283,7 @@ listener like `model.on( "dataValidated", myEventHandler );`
 
 ### Store Events
 
-<span class="mega-icon mega-icon-exclamation"></span> Store events are available
+<span class="mega-octicon octicon-alert"></span> Store events are available
 if, and only if, the store is made [Eventable](Store#wiki-eventable) or the 
 store is a [cbtree/store/Object](Store#wiki-the-object-store) store.
 

@@ -6,7 +6,7 @@ which converts the input data into an array of JavaScript key:value pairs object
 The data handlers act upon data passed to the store using either the stores _data_ or
 _url_ property.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Data Handler Signature](#data-handler-signature)
 * [Data Handler Registration](#data-handler-registration)
 * [Advanced Data Handler](#advanced-data-handler)

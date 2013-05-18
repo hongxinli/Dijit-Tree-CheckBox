@@ -62,7 +62,7 @@ In the context of this API, property values, arguments and operand types are def
 	</tbody>
 </table>
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Store Properties](#store-properties)
 * [Store Functions](#store-functions)
 * [Store Directives](#store-directives)

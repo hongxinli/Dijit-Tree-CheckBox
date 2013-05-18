@@ -2,7 +2,7 @@ The CheckBox Tree comes with three store models, a [Tree Store Model](#tree-stor
 a [Forest Store Model](#forest-store-model) and a [File Store Model](#file-store-model).
 The distinct differences are explained in the sections below. 
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [The Model, an introduction](#the-model)
 * [Tree Store Model](#tree-store-model)
 * [Forest Store Model](#forest-store-model)
@@ -66,7 +66,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Hierarchy Store</td>
-    <td><span class="mini-icon mini-icon-confirm"></span></td>
+    <td><span class="octicon octicon-check"></span></td>
 		<td>
 			Derived from the Memory store adding support for natural order,
 			hierarchical organized data object and multi-parenting.
@@ -74,12 +74,12 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Object Store</td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td>Derived from the Hierarchy store with build in eventable capabilities.
 	</tr>
 	<tr>
 		<td>File Store</td>
-    <td><span class="mini-icon mini-icon-confirm"></span></td>
+    <td><span class="octicon octicon-check"></span></td>
 		<td>
 			The File Store implements an in-memory store whose content represent the
 			file system layout of the HTTP back-end server document root directory or
@@ -113,7 +113,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 </table>
 
-<span class="mega-icon mega-icon-exclamation"></span> All CheckBox Tree stores
+<span class="mega-octicon octicon-alert"></span> All CheckBox Tree stores
 are designed and implemented such that they can be wrapped with the dojo/store/Observable
 store wrapper. Howerver, be sure to read the store [Eventable](Store#wiki-eventable) 
 and [Observable](Store#wiki-observable) sections before doing so.
@@ -134,26 +134,26 @@ The folowing table lists the stores supported by CheckBox Tree model type.
 	</thead>
     <tr style="vertical-align:top">
       <td>Tree Store Model</td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-x"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-x"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
     <tr style="vertical-align:top">
       <td>Forest Store Model</td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-x"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-x"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
     </tr>
     <tr style="vertical-align:top">
       <td>File Store Model</td>
-      <td><span class="mini-icon mini-icon-x"></span></td>
-      <td><span class="mini-icon mini-icon-x"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
-      <td><span class="mini-icon mini-icon-x"></span></td>
-      <td><span class="mini-icon mini-icon-confirm"></span></td>
+      <td><span class="octicon octicon-x"></span></td>
+      <td><span class="octicon octicon-x"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
+      <td><span class="octicon octicon-x"></span></td>
+      <td><span class="octicon octicon-check"></span></td>
     </tr>
   </tbody>
 </table>
@@ -317,7 +317,7 @@ however add custom properties to store items which will be writeable, or rename
 or delete store items. The File Store Model also supports drag and drop
 operations using the File Store rename capabilities.
 
-<span class="mega-icon mega-icon-exclamation"></span> Because of the reduced
+<span class="mega-octicon octicon-alert"></span> Because of the reduced
 function set supported, some of the common store model properties are ignored 
 by the File Store Model.
 
@@ -348,93 +348,93 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 	<tr>
 		<td rowspan="15">Property</td>
 		<td><a href="Model-API#wiki-checkedall">checkedAll</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-checkedattr">checkedAttr</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-checkedstate">checkedState</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-checkedroot">checkedRoot</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-checkedstrict">checkedStrict</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-">enabledAttr</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-iconattr">iconAttr</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-labelattr">labelAttr</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-multistate">multiState</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-normalize">normalize</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-parentproperty">parentProperty</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-query">query</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-rootlabel">rootLabel</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-rootid">rootId</a></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-store">store</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 </table>
 
@@ -450,75 +450,75 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 	<tr>
 		<td rowspan="12">Function</td>
 		<td><a href="Model-API#wiki-getchecked">getChecked</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getchildren">getChildren</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getenabled">getEnabled</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-geticon">getIcon</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getidentity">getIdentity</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getlabel">getLabel</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getparents">getParents</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-getroot">getRoot</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-isitem">isItem</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-mayhavechildren">mayHaveChildren</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-setchecked">setChecked</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-setenabled">setEnabled</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 
 </table>

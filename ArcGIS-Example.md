@@ -12,7 +12,7 @@ search results are added to the tree below the search box. Clicking a checkbox
 on the tree will, depending on the checkbox state, add or remove a marker for
 the given location.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 **This tutorial is not an introduction to the [ArcGIS 3.3 API for JavaScript](http://help.arcgis.com/en/webapi/javascript/arcgis/), it is intended
 to demonstrate how you can leverage the CheckBox Tree and some of its extensions
 in your ArcGIS, or other, projects.**
@@ -122,7 +122,7 @@ record.
 The parent record does not represent an actual geo location, it merely ancors
 the results in the store establishing a hierarchy.
 
-<span class="mini-icon mini-icon-exclamation"></span>
+<span class="octicon octicon-alert"></span>
 Note that only the parent record gets a specific id assigned, this because the
 id of store records must be unique. In this application we can't use the name as
 the id for location records simply because it's very likely we get many duplicates.

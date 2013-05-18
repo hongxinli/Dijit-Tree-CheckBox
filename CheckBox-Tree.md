@@ -7,7 +7,7 @@ This document describes the CheckBox Tree extensions only. Details on the
 standard dijit tree can be found 
 [here](http://dojotoolkit.org/reference-guide/1.7/dijit/Tree.html).
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 
 * [CheckBox Tree Basics](#checkbox-tree-basics)
 * [CheckBox Tree Placement](#checkbox-tree-placement)
@@ -108,7 +108,7 @@ Model extension allows the user to programmatically manipulate checkbox trees.
 You can simply check/uncheck a single store item or a set of store items using
 a store query.  
 
-<span class="mega-icon mega-icon-exclamation"></span> This version of the cbtree 
+<span class="mega-octicon octicon-alert"></span> This version of the cbtree 
 no longer supports the *setItemAttr()* and *getItemAttr()* methods, to change
 store object properties use the appropriate store interface. Some of the Store 
 Model extension functions are:
@@ -167,7 +167,7 @@ location parameter accepts: *"after"*, *"before"*, *"replace"*, *"only"*, *"firs
 and *"last"*. The default location is *"last"*.
 See the **_place()_** method of dojo/dom-construct for more details.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Please note that as of dojo 1.8 it is required to call the tree widget startup()
 method after creating a tree.
 

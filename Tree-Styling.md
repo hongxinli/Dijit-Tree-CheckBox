@@ -99,7 +99,7 @@ A style property looks like:
 ```javascript
 {color:"red", border:"solid"}
 ```
-<span class="mini-icon mini-icon-exclamation"></span>`domStyle.set()` objects
+<span class="octicon octicon-alert"></span>`domStyle.set()` objects
 requires camelcase property names, therefore a css property like `border-width`
 is specified as `borderWidth`.
 
@@ -238,7 +238,7 @@ boolean      = "true" / "false"
 
 > Optional, the *iconStyle* property specifies the css style of the icon. The
 > iconStyle is an object suitable for the input to domStyle.set() like {border:"solid"}
-> <span class="mini-icon mini-icon-exclamation"></span>`domStyle.set()` objects
+> <span class="octicon octicon-alert"></span>`domStyle.set()` objects
 requires camelcase property names, therefore a css property like `border-width`
 is specified as `borderWidth`.
 
@@ -337,7 +337,7 @@ icon: { iconClass: "myIcons", indent: false },
               });
 </script>
 ```
-<span class="mini-icon mini-icon-exclamation"></span>
+<span class="octicon octicon-alert"></span>
 Make sure you first load the css file (line 1) otherwise the icons will not show in your
 browser.
 
@@ -398,7 +398,7 @@ Add the following to your css file.
   background-position: -48px;
 }
 ```
-<span class="mini-icon mini-icon-exclamation"></span>
+<span class="octicon octicon-alert"></span>
 Notice though that all class names map to the same icon, the one on the right.
 To get the full user experiance you would need to add an icon for each icon
 class and define the css classes accordingly.
@@ -521,7 +521,7 @@ above mapping will take the items *type* property value and creates the css
 class `makiIcon CityStreet`. Simply speaking, the wildcard character (*) is
 replaced with the property value.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Icons mapped using the trees *valueToIconMap* property will **_NOT_** trigger
 an automatic tree update if the value of the associated property is changed in
 the store unless you also set the [iconAttr](Model-API#wiki-iconattr) property
@@ -570,7 +570,7 @@ set and a mapping can be made, otherwise use:
 3. The default icon set for the tree, otherwise use:
 4. The default dijit tree icon classes.
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 Regardless of how the css class name(s) for a tree node are determined it is
 paramount you have the appropriate css class name definitions loaded along with
 the dojo, dijit and cbtree modules. If any css class name definition is missing

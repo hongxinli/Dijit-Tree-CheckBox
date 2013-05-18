@@ -15,7 +15,7 @@ a new `/cbtree` directory like:
       /dojo
       /util
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 The location of the `/cbtree` directory is important in order for the demos included
 in the package to work correctly. All demos use relative paths to load dojo and
 dijit modules. If you are not interested in running any of the demos you can
@@ -36,14 +36,14 @@ After installation the `/cbtree` directory will have the following subdirectorie
       /themes
       /util
 
-<span class="mega-icon mega-icon-exclamation"></span> Please note that all 
+<span class="mega-octicon octicon-alert"></span> Please note that all 
 directories marked **_deprecated_** are maintained for backward compatability 
 only and will be removed in the future. 
 
 #### /data
 > The `/data` directory holds the cbtree stores implementing the legacy
 > dojo/data/api API's.  
-> <span class="mini-icon mini-icon-exclamation"></span> These stores have been
+> <span class="octicon octicon-alert"></span> These stores have been
 > deprecated and will removed in the future. See the /store directory instead.
 
 #### /demos
@@ -68,7 +68,7 @@ only and will be removed in the future.
 #### /models
 > The /models directory holds the cbtree store models used with the legacy
 > dojo/data/ItemFile stores.  
-> <span class="mini-icon mini-icon-exclamation"></span> These models have been
+> <span class="octicon octicon-alert"></span> These models have been
 > deprecated and will removed in the future. See the /model directory
 > instead.
 

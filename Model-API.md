@@ -1,5 +1,5 @@
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Model Properties](#model-properties)
 * [Model Functions](#model-functions)
 * [Model Callbacks](#model-callbacks)
@@ -40,7 +40,7 @@ require(["cbtree/model/TreeStoreModel", ... ], function (TreeStoreModel, ... ) {
 
 > **_DEFAULT_**: "checked"
 
-<span class="mega-icon mega-icon-exclamation"></span> If a store object has no
+<span class="mega-octicon octicon-alert"></span> If a store object has no
 'checked' state property and **_checkedAll_** is *false* no checkbox will be 
 created by the tree for the object.
 
@@ -75,7 +75,7 @@ created by the tree for the object.
 
 > **_DEFAULT_**: true
 
-<span class="mega-icon mega-icon-exclamation"></span> If set to true, the model
+<span class="mega-octicon octicon-alert"></span> If set to true, the model
 will request a full store load which may impact performance on very large object
 stores like a File Store.
 

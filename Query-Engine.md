@@ -5,11 +5,11 @@ misleading in the sense that it does not actually query the object arrays,
 instead when called, it returns a function capable of executing the requested
 query.  
 
-<span class="mega-icon mega-icon-exclamation"></span>
+<span class="mega-octicon octicon-alert"></span>
 The Query Engine can be used with any arbitrary array of JavaScript
 key:value pairs objects, not just store objects.
 
-<h3><span class="mega-icon mega-icon-readme"></span>Content</h3>
+<h3><span class="mega-octicon octicon-book"></span>Content</h3>
 * [The Query Engine API](#the-query-engine-api)
 * [The Query Argument](#the-query-argument)
 * [The Query Options](#the-query-options)
@@ -173,7 +173,7 @@ var results   = queryFunc( myObjects );
 The above example returns at a maximum 10 objects whose *hair* property equal
 "blond" starting at index number 5 of the results.
 
-<span class="mega-icon mega-icon-exclamation"></span> Pagination is performed
+<span class="mega-octicon octicon-alert"></span> Pagination is performed
 **_after_** any optional sort is performed.
 
 #### Sorting Results

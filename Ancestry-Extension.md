@@ -2,7 +2,7 @@ The store Ancestry extension adds an additional set of functions to both the
 [Hierarchy](Hierarchy-Store) and Object stores to explore the hierarchy and
 order of those stores.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Store Root versus Tree root](##store-root-versus-tree-root)
 * [Loading the Ancestry Extension](#loading-the-ancestry-extension)
 * [Ancestry Functions](#ancestry-functions)

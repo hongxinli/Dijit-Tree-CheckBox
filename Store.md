@@ -10,7 +10,7 @@ important to understand the pros and cons of each of them. Please read the
 [store selection](Model#wiki-selecting-a-store)
 section of the cbtree models.
 
-<h3>Content <span class="mega-icon mega-icon-readme"></span></h3>
+<h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Store Types](#store-types)
 * [Eventable](#eventable)
 * [Observable](#observable)
@@ -436,7 +436,7 @@ required(["cbtree/store/Hierarchy",
 Once the CORS extension is loaded you can start using URLs with the schema
 'http' or 'https'.
 
-<span class="mega-icon mega-icon-exclamation"></span> The remote domain must 
+<span class="mega-octicon octicon-alert"></span> The remote domain must 
 support the [Access-Control-Allow-Origin](http://www.w3.org/TR/cors/#access-control-allow-origin-response-header)
 header. See the [CORS standard](http://www.w3.org/TR/cors/) for more details.
 
@@ -460,7 +460,7 @@ myStore.close();
                      ...
 myStore.load( {url:"/file/path/and/anotherFile.json"} );
 ```
-<span class="mini-icon mini-icon-exclamation"></span>
+<span class="octicon octicon-alert"></span>
 the store **_must_** be closed first before any new load request can take
 effect.
 
@@ -491,107 +491,107 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	<tr>
 		<td rowspan="13">Property</td>
 		<td><a href="Store-API#wiki-autoload">autoLoad</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-clearonclose">clearOnClose</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-data">data</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-datahandler">dataHandler</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-defaultproperties">defaultProperties</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-filter">filter</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-handleas">handleAs</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-hierarchical">hierarchical<sup>1</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-idproperty">idProperty</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-multiparented">multiParented</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-parentproperty">parentProperty</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-queryengine">queryEngine</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-url">url</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 </table>
 
@@ -610,130 +610,130 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 	<tr>
 		<td rowspan="16">Function</td>
 		<td><a href="Store-API#wiki-add">add<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-addparent">addParent</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-close">close</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-destroy">destroy</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-get">get<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-getchildren">getChildren<sup>2</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-getidentity">getIdentity<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-getparents">getParents</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-haschildren">hasChildren</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-isitem">isItem</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-load">load</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-put">put<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-query">query<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-ready">ready</a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-remove">remove<sup>2</sup></a></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Store-API#wiki-removeparent">removeParent</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 
@@ -759,14 +759,14 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="Hierarchy-Store#wiki-indexchildren">indexChildren</a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -775,7 +775,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="File-Store#wiki-options">options</a></td>
@@ -783,7 +783,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="File-Store#wiki-preventcache">preventCache</a></td>
@@ -791,7 +791,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
 		<td><a href="File-Store#wiki-sort">sort</a></td>
@@ -799,7 +799,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 
 	<tr>
@@ -807,80 +807,80 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td><a href="Ancestry-Extension#wiki-analyze">analyze<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-getancestors">getAncestors<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-getdescendants">getDescendants<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-getpaths">getPaths<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-getsiblings">getSiblings<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-isancestorof">isAncestorOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-isbefore">isBefore<sup>4</sup></a></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-ischildof">isChildOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-isdescendantof">isDescendantOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td><a href="Ancestry-Extension#wiki-issiblingof">isSiblingOf<sup>4</sup></a></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -889,7 +889,7 @@ and [functions](Store-API#wiki-store-functions) each store implements.
 		<td></td>
 		<td></td>
 		<td></td>
-		<td><span class="mini-icon mini-icon-confirm"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 </table>
 
