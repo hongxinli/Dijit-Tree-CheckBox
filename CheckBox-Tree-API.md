@@ -5,9 +5,9 @@
 
 <h2 id="tree-properties">Tree Properties</h2>
 
-CheckBox Tree properties enable or disable specific features and/or define 
+CheckBox Tree properties enable or disable specific features and/or define
 characteristics of the tree.
-The property names also represent properties in the keyword object passed to 
+The property names also represent properties in the keyword object passed to
 the CheckBox Tree constructor. The following example illustrates how to apply
 the CheckBox Tree properties:
 
@@ -20,7 +20,7 @@ require(["cbtree/Tree", ... ], function ( Tree, ... ) {
 ```
 
 Additional CheckBox Tree Properties are available when the Tree Styling extension
-is loaded, see [Tree Styling Properties](Tree-Styling#styling-properties) 
+is loaded, see [Tree Styling Properties](Tree-Styling#styling-properties)
 for details.
 
 
@@ -59,7 +59,7 @@ for details.
 
 > **_DEFAULT_**: true
 
-> <span class="mega-octicon octicon-alert"></span>If checkBoxes is true, 
+> <span class="mega-octicon octicon-alert"></span>If checkBoxes is true,
 > the model for the tree **MUST** support the [getChecked()](Model-API#wiki-getchecked)
 > and [setChecked()](Model-API#wiki-setchecked) methods.
 
@@ -71,13 +71,20 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 
 > **_DEFAULT_**: true
 
+<h3 id="closeonunchecked">closeOnUnchecked:</h3>
+> **_TYPE_**: Boolean
+
+> If true, unchecking a branch node checkbox will close/collapse the branch.
+
+> **_DEFAULT_**: false
+
 
 <h3 id="deleterecursive">deleteRecursive:</h3>
 > **_TYPE_**: Boolean
 
 > Determines if a delete operation, initiated from the keyboard, should include
 > all descendants of the selected item(s). If false, only the selected item(s)
-> are deleted from the store. This property has only effect when the store property 
+> are deleted from the store. This property has only effect when the store property
 > *enableDelete* is true.
 
 > **_DEFAULT_**: false
@@ -105,7 +112,7 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 > **_TYPE_**: Boolean
 
 > Determines if leaf checkboxes are read only. If true, the  user can only
-> check/uncheck branch checkboxes. This property overrides the per store item 
+> check/uncheck branch checkboxes. This property overrides the per store item
 > 'enabled' features for any store item associated with a tree leaf.
 
 > **_DEFAULT_**: false
@@ -118,6 +125,17 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 
 > **_DEFAULT_**: null
 
+<h3 id="openonchecked">openOnChecked:</h3>
+> **_TYPE_**: Boolean
+
+> If true, checking a branch checkbox will open/expand the branch.
+
+> **_DEFAULT_**: false
+
+> <span class="mega-octicon octicon-alert"></span> This property is especially helpful
+> when the tree is part of a form that you want to submit. Expanding checked branches
+> will guarantee that all checked nodes will be included in the form submission.
+
 <h3 id="openonclick">openOnClick:</h3>
 > **_TYPE_**: Boolean
 
@@ -129,7 +147,7 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 <h3 id="openondblclick">openOnDblClick:</h3>
 > **_TYPE_**: Boolean
 
-> If true, double-clicking a folder node's label will open it, rather than 
+> If true, double-clicking a folder node's label will open it, rather than
 > calling tree's callback method onDblClick().
 
 > **_DEFAULT_**: false
@@ -153,7 +171,7 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 <h3 id="widget">widget:</h3>
 > **_TYPE_**: [WidgetObject](#widget-object)
 
-> Specifies the checkbox widget to be instanciated for the tree node. The 
+> Specifies the checkbox widget to be instanciated for the tree node. The
 > default is the CheckBox Tree multi-state checkbox.
 
 > **_DEFAULT_**: null
@@ -166,16 +184,28 @@ is clicked. If false, only the *checkBoxClick* event is generated.
 As of dojo 1.6 all dijit widgets come with the so called auto-magic accessors
 *get()* and *set()*. All CheckBox Tree API's, that is, the CheckBox Tree, Tree
 Styling and Store Model API, use these accessors as their primary interface.
-For example, to get the checked state of a tree node one could simply call: 
+For example, to get the checked state of a tree node one could simply call:
 *get("checked")* or to change the checked state call: *set("checked",true)*.
 
 #### Note:
-The property names *"checked"* and *"enabled"* are automatically mapped to the 
+The property names *"checked"* and *"enabled"* are automatically mapped to the
 appropriate store item properties based on the store models [checkedAttr](Model-API#wiki-checkedAttr)
 and [enabledAttr](Model-API#wiki-enabledattr) values. Therefore, at the application
 level you can simple  use the keywords *"checked"* and *"enabled"* regardless
 of the actual store item properties.
- 
+
+***********************************************
+
+<h3 id="get">collapseUnchecked( node )</h3>
+> Collapse a branch node conditional. If the checkbox of the item associated with the
+> node is unchecked, the node is closed/collapsed.
+
+**_node:_** TreeNode
+
+> The tree node to close/collapse. If the node argument is omitted the tree root node
+> is used. Calling `collapseUnchecked()` without the node argument will collapse all
+> unchecked branches in the tree.
+
 ***********************************************
 
 <h3 id="get">get( propertyName )</h3>
@@ -191,9 +221,22 @@ of the actual store item properties.
 
 ***********************************************
 
+<h3 id="get">expandChecked( node )</h3>
+> Expand a branch node conditional. If the checkbox of the item associated with the node
+> is checked, the node is opened/expanded. Checked child branches of the newly expanded
+> branch will automatically expand as well.
+
+**_node:_** TreeNode
+
+> The tree node to open/expand. If the node argument is omitted the tree root node is
+> used. Calling `expandChecked()` without the node argument will expand all checked
+> branches in the tree.
+
+***********************************************
+
 <h3 id="mapeventtoattr">mapEventToAttr( oldPropName, property, nodeProp, value? )</h3>
 > Map an object property name to a tree node property. If the optional *value*
-> argument is specified, its value is assigned to the tree node property. If 
+> argument is specified, its value is assigned to the tree node property. If
 > *value* is a function, the result returned by the function is assigned to the
 > tree node property.
 
@@ -314,8 +357,8 @@ properties:
 > The widget must support the accessors `get()` and `set()` and must have a
 > *checked* property. In addition, the widgets should not stop any 'click'
 > events calling `event.stop()` nor should it change any related widget
-> instances without generating an 'click' event for those widgets.  
-> If *type* is a string, the string value must be a module ID. For example 
+> instances without generating an 'click' event for those widgets.
+> If *type* is a string, the string value must be a module ID. For example
 > `dojox/form/TriStateCheckbox`
 
 > **_DEFAULT_**: null
@@ -364,7 +407,7 @@ Tree Styling extension being loaded to hide the tree node labels and icons.
   require([
     "dojo/ready",
     "dijit/form/ToggleButton",
-    "cbtree/Tree",                      // CheckBox Tree              
+    "cbtree/Tree",                      // CheckBox Tree
     "cbtree/store/ObjectStore",         // Eventable Object Store
     "cbtree/model/ForestStoreModel",    // Tree Forest Store Model
     "cbtree/extensions/TreeStyling"     // Tree Styling extension
@@ -375,12 +418,12 @@ Tree Styling extension being loaded to hide the tree node labels and icons.
                                          query: {type: 'parent'},
                                          rootLabel: 'The Simpsons',
                                          checkedRoot: true
-                                       }); 
+                                       });
       ready( function() {
         var tree = new Tree( { model: model,
                                id: "MyTree",
-                               widget: { type: ToggleButton, 
-                                         args:{iconClass:'dijitCheckBoxIcon'}, 
+                               widget: { type: ToggleButton,
+                                         args:{iconClass:'dijitCheckBoxIcon'},
                                          mixin: function(args) {
                                             args['label'] = this.label;
                                          }
