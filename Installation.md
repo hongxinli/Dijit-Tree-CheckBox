@@ -11,7 +11,7 @@ Unzip the cbtree package in the `/dojotoolkit` directory which will create
 a new `/cbtree-v0.x.x` directory like:
 
     /dojotoolkit
-      /cbtree-v0.x.x
+      /cbtree-v0.9.3
       /dijit
       /dojo
       /util
