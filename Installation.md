@@ -1,5 +1,6 @@
-Before installing the cbtree package you must first install the latest [Dojo Toolkit](http://dojotoolkit.org/download/), that is, dojo 1.8 or
-later. Assuming you created a directory structure like:
+Before installing the [cbtree package](http://thejekels.com/download/cbtree) you must
+first install the latest [Dojo Toolkit](http://dojotoolkit.org/download/), that is, dojo
+1.8 or later. Assuming you created a directory structure like:
 
     /dojotoolkit
       /dijit
@@ -7,7 +8,16 @@ later. Assuming you created a directory structure like:
       /util
 
 Unzip the cbtree package in the `/dojotoolkit` directory which will create
-a new `/cbtree` directory like:
+a new `/cbtree-v0.x.x` directory like:
+
+    /dojotoolkit
+      /cbtree-v0.x.x
+      /dijit
+      /dojo
+      /util
+
+Next, rename the `/cbtree-v0.x.x` directory to `/cbtree` after which you end-up with a
+directory structure like:
 
     /dojotoolkit
       /cbtree
@@ -16,10 +26,10 @@ a new `/cbtree` directory like:
       /util
 
 <span class="mega-octicon octicon-alert"></span>
-The location of the `/cbtree` directory is important in order for the demos included
-in the package to work correctly. All demos use relative paths to load dojo and
-dijit modules. If you are not interested in running any of the demos you can
-install the cbtree package at any location.
+The location and name of the `/cbtree` directory is important in order for the demos included
+in the package to work correctly. All cbtree demos use relative paths to load dojo, dijit and
+cbtree modules. However, if you're not interested in running any of the demos you can
+install the cbtree package at any location and name the directory anyway you like.
 
 ### CheckBox Tree Directories
 After installation the `/cbtree` directory will have the following subdirectories:
@@ -36,13 +46,13 @@ After installation the `/cbtree` directory will have the following subdirectorie
       /themes
       /util
 
-<span class="mega-octicon octicon-alert"></span> Please note that all 
-directories marked **_deprecated_** are maintained for backward compatability 
-only and will be removed in the future. 
+<span class="mega-octicon octicon-alert"></span> Please note that all
+directories marked **_deprecated_** are maintained for backward compatability
+only and will be removed in the future.
 
-#### /data
+#### /data (deprecated)
 > The `/data` directory holds the cbtree stores implementing the legacy
-> dojo/data/api API's.  
+> dojo/data/api API's.
 > <span class="octicon octicon-alert"></span> These stores have been
 > deprecated and will removed in the future. See the /store directory instead.
 
@@ -65,9 +75,9 @@ only and will be removed in the future.
 > The /models directory holds the cbtree store models used with the new
 > cbtree/store stores located in the /store directory.
 
-#### /models
+#### /models (deprecated)
 > The /models directory holds the cbtree store models used with the legacy
-> dojo/data/ItemFile stores.  
+> dojo/data/ItemFile stores.
 > <span class="octicon octicon-alert"></span> These models have been
 > deprecated and will removed in the future. See the /model directory
 > instead.
