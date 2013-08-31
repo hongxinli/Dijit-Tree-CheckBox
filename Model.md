@@ -410,6 +410,7 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 		<td><a href="Model-API#wiki-options">options</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
+		<td></span></td>
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-parentproperty">parentProperty</a></td>
