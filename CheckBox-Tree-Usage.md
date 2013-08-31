@@ -449,7 +449,7 @@ in the sort options array. Given the example above, tree nodes are first sorted 
 name followed by hair color and finally age.
 Creating a model with the options property specifies would look like:
 
-```JavaScript
+```javascript
 var mySortOptions = {[
 	{attribute: "name", descending: true, ignoreCase: true},
 	{attribute: "hair", ignoreCase: true},
