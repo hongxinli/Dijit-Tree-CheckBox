@@ -449,7 +449,7 @@ to `false`.
 The sort operation is performed in the order in which the sort information appears
 in the sort options array. Given the example above, tree nodes are first sorted by
 name followed by hair color and finally age.
-Creating a model with the options property specifies would look like:
+Creating a model with the options property specified would look like:
 
 ```javascript
 var mySortOptions = {[
