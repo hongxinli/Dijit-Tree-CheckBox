@@ -1,6 +1,6 @@
 The CheckBox Tree comes with three store models, a [Tree Store Model](#tree-store-model),
 a [Forest Store Model](#forest-store-model) and a [File Store Model](#file-store-model).
-The distinct differences are explained in the sections below. 
+The distinct differences are explained in the sections below.
 
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [The Model, an introduction](#the-model)
@@ -13,9 +13,9 @@ The distinct differences are explained in the sections below.
 <h2 id="the-model">The Model</h2>
 In a Model-View-Controller (MVC) pattern the model is the glue between the *View*
 or presentation layer and something that manipulates the data (the controller).
-Each controller may require a specific model. Please note that all models 
+Each controller may require a specific model. Please note that all models
 that come with the CheckBox Tree are so-called store models, that is,
-they interface with objects (controllers) that expose the 
+they interface with objects (controllers) that expose the
 [cbtree/store/api/Store](Store-API) API.
 
 All Checkbox Tree models implement the **cbtree/model/api/Model** API
@@ -23,14 +23,14 @@ All Checkbox Tree models implement the **cbtree/model/api/Model** API
 ### Model Foundation
 
 The foundation of the CheckBox Tree models are the two base classes **_BaseStoreModel_**
-and **_CheckedStoreModel_**. The class **_BaseStoreModel_** provides all 
-the required logic to interface with a wide variety of store implementation. 
+and **_CheckedStoreModel_**. The class **_BaseStoreModel_** provides all
+the required logic to interface with a wide variety of store implementation.
 This class inspects a store and automatically extend it, if required and
 possible, so that it complies with the minimum feature set required for the
-models to operate. 
+models to operate.
 
 Please note that any model derived from the **_BaseStoreModel_** will also work
-with the default `dijit/tree`. The base class **_CheckedStoreModel_** inherits 
+with the default `dijit/tree`. The base class **_CheckedStoreModel_** inherits
 for **_BaseStoreModel_** and adds
 the capabilities to maintain and manipulate a so-called 'checked' state for store
 objects.
@@ -45,7 +45,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<th>Preferred</th>
 		<th>Description</th>
 	</tr>
-	
+
 	<tr>
 		<td rowspan="6">CheckBox Tree</td>
 		<td>cbtree/store/api/Store<sup>1</sup></td>
@@ -70,7 +70,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 		<td>
 			Derived from the Memory store adding support for natural order,
 			hierarchical organized data object and multi-parenting.
-		</td>	
+		</td>
 	</tr>
 	<tr>
 		<td>Object Store</td>
@@ -84,14 +84,14 @@ wrappers supported by the base class **_BaseStoreModel_**:
 			The File Store implements an in-memory store whose content represent the
 			file system layout of the HTTP back-end server document root directory or
 			portions thereof.
-		</td>	
+		</td>
 	</tr>
 	<tr>
 		<td>Eventable</td>
     <td></td>
 		<td>
 			A store wrapper that makes the store emit events for store updates.
-		</td>	
+		</td>
 	</tr>
 
 	<tr>
@@ -115,7 +115,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 
 <span class="mega-octicon octicon-alert"></span> All CheckBox Tree stores
 are designed and implemented such that they can be wrapped with the dojo/store/Observable
-store wrapper. Howerver, be sure to read the store [Eventable](Store#wiki-eventable) 
+store wrapper. Howerver, be sure to read the store [Eventable](Store#wiki-eventable)
 and [Observable](Store#wiki-observable) sections before doing so.
 
 The folowing table lists the stores supported by CheckBox Tree model type.
@@ -176,7 +176,7 @@ certain functionality is not offered by the store. The model tests the store for
 the presence of the [hierarchical](Store-API#wiki-hierarchical) property.
 If missing, or set to false, the model adds *before* advice to the store
 methods `add()` and `put()` adding support for the [PutDirectives](Store-API#wiki-putdirectives)
-property **_parent_**. 
+property **_parent_**.
 
 If the store does not have a [getChildren()](Store-API#wiki-getchildren)
 method one will be added using the store's [query()](Store-API#wiki-query)
@@ -189,7 +189,7 @@ the first store query is executed.
 <h3 id="creating-a-model">Creating a Model</h3>
 
 In order to explain some of the models inner workings we need to declare a simple
-data set which we will refer back to throughout this document. Lets assume we 
+data set which we will refer back to throughout this document. Lets assume we
 have the following set of objects:
 
 ```javascript
@@ -211,7 +211,7 @@ a tree root query. This query is passed to the store when a tree issues a
 the root of our tree assuming the store query returns a single object.
 
 ```javascript
-required(["cbtree/store/Hierarchy"           // Fetch the store, 
+required(["cbtree/store/Hierarchy"           // Fetch the store,
           "cbtree/model/TreeStoreModel",     // the model,
           "cbtree/Tree"                      // and the Tree
          ], function (Hierarchy, TreeStoreModel, Tree) {
@@ -223,7 +223,7 @@ required(["cbtree/store/Hierarchy"           // Fetch the store,
   myTree.startup();
 });
 ```
-The above example shows the basic sequence required to create a store, model 
+The above example shows the basic sequence required to create a store, model
 and tree. The following sections will explain in detail which model to use.
 
 Which store model to use primarily depends on:
@@ -252,11 +252,11 @@ with the name 'Family' therefore we can safely use the Tree Store Model located
 at **_cbtree/model/TreeStoreModel_**.
 
 However, querying the same store with a query argument like `query:{type:"parent"}`
-would throw an exception because this particular query would return 4 store 
+would throw an exception because this particular query would return 4 store
 objects instead of just one.
-This shows that even though the store data is needly organized in a tree hierarchy 
+This shows that even though the store data is needly organized in a tree hierarchy
 it all depends on the number of objects the root query returns if we can use a
-Tree Store Model. 
+Tree Store Model.
 
 
 
@@ -272,22 +272,22 @@ children of this fabricate root. The fabricated root object does **NOT** represe
 any store object and is merely used to anchor the tree.
 
 There are two specific properties that effect the fabricated root, the model
-property [checkedRoot](Model-API#wiki-checkedroot) and the tree property [showRoot](CheckBox-Tree-API#wiki-showroot). 
-If the tree property **_showRoot_** is set to false the fabricated root is not 
+property [checkedRoot](Model-API#wiki-checkedroot) and the tree property [showRoot](CheckBox-Tree-API#wiki-showroot).
+If the tree property **_showRoot_** is set to false the fabricated root is not
 displayed as part of the tree.
 
 ```javascript
 var store = new Hierarchy( {data:myData} );
 var model = new ForestStoreModel( {store: store, query: {name:/.*/}} );
 
-                      or simply 
-                      
+                      or simply
+
 var model = new ForestStoreModel( {store: store} );
 ```
 
 In the example above the query returns all available store objects. Notice that
-a regular expression was used to query the object property *name*. See the 
-[Query Engine](Query-Engine) for a detailed description on how to query a store.  
+a regular expression was used to query the object property *name*. See the
+[Query Engine](Query-Engine) for a detailed description on how to query a store.
 
 The next example returns 4 store objects
 ```javascript
@@ -296,29 +296,29 @@ var model = new ForestStoreModel( {store: store, query: {type:"parent"}} );
 ```
 
 If you can structure your data and associated root query such that a single store
-object is returned it is recommended to do so and use the Tree Store Model 
+object is returned it is recommended to do so and use the Tree Store Model
 instead because of the additional overhead of a Forest Tree Store.
 
 
 <h2 id="file-store-model">File Store  Model</h2>
 
 The File Store Model allows the user to present the back-end server file system
-as a traditional UI directory tree. 
+as a traditional UI directory tree.
 The model is designed to be used with the cbtree FileStore which, like the other
 cbtree stores, implements the `cbtree/store/api/Store` API offering the functionality
 to query the back-end servers file system, add lazy loading and provide limited
 support for store write operations.
-Please refer to the [File Store](File-Store) documentation for details and 
-examples. 
+Please refer to the [File Store](File-Store) documentation for details and
+examples.
 
 Because the content of a File Store is treated as read-only, that is, you can't
-add new items to the store, any attempt to do so will throw an exception. You can 
+add new items to the store, any attempt to do so will throw an exception. You can
 however add custom properties to store items which will be writeable, or rename
 or delete store items. The File Store Model also supports drag and drop
 operations using the File Store rename capabilities.
 
 <span class="mega-octicon octicon-alert"></span> Because of the reduced
-function set supported, some of the common store model properties are ignored 
+function set supported, some of the common store model properties are ignored
 by the File Store Model.
 
 
@@ -346,7 +346,7 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 		<th>File Store Model</th>
 	</tr>
 	<tr>
-		<td rowspan="15">Property</td>
+		<td rowspan="16">Property</td>
 		<td><a href="Model-API#wiki-checkedall">checkedAll</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
