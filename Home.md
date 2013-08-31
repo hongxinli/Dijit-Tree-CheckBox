@@ -2,7 +2,7 @@ Welcome to the CheckBox Tree wiki.
 
 <img src="wiki/images/Trees.png" alt="Trees"></img>
 
-The picture above shows some tree samples created with the CheckBox Tree widget. 
+The picture above shows some tree samples created with the CheckBox Tree widget.
 The tree on the left is a default CheckBox tree, the others are created using
 specific tree and/or model properties.
 
@@ -34,6 +34,7 @@ has three primary components plus a set of sub-components and extensions.
 ## Usage
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
 * [Deleting Tree Nodes](wiki/CheckBox-Tree-Usage#deleting-tree-nodes)
+* [Sorting Tree Nodes](wiki/CheckBox-Tree-Usage#sorting-tree-nodes)
 
 ## Examples
 * [ArcGIS Points Of Interest](wiki/ArcGIS-Example)

@@ -178,7 +178,7 @@ The above example returns at a maximum 10 objects whose *hair* property equal
 
 #### Sorting Results
 Query results can be sorted using the optional **_sort_** property. The **_sort_**
-property value is an array of [sort directive](Store-API#wiki-sortDirective)
+property value is an array of [sort directives](Store-API#wiki-sortDirective)
 or a comparison function. A sort directive is a JavaScript key:value
 pairs object describing what property to sort on, the direction of the sort and
 if property values should be compared case insensitive.

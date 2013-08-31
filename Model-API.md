@@ -125,6 +125,14 @@ stores like a File Store.
 
 > **_DEFAULT_**: true
 
+<h3 id="options">options:</h3>
+> **_TYPE_**: Object
+
+> A JavaScript key:value pairs object used as the query options. Please refer to the
+> [Query Options](Query-Engine#wiki-the-query-options) for details.
+
+> **_DEFAULT_**: null
+
 <h3 id="parentproperty">parentProperty:</h3>
 > **_TYPE_**: String
 
@@ -137,7 +145,7 @@ stores like a File Store.
 <h3 id="query">query:</h3>
 > **_TYPE_**: Object
 
-> A JavaScript key:value pairs object used the query the store to determine the
+> A JavaScript key:value pairs object used to query the store to determine the
 > tree root object or, in case the query returns multiple objects, the children
 > of the fabricated root object. For example: `{type:"parent"}`.
 > If not specified, a wildcard search is performed using the store's 
