@@ -1,6 +1,8 @@
 
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Working with Events](#working-with-events)
+* [Deleting Tree Node](#deleting-tree-nodes)
+* [Sorting Tree Node](#sorting-tree-nodes)
 
 <h2 id="working-with-events">Working with Events</h2>
 
@@ -213,7 +215,7 @@ The arguments passed to event handles are defined as follows:
 
 ### Model Events
 The CheckBox Tree models, although not widgets, offer the same `on()`
-functionality as widgets do. Therefore you can simple register a model event
+functionality as widgets do. Therefore you can simply register a model event
 listener like `model.on( "dataValidated", myEventHandler );`
 
 <table>
