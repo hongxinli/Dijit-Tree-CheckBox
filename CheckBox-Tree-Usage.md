@@ -449,16 +449,16 @@ in the sort options array. Given the example above, tree nodes are first sorted 
 name followed by hair color and finally age.
 Creating a model with the options property specifies would look like:
 
-```javascript
+```JavaScript
 var mySortOptions = {[
 	{attribute: "name", descending: true, ignoreCase: true},
 	{attribute: "hair", ignoreCase: true},
 	{attribute: "age"}
 ]};
 var model = new TreeStoreModel( { store: store,
-								  query: {name: "Root"},
-								  options: {sort: mySortOptions}
-								});
+                                  query: {name: "Root"},
+                                  options: {sort: mySortOptions}
+                                });
 ```
 #### Using a custom sort function
 
