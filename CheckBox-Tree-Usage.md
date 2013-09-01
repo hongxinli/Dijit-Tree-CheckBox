@@ -430,7 +430,7 @@ The options object is currently defined as follows:
 ```
 options     = "{" "sort" ":" sortOptions "}"
 sortOptions = "[" SortInfo ["," SortInfo]* "]" / Function
-SortInfo    = "{" attribute [descending / ignoreCase] "}"
+SortInfo    = "{" attribute ["," descending] ["," ignoreCase] "}"
 attribute   = "attribute" ":" JSidentifier
 descending  = "descending" ":" boolean
 ignoreCase  = "ignoreCase" ":" boolean
@@ -439,9 +439,9 @@ boolean     = "true" / "false"
 See also [sort directives](Store-API#wiki-sortDirective). For example:
 ```javascript
 var options = {[
-	{attribute: "name", descending: true, ignoreCase: true},
-	{attribute: "hair", ignoreCase: true},
-	{attribute: "age"}
+  {attribute: "name", descending: true, ignoreCase: true},
+  {attribute: "hair", ignoreCase: true},
+  {attribute: "age"}
 ]};
 ```
 The value of both the _descending_ and _ignoreCase_ sort info properties defaults
@@ -453,9 +453,9 @@ Creating a model with the options property specified would look like:
 
 ```javascript
 var mySortOptions = {[
-	{attribute: "name", descending: true, ignoreCase: true},
-	{attribute: "hair", ignoreCase: true},
-	{attribute: "age"}
+  {attribute: "name", descending: true, ignoreCase: true},
+  {attribute: "hair", ignoreCase: true},
+  {attribute: "age"}
 ]};
 var model = new TreeStoreModel( { store: store,
                                   query: {name: "Root"},
@@ -468,12 +468,12 @@ Alternatively, instead of specifying the options sort property as an object you
 can also specify a custom sort function. Consider the following example:
 ```javascript
 function mySortFunc(itemA, itemB) {
-	if (itemA.name > itemB.name) {
-		return 1;
-	} else if (itemA.name < itemB.name) {
-		return -1;
-	}
-	return 0;
+  if (itemA.name > itemB.name) {
+    return 1;
+  } else if (itemA.name < itemB.name) {
+    return -1;
+  }
+  return 0;
 }
 var model = new TreeStoreModel( { store: store, query: {name: "Root"}, options: {sort: mySortFunc}});
 ```
