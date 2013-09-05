@@ -452,7 +452,7 @@ name followed by hair color and finally age.
 Creating a model with the options property specified would look like:
 
 ```javascript
-var mySortOptions = {[
+var mySortOptions = {sort: [
   {attribute: "name", descending: true, ignoreCase: true},
   {attribute: "hair", ignoreCase: true},
   {attribute: "age"}
