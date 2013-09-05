@@ -438,7 +438,7 @@ boolean     = "true" / "false"
 ```
 See also [sort directives](Store-API#wiki-sortDirective). For example:
 ```javascript
-var options = {[
+var options = {sort: [
   {attribute: "name", descending: true, ignoreCase: true},
   {attribute: "hair", ignoreCase: true},
   {attribute: "age"}
