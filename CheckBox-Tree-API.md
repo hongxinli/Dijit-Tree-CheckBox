@@ -85,7 +85,7 @@ for details.
 
 > If true, unchecking a branch node checkbox will close/collapse the branch. In addition,
 > when all children of a given branch are unchecked the branch will also collapse, that is,
-> if the models property **_checkedStrict_** is enabled (default).
+> if the model property [checkedStrict](Model-API#wiki-checkedstrict) is enabled (default).
 
 > **_DEFAULT_**: false
 
