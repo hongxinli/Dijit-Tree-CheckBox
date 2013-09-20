@@ -423,7 +423,7 @@ The root children will be displayed in the order they appear in the store, that 
 **_Abe, Mona, Jacqueline, Ned_** and finally **_Apu_**. The same goes for any children,
 for example, expanding tree node 'Homer' displays **_Lisa, Bart_** and **_Maggie_**.
 
-As of **_cbtree v0.9.4_** the Tree models have a new property called [options](Model-API#options)
+As of **_cbtree v0.9.3-3_** the Tree models have a new property called [options](Model-API#options)
 which is a JavaScript key:value pairs object defining the sort order of the tree.
 The options object is currently defined as follows:
 
