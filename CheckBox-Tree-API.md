@@ -32,6 +32,15 @@ for details.
 > **_DEFAULT_**: false
 
 
+<h3 id="branchcheckbox">branchCheckBox:</h3>
+> **_TYPE_**: Boolean
+
+> If true, the checkbox associated with a tree branch will be displayed, otherwise the
+> checkbox will be hidden but still available for checking its state. See also:
+> [branchReadOnly](#branchreadonly)
+
+> **_DEFAULT_**: true
+
 <h3 id="branchicons">branchIcons:</h3>
 > **_TYPE_**: Boolean
 
@@ -66,15 +75,17 @@ for details.
 <h3 id="clickeventcheckbox">clickEventCheckBox:</h3>
 > **_TYPE_**: Boolean
 
-If true, both the *click* and *checkBoxClick* events are generated when a checkbox
-is clicked. If false, only the *checkBoxClick* event is generated.
+> If true, both the *click* and *checkBoxClick* events are generated when a checkbox
+> is clicked. If false, only the *checkBoxClick* event is generated.
 
 > **_DEFAULT_**: true
 
 <h3 id="closeonunchecked">closeOnUnchecked:</h3>
 > **_TYPE_**: Boolean
 
-> If true, unchecking a branch node checkbox will close/collapse the branch.
+> If true, unchecking a branch node checkbox will close/collapse the branch. In addition,
+> when all children of a given branch are unchecked the branch will also collapse, that is,
+> if the models property **_checkedStrict_** is enabled (default).
 
 > **_DEFAULT_**: false
 
@@ -198,7 +209,9 @@ of the actual store item properties.
 
 <h3 id="get">collapseUnchecked( node )</h3>
 > Collapse a branch node conditional. If the checkbox of the item associated with the
-> node is unchecked, the node is closed/collapsed.
+> node is unchecked, the node is closed/collapsed. See also the tree properties
+> [closeOnUnchecked](#closeonunchecked) and [openOnChecked](#openonchecked) which enable
+> automatic branch expanding and collapsing.
 
 **_node:_** TreeNode
 
@@ -224,7 +237,9 @@ of the actual store item properties.
 <h3 id="get">expandChecked( node )</h3>
 > Expand a branch node conditional. If the checkbox of the item associated with the node
 > is checked, the node is opened/expanded. Checked child branches of the newly expanded
-> branch will automatically expand as well.
+> branch will automatically expand as well. See also the tree properties
+> [closeOnUnchecked](#closeonunchecked) and [openOnChecked](#openonchecked) which enable
+> automatic branch expanding and collapsing.
 
 **_node:_** TreeNode
 
