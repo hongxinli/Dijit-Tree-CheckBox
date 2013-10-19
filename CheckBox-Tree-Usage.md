@@ -53,7 +53,7 @@ For each DOM node the dijit registry is called to get the associated tree node w
 ```javascript
 require(["dojo/query", "dijit/registry", ... ], function (query, regsitry, ...) {
 	         ...
-    var allTreeBranches = query(".dijitTreeRow[branch=\"true\"]");
+    var allTreeBranches = query(".dijitTreeRow[branch='true']");
     allTreeBranches.forEach(function (domNode) {
 		var nodeWidget = registry.getEnclosingWidget(domNode);
                       ...
