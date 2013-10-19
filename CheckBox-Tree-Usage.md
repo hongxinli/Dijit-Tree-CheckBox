@@ -27,10 +27,10 @@ function onCheckBoxClick(item, nodeWidget, event) {
     if (nodeWidget.isExpandable) {
        // Node is a branch
 	         ...
-	} else {
+    } else {
        // Node is a leaf
 	         ...
-	}
+    }
 }
 ```
 
@@ -42,7 +42,7 @@ require(["dojo/dom-attr", ... ], function (domAttr, ... ) {
 	         ...
     function onCheckBoxClick(item, nodeWidget, event) {
         var isBranch = domAttr.get(nodeWidget.rowNode, "branch");
-	}
+    }
 }
 ```
 
@@ -55,9 +55,9 @@ require(["dojo/query", "dijit/registry", ... ], function (query, regsitry, ...) 
 	         ...
     var allTreeBranches = query(".dijitTreeRow[branch='true']");
     allTreeBranches.forEach(function (domNode) {
-		var nodeWidget = registry.getEnclosingWidget(domNode);
+        var nodeWidget = registry.getEnclosingWidget(domNode);
                       ...
-	    console.log(nodeWidget.label);
+        console.log(nodeWidget.label);
     });
 }
 ```
@@ -69,7 +69,7 @@ on whether or not a tree node is a branch.
     .dijitTreeRow[branch="true"] .dijitTreeLabel {
         background-color: yellow;
                  ...
-	}
+    }
 </style>
 ```
 <sup id="branch-since">[1]</sup>The **_branch_** attribute is available since cbtree release
