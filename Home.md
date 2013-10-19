@@ -32,6 +32,7 @@ has three primary components plus a set of sub-components and extensions.
 * [Store API](wiki/Store-API)
 
 ## Usage
+* [Branch versus Leaf](wiki/CheckBox-Tree-Usage#branch-versus-leaf)
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
 * [Deleting Tree Nodes](wiki/CheckBox-Tree-Usage#deleting-tree-nodes)
 * [Sorting Tree Nodes](wiki/CheckBox-Tree-Usage#sorting-tree-nodes)

@@ -1,5 +1,6 @@
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Tree Properties](#tree-properties)
+* [Tree Node Properties](#tree-node-properties)
 * [Tree Functions](#tree-functions)
 * [Tree Callbacks](#tree-callbacks)
 
@@ -173,7 +174,7 @@ for details.
 <h3 id="showRoot">showRoot:</h3>
 > **_TYPE_**: Boolean
 
-> Determines if the tree root is displayed or not. This property is specificly
+> Determines if the tree root is displayed or not. This property is specifically
 > helpful when using a Forest Store Model and you don't want to display the
 > fabricate root.
 
@@ -182,10 +183,65 @@ for details.
 <h3 id="widget">widget:</h3>
 > **_TYPE_**: [WidgetObject](#widget-object)
 
-> Specifies the checkbox widget to be instanciated for the tree node. The
+> Specifies the checkbox widget to be instantiated for the tree node. The
 > default is the CheckBox Tree multi-state checkbox.
 
 > **_DEFAULT_**: null
+
+
+
+
+<h2 id="tree-node-properties">Tree Node Properties</h2>
+All tree nodes are template driven widgets which only have non-configurable properties.
+User applications should therefore treat all properties as **read-only**
+
+<h3 id="focused">focused:</h3>
+> If `true` indicates the tree node currently has focus, false otherwise.
+
+> **_TYPE_**: Boolean
+
+<h3 id="id">id:</h3>
+> The unique identifier generated for this tree node.
+
+> **_TYPE_**: String
+
+<h3 indent="id">indent:</h3>
+> Zero based indent level of the tree node. The tree root node is at level 0.
+
+> **_TYPE_**: Number
+
+<h3 id="isExpandable">isExpandable:</h3>
+> Indicates if the tree node is expandable. If `true` the tree node is a so-called _tree branch_
+> and may have child tree nodes, otherwise the tree node is a _tree leaf_. This property is
+> also exposed as the **_branch_** attribute of the generated HTML elements whose class
+> attribute equals to **dijitTreeRow**, for example `<div class="dijitTreeRow" branch="true" ...>`
+
+> **_TYPE_**: Boolean
+
+> <span class="mega-octicon octicon-alert"></span>The **_isExpandable_** property only
+> indicates if a node has children in the DOM, it is no indication if the store item
+> associated with the tree node has any children in the store.
+
+<h3 id="isExpanded">isExpanded:</h3>
+> Indicates if the tree node is currently expanded. Only applicable to tree branches.
+
+> **_TYPE_**: Boolean
+
+<h3 id="item">item:</h3>
+> The store item or record this tree node is representing.
+
+> **_TYPE_**: Object
+
+<h3 id="label">label:</h3>
+> The label text for the tree node.
+
+> **_TYPE_**: String
+
+<h3 id="tree">tree:</h3>
+> The tree instance this tree node belongs to.
+
+> **_TYPE_**: Object
+
 
 
 

@@ -1,8 +1,79 @@
 
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
+* [Branch versus Leaf](#branch-versus-leaf)
 * [Working with Events](#working-with-events)
 * [Deleting Tree Node](#deleting-tree-nodes)
 * [Sorting Tree Node](#sorting-tree-nodes)
+
+<h2 id="branch-versus-leaf">Branch versus Leaf</h2>
+One of the most common questions asked is: _`How do I distinguish between tree branches
+and tree leafs?'_. The simple answer is: check the [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
+property of a tree node widget or the associated DOM attribute **_branch_**
+<a href="#branch-since"><sup>[1]</sup></a>.
+The **_isExpandable_** property and **_branch_** attribute both indicates if a tree node has
+children, that is, DOM child nodes.
+
+Tree nodes are template driven widgets which are automatically generated when the tree is
+created. The cbtree node template used is located at `cbtree/templates/cbtreeNode.html`.
+Each generated HTML element with the class **_dijitTreeRow_** also gets the **_branch_**
+attribute whose value is the value of the tree node widget property **_isExpandable_**.
+
+### Test for branches programmatically
+Whenever a tree node widget is passed as an argument to a function, typically an event handler,
+one can simple test the **_isExpandable_** property to determine if the tree node is a
+branch or not.
+```javascript
+function onCheckBoxClick(item, nodeWidget, event) {
+    if (nodeWidget.isExpandable) {
+       // Node is a branch
+	         ...
+	} else {
+       // Node is a leaf
+	         ...
+	}
+}
+```
+
+Although not very efficient, compared to the approach above, you can also access the DOM
+**_branch_** attribute in your application like:
+
+```javascript
+require(["dojo/dom-attr", ... ], function (domAttr, ... ) {
+	         ...
+    function onCheckBoxClick(item, nodeWidget, event) {
+        var isBranch = domAttr.get(nodeWidget.rowNode, "branch");
+	}
+}
+```
+
+### Test using a selector
+The following example collects all tree node branches in the DOM and iterates over them.
+For each DOM node the dijit registry is called to get the associated tree node widget.
+
+```javascript
+require(["dojo/query", "dijit/registry", ... ], function (query, regsitry, ...) {
+	         ...
+    var allTreeBranches = query(".dijitTreeRow[branch=\"true\"]");
+    allTreeBranches.forEach(function (domNode) {
+		var nodeWidget = registry.getEnclosingWidget(domNode);
+                      ...
+	    console.log(nodeWidget.label);
+    });
+}
+```
+
+Next, lets assume you want to give the label of tree nodes a different background color depending
+on whether or not a tree node is a branch.
+```html
+<style type="text/css">
+    .dijitTreeRow[branch="true"] .dijitTreeLabel {
+        background-color: yellow;
+                 ...
+	}
+</style>
+```
+<sup id="branch-since">[1]</sup>The **_branch_** attribute is available since cbtree release
+[cbtree-v0.9.3-4](http://thejekels.com/download/cbtree)
 
 <h2 id="working-with-events">Working with Events</h2>
 
