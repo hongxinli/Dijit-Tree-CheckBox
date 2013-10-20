@@ -213,8 +213,8 @@ User applications should therefore treat all properties as **read-only**
 <h3 id="isExpandable">isExpandable:</h3>
 > Indicates if the tree node is expandable. If `true` the tree node is a so-called _tree branch_
 > and may have child tree nodes, otherwise the tree node is a _tree leaf_. This property is
-> also exposed as the **_branch_** attribute of the generated HTML elements whose class
-> attribute equals to **dijitTreeRow**, for example `<div class="dijitTreeRow" branch="true" ...>`
+> also exposed as the **_isExpandable_** attribute of the generated DOM elements whose class
+> attribute equals to **dijitTreeRow**, for example `<div class="dijitTreeRow" isExpandable="true" ...>`
 
 > **_TYPE_**: Boolean
 
