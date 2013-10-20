@@ -9,12 +9,12 @@
 
 One of the most common questions asked is: _`How do I distinguish between tree branches
 and tree leafs?'_. The simple answer is: check the [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
-property of a tree node widget or the associated DOM attribute
+property of a tree node widget or the associated HTML attribute
 <a href="#isexpandable-since"><sup>[1]</sup></a>.
 Both the **_isExpandable_** property and attribute indicate if the tree node has
 children in the DOM.
 
-Each DOM tree node element with class **_dijitTreeRow_** gets an **_isExpandable_** attribute
+Each HTML tree node element with class **_dijitTreeRow_** gets an **_isExpandable_** attribute
 whose value is the value of the matching tree node widget property:
 
 ```html
@@ -37,7 +37,7 @@ function onCheckBoxClick(item, nodeWidget, event) {
 }
 ```
 
-Although not very efficient, compared to the approach above, you can also access the DOM
+Although not very efficient, compared to the approach above, you can also access the HTML
 **_isExpandable_** attribute in your application like:
 
 ```javascript
@@ -49,7 +49,7 @@ require(["dojo/dom-attr", ... ], function (domAttr, ... ) {
 }
 ```
 
-### Testing DOM elements
+### Testing HTML elements
 The following example collects all tree node branches in the DOM and iterates over them.
 For each DOM node the dijit registry is called to get the associated tree node widget.
 
