@@ -6,22 +6,22 @@
 * [Sorting Tree Node](#sorting-tree-nodes)
 
 <h2 id="branch-versus-leaf">Branch versus Leaf</h2>
-
-One of the most common questions asked is: _`How do I distinguish between tree branches
-and tree leafs?'_. The simple answer is: check the [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
-property of a tree node widget or the associated HTML attribute
-<a href="#isexpandable-since"><sup>[1]</sup></a>.
-Both the **_isExpandable_** property and attribute indicate if the tree node has
-children in the DOM.
-
-Each HTML tree node element with class **_dijitTreeRow_** gets an **_isExpandable_** attribute
-whose value is the value of the matching tree node widget property:
+Each tree node widget has a property called [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
+indicating, as the name implies, if the widget is expandable or in other words: if the
+tree node has children in the DOM. The _isExpandable_ widget property is also exposed as
+the **_expandable_** <a href="#expandable-since"><sup>[1]</sup></a> attribute on all HTML
+elements with class _dijitTreeRow_:
 
 ```html
-<div class="dijitTreeRow" isExpandable="true" ... >
+<div class="dijitTreeRow" expandable="true" ... >
 ```
 
-### Testing a tree node widget
+To determine if a tree node is a branch or a leaf on the tree simply check the
+[isExpandable](CheckBox-Tree-API#wiki-isExpandable) property of a tree node widget or the
+associated HTML attribute **_expandable_**. If the value is true it is a branch, otherwise
+it is a leaf.
+
+### Testing Tree node widgets
 Whenever a tree node widget is passed as an argument to a function, typically an event
 handler, one can simple test the **_isExpandable_** property of the widget to determine
 if the tree node is a branch or not.
@@ -37,14 +37,14 @@ function onCheckBoxClick(item, nodeWidget, event) {
 }
 ```
 
-Although not very efficient, compared to the approach above, you can also access the HTML
-**_isExpandable_** attribute in your application like:
+Although not as efficient, compared to the approach above, you can also access the HTML
+**_expandable_** attribute in your application like:
 
 ```javascript
 require(["dojo/dom-attr", ... ], function (domAttr, ... ) {
 	         ...
     function onCheckBoxClick(item, nodeWidget, event) {
-        var isBranch = domAttr.get(nodeWidget.rowNode, "isExpandable");
+        var isBranch = domAttr.get(nodeWidget.rowNode, "expandable");
     }
 }
 ```
@@ -56,8 +56,7 @@ For each DOM node the dijit registry is called to get the associated tree node w
 ```javascript
 require(["dojo/query", "dijit/registry", ... ], function (query, regsitry, ...) {
 	         ...
-    var allTreeBranches = query(".dijitTreeRow[isExpandable='true']");
-    allTreeBranches.forEach(function (domNode) {
+    query(".dijitTreeRow[expandable='true']").forEach(function (domNode) {
         var nodeWidget = registry.getEnclosingWidget(domNode);
                       ...
         console.log(nodeWidget.label);
@@ -65,17 +64,17 @@ require(["dojo/query", "dijit/registry", ... ], function (query, regsitry, ...) 
 }
 ```
 
-Next, lets assume you want to give the label of tree nodes a different background color depending
-on whether or not a tree node is a branch.
+Next, lets assume you want to give the label of tree rows a different background color
+depending on whether or not a tree node is a branch.
 ```html
 <style type="text/css">
-    .dijitTreeRow[isExpandable="true"] .dijitTreeLabel {
+    .dijitTreeRow[expandable="true"] .dijitTreeLabel {
         background-color: yellow;
                  ...
     }
 </style>
 ```
-<sup id="isexpandable-since">[1]</sup>The **_isExpandable_** attribute is available since
+<sup id="expandable-since">[1]</sup>The HTML attribute **_expandable_** is available since
 cbtree release [cbtree-v0.9.3-4](http://thejekels.com/download/cbtree)
 
 <h2 id="working-with-events">Working with Events</h2>
