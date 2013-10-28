@@ -1,11 +1,302 @@
 
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
-* [Branch versus Leaf](#branch-versus-leaf)
+* [Checkbox Access and Visibility](#checkbox-access-and-visibility)
+* [Tree Branch versus Leaf](#tree-branch-versus-leaf)
+* [Checkboxes in HTML forms](#checkboxes-in-html-forms)
 * [Working with Events](#working-with-events)
 * [Deleting Tree Node](#deleting-tree-nodes)
 * [Sorting Tree Node](#sorting-tree-nodes)
 
-<h2 id="branch-versus-leaf">Branch versus Leaf</h2>
+<h2 id="checkbox-access-and-visibility">Checkbox Access and Visibility</h2>
+
+The CheckBox Tree offers several options to manipulate the creation, access and visibility
+of checkboxes. By default, each tree node will automatically get a checkbox, the following
+properties influence the checkbox behavior:
+
+<table>
+	<tr>
+		<th>Class</th>
+		<th>property</th>
+		<th>default</th>
+		<th>description</th>
+	</tr>
+
+	<tr>
+		<td rowspan="5">CheckBox Tree</td>
+		<td>branchCheckBox</td>
+		<td>true</td>
+		<td>
+			Determines if the checkbox of a tree branch is displayed. If <code>false</code>,
+			the checkbox is still created and placed in the document but hidden from view.
+		</td>
+	</tr>
+	<tr>
+		<td>branchReadOnly</td>
+		<td>false</td>
+		<td>
+			Determines if the checkbox of a tree branch is read-only. If <code>true</code>,
+			The checkbox is displayed but grayed out and can not be clicked. This property
+			only has affect if both tree properties <em>checkBoxes</em> and <em>branchCheckBox</em>
+			are <code>true</code>.
+		</td>
+	</tr>
+	<tr>
+		<td>checkBoxes</td>
+		<td>true</td>
+		<td>
+			Determines if the checkbox tree will get any checkboxes. If <code>false</code>
+			no checkboxes will be created and/or displayed. As a result, there will be no
+			checkboxes in the document.
+		</td>
+	</tr>
+	<tr>
+		<td>leafCheckBox</td>
+		<td>true</td>
+		<td>
+			Determines if the checkbox of a tree leaf is displayed. If <code>false</code>,
+			the checkbox is still created and placed in the document but hidden from view.
+		</td>
+	</tr>
+	<tr>
+		<td>leafReadOnly</td>
+		<td>false</td>
+		<td>
+			Determines if the checkbox of a tree leaf is read-only. If <code>true</code>,
+			the checkbox is displayed but grayed out and can not be clicked. This property
+			only has affect if both tree properties <em>checkBoxes</em> and <em>leafCheckBox</em>
+			are <code>true</code>.
+		</td>
+	</tr>
+
+	<tr>
+		<td rowspan="2">Tree Model</td>
+		<td>checkedAll</td>
+		<td>true</td>
+		<td>
+			If true, every store object will receive a so-called <em>checked</em> state property.
+			The name of the actual property is defined by the value of the model property
+			<a href="Model-API#wiki-checkedattr">checkedAttr</a>. If the 'checked' state
+			property is added to a store object, its initial state is defined by the value
+			of the model property <a href="Model-API#wiki-checkedstate">checkedState</a>.
+		</td>
+	</tr>
+	<tr>
+		<td>enabledAttr</td>
+		<td>""</td>
+		<td>
+			The name of the store object property that holds the <em>enabled</em> state
+			of the checkbox. Even though it is referred to as the <em>enabled</em> state
+			the tree will only use this property to set the <em>readOnly</em> property of
+			a checkbox, as disabling the widget (DOM element) would exclude it from HTTP
+			POST operations.
+		</td>
+	</tr>
+</table>
+
+<h3 id="hidden-checkboxes">Hidden Checkboxes</h3>
+
+Hidden checkboxes behave like any normal checkbox, they're just hidden from view. Therefore,
+in your application you can still manipulate the checkbox state using either the Tree node
+widget accessors, <code>get()</code> and <code>set()</code>, or the model methods <code>
+getChecked()</code> or <code>setChecked()</code>, for example:
+
+```javascript
+require(["dojo/query", "dijit/registry", "cbtree/Tree", ... ], function (query, registry, cbTree, ... ) {
+
+	function checkboxState(nodeWidget) {
+	   var state = nodeWidget.get("checked");
+	   var label = tree.model.getLabel(item);
+
+	   alert( "The state for " + label + " is: " + state );
+	}
+
+	// Create a tree without any visible checkboxes
+	var tree = new cbTree({branchCheckBox: false, leafCheckBox: false, ... }, "myTree");
+	tree.startup();
+							   ...
+	query(".dijitTreeRow").forEach(function (domNode) {
+		checkboxState(registry.getEnclosingWidget(domNode));
+	});
+});
+```
+
+Even though the checkboxes are hidden from view, they **_will_** be included in HTML forms
+as long as the associated tree node is visible.
+See [Checkboxes in HTML forms](#checkboxes-in-html-forms) for additional information.
+
+<h3 id="read-only-checkboxes">Read-only Checkboxes</h3>
+
+Read-only checkboxes are normal checkboxes but with their property **_readOnly_** set to
+`true` which results in the checkbox being grayed out and is therefore not clickable.
+There are two ways to change the read-only property of a checkbox:
+
+1.	Use the node widget `set()` accessor, or
+2.	Use the model `setEnabled()` method.
+
+<span class="mega-octicon octicon-alert"></span>
+The model method `setEnabled()` **_ONLY_** has affect if the model's
+[_enabledAttr_](Model-API#wiki-enabledattr) is assigned a property name (see example below).
+
+#### Using the widget set accessor.
+
+```javascript
+require([ ... ], function ( ... ) {
+	function checkBoxClicked(item, nodeWidget, event) {
+		nodeWidget.set("enabled", false);    // Make checkbox read-only
+					...
+	}
+
+	var tree  = new cbTree({model: model, ... }, "myTree");
+	tree.on("checkBoxClick", checkBoxClicked);
+	tree.startup();
+});
+```
+
+#### Using the model setEnabled method.
+The following example defines a simple dataset which is loaded into a store. The store
+property **_readable_** is used to determine if the checkbox associated with the store
+object is read-only or not. If a store object does not have the **_readable_** property
+the associated checkbox will be readable by default.
+
+```javascript
+require([ ... ], function ( ... ) {
+    var data = [
+		{name: "homer", parent: null, readable: true},
+		{name: "bart", parent: "homer", readable: true},
+		{name: "lisa", parent: "homer", readable: false},
+		{name: "maggie", parent: "homer"},
+	];
+
+	function checkBoxClick(item, nodeWidget, event) {
+		this.model.setEnabled(nodeWidget.item, false);    // Make checkbox read-only
+					...
+	}
+
+    var store = new Store({data: data, ... });
+	var model = new ForestStoreModel({store: store, enabledAttr: "readable", ... });
+	var tree  = new CBTree({model: model, ... }, "myTree");
+
+	tree.on("checkBoxClicked", checkBoxClicked);
+	tree.startup();
+					...
+});
+```
+
+
+
+
+<h2 id="checkboxes-in-html-forms">Checkboxes in HTML forms</h2>
+
+By default, the Checkbox Tree checkboxes are **_NOT_** included in form submissions. The
+functionality can be enabled using the tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform)
+The simplest way to automatically include checkboxes in the
+[_form data set_](http://www.w3.org/TR/html4/interact/forms.html#form-data-set) is to set
+the tree property _attachToForm_ to `true`, in which case all eligible **_checked_**
+checkboxes will be included in the form submission.
+
+<h3 id="about-checkboxes">About Checkboxes</h3>
+
+To understand the Checkbox Tree checkboxes, you need to understand how the
+checkboxes are constructed. Each Checkbox Tree checkbox consists of two parts:
+
+1. The dijit checkbox widget and,
+2. The associated HTML `<input ... >` element of type 'checkbox'.
+
+When a checkbox is created as part of a tree node, the Checkbox Tree sets the _name_
+property of the checkbox widget to the dijit generated id of the widget, the _value_
+property to the tree node label and the _checked_ property to the
+[associated property](Model-API#wiki-checkedattr) value of the store object or, if the
+store object doesn't have a corresponding _checked_ state property, the
+[default value](Model-API#wiki-checkedstate) defined on the model.
+
+
+<h3 id="eligible-form-checkboxes">Eligible Form CheckBoxes</h3>
+
+Checkboxes will be included in the _form data set_ if, and only if, they meet all of
+following requirements:
+
+1.	The checkbox **_must_** have an &lt;input> element of type _checkbox_ in the DOM and,
+2.  The &lt;input> element **_must_** have both its _name_ and _value_ attribute set and,
+3.	The &lt;input> element **_must_** be "on", that is, checked and,
+3.	The &lt;input> element **_must_** be enabled.
+
+In the context of a Checkbox Tree, having an &lt;input> element of type _checkbox_ in the
+DOM basically means: the tree node associated with the checkbox must be visible. Children
+of collapsed tree branches are **_NOT_** visible and therefore not eligible. Also, hidden
+checkboxes although invisible, are eligible as long as the tree node is visible.
+
+By default, the Checkbox Tree does **_NOT_** set the name attribute of the &lt;input> element,
+only the name property of the checkbox widget, therefore Checkbox Tree checkboxes are not
+valid [Successful Controls](http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2) and
+thus not eligible.
+
+
+To make Checkbox Tree checkboxes eligible for inclusion in the _form data set_, select one
+of the following options:
+
+### Basic Checkbox Submission
+
+When the Checkbox Tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform) is
+set to boolean `true`, the Checkbox Tree will also set the name attribute of the &lt;input>
+element to the checkbox widget id and the value attribute to the tree node label. Having
+both attributes set turns the checkbox into a
+[Successful Control](http://www.w3.org/TR/html4/interact/forms.html#h-17.13.2) ready to
+be included in the _form data set_.
+
+```javascript
+var myTree = new CBTree({attachToForm: true, ... });
+```
+
+All [eligible](#eligible-form-checkboxes) checkboxes are submitted as separate name=value pairs.
+
+
+### Advanced Checkbox Submission
+
+The Checkbox Tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform) can also be
+specified as an JavaScript key:value pairs object, in which case the Checkbox Tree tries
+to load the [TreeOnSubmit](CheckBox-Tree-in-Forms) extension if not already loaded.
+The **_TreeOnSubmit_** extension collects the checked states of some or all store objects
+and includes the result as a **_single_** parameter in the _form data set_.
+The parameter value is a JSON encoded array of objects, each object representing the checked
+state of a store object.
+
+```javascript
+var myTree = new CBTree({attachToForm: {
+                    name: "checkboxes",
+                    checked: ["mixed", true],
+                    domOnly: false
+                }, ... });
+```
+
+On the server side, assuming the form uses the HTTP POST method, you can now simply do
+something like:
+
+```html
+<?php
+    $storeItems = json_decode($_POST["checkboxes"]);
+               ...
+?>
+```
+
+The advanced approach also allows the options of submitting unchecked or _"mixed"_ state
+checkboxes which would not be possible with the standard HTML (basic) approach. For example:
+
+```javascript
+var myTree = new CBTree({attachToForm: {checked: [true, false]}, ... });
+```
+
+
+<span class="mega-octicon octicon-alert"></span> The Checkbox tree extension _TreeOnSubmit_
+collects the checked states directly from the underlaying store instead of the DOM.
+Store objects that would otherwise be ineligible (e.g not included in the DOM), will be
+included in the _form data set_.
+
+Please refer to the [TreeOnSubmit](CheckBox-Tree-in-Forms) extension for a more detailed
+description and additional examples.
+
+
+<h2 id="tree-branch-versus-leaf">Tree Branch versus Leaf</h2>
+
 Each tree node widget has a property called [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
 indicating, as the name implies, if the widget is expandable or in other words: if the
 tree node has children in the DOM. The _isExpandable_ widget property is also exposed as
@@ -76,6 +367,14 @@ depending on whether or not a tree node is a branch.
 ```
 <sup id="expandable-since">[1]</sup>The HTML attribute **_expandable_** is available since
 cbtree release [cbtree-v0.9.3-4](http://thejekels.com/download/cbtree)
+
+
+
+
+
+
+
+
 
 <h2 id="working-with-events">Working with Events</h2>
 
@@ -227,62 +526,72 @@ The arguments passed to event handles are defined as follows:
 	</tr>
 	<tr>
 		<td>click</td>
-    <td>onClick</td>
-    <td>(item, node, event)</td>
+		<td>onClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			A tree node is clicked.
 		</td>
 	</tr>
 	<tr>
 		<td>checkBoxClick</td>
-    <td>onCheckBoxClick</td>
-    <td>(item, node, event)</td>
+		<td>onCheckBoxClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			A checkbox is clicked.
 		</td>
 	</tr>
 	<tr>
 		<td>close</td>
-    <td>onClose</td>
-    <td>(item, node)</td>
+		<td>onClose</td>
+		<td>(item, node)</td>
 		<td>
 			Node closed, a tree node collapsed.
 		</td>
 	</tr>
 	<tr>
 		<td>dblClick</td>
-    <td>onDblClick</td>
-    <td>(item, node, event)</td>
+		<td>onDblClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			Double click
 		</td>
 	</tr>
 	<tr>
-		<td>open</td>
-    <td>onOpen</td>
-    <td>(item, node)</td>
-		<td>
-			Node opened. a tree node is expanded.
-		</td>
-	</tr>
-	<tr>
 		<td>event</td>
-    <td>onEvent</td>
-    <td>(item, event, value)</td>
+		<td>onEvent</td>
+		<td>(item, event, value)</td>
 		<td>
 			User event successful.
 		</td>
 	</tr>
 	<tr>
 		<td>load</td>
-    <td>onLoad</td>
-    <td>(void)</td>
+		<td>onLoad</td>
+		<td>(void)</td>
 		<td>
 			Tree finished loading.
 		</td>
 	</tr>
+	<tr>
+		<td>open</td>
+		<td>onOpen</td>
+		<td>(item, node)</td>
+		<td>
+			Node opened. a tree node is expanded.
+		</td>
+	</tr>
+	<tr>
+		<td>submit <sup>1</sup></td>
+		<td>onSubmit</td>
+		<td>(formNode, treeWidget, event)</td>
+		<td>
+			Submit button on a form is clicked.
+		</td>
+	</tr>
 </table>
 
+<sup>1</sup> The submit event on a tree is only generated if the Checkbox Tree has a form
+as one of its ancestors.
 
 
 
@@ -300,56 +609,56 @@ listener like `model.on( "dataValidated", myEventHandler );`
 	</tr>
 	<tr>
 		<td>change</td>
-    <td>onChange</td>
-    <td>(item, propertyName, newValue, oldValue)</td>
+		<td>onChange</td>
+		<td>(item, propertyName, newValue, oldValue)</td>
 		<td>
 			Property of a store item changed.
 		</td>
 	</tr>
 	<tr>
 		<td>childrenChange</td>
-    <td>onChildrenChange</td>
-    <td>(parent, newChildrenList)</td>
+		<td>onChildrenChange</td>
+		<td>(parent, newChildrenList)</td>
 		<td>
 			The children of a node changed.
 		</td>
 	</tr>
 	<tr>
 		<td>dataValidated</td>
-    <td>onDataValidated</td>
-    <td>(void)</td>
+		<td>onDataValidated</td>
+		<td>(void)</td>
 		<td>
 			The store data has been validated.
 		</td>
 	</tr>
 	<tr>
 		<td>delete</td>
-    <td>onDelete</td>
-    <td>(item)</td>
+		<td>onDelete</td>
+		<td>(item)</td>
 		<td>
 			An item was removed from the store.
 		</td>
 	</tr>
 	<tr>
 		<td>pasteItem</td>
-    <td>onPasteItem</td>
-    <td>(item, insertIndex, before)</td>
+		<td>onPasteItem</td>
+		<td>(item, insertIndex, before)</td>
 		<td>
 			Item was pasted at a new location.
 		</td>
 	</tr>
 	<tr>
 		<td>rootChange</td>
-    <td>onRootChange</td>
-    <td>(item, action)</td>
+		<td>onRootChange</td>
+		<td>(item, action)</td>
 		<td>
 			The children of the tree root changed.
 		</td>
 	</tr>
 	<tr>
 		<td>reset</td>
-    <td>onReset</td>
-    <td>(void)</td>
+		<td>onReset</td>
+		<td>(void)</td>
 		<td>
 			The model is being reset.
 		</td>
@@ -371,38 +680,38 @@ store is a [cbtree/store/Object](Store#wiki-the-object-store) store.
 	</tr>
 	<tr>
 		<td>change</td>
-    <td></td>
-    <td>(event)</td>
+		<td></td>
+		<td>(event)</td>
 		<td>
 			Property of a store object changed.
 		</td>
 	</tr>
 	<tr>
-		<td>close<sup>1</sup></td>
-    <td>onClose</td>
-    <td>(count, cleared)</td>
+		<td>close<sup>2</sup></td>
+		<td>onClose</td>
+		<td>(count, cleared)</td>
 		<td>
 			The store was closed.
 		</td>
 	</tr>
 	<tr>
 		<td>new</td>
-    <td></td>
-    <td>(event)</td>
+		<td></td>
+		<td>(event)</td>
 		<td>
 			A new store object was added.
 		</td>
 	</tr>
 	<tr>
 		<td>remove</td>
-    <td></td>
-    <td>(event)</td>
+		<td></td>
+		<td>(event)</td>
 		<td>
 			A store object was removed/deleted.
 		</td>
 	</tr>
 </table>
-<sup>1</sup> The close event is the only store event using a callback and therefore
+<sup>2</sup> The close event is the only store event using a callback and therefore
 accessible even if the store isn't made eventable.
 
 ### An example
