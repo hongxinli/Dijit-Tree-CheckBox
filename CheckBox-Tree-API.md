@@ -25,6 +25,75 @@ is loaded, see [Tree Styling Properties](Tree-Styling#styling-properties)
 for details.
 
 
+<h3 id="attachtoform">attachToForm:</h3>
+> **_TYPE_**: Boolean | Object
+
+> Include CheckBox Tree checkboxes in the
+> [_form data set_](http://www.w3.org/TR/html4/interact/forms.html#form-data-set) to be
+> submitted. If boolean `true`, all <a href="CheckBox-Tree-Usage#wiki-eligible-form-checkboxes">eligible</a>
+> checkboxes will be included.
+> The _form data set_ is submitted as a series of parameters in either the HTTP GET URL _Query
+> String_ or the HTTP POST request body. If boolean `false`, no Checkbox Tree checkboxes
+> will be included in the _from data set_.
+>
+> If specified as a JavaScript key:value pairs object, some or all store objects checked
+> states are included in the _form data set_ as a **_single_** parameter. The parameter
+> value is a JSON encoded array of objects, each object representing the checked state of
+> a store object.
+
+> The _attachToForm_ value object has tree properties all of which are optional:
+<table>
+	<tr>
+		<th>Property</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>String?</td>
+		<td>"checkedStates"</td>
+		<td>The parameter name in the form data set</td>
+	</tr>
+	<tr>
+		<td>checked</td>
+		<td>(String|Boolean)?</td>
+		<td>undefined</td>
+		<td>
+			The checked state(s) to be included in the form submission. Possible values
+			are: <em>"mixed"</em>, true or false. The checked property can also be
+			specified as an array of checked states, as is ["mixed", true]. If undefined
+			(default) all store objects are included regardless of their checked state.
+		</td>
+	</tr>
+	<tr>
+		<td>domOnly</td>
+		<td>Boolean?</td>
+		<td>false</td>
+		<td>
+			If true, only the store objects associated with <bold>visible</bold> tree nodes
+			will be included. See also <a href="#wiki-openonchecked">openOnChecked</a>
+		</td>
+	</tr>
+	<tr>
+		<td>extension</td>
+		<td>String?</td>
+		<td>"./extensions/TreeOnSubmit"</td>
+		<td>
+			Pathname of the extension to be loaded. Only valid when no other extension has
+			been loaded.
+		</td>
+	</tr>
+</table>
+
+> Please see the usage section <a href="CheckBox-Tree-Usage#wiki-checkboxes-in-html-forms">Checkboxes in HTML forms</a>
+> and the [TreeOnSubmit](CheckBox-Tree-in-Forms.md) extension for additional details and
+> examples.
+
+> **_DEFAULT_**: false
+
+
+
 <h3 id="autoexpand">autoExpand:</h3>
 > **_TYPE_**: Boolean
 
@@ -37,8 +106,10 @@ for details.
 > **_TYPE_**: Boolean
 
 > If true, the checkbox associated with a tree branch will be displayed, otherwise the
-> checkbox will be hidden but still available for checking its state. See also:
-> [branchReadOnly](#branchreadonly)
+> checkbox will be hidden but still available for checking its state. This property only
+> affects the checkbox visibility and has no affect when the [checkBoxes](#checkboxes)
+> property is set to `false`.
+> See also: [branchReadOnly](#branchreadonly)
 
 > **_DEFAULT_**: true
 
@@ -111,6 +182,16 @@ for details.
 
 > **_DEFAULT_**: false
 
+<h3 id="leafcheckbox">leafCheckBox:</h3>
+> **_TYPE_**: Boolean
+
+> If true, the checkbox associated with a tree leaf will be displayed, otherwise the
+> checkbox will be hidden but still available for checking its state. This property only
+> affects the checkbox visibility and has no affect when the [checkBoxes](#checkboxes)
+> property is set to `false`.
+> See also: [leafReadOnly](#leafreadonly)
+
+> **_DEFAULT_**: true
 
 <h3 id="leaficons">leafIcons:</h3>
 > **_TYPE_**: Boolean
@@ -169,7 +250,7 @@ for details.
 
 > Enables or disables the use of cookies for saving the tree state.
 
-> **_DEFAULT_**: true
+> **_DEFAULT_**: (dojo < 1.9) true, (dojo >= 1.9) false
 
 <h3 id="showRoot">showRoot:</h3>
 > **_TYPE_**: Boolean
@@ -357,58 +438,66 @@ arguments passed to the event listener.
 	</tr>
 	<tr>
 		<td>click</td>
-    <td>onClick</td>
-    <td>(item, node, event)</td>
+		<td>onClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			A tree node is clicked.
 		</td>
 	</tr>
 	<tr>
 		<td>checkBoxClick</td>
-    <td>onCheckBoxClick</td>
-    <td>(item, node, event)</td>
+		<td>onCheckBoxClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			A checkbox is clicked.
 		</td>
 	</tr>
 	<tr>
 		<td>close</td>
-    <td>onClose</td>
-    <td>(item, node)</td>
+		<td>onClose</td>
+		<td>(item, node)</td>
 		<td>
 			Node closed, a tree node collapsed.
 		</td>
 	</tr>
 	<tr>
 		<td>dblClick</td>
-    <td>onDblClick</td>
-    <td>(item, node, event)</td>
+		<td>onDblClick</td>
+		<td>(item, node, event)</td>
 		<td>
 			Double click
 		</td>
 	</tr>
 	<tr>
-		<td>open</td>
-    <td>onOpen</td>
-    <td>(item, node)</td>
-		<td>
-			Node opened. a tree node is expanded.
-		</td>
-	</tr>
-	<tr>
 		<td>event</td>
-    <td>onEvent</td>
-    <td>(item, event, value)</td>
+		<td>onEvent</td>
+		<td>(item, event, value)</td>
 		<td>
 			User event successful.
 		</td>
 	</tr>
 	<tr>
 		<td>load</td>
-    <td>onLoad</td>
-    <td>(void)</td>
+		<td>onLoad</td>
+		<td>(void)</td>
 		<td>
 			Tree finished loading.
+		</td>
+	</tr>
+	<tr>
+		<td>open</td>
+		<td>onOpen</td>
+		<td>(item, node)</td>
+		<td>
+			Node opened. a tree node is expanded.
+		</td>
+	</tr>
+	<tr>
+		<td>submit <sup>1</sup></td>
+		<td>onSubmit</td>
+		<td>(formNode, treeWidget, event)</td>
+		<td>
+			Submit button on a form is clicked.
 		</td>
 	</tr>
 </table>
