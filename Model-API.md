@@ -7,7 +7,7 @@
 <h2 id="model-properties">Model Properties</h2>
 
 Model properties define specific features or characteristics of a store model.
-The property names also represent properties in the keyword object passed to 
+The property names also represent properties in the keyword object passed to
 the model constructor. For example:
 
 ```javascript
@@ -21,7 +21,7 @@ require(["cbtree/model/TreeStoreModel", ... ], function (TreeStoreModel, ... ) {
 > **_TYPE_**: Boolean
 
 > If true, every store object will receive a so-called 'checked' state property.
-> The name of the actual property is defined by the value of the model property 
+> The name of the actual property is defined by the value of the model property
 > **_checkedAttr_**. If the 'checked' state property is added to a store object,
 > its initial state is defined by the value of the model property **_checkedState_**
 > (see also *checkedAttr*)
@@ -31,17 +31,17 @@ require(["cbtree/model/TreeStoreModel", ... ], function (TreeStoreModel, ... ) {
 <h3 id="checkedattr">checkedAttr:</h3>
 > **_TYPE_**: String
 
-> The property name of a store object that holds its *checked* state. On store 
+> The property name of a store object that holds its *checked* state. On store
 > load it specifies the object's initial checked state.
 > For example: `{ name:"Egypt", type:"country", checked: true }`
-> If a store object has no *checked* property it depends on the model property 
-> **_checkedAll_** if one will be added in which case the initial value is 
+> If a store object has no *checked* property it depends on the model property
+> **_checkedAll_** if one will be added in which case the initial value is
 > set according to the value of **_checkedState_**.
 
 > **_DEFAULT_**: "checked"
 
 <span class="mega-octicon octicon-alert"></span> If a store object has no
-'checked' state property and **_checkedAll_** is *false* no checkbox will be 
+'checked' state property and **_checkedAll_** is *false* no checkbox will be
 created by the tree for the object.
 
 <h3 id="checkedstate">checkedState:</h3>
@@ -55,7 +55,7 @@ created by the tree for the object.
 <h3 id="checkedroot">checkedRoot:</h3>
 > **_TYPE_**: Boolean
 
-> If true, the tree root node will receive a checked state even though it may not 
+> If true, the tree root node will receive a checked state even though it may not
 > represent an actual entry in the store. This property is independent of the
 > tree property **_showRoot_**. If the tree property *showRoot* is set to false the
 > checked state for the root will not show either.
@@ -65,9 +65,9 @@ created by the tree for the object.
 <h3 id="checkedstrict">checkedStrict:</h3>
 > **_TYPE_**: Boolean | String
 
-> If true, a strict parent-child relation is maintained. For example, if all 
+> If true, a strict parent-child relation is maintained. For example, if all
 > children of an object are checked the parent will automatically receive the
-> same checked state. If any of the children are unchecked the parent will, 
+> same checked state. If any of the children are unchecked the parent will,
 > depending on, if multi state is enabled, receive either a mixed or unchecked
 > state. If set to "inherit", children will inherit the parent checked state
 > when changed. However, the parent checked state is **_NOT_** updated when a
@@ -82,11 +82,11 @@ stores like a File Store.
 <h3 id="enabledattr">enabledAttr:</h3>
 > **_TYPE_**: String
 
-> The name of the store object property that holds the 'enabled' state of the
-> checkbox or alternative widget. Note: Eventhough it is referred to as the
-> 'enabled' state the tree will only use this property to enable/disable the 
-> 'ReadOnly' property of a checkbox or alternative widget. This because disabling
-> a widget (DOM element) may exclude it from HTTP POST operations.
+> The name of the store object property that holds the <em>enabled</em> state of the
+> checkbox or alternative widget. Note: Even though it is referred to as the
+> <em>enabled</em> state the tree will only use this property to set the
+> <em>readOnly</em> property of a checkbox or alternative widget. This because disabling
+> a widget (DOM element) will exclude it from HTTP POST operations.
 
 > **_DEFAULT_**: null
 
@@ -110,7 +110,7 @@ stores like a File Store.
 <h3 id="multistate">multiState:</h3>
 > **_TYPE_**: Boolean
 
-> Determines if the object checked state is to be maintained as multi state or 
+> Determines if the object checked state is to be maintained as multi state or
 > as dual state, that is, {"mixed", true, false} versus {true, false}. If true
 > multi state is enabled.
 
@@ -119,7 +119,7 @@ stores like a File Store.
 <h3 id="normalize">normalize:</h3>
 > **_TYPE_**: Boolean
 
-> If true, the checked state of any non branch (leaf) checkbox is normalized, 
+> If true, the checked state of any non branch (leaf) checkbox is normalized,
 > that is, true or false. When normalization is enabled checkboxes associated
 > with tree leafs (e.g. nodes without children) can never have a "mixed" state.
 
@@ -137,7 +137,7 @@ stores like a File Store.
 > **_TYPE_**: String
 
 > The property name of a store object whose value represents the object's parent
-> id or ids. If the store assigned to the model has a **_parentProperty_** 
+> id or ids. If the store assigned to the model has a **_parentProperty_**
 > property the store property value is used.
 
 > **_DEFAULT_**: "parent"
@@ -148,7 +148,7 @@ stores like a File Store.
 > A JavaScript key:value pairs object used to query the store to determine the
 > tree root object or, in case the query returns multiple objects, the children
 > of the fabricated root object. For example: `{type:"parent"}`.
-> If not specified, a wildcard search is performed using the store's 
+> If not specified, a wildcard search is performed using the store's
 > **_idProperty_** property value. (See also [Tree Store Model](#tree-store-model)
 > and [Forest Store Model](#forest-store-model))
 
@@ -267,7 +267,7 @@ store models.
 *********************************************
 
 <h3 id="getparents">getParents ( item )</h3>
-> Get the parent(s) of a store item. Returns an array of store items.	
+> Get the parent(s) of a store item. Returns an array of store items.
 
 **_item:_** Object
 > A valid store object.
@@ -367,7 +367,7 @@ model.ready().then( function () {
 
 <h3 id="setenabled">setEnabled( item, value )</h3>
 
-> Set the new 'enabled' state of an item. See the *enabledAttr* property description 
+> Set the new 'enabled' state of an item. See the *enabledAttr* property description
 > for more details.
 
 **_item:_** Object
