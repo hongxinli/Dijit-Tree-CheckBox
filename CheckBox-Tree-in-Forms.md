@@ -352,7 +352,7 @@ as an object triggers all the required magic.
 
 ```html
 <!DOCTYPE html>
- <html>
+<html>
     <head>
         <style type="text/css">
             @import "../../../dijit/themes/claro/claro.css";
@@ -430,7 +430,8 @@ as an object triggers all the required magic.
         <input type="submit" value="Submit">
       </form>
     </body>
-</html>```
+</html>
+```
 
 The form, in the above example, uses the HTTP POST method which forces the _form data set_ to
 be included in the HTTP request body as apposed to the _Query String_ of a URL when using
