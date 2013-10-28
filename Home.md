@@ -22,6 +22,7 @@ has three primary components plus a set of sub-components and extensions.
 ## Extensions
 
 * [Tree Styling](wiki/Tree-Styling)
+* [Tree in HTML forms](wiki/CheckBox-Tree-in-Forms)
 * [Model Extension](wiki/Model-Extension)
 * [Store Ancestry](wiki/Ancestry-Extension)
 
@@ -32,7 +33,9 @@ has three primary components plus a set of sub-components and extensions.
 * [Store API](wiki/Store-API)
 
 ## Usage
-* [Branch versus Leaf](wiki/CheckBox-Tree-Usage#branch-versus-leaf)
+* [Checkbox Access and Visibility](wiki/CheckBox-Tree-Usage#checkbox-access-and-visibility)
+* [Checkboxes in HTML forms](wiki/CheckBox-Tree-Usage#checkboxes-in-html-forms)
+* [Tree Branch versus Leaf](wiki/CheckBox-Tree-Usage#tree-branch-versus-leaf)
 * [Working with Events](wiki/CheckBox-Tree-Usage#working-with-events)
 * [Deleting Tree Nodes](wiki/CheckBox-Tree-Usage#deleting-tree-nodes)
 * [Sorting Tree Nodes](wiki/CheckBox-Tree-Usage#sorting-tree-nodes)
@@ -62,6 +65,15 @@ section:
 	  </tr>
 	</thead>
   <tbody>
+    <tr style="vertical-align:top">
+      <td>cbtree-v09.4-0</td>
+      <td>Nov-03 2013</td>
+      <td>1.8 - 1.9</td>
+      <td>
+	New TreeOnSubmit extension adds support for Checkbox Tree in HTML forms.<br/>
+	Updated documentation and Wiki.<br/>
+      </td>
+    </tr>
     <tr style="vertical-align:top">
       <td>cbtree-v09.3-0</td>
       <td>May-03 2013</td>
