@@ -127,7 +127,7 @@ Each object in the result array has the following properties:
 		<td>checked</td>
 		<td>Boolean | String</td>
 		<td><span class="octicon octicon-x"></span></td>
-		<td>The current checked state of the store object ("mixed", `true` or `false`)</td>
+		<td>The current checked state of the store object ("mixed", <code>true</code> or <code>false</code>)</td>
 	</tr>
 	<tr>
 		<td>count</td>
@@ -135,9 +135,9 @@ Each object in the result array has the following properties:
 		<td><span class="octicon octicon-x"></span></td>
 		<td>
 			The number of times the store object is found in the Checkbox tree. If zero,
-			there currently is **_NO_** tree node for the given store object.
+			there currently is <b><em>NO</em></b> tree node for the given store object.
 			If count is greater than one, it indicates there are multiple tree nodes for
-			the given store object. (e.g. this is a [multi parented](Store-API#wiki-multiparented) tree).
+			the given store object. (e.g. this is a <a href="Store-API#wiki-multiparented">multi parented</a> tree).
 		</td>
 	</tr>
 	<tr>
@@ -146,9 +146,9 @@ Each object in the result array has the following properties:
 		<td><span class="octicon octicon-check"></span></td>
 		<td>
 			If present and `true`, it indicates the object is associated with the fabricated
-			root of the tree and does **_NOT_** represents an object in the store. This
+			root of the tree and does <b><em>NOT</em></b> represents an object in the store. This
 			property is only present if the Checkbox Tree is used in combination with a
-			_ForestStoreModel_ and the _domOnly_ parameter is `false` (default).
+			<em>ForestStoreModel</em> and the <em>domOnly</em> parameter is <code>false</code> (default).
 		</td>
 	</tr>
 </table>
@@ -214,7 +214,7 @@ loaded already.
 
 As stated above, the _TreeOnSubmit_ extension effectively replaces the Checkbox Tree's
 `onSubmit()` method. There are three different ways you can establish your own **submit**
-event listener or onSubmit method.
+event listener or provide your own `onSubmit()` method.
 
 1.	Establish an event listener calling the `tree.on()` method.
 2.	Passing your `onSubmit()` method as a CheckBox Tree parameter.
