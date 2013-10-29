@@ -24,6 +24,7 @@ has three primary components plus a set of sub-components and extensions.
 * [Tree Styling](wiki/Tree-Styling)
 * [Tree in HTML forms](wiki/CheckBox-Tree-in-Forms)
 * [Model Extension](wiki/Model-Extension)
+* [Store CORS support](wiki/Store#cors-support)
 * [Store Ancestry](wiki/Ancestry-Extension)
 
 ## API's

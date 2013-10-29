@@ -236,7 +236,7 @@ of the following options:
 
 ### Basic Checkbox Submission
 
-When the Checkbox Tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform) is
+When the Checkbox Tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform) is
 set to boolean `true`, the Checkbox Tree will also set the name attribute of the &lt;input>
 element to the checkbox widget id and the value attribute to the tree node label. Having
 both attributes set turns the checkbox into a
@@ -247,7 +247,8 @@ be included in the _form data set_.
 var myTree = new CBTree({attachToForm: true, ... });
 ```
 
-All [eligible](#eligible-form-checkboxes) checkboxes are submitted as separate name=value pairs.
+All [eligible](#eligible-form-checkboxes) checkboxes are submitted as separate `name = value`
+pairs.
 
 
 ### Advanced Checkbox Submission

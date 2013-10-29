@@ -1,3 +1,4 @@
+
 The CheckBox Tree comes with three store models, a [Tree Store Model](#tree-store-model),
 a [Forest Store Model](#forest-store-model) and a [File Store Model](#file-store-model).
 The distinct differences are explained in the sections below.
@@ -11,6 +12,7 @@ The distinct differences are explained in the sections below.
 * [Model API Matrix](#model-api-matrix)
 
 <h2 id="the-model">The Model</h2>
+
 In a Model-View-Controller (MVC) pattern the model is the glue between the *View*
 or presentation layer and something that manipulates the data (the controller).
 Each controller may require a specific model. Please note that all models
@@ -35,7 +37,7 @@ for **_BaseStoreModel_** and adds
 the capabilities to maintain and manipulate a so-called 'checked' state for store
 objects.
 
-The following table lists all [store](Store#wiki-store-types) types and store
+The following table lists all [store](Store#store-types) types and store
 wrappers supported by the base class **_BaseStoreModel_**:
 
 <table>
@@ -49,7 +51,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	<tr>
 		<td rowspan="6">CheckBox Tree</td>
 		<td>cbtree/store/api/Store<sup>1</sup></td>
-    <td></td>
+		<td></td>
 		<td>
 			Any store implenting the <strong>cbtree/store/api/Store</strong> API.
 			The store must at a minimum implement the <em>get(), put()</em> and
@@ -58,7 +60,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Memory Store</td>
-    <td></td>
+		<td></td>
 		<td>
 			A basic in memory store. The cbtree in memory store is similar to the
 			dojo/store/Memory enhanced with additional capabilities.
@@ -66,7 +68,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Hierarchy Store</td>
-    <td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td>
 			Derived from the Memory store adding support for natural order,
 			hierarchical organized data object and multi-parenting.
@@ -79,7 +81,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>File Store</td>
-    <td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
 		<td>
 			The File Store implements an in-memory store whose content represent the
 			file system layout of the HTTP back-end server document root directory or
@@ -88,7 +90,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Eventable</td>
-    <td></td>
+		<td></td>
 		<td>
 			A store wrapper that makes the store emit events for store updates.
 		</td>
@@ -97,7 +99,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	<tr>
 		<td rowspan="2">Dojo Toolkt</td>
 		<td>dojo/store/api/Store<sup>1</sup></td>
-    <td></td>
+		<td></td>
 		<td>
 			Any store implenting the <strong>dojo/store/api/Store</strong> API. The
 			store must at a minimum implement the <em>get(), put()</em> and
@@ -106,7 +108,7 @@ wrappers supported by the base class **_BaseStoreModel_**:
 	</tr>
 	<tr>
 		<td>Observable</td>
-    <td></td>
+		<td></td>
 		<td>
 			A store wrapper that enables the store query results to be made 'observable'.
 		</td>
@@ -115,8 +117,8 @@ wrappers supported by the base class **_BaseStoreModel_**:
 
 <span class="mega-octicon octicon-alert"></span> All CheckBox Tree stores
 are designed and implemented such that they can be wrapped with the dojo/store/Observable
-store wrapper. Howerver, be sure to read the store [Eventable](Store#wiki-eventable)
-and [Observable](Store#wiki-observable) sections before doing so.
+store wrapper. Howerver, be sure to read the store [Eventable](Store#eventable)
+and [Observable](Store#observable) sections before doing so.
 
 The folowing table lists the stores supported by CheckBox Tree model type.
 
@@ -162,28 +164,28 @@ The folowing table lists the stores supported by CheckBox Tree model type.
 In order for any store to work with the CheckBox Tree store models they must,
 at a minimum, implement the following `cbtree/store/api/Store` API functions:
 
-* [get()](Store-API#wiki-get)
-* [put()](Store-API#wiki-put)
-* [query()<sup>1</sup>](Store-API#wiki-query)
+* [get()](Store-API#get)
+* [put()](Store-API#put)
+* [query()<sup>1</sup>](Store-API#query)
 
 <sup>1</sup> In case of a Forest Store Model the store must implement either
-the [query()](Store-API#wiki-query) or [getChildren()](Store-API#wiki-getchildren)
+the [query()](Store-API#query) or [getChildren()](Store-API#getchildren)
 function.
 
 <h3 id="extending-a-store">Extending a Store</h3>
 The **_BaseStoreModel_** class will automatically try to extend a store if
 certain functionality is not offered by the store. The model tests the store for
-the presence of the [hierarchical](Store-API#wiki-hierarchical) property.
+the presence of the [hierarchical](Store-API#hierarchical) property.
 If missing, or set to false, the model adds *before* advice to the store
-methods `add()` and `put()` adding support for the [PutDirectives](Store-API#wiki-putdirectives)
+methods `add()` and `put()` adding support for the [PutDirectives](Store-API#putdirectives)
 property **_parent_**.
 
-If the store does not have a [getChildren()](Store-API#wiki-getchildren)
-method one will be added using the store's [query()](Store-API#wiki-query)
+If the store does not have a [getChildren()](Store-API#getchildren)
+method one will be added using the store's [query()](Store-API#query)
 function. If the store does not have a `query()` method either an exception
 is thrown.
 
-If the store has a [load()](Store-API#wiki-load) method it is called just before
+If the store has a [load()](Store-API#load) method it is called just before
 the first store query is executed.
 
 <h3 id="creating-a-model">Creating a Model</h3>
@@ -272,7 +274,7 @@ children of this fabricate root. The fabricated root object does **NOT** represe
 any store object and is merely used to anchor the tree.
 
 There are two specific properties that effect the fabricated root, the model
-property [checkedRoot](Model-API#wiki-checkedroot) and the tree property [showRoot](CheckBox-Tree-API#wiki-showroot).
+property [checkedRoot](Model-API#checkedroot) and the tree property [showRoot](CheckBox-Tree-API#showroot).
 If the tree property **_showRoot_** is set to false the fabricated root is not
 displayed as part of the tree.
 
@@ -334,8 +336,8 @@ for the best store practices...
 
 <h2 id="model-api-matrix">Model API Matrix</h2>
 
-The following tables show which `cbtree/model/api/Model` API [properties](Model-API#wiki-model-properties)
-and [functions](Model-API#wiki-model-functions) each model implements.
+The following tables show which `cbtree/model/api/Model` API [properties](Model-API#model-properties)
+and [functions](Model-API#model-functions) each model implements.
 
 <table>
 	<tr>
@@ -347,31 +349,31 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 	</tr>
 	<tr>
 		<td rowspan="16">Property</td>
-		<td><a href="Model-API#wiki-checkedall">checkedAll</a></td>
+		<td><a href="Model-API#checkedall">checkedAll</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-checkedattr">checkedAttr</a></td>
+		<td><a href="Model-API#checkedattr">checkedAttr</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-checkedstate">checkedState</a></td>
+		<td><a href="Model-API#checkedstate">checkedState</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-checkedroot">checkedRoot</a></td>
+		<td><a href="Model-API#checkedroot">checkedRoot</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-checkedstrict">checkedStrict</a></td>
+		<td><a href="Model-API#checkedstrict">checkedStrict</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
@@ -383,61 +385,61 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-iconattr">iconAttr</a></td>
+		<td><a href="Model-API#iconattr">iconAttr</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-labelattr">labelAttr</a></td>
+		<td><a href="Model-API#labelattr">labelAttr</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-multistate">multiState</a></td>
+		<td><a href="Model-API#multistate">multiState</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-normalize">normalize</a></td>
+		<td><a href="Model-API#normalize">normalize</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-options">options</a></td>
+		<td><a href="Model-API#options">options</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
-		<td></span></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-parentproperty">parentProperty</a></td>
+		<td><a href="Model-API#parentproperty">parentProperty</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
-		<td></span></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-query">query</a></td>
-		<td><span class="octicon octicon-check"></span></td>
-		<td><span class="octicon octicon-check"></span></td>
-		<td><span class="octicon octicon-check"></span></td>
-	</tr>
-	<tr>
-		<td><a href="Model-API#wiki-rootlabel">rootLabel</a></td>
+		<td><a href="Model-API#query">query</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-rootid">rootId</a></td>
+		<td><a href="Model-API#rootlabel">rootLabel</a></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#rootid">rootId</a></td>
 		<td></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-store">store</a></td>
+		<td><a href="Model-API#store">store</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
@@ -455,73 +457,73 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 	</tr>
 	<tr>
 		<td rowspan="12">Function</td>
-		<td><a href="Model-API#wiki-getchecked">getChecked</a></td>
+		<td><a href="Model-API#getchecked">getChecked</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getchildren">getChildren</a></td>
+		<td><a href="Model-API#getchildren">getChildren</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getenabled">getEnabled</a></td>
+		<td><a href="Model-API#getenabled">getEnabled</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-geticon">getIcon</a></td>
+		<td><a href="Model-API#geticon">getIcon</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getidentity">getIdentity</a></td>
+		<td><a href="Model-API#getidentity">getIdentity</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getlabel">getLabel</a></td>
+		<td><a href="Model-API#getlabel">getLabel</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getparents">getParents</a></td>
+		<td><a href="Model-API#getparents">getParents</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-getroot">getRoot</a></td>
+		<td><a href="Model-API#getroot">getRoot</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-isitem">isItem</a></td>
+		<td><a href="Model-API#isitem">isItem</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-mayhavechildren">mayHaveChildren</a></td>
+		<td><a href="Model-API#mayhavechildren">mayHaveChildren</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-setchecked">setChecked</a></td>
+		<td><a href="Model-API#setchecked">setChecked</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 	</tr>
 	<tr>
-		<td><a href="Model-API#wiki-setenabled">setEnabled</a></td>
+		<td><a href="Model-API#setenabled">setEnabled</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>

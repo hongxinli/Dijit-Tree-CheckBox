@@ -2,8 +2,13 @@ The **_TreeOnSubmit_** extension `cbtree/extension/TreeOnSubmit` aids in submitt
 HTML forms that include a Checkbox Tree. This extension is optional and only required when:
 
 1.	Submitting forms that include a Checkbox Tree and,
-2.	The Checkbox Tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform) is
+2.	The Checkbox Tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform) is
 	specified as an object.
+
+If you want to submit Checkbox Tree checkboxes the standard HTML way, that is, as a series
+of `name = value` pairs, simply set the tree property [attachToForm](CheckBox-Tree-API#attachtoform)
+to `true`, in which case you do not need the **_TreeOnSubmit_** extension.
+See [Basic Checkbox Submission](CheckBox-Tree-Usage#basic-checkbox-submission) for details.
 
 <h3>Content <span class="mega-octicon octicon-book"></span></h3>
 * [Introduction](#introduction)
@@ -11,6 +16,7 @@ HTML forms that include a Checkbox Tree. This extension is optional and only req
 * [Loading the Extension](#loading-the-extension)
 * [Use Custom Extension](#use-custom-extension)
 * [Sample Applications](#sample-application)
+
 
 <h2 id="introduction">Introduction</h2>
 
@@ -94,7 +100,7 @@ When loading the TreeOnSubmit extension, the default Checkbox Tree event listene
 is replaced with one that, when triggered, collects the checked states of some or all store
 objects. The result is a JSON encoded array of key:value pairs objects which is assigned
 to a **_single_** hidden field in the form. The name of the hidden field is configurable
-using the tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform)
+using the tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform)
 
 Each object in the result array has the following properties:
 <table>
@@ -179,7 +185,7 @@ require(["cbtree/Tree",
 ```
 
 The Checkbox Tree can also load the _TreeOnSubmit_ extension automatically by simply declaring
-the tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform) as an object:
+the tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform) as an object:
 
 ```javascript
 require(["cbtree/Tree"], function (CBTree) {
@@ -198,7 +204,7 @@ require(["cbtree/Tree"], function (CBTree) {
 });
 ```
 
-Whenever the Checkbox Tree detects the tree property [_attachToForm_](CheckBox-Tree-API#wiki-attachtoform)
+Whenever the Checkbox Tree detects the tree property [attachToForm](CheckBox-Tree-API#wiki-attachtoform)
 to be an object, it will automatically try to load the _TreeOnSubmit_ extension if it isn't
 loaded already.
 
@@ -347,7 +353,7 @@ retrieve the checked state of all store objects and attach them to the form. On 
 completion the form is submitted using the HTTP POST method.
 
 Notice that the application is not required to set the _onsubmit_ attribute of the form or
-even load the _TreeOnSubmit_ extension. Simply defining the tree property _attachToForm_
+even load the _TreeOnSubmit_ extension. Simply defining the tree property attachToForm
 as an object triggers all the required magic.
 
 ```html
@@ -461,4 +467,4 @@ The server side application can be as simple as:
 ```
 
 In the above example the $_POST_ property **_checkboxes_** is fetched because that's name set
-for the _attachToForm_ tree property. The default property name would be **_checkedStates_**.
+for the attachToForm tree property. The default property name would be **_checkedStates_**.
