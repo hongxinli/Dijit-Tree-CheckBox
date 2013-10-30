@@ -293,7 +293,9 @@ Store objects that would otherwise be ineligible (e.g not included in the DOM), 
 included in the _form data set_.
 
 Please refer to the [TreeOnSubmit](CheckBox-Tree-in-Forms) extension for a more detailed
-description and additional examples.
+description and additional examples. As simple demo of _Advanced Checkbox Submission_ can
+be found at 
+[cbtree/demos/store/tree30.html](https://github.com/pjekel/cbtree/blob/master/demos/store/tree30.html)
 
 
 <h2 id="tree-branch-versus-leaf">Tree Branch versus Leaf</h2>
