@@ -247,8 +247,8 @@ The Checkbox Tree `onSubmit()` method has the following signature:
 	</tr>
 	<tr>
 		<td>event</td>
-		<td>DOM Event</td>
-		<td>Native DOM event of type <b>submit</b></td>
+		<td>DOM Event | IE8 Event <a href="#ie8event"><sup>[1]</sup></a></td>
+		<td>Native DOM or custom IE8 event of type <b>submit</b></td>
 	</tr>
 	<tr>
 		<td><b>returns:</b></td>
@@ -259,6 +259,10 @@ The Checkbox Tree `onSubmit()` method has the following signature:
 		</td>
 	</tr>
 </table>
+<sup id="ie8event">[1]</sup> When running Internet Explorer (IE) version 7 or 8, the Checkbox
+Tree generates it's own DOM4 style synthetic event. This type of event is **_NOT_** a native event
+instead, it is an instance of _IE8\_Event_. The event property _ieEventObject_ holds the
+original IE event object.
 
 <span class="mega-octicon octicon-alert"></span> Regardless of, if you are replacing the
 `onSubmit()` method or establishing an **submit** event listener, **DO NOT** change the checked state
