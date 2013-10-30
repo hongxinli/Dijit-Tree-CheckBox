@@ -109,7 +109,7 @@ for details.
 > checkbox will be hidden but still available for checking its state. This property only
 > affects the checkbox visibility and has no affect when the [checkBoxes](#checkboxes)
 > property is set to `false`.
-> See also: [branchReadOnly](#branchreadonly)
+> See also: [Hidden Checkboxes](CheckBox-Tree-Usage#hidden-checkboxes) and [branchReadOnly](#branchreadonly)
 
 > **_DEFAULT_**: true
 
@@ -189,7 +189,7 @@ for details.
 > checkbox will be hidden but still available for checking its state. This property only
 > affects the checkbox visibility and has no affect when the [checkBoxes](#checkboxes)
 > property is set to `false`.
-> See also: [leafReadOnly](#leafreadonly)
+> See also: [Hidden Checkboxes](CheckBox-Tree-Usage#hidden-checkboxes) and [leafReadOnly](#leafreadonly)
 
 > **_DEFAULT_**: true
 
