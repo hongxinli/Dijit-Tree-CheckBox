@@ -182,6 +182,31 @@ require([ ... ], function ( ... ) {
 });
 ```
 
+<h3 id="no-checboxes-showing">No Checkboxes Showing</h3>
+
+In the event the Checkbox Tree is displayed but no checkboxes are visible, like in the
+image below, you are missing the required Checkbox Tree css file for the dijit theme.
+Notice the empty space between the expando icons and the folder icons.
+
+<img src="images/noCheckboxes.png"></img>
+
+In order for any checkbox to be visible you **_MUST_** load the appropriate Checkbox Tree
+theme file. The Checkbox Tree theme files correspond with the dijit theme therefore,
+if you are running the dijit theme _claro_ you must, at a minimum, load the following css
+files in the specified order:
+
+```
+<style type="text/css">
+    @import url("./dijit/themes/claro/claro.css");
+    @import url("./cbtree/themes/claro/claro.css");
+</style>
+       ...
+<body class="claro">
+       ...
+</body>
+```
+
+Also notice that the body class **_MUST_** match the dijit theme name, in this case _claro_.
 
 
 
@@ -275,7 +300,9 @@ something like:
 ```html
 <?php
     $storeItems = json_decode($_POST["checkboxes"]);
+    forEach ($storeItems as $item) {
                ...
+    }
 ?>
 ```
 
@@ -294,7 +321,7 @@ included in the _form data set_.
 
 Please refer to the [TreeOnSubmit](CheckBox-Tree-in-Forms) extension for a more detailed
 description and additional examples. As simple demo of _Advanced Checkbox Submission_ can
-be found at 
+be found at
 [cbtree/demos/store/tree30.html](https://github.com/pjekel/cbtree/blob/master/demos/store/tree30.html)
 
 
@@ -302,7 +329,7 @@ be found at
 
 Each tree node widget has a property called [isExpandable](CheckBox-Tree-API#wiki-isExpandable)
 indicating, as the name implies, if the widget is expandable or in other words: if the
-tree node has children in the DOM. The _isExpandable_ widget property is also exposed as
+tree node has children. The _isExpandable_ widget property is also exposed as
 the **_expandable_** <a href="#expandable-since"><sup>[1]</sup></a> attribute on all HTML
 elements with class _dijitTreeRow_:
 

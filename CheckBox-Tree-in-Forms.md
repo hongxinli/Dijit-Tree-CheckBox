@@ -156,17 +156,17 @@ Each object in the result array has the following properties:
 Example result array:
 ```javascript
 [
-  {id: "$root$", value: "Family", checked: "mixed", count: 1, virtual: true},
+  {"id": "$root$", "value": "Family", "checked": "mixed", "count": 1, "virtual": true},
                           ...
-  {id: "bart", value: "bart", checked: true, count: 1},
-  {id: "lisa", value: "lisa", checked: false, count: 1},
-  {id: "todd", value: "todd", checked: false, count: 0},
+  {"id": "bart", "value": "bart", "checked": true,  "count": 1},
+  {"id": "lisa", "value": "lisa", "checked": false, "count": 1},
+  {"id": "todd", "value": "todd", "checked": false, "count": 0},
                           ...
 ]
 ```
 
 In case of a multi parented tree, multiple checkboxes may refer to the same store object
-however, the result array will only have one entry for the given store object.
+however, the result array will only have one entry for any given store object.
 
 
 
@@ -434,7 +434,7 @@ as an object triggers all the required magic.
     </head>
 
     <body class="claro">
-      <form name="someForm" action="cbtree.php" method="post">
+      <form name="someForm" action="submitForm.php" method="post">
         <div id="CheckboxTree">
         </div>
         <input type="submit" value="Submit">

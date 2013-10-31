@@ -53,6 +53,7 @@ only and will be removed in the future.
 #### /data (deprecated)
 > The `/data` directory holds the cbtree stores implementing the legacy
 > dojo/data/api API's.
+>
 > <span class="octicon octicon-alert"></span> These stores have been
 > deprecated and will removed in the future. See the /store directory instead.
 
@@ -68,7 +69,8 @@ only and will be removed in the future.
 #### /icons
 > The /icons directory holds sample custom icons and their associated css files,
 > please refer to [Tree Styling](Tree-Styling) for a detailed description
-> on how to use custom icons.
+> on how to use custom icons. In addition, if you are planning on creating a custom
+> build, remove all unused images and css file to reduce the overall size of your build.
 
 
 #### /model
@@ -78,6 +80,7 @@ only and will be removed in the future.
 #### /models (deprecated)
 > The /models directory holds the cbtree store models used with the legacy
 > dojo/data/ItemFile stores.
+>
 > <span class="octicon octicon-alert"></span> These models have been
 > deprecated and will removed in the future. See the /model directory
 > instead.
