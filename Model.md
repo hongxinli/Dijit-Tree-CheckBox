@@ -348,7 +348,7 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 		<th>File Store Model</th>
 	</tr>
 	<tr>
-		<td rowspan="16">Property</td>
+		<td rowspan="17">Property</td>
 		<td><a href="Model-API#wiki-checkedall">checkedAll</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
@@ -392,6 +392,12 @@ and [functions](Model-API#wiki-model-functions) each model implements.
 	</tr>
 	<tr>
 		<td><a href="Model-API#wiki-labelattr">labelAttr</a></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+		<td><span class="octicon octicon-check"></span></td>
+	</tr>
+	<tr>
+		<td><a href="Model-API#wiki-labeltype">labelType</a></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>
 		<td><span class="octicon octicon-check"></span></td>

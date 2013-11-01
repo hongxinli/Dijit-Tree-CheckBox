@@ -107,6 +107,13 @@ stores like a File Store.
 
 > **_DEFAULT_**: "name"
 
+<h3 id="labeltype">labelType:</h3>
+> **_TYPE_**: String
+
+> Specifies how to interpret the labelAttr in the data store items.	Can be "html" or "text".
+
+> **_DEFAULT_**: "text"
+
 <h3 id="multistate">multiState:</h3>
 > **_TYPE_**: Boolean
 
