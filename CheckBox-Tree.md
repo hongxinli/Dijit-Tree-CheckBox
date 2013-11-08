@@ -250,6 +250,8 @@ tree.on("checkBoxClick", function (item, treeNode) {
 });
 ```
 
+<h2 id="checkbox-tree-advanced">CheckBox Tree Advanced</h2>
+
 ### Mapping Model Events
 
 The CheckBox Tree is completely event driven and after instantiation only acts
